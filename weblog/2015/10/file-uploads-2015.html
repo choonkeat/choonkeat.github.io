@@ -1,0 +1,168 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>File Uploads 2015  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="Another day, another monolith Ruby gem to reach deep into the bowels of your app config, models, views, controllers and make you manage uploading o..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">File Uploads 2015</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-10-29T11:17:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>Another day, another monolith Ruby gem to reach deep into the bowels of your app config, models, views, controllers and make you manage uploading of file, storage of files, processing of files together with the rest of your business logic, only with the promise of loads and loads of syntax-sugar and enough config option to hang yourself with.</p>
+
+<p>paperclip, carrierwave, dragonfly, refile, shrine&#8230;</p>
+
+<p>The libraries may have high code quality, full coverage specs, flexible, comprehensive, easy, but it is bad architecture. I’ve covered most of them in <a href="http://www.slideshare.net/choonkeat/file-upload-2015">this presentation</a> and won’t repeat them here.</p>
+
+<p>While the Ruby community wasn&#8217;t looking, the rest of the world has moved on to having standalone servers to manage &amp; process their file uploads. Latest example: <a href="https://medium.com/medium-eng/the-stack-that-helped-medium-drive-2-6-millennia-of-reading-time-e56801f7c492?source=tw-f29a01c49588-1446087364731#e425--share-0-487">medium.com</a></p>
+
+<p>When you adopt a server-client pattern (as oppose to syntax-sugar-into-my-monolith-rails-app pattern) you&#8217;ll discover can optimize, manage, scale independently, extend and improve using standard protocols; a whole new world of possibilities.</p>
+
+<p>What? This <a href="https://github.com/choonkeat/attache">rack+imagemagick server</a> not working out for you? Swap in your own clustered-faster-attache.go server and your Rails app chugs along oblivious to the change.</p>
+
+<p>What? Don’t like <a href="https://github.com/choonkeat/attache_rails">reactjs in the attache client gem</a>? Introduce your own no-framework-js-attache gem and your attache server can remain oblivious to the upgrade.</p>
+
+<p>What? Need to support that spanking new open protocol for resumable upload over unreliable network? Have option for Instagram-like processing? Well then <a href="https://github.com/choonkeat/attache/pull/10">add a middleware</a> to your image server and both your server and Rails app can remain blissfully ignorant.</p>
+
+<p>Architecture.</p>
+
+<p>You already know it. That&#8217;s why the common pattern is to use a database, redis, nginx alongside your Rails app. Instead of just having syntax-sugar inside your Rails app to wrangle with b-trees.</p>
+
+<p>Or maybe this will work better: microservices!</p>
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=File Uploads 2015 by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2015/10/file-uploads-2015.html" title="Share File Uploads 2015 on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2015/10/file-uploads-2015.html" title="Share File Uploads 2015 on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2015/10/file-uploads-2015.html" title="Share File Uploads 2015 on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://choonkeat.github.com/choonkeat/weblog/2015/10/file-uploads-2015.html';
+        var disqus_url = 'http://choonkeat.github.com/choonkeat/weblog/2015/10/file-uploads-2015.html';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

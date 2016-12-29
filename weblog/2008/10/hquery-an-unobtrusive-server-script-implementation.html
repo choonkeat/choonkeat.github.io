@@ -1,0 +1,144 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>hquery: an unobtrusive server script implementation  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="I&#8217;d previously blogged about some ideas to resolve the developer-designer gulf regarding templates. I&#8217;m happy I&#8217;ve finally found ..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">hquery: an unobtrusive server script implementation</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-10-02T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>I&#8217;d <a href="http://blog.choonkeat.com/weblog/2008/03/no-template-is.html">previously blogged</a> about some ideas to resolve the developer-designer gulf regarding templates. I&#8217;m happy I&#8217;ve finally found time to code up a proof-of-concept:</p><div><br>
+
+<object width="500" height="377">	<param name="allowfullscreen" value="true" />	<param name="allowscriptaccess" value="always" />	<param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=1836815&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=0&amp;show_portrait=0&amp;color=CC0500CC0500&amp;fullscreen=1" />	<embed src="http://vimeo.com/moogaloop.swf?clip_id=1836815&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=0&amp;show_portrait=0&amp;color=CC0500CC0500&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="500" height="377"></embed></object><br /><a href="http://vimeo.com/1836815?pg=embed&amp;sec=1836815">hquery - the unobtrusive server script</a> from <a href="http://vimeo.com/user248563?pg=embed&amp;sec=1836815">choonkeat</a> on <a href="http://vimeo.com?pg=embed&amp;sec=1836815">Vimeo</a>.
+
+<br><div><span style="font-weight: bold;">Q: What is &#8220;unobtrusive server script&#8221;?</span></div><br><div>If &#8220;unobtrusive javascript&#8221; adds interaction to a web page without being inside the markup - then &#8220;unobtrusive server script&#8221; replaces data in a web page without being inside the markup (and design).</div><br><div>You&#8217;ll get a clean separation of 1) designed web page is constructed, then 2) server data is weaved in, and finally 3) javascript hooks up the interactive portions.</div><br><div>The key thing is that all 3 layers are stringed together by CSS path - a concept / language that both designers and developers can communicate with.</div><br><div><span style="font-weight: bold;">Q: Is this a silver bullet?</span></div><br><div>No. There are constraints: everything that needs to be dynamic, need its own CSS/XPath. e.g. Google&#8217;s result page markup isn&#8217;t very suitable:</div><br><div>  <span style="font-family: Courier;">&lt;div><span style="font-weight: bold;">this is abstract</span>&lt;cite>citation&lt;/cite>&lt;/div></span></div><br><div>Notice how we can&#8217;t address the abstract content without stepping on <span style="font-family: Courier;">&lt;cite></span>. When using USS, we&#8217;ll need the markup to be:</div><br><div><div>  <span style="font-family: Courier;">&lt;div><span style="font-weight: bold;">&lt;span>this is abstract&lt;/span></span>&lt;cite>citation&lt;/cite>&lt;/div></span></div><br></div><div>Then both abstract and citation can be targeted independently. Furthermore, to be totally isolated from markup changes, it is best to only use classes and ids without the tag names.</div><br><div><span style="font-weight: bold;">Q: Is USS a Ruby on Rails thing?</span></div><br><div>Nope. &#8220;hquery&#8221; is just a library I wrote to do USS in Rails. I believe any language / framework can have its own USS renderer.</div><br><div><span style="font-weight: bold;">Q: How do I write javascript that needs dynamic values?</span></div><br><div>Instead of writing mixed-up code like this:</div><br><blockquote class="webkit-indent-blockquote" style="margin: 0 0 0 40px; border: none; padding: 0px;"><p><span style="font-family: Courier;">&lt;script><br>  alert(&#8220;I am &lt;%= user.name %>&#8221;);<br>&lt;/script></span></p></blockquote><br><div>Try doing it this way (separating data from logic):</div><br><blockquote class="webkit-indent-blockquote" style="margin: 0 0 0 40px; border: none; padding: 0px;"><p><span style="font-family: Courier;">&lt;div id=&#8221;json&#8221;>&lt;script>var user = {name: &#8216;foo&#8217;};&lt;/script>&lt;/div><br>&lt;script><br>  alert(&#8220;I am &#8221; + user.name);<br>&lt;/script></span></p></blockquote><br><div>Then in your script, you can swap out the JSON data:</div><br><blockquote class="webkit-indent-blockquote" style="margin: 0 0 0 40px; border: none; padding: 0px;"><p><span style="font-family: Courier;">select &#8220;#json script&#8221; do |ele|<br>  ele.html &#8220;var person = &#8221; + current_user.to_json   <br>end</span></p></blockquote><br><div><span style="font-weight: bold;">Q: Where next?</span></div><br><div>I dunno. Since hquery script is declarative, we can compile to regular &lt;% messy %> template as runtime? Or, have build tasks that can check that corresponding HTML contain necessary elements - i.e. a new design don&#8217;t break/miss out anything?</div><br><div>Anything else? Love to hear your thoughts!</div><br><br><div><span style="font-style: italic;">PS: I find myself trusting Yahoo search results when its in Google skin!</span></div><br><br></div>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=hquery: an unobtrusive server script implementation by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2008/10/hquery-an-unobtrusive-server-script-implementation.html" title="Share hquery: an unobtrusive server script implementation on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2008/10/hquery-an-unobtrusive-server-script-implementation.html" title="Share hquery: an unobtrusive server script implementation on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2008/10/hquery-an-unobtrusive-server-script-implementation.html" title="Share hquery: an unobtrusive server script implementation on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

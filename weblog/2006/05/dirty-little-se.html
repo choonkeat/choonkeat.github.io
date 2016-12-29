@@ -1,0 +1,140 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>Dirty Little Secret  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="I&#8217;ve been doing more Rails development lately (yay!) but have something shameful to admit:            I don&#8217;t care what variant of many..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">Dirty Little Secret</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-05-26T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>I&#8217;ve been doing more Rails development lately (yay!) but have something shameful to admit:</p>       <blockquote>    <p> I don&#8217;t care what <a href="http://blog.hasmanythrough.com/articles/2006/04/20/many-to-many-dance-off">variant of many-to-many relationship</a> the models have, I bulldoze with a same implementation everytime. </p>    </blockquote>        <p>The <a href="http://blog.hasmanythrough.com/articles/category/associations">nuances and gotchas</a> are too much for my liking. So rather than spending time groking them and risk <a href="http://dev.rubyonrails.org/changeset/4123">seeing them deprecated</a> (not complaining, just note things are moving fast), I&#8217;d prefer to rely on simpler concepts which are hence more stable and has <a href="http://www.artima.com/intv/ruby4.html">least-surprise</a> behaviors. Use the time saved to think about real important stuff: business requirements.<br />     </p>         <p>Simplifying the concept will mean a tiny bit more code - but lesser wrestling with the framework overall, IMHO. To represent any many-to-many relationship, opt for a rich-association database setup everytime (aka include an auto_increment id in the join table), regardless of whether there&#8217;ll ultimately be extra attributes. Defer decisions. Hence, <em>people.id == people_skills.person_id and&nbsp; people_skills.skill_id == skills.id</em> in the database will be represented in ActiveRecord as:<br />     </p>         <pre>  <strong><font color="#0000ff">class</font></strong> Person <font color="#990000">&lt;</font> ActiveRecord<font color="#990000">:</font><font color="#990000">:</font>Base<br />     has_and_belongs_to_many <font color="#990000">:</font>skills<br />     has_many <font color="#990000">:</font>people_skills<font color="#990000">,</font> <font color="#990000">:</font>dependent <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">:</font>destroy<br />   <strong><font color="#0000ff">end</font></strong><br />   <br />   <strong><font color="#0000ff">class</font></strong> Skill <font color="#990000">&lt;</font> ActiveRecord<font color="#990000">:</font><font color="#990000">:</font>Base<br />     has_and_belongs_to_many <font color="#990000">:</font>people<br />     has_many <font color="#990000">:</font>people_skills<font color="#990000">,</font> <font color="#990000">:</font>dependent <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">:</font>destroy<br />   <strong><font color="#0000ff">end</font></strong><br />   <br />   <strong><font color="#0000ff">class</font></strong> PeopleSkill <font color="#990000">&lt;</font> ActiveRecord<font color="#990000">:</font><font color="#990000">:</font>Base<br />     set_primary_key <font color="#990000">:</font>not_id <em><font color="#9a1900"># int auto_increment primary key, cannot be named 'id'</font></em><br />     belongs_to <font color="#990000">:</font>person<br />     belongs_to <font color="#990000">:</font>skill<br />   <strong><font color="#0000ff">end</font></strong></pre>         <p>There 2 lines more than <em>rightfully necessary</em>. But all the data will surely be accessible. If things turns out to be simple, your overhead is negligible. If requirements turns hairy, you&#8217;re still safe! No worrying over any potential <em>has_many :through</em> quirks, or lack of support with <em>has_and_belongs_to_many</em>. Just go with the above setup - get some code running! - and everything can be optimised later. Wrestling more and things will begin to feel like unnecessary situps to me&#8230;</p>     <p>[Update]<br />   Fixed the sample code above, apparently PeopleSkill&#8217;s primary key should not be named :id. So its 3 additional lines instead of 2. A tour via ./script/console will be<br />   </p>     <pre>  <font color="#990000">&gt;</font><font color="#990000">&gt;</font> Person<font color="#990000">.</font>delete_all<br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#993399">0</font><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> Skill<font color="#990000">.</font>delete_all<br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#993399">0</font><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> PeopleSkill<font color="#990000">.</font>delete_all<br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#993399">0</font><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> s <font color="#990000">=</font> Skill<font color="#990000">.</font>create <font color="#990000">:</font>name <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#ff0000">&quot;Swimming&quot;</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <em><font color="#9a1900">#&lt;Skill:0xb7855b3c @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Swimming&quot;, &quot;id&quot;=&gt;1}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb78533a0 @errors={}, @base=#&lt;Skill:0xb7855b3c ...&gt;&gt;&gt;</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jack <font color="#990000">=</font> Person<font color="#990000">.</font>create <font color="#990000">:</font>name <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#ff0000">&quot;Jack&quot;</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <em><font color="#9a1900">#&lt;Person:0xb784da04 @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Jack&quot;, &quot;id&quot;=&gt;1}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb784b268 @errors={}, @base=#&lt;Person:0xb784da04 ...&gt;&gt;&gt;</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jill <font color="#990000">=</font> Person<font color="#990000">.</font>create <font color="#990000">:</font>name <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#ff0000">&quot;Jill&quot;</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <em><font color="#9a1900">#&lt;Person:0xb784181c @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Jill&quot;, &quot;id&quot;=&gt;2}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb783eb30 @errors={}, @base=#&lt;Person:0xb784181c ...&gt;&gt;&gt;</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jack<font color="#990000">.</font>skills <font color="#990000">&lt;</font><font color="#990000">&lt;</font> s<br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">[</font><em><font color="#9a1900">#&lt;Skill:0xb7855b3c @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Swimming&quot;, &quot;id&quot;=&gt;1}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb78533a0 @errors={}, @base=#&lt;Skill:0xb7855b3c ...&gt;&gt;&gt;]</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jill<font color="#990000">.</font>skills <font color="#990000">&lt;</font><font color="#990000">&lt;</font> s<br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">[</font><em><font color="#9a1900">#&lt;Skill:0xb7855b3c @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Swimming&quot;, &quot;id&quot;=&gt;1}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb78533a0 @errors={}, @base=#&lt;Skill:0xb7855b3c ...&gt;&gt;&gt;]</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> PeopleSkill<font color="#990000">.</font><strong><font color="#000000">find</font></strong><font color="#990000">(</font><font color="#990000">:</font>all<font color="#990000">)</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">[</font><em><font color="#9a1900">#&lt;PeopleSkill:0xb781206c @attributes={&quot;not_id&quot;=&gt;&quot;1&quot;, &quot;skill_id&quot;=&gt;&quot;1&quot;, &quot;person_id&quot;=&gt;&quot;1&quot;}&gt;, #&lt;PeopleSkill:0xb7811ef0 @attributes={&quot;not_id&quot;=&gt;&quot;2&quot;, &quot;skill_id&quot;=&gt;&quot;1&quot;, &quot;person_id&quot;=&gt;&quot;2&quot;}&gt;]</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jack<font color="#990000">.</font>skills <font color="#990000">&lt;</font><font color="#990000">&lt;</font> Skill<font color="#990000">.</font><strong><font color="#000000">create</font></strong><font color="#990000">(</font><font color="#990000">:</font>name <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#ff0000">&quot;Dancing&quot;</font><font color="#990000">)</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">[</font><em><font color="#9a1900">#&lt;Skill:0xb7855b3c @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Swimming&quot;, &quot;id&quot;=&gt;1}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb78533a0 @errors={}, @base=#&lt;Skill:0xb7855b3c ...&gt;&gt;&gt;, #&lt;Skill:0xb7809994 @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Dancing&quot;, &quot;id&quot;=&gt;2}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb7807f04 @errors={}, @base=#&lt;Skill:0xb7809994 ...&gt;&gt;&gt;]</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jill<font color="#990000">.</font>skills <font color="#990000">&lt;</font><font color="#990000">&lt;</font> Skill<font color="#990000">.</font><strong><font color="#000000">create</font></strong><font color="#990000">(</font><font color="#990000">:</font>name <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#ff0000">&quot;Cooking&quot;</font><font color="#990000">)</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">[</font><em><font color="#9a1900">#&lt;Skill:0xb7855b3c @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Swimming&quot;, &quot;id&quot;=&gt;1}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb78533a0 @errors={}, @base=#&lt;Skill:0xb7855b3c ...&gt;&gt;&gt;, #&lt;Skill:0xb77f5930 @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Cooking&quot;, &quot;id&quot;=&gt;3}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb77f3b44 @errors={}, @base=#&lt;Skill:0xb77f5930 ...&gt;&gt;&gt;]</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jack<font color="#990000">.</font><strong><font color="#000000">skills</font></strong><font color="#990000">(</font><strong><font color="#0000ff">true</font></strong><font color="#990000">)</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">[</font><em><font color="#9a1900">#&lt;Skill:0xb77e2970 @attributes={&quot;name&quot;=&gt;&quot;Swimming&quot;, &quot;id&quot;=&gt;&quot;1&quot;, &quot;not_id&quot;=&gt;&quot;1&quot;, &quot;skill_id&quot;=&gt;&quot;1&quot;, &quot;person_id&quot;=&gt;&quot;1&quot;}, @readonly=true&gt;, #&lt;Skill:0xb77e2934 @attributes={&quot;name&quot;=&gt;&quot;Dancing&quot;, &quot;id&quot;=&gt;&quot;2&quot;, &quot;not_id&quot;=&gt;&quot;3&quot;, &quot;skill_id&quot;=&gt;&quot;2&quot;, &quot;person_id&quot;=&gt;&quot;1&quot;}, @readonly=true&gt;]</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jack<font color="#990000">.</font>destroy<br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <em><font color="#9a1900">#&lt;Person:0xb784da04 @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Jack&quot;, &quot;id&quot;=&gt;1}, @skills=[], @new_record=false, @people_skills=[#&lt;PeopleSkill:0xb77dce94 @attributes={&quot;not_id&quot;=&gt;&quot;1&quot;, &quot;skill_id&quot;=&gt;&quot;1&quot;, &quot;person_id&quot;=&gt;&quot;1&quot;}&gt;, #&lt;PeopleSkill:0xb77dcd54 @attributes={&quot;not_id&quot;=&gt;&quot;3&quot;, &quot;skill_id&quot;=&gt;&quot;2&quot;, &quot;person_id&quot;=&gt;&quot;1&quot;}&gt;], @errors=#&lt;ActiveRecord::Errors:0xb784b268 @errors={}, @base=#&lt;Person:0xb784da04 ...&gt;&gt;&gt;</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> PeopleSkill<font color="#990000">.</font><strong><font color="#000000">find</font></strong><font color="#990000">(</font><font color="#990000">:</font>all<font color="#990000">)</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">[</font><em><font color="#9a1900">#&lt;PeopleSkill:0xb77cef88 @attributes={&quot;not_id&quot;=&gt;&quot;2&quot;, &quot;skill_id&quot;=&gt;&quot;1&quot;, &quot;person_id&quot;=&gt;&quot;2&quot;}&gt;, #&lt;PeopleSkill:0xb77cef38 @attributes={&quot;not_id&quot;=&gt;&quot;4&quot;, &quot;skill_id&quot;=&gt;&quot;3&quot;, &quot;person_id&quot;=&gt;&quot;2&quot;}&gt;]</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> quit </pre>     <p>The reason the original sample code wasn&#8217;t working was <strong>not</strong> because of HABTM didn&#8217;t create the primary key (as mentioned by Josh in the comments), but rather its precisely because it did try to include the id column in the INSERT statement (with a wrong value) thus causing primary key clashes and blah blah blah. Strangely, by changing PeopleSkill&#8217;s primary key to be named something else, the INSERT statement would exclude it and insert only (`skill_id`, `person_id`), allowing MySQL to auto_generate the primary key.</p>   <p>As long as the primary keys of Person and Skill are not called &quot;id&quot;, PeopleSkill can happily use &quot;id&quot; as its auto increment primary key (as is with my original work). My force is not strong enough to attempt a patch / further investigation for this HABTM issue.&nbsp;</p><p>[Update 2]<br />Plugin available to make habtm behave: <a href="../../../files/ticket5216.zip">Download</a> and unzip into your vendor/plugins folder.<br /></p>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=Dirty Little Secret by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2006/05/dirty-little-se.html" title="Share Dirty Little Secret on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2006/05/dirty-little-se.html" title="Share Dirty Little Secret on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2006/05/dirty-little-se.html" title="Share Dirty Little Secret on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

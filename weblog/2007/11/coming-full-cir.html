@@ -1,0 +1,159 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>Learning Web Development  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="Much in the spirit of &quot;Skinny Controllers and Fat Models&quot;, I&#8217;m coming round to the fact that Single-Table Inheritance for is the ev..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">Learning Web Development</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-11-21T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>Much in the spirit of &quot;Skinny Controllers and Fat Models&quot;, I&#8217;m coming round to the fact that Single-Table Inheritance for is <del>the evil</del> best avoided.</p>
+
+
+
+<p>All that code-reuse might look sexy and get all the OOP noddings. But in the longer run, the risk is that my code (esp. domain/business logic) end up as <a href="http://www.laputan.org/mud/">big balls of mud</a>. But this &quot;risk&quot; is taken in the bid to stave off something more imminent - code repetition. SQL everywhere? No, wrap in a function! No, wrap in a Class! No, inherit from that BaseClass! Fewest blocks to build the tallest cathedrals - architectural elegance.</p>
+
+
+
+<p>But buildings don&#8217;t evolve. When requirements evolve, aka &quot;reveal their true selves&quot;, the models start to diverge bit by bit and my OOP-instinct intuitively hold them together. Then one day, often when its too late or a new team member joins, I realise the models are really not of the same family
+anymore. To my chagrin, the glue holding the inheritance were more about preventing them from stepping over each other. And the result is worse than the repetition I&#8217;d avoided.</p>
+
+<p>Another related issue is RESTful controllers - &quot;Oh, so 2006&quot; you say. Sorry I&#8217;d only drank half the CRUD kool-aid. Now I&#8217;m feeling the pain on those parts where I&#8217;d chosen to go the other way when there&#8217;s a Model involved. Its the kind of pain you know only when you&#8217;re straddling between 2 worlds. Bottom line: not worth over-thinking about controllers. I&#8217;m also certain those content-type negotiation can be abstracted out of sight. What&#8217;s the fun in repeating this:</p>
+
+<blockquote><pre>responds_to do |format|<br />&nbsp; format.js { render :json =&gt; @object.to_json }<br />&nbsp; format.xml { render :xml =&gt; @object.to_xml }<br />&nbsp; format.html {&nbsp; }<br />end</pre></blockquote><p>And if I jump both feet into doing &quot;Presentation Layer&quot; in CSS/Javascript only, a lot of &quot;view&quot; can actually go away - leaving only layouts.<br /> </p>
+
+<p>So yes, bliss will be the day I only define schemas, write Models, sprinkle CSS and my app is done. Like my <a href="http://khigia.wordpress.com/">colleague</a> (and <a href="http://en.wikipedia.org/wiki/Prolog">Prolog</a> admirer) always say, &quot;<em>we only need defined data; everything else is easy</em>&quot;.&nbsp; </p>
+
+
+
+<p>PS: I used to roll my eyes at that, saying it is too academic. In the real world, we often don&#8217;t have the luxury of data being fully &amp; correctly defined for us. Requirements change, stay agile, live with it! But I should&#8217;ve looked at it in another way: &quot;<em>we only need <del>defined [</del>to be defining] data; everything else <del>is easy </del>[can always write themselves]</em>&quot;</p>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=Learning Web Development by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2007/11/coming-full-cir.html" title="Share Learning Web Development on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2007/11/coming-full-cir.html" title="Share Learning Web Development on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2007/11/coming-full-cir.html" title="Share Learning Web Development on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

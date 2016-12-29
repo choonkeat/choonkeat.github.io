@@ -1,0 +1,165 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>Loremipsumizer  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="I had the need to show some folks example screens of webapps I&#8217;m working on recently. Using those screenshots, the other party could have a b..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">Loremipsumizer</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-09-18T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>I had the need to show some folks example screens of webapps I&#8217;m working on recently. Using those screenshots, the other party could have a better feel of things, we could have a clearer discussion. But the irritation [for me] is always the setup</p>
+
+<p><ol>
+<li>The app I&#8217;m working on is still in flux, i.e. design &amp; data attributes will likely change, often</li>
+<li>The content I have is often imported from real data sources, and hence is somewhat private &amp; sensitive</li>
+<li>I&#8217;m too lazy to think up fake names, fake scenarios, fake photos to fill my database, just so I could have a fragile, demo screenshot (I&#8217;d need to redo / update later)</li>
+</ol>
+<p>What I&#8217;d <em>really</em> like is</p>
+
+<p><ol>
+<li>To be able to use my current webapp, as-is</li>
+<li>To be able to use my current data, as-is</li>
+<li>To protect private &amp; sensitive data</li>
+</ol>
+<p>Smells like a bookmarklet? So here it is&nbsp;<a href="http://gist.github.com/585708">Loremipsumizer.js</a>. After installing it, I can anonymize any webpage instantly (then take a screenshot, annotate or print &amp; discuss with somebody else, without worrying about the sensitivity of content)</p>
+
+<p><a href="javascript:(function(u){ c=document;b=c.body;s=c.createElement('script');s.src=u+'?r='+(new Date()).getTime();b.appendChild(s);})('https://raw.github.com/gist/585708/925d9d98ab459feacf3d17568d2d1499157f4970/loremipsumizer.js');void(0);">Click here</a> to try it on this webpage!</p>
+
+<p>The Loremipsumizer will anonymize all text, scramble all numbers, replace images, flash embeds (&amp; video tags?) with wireframe-ish cross-boxes (via data uri). Unfortunately I didn&#8217;t have an elegant solution to anonymize background images (css sprinting, image size, etc) so I&#8217;ll need suggestions there.</p>
+
+<p>In any case, here are a few screenshots of webpages I&#8217;ve anonymized. No prizes for guessing which websites:</p>
+
+<p><object width="400" height="300"> <param name="flashvars" value="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624856834061%2Fshow%2F&page_show_back_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624856834061%2F&set_id=72157624856834061&jump_to="></param> <param name="movie" value="http://www.flickr.com/apps/slideshow/show.swf?v=71649"></param> <param name="allowFullScreen" value="true"></param><embed type="application/x-shockwave-flash" src="http://www.flickr.com/apps/slideshow/show.swf?v=71649" allowFullScreen="true" flashvars="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624856834061%2Fshow%2F&page_show_back_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624856834061%2F&set_id=72157624856834061&jump_to=" width="400" height="300"></embed></object></p>
+
+<p>Note: Loremipsumizer does not require any JS library, and have not been tested on irritating browsers. Patches are welcome.</p>
+
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=Loremipsumizer by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2010/09/loremipsumizer.html" title="Share Loremipsumizer on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2010/09/loremipsumizer.html" title="Share Loremipsumizer on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2010/09/loremipsumizer.html" title="Share Loremipsumizer on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

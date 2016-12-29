@@ -1,0 +1,141 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>Something&#39;s Gotta Give  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="Saw this clarification on TC regarding Twitter  the issue certainly isn’t with creating new messages, the issue is when you check your own messages..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">Something&#39;s Gotta Give</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-26T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">Saw this clarification on TC regarding Twitter<br><div class='sharedcopy_widget' id='shcp_49cf5b567747f3411565e53a107ab110' ><blockquote class='cited'  cite='http://r7.sharedcopy.com/29ptdlct' style='cursor: pointer; margin-left: 0; padding: 0 0 1em 1em; border: 1px #FFFFFF solid; border-left: 1em #EEEEEE solid; background: #ffffff; '> <span class="content comments_count_1 withoutphoto" ><span class="text" ><div class="html_gist techcrunch_com"><input class="csspath" type="hidden" value="body div#page div#container table tbody tr td div#content div#post-17834.post div.entry.snap_trigger_icon p img.shot.shcp_dimension_223x70" /></div> <blockquote style="text-align: justify; font-style: italic; border: 0px; " class="comment_body comment_body1" >the issue certainly isn’t with creating new messages, the issue is when you check your own messages For eg, if I am following 200 people, the query needs to check the new messages from all those people and sort them into date order. That query would be really intense<a href="http://r7.sharedcopy.com/29ptdlct#shcp0" > <sup>link &raquo;</sup></a ></blockquote> </span ></span> - from <a href="http://r7.sharedcopy.com/29ptdlct">Twitter At Scale: Will It Work?</a> via <a href="http://sharedcopy.com">sharedcopy.com</a></blockquote></div><script>  var json_49cf5b567747f3411565e53a107ab110 = {   host: 'sharedcopy.com',   width: '480px',   height: '250px',   bgcolor: '#ffffff',   background: '#ffffff url(http://www.techcrunch.com.sharedcopy.com/images/loading.gif) no-repeat center center; ',   allow_click: false,   src: 'http://www.techcrunch.com.sharedcopy.com/embeds/copy/choonkeat/49cf5b567747f3411565e53a107ab110/480.250/ffffff.ffffff.cc0500/false/shcp0.html' };</script><script src='http://sharedcopy.com/static/embed/script.js'></script><br>I&#8217;d heard that earlier in the <a href="http://gillmorgang.techcrunch.com/2008/05/15/gillmor-gang-051508/">Gilmor Gang</a> : Blaine clarified that static resources (e.g. profile images) are no issue at all, and that the the bigger issue is with each person&#8217;s &#8220;home page&#8221;, where multiple streams are joined and ordered chronologically. When 1 of the connected people update, all related cached &#8220;home pages&#8221; are obsolete - hence they are generated painfully often. (so don&#8217;t refresh your own page so much!)<br><br>I&#8217;m not a scaling expert. Nor do I know anything about Twitter&#8217;s real problems. So treat this as noise maybe.<br><br>Anyways, ignoring other things unknown and purely focusing on this particular aspect&#8230; I thought it&#8217;d be interesting to consider what we might gain, if we&#8217;re just willing to give up certain things?<br><br>So.. assuming static resources ain&#8217;t a problem, lets try to have more of those! A single person&#8217;s stream (without friends) looks cachable - like a blog that generates html instead of serving dynamic. A single person&#8217;s social graph (following who) looks cachable as well. If assumptions are wrong here, then exit(1); So a person&#8217;s homepage is his own static stream with static external references to static streams of ppl he follows. Like a html page referencing a bunch of CSS. No server side join or sort. Instead, the browser, with the help of some static javascript, pulls in <em>those</em> resources, does the merging and sorting (and paging) and spit a pretty display similar to the current. i.e. every user&#8217;s browser does its own merging and sorting, you know&#8230; like, help out will ya?<br><br>Would that be better? And what did we give up? The ability to properly browse your own Twitter homepage on a browser without JS &amp; clients using API need a few more pulls and do merging / sorting themselves too. <br><br>Can we live with that?<br><br>Update: Slim pointed to an article in the comments, and &#8220;Part III&#8221; of that article, Eran had talked abt the same alternative:<br><div class='sharedcopy_widget' id='shcp_49dba0a4cf15030cc61fbbc055bc4fb9' ><blockquote class='cited'  cite='http://r2.sharedcopy.com/29reg' style='cursor: pointer; margin-left: 0; padding: 0 0 1em 1em; border: 1px #FFFFFF solid; border-left: 1em #EEEEEE solid; background: #ffffff; '> <span class="content comments_count_2 withoutphoto" ><span class="text" > <blockquote style="text-align: justify; font-style: italic; border: 0px; " class="comment_body comment_body1" >if you only ask this once, the server side batch solution will be faster. But when the client starts asking this once a minute or more repeatedly, resources go to waste and scalability is more expensive.<a href="http://r2.sharedcopy.com/29reg#shcp0" > <sup>link &raquo;</sup></a ></blockquote> <blockquote style="text-align: justify; font-style: italic; border: 0px; " class="comment_body comment_body2" >Once the server is only serving data with limited scope, usually providing the messages of a single person with the optional perspective of the reader (to enforce access control), scaling becomes a much easier task as data can be segmented easier.<a href="http://r2.sharedcopy.com/29reg#shcp1" > <sup>link &raquo;</sup></a ></blockquote> </span ></span> - from <a href="http://r2.sharedcopy.com/29reg">Hueniverse: Scaling a Microblogging Service - Part III</a> via <a href="http://sharedcopy.com">sharedcopy.com</a></blockquote></div><script>  var json_49dba0a4cf15030cc61fbbc055bc4fb9 = {   host: 'sharedcopy.com',   width: '480px',   height: '250px',   bgcolor: '#ffffff',   background: '#ffffff url(http://www.hueniverse.com.sharedcopy.com/images/loading.gif) no-repeat center center; ',   allow_click: false,   src: 'http://www.hueniverse.com.sharedcopy.com/embeds/copy/choonkeat/49dba0a4cf15030cc61fbbc055bc4fb9/480.250/ffffff.ffffff.cc0500/false/shcp0.html' };</script><script src='http://sharedcopy.com/static/embed/script.js'></script>
+<br>Update: Then again, you have scoble who follows 30k other people making it impractical for the client to fetch those streams independently&#8230; I guess most systems would decide to place limits and &#8220;punt&#8221; the issue, e.g. you can have at most 5000 friends. And that&#8217;s something Twitter is unwilling to let go.
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=Something&#39;s Gotta Give by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2008/05/somethings-gotta-give.html" title="Share Something&#39;s Gotta Give on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2008/05/somethings-gotta-give.html" title="Share Something&#39;s Gotta Give on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2008/05/somethings-gotta-give.html" title="Share Something&#39;s Gotta Give on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

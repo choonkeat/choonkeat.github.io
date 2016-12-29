@@ -1,0 +1,140 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>HOWTO Add Accelerator Keys, aka Keyboard Shortcuts, aka Keybindings to Your Eclipse Plugin  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="For starters, just add the following into the plugin.xml   &lt;extension  point=&quot;org.eclipse.ui.commands&quot;&gt;  &lt;activeKeyConfiguration..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">HOWTO Add Accelerator Keys, aka Keyboard Shortcuts, aka Keybindings to Your Eclipse Plugin</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2005-02-23T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>For starters, just add the following into the <font face="courier new,courier,monospace">plugin.xml<br /></font><br /><!--StartFragment --> <!--StartFragment -->  <strong>&lt;extension</strong><br />  <strong>point=&quot;</strong>org.eclipse.ui.commands<strong>&quot;&gt;</strong><br />  <strong>&lt;activeKeyConfiguration value=&quot;</strong>org.eclipse.ui.defaultAcceleratorConfiguration<strong>&quot;/&gt;</strong><br />  <em>&lt;!&#8211; this one says that what I declare is active by default &#8211;&gt;</em><br />  <strong>&lt;category<br />  name=&quot;</strong>Do My Bidding Accelerator Keys<strong>&quot;</strong><br />  <strong>id=&quot;</strong>myklass.activeKey.category1<strong>&quot;/&gt;</strong><br />  <strong>&lt;command<br />  category=&quot;</strong>myklass.activeKey.category1<strong>&quot;<br />  name=&quot;</strong>Do My Bidding<strong>&quot;<br />  id=&quot;</strong>myklass.activeKey.MyCommand<strong>&quot;/&gt; <br /></strong>  <em>&lt;!&#8211; a unique id, to be used only much later &#8211;&gt;</em><br />  <strong>&lt;keyBinding<br />  command=&quot;</strong>myklass.activeKey.MyCommand<strong>&quot;<br />  string=&quot;</strong>Ctrl+1<strong>&quot;<br />  scope=&quot;</strong>org.eclipse.ui.globalScope<strong>&quot; <br /></strong>  <em>&lt;!&#8211; this is the scope where ur binding is active, lets try any global &#8211;&gt;</em><br />  <strong>configuration=&quot;</strong>org.eclipse.ui.defaultAcceleratorConfiguration<strong>&quot;/&gt;<br />  &lt;/extension&gt;</strong>  </extension /><br /></extension /><br />Notice that we&#8217;ve declared this binding to be default, to be called &quot;Do My Bidding&quot;, to be bound to keys &quot;Ctrl+1&quot;. But when I really do a Ctrl+1, what is executed? </p><p>An <span style="FONT-WEIGHT: bold">Action</span> happens. How to create an action? That&#8217;s for another article (you should try the Hello World example from Eclipse itself) but right now, lets assume you have an Action that shows up a message box that says &quot;Do My Bidding&quot;&#8230; just add a <font face="courier new,courier,monospace">definitionId</font> to the <font face="courier new,courier,monospace">&lt;action /&gt;</font><br /><br /><!--StartFragment --> <strong>&lt;extension<br /></strong>  <strong>point=&quot;</strong>org.eclipse.ui.actionSets<strong>&quot;&gt;<br /></strong>  <strong>&lt;actionSet &#8230; /&gt;<br /></strong>  <strong>&lt;action definitionId=&quot;</strong>myklass.activeKey.MyCommand<strong>&quot; &#8230; /&gt;</strong> <br />  <em>&lt;!&#8211; match definitionId with the id you gave to command earlier &#8211;&gt;</em> <br /><action definitionid="myklass.activeKey.MyCommand" .="" /><!-- match definitionId with the id you gave to command earlier --></action /><br /><extension<br /><!--StartFragment --><extension<br />Now, when you press Ctrl+1, the above action will be invoked. What&#8217;s kewl is, even the menu will be updated to show the key-binding, e.g. the Ctrl-H you see in the screen capture below:<br /><img style="MARGIN: 5px" alt="" src="http://www.yanime.org/accelerator_keys_menu.jpg" /><br />See <a href="http://publib.boulder.ibm.com/infocenter/ad51help/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/wrkAdv_keyBindings_accelConfig.htm">here</a> for more details.</p><br />
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=HOWTO Add Accelerator Keys, aka Keyboard Shortcuts, aka Keybindings to Your Eclipse Plugin by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2005/02/howto-add-accel.html" title="Share HOWTO Add Accelerator Keys, aka Keyboard Shortcuts, aka Keybindings to Your Eclipse Plugin on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2005/02/howto-add-accel.html" title="Share HOWTO Add Accelerator Keys, aka Keyboard Shortcuts, aka Keybindings to Your Eclipse Plugin on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2005/02/howto-add-accel.html" title="Share HOWTO Add Accelerator Keys, aka Keyboard Shortcuts, aka Keybindings to Your Eclipse Plugin on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

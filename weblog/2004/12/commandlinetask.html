@@ -1,0 +1,140 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>CommandLineTask: Running Ant repeatedly without the slow inits  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="I&#8217;m not sure if this was already out there somewhere. But I sure didn&#8217;t find it. Anyways, my very slow (0.3GHZ) machine was coughing al..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">CommandLineTask: Running Ant repeatedly without the slow inits</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2004-12-19T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>I&#8217;m not sure if this was already out there somewhere. But I sure didn&#8217;t find it. Anyways, my very slow (0.3GHZ) machine was coughing all the way whilst I&#8217;m trying to write some Java program at home, compiling them with <a href="http://ant.apache.org/">Ant</a>. Frustrated with the start-up delays, I wrote this very simple task to allow invoking of ant targets at will - without the slow startup that Ant has, everytime its called - <a title="CommandLineTask: Keeps Ant in memory to execute future tasks efficiently" href="http://www.yanime.org/CommandLineTask.java">CommandLineTask.java</a><br />To use, just add a new task definition into an existing build.xml:</p><blockquote dir="ltr" style="MARGIN-RIGHT: 0px"><p>&lt;taskdef name=&quot;<strong>command</strong>&quot; classname=&quot;<strong>org.yanime.ant.CommandLineTask</strong>&quot; /&gt; </p></blockquote><p>And add a new target, say &quot;cmd&quot;:<!--StartFragment --></p><div style="MARGIN-LEFT: 40px">&lt;target name=&quot;cmd&quot;&gt;<br />  &lt;<strong>command</strong> /&gt;<br />&lt;/target&gt;<br /></div><p>Easy. Now, run your build, invoking the &quot;cmd&quot; target and you&#8217;ll get a prompt. Type in any targetname to continue / repeat your process. The command line will remain until you type !. With so much speed up (22secs compile now takes 3 seconds!) for so little work (96 lines), I really wonder why I&#8217;d never written this helper earlier. Sigh.<br /><br />The only caveat is, don&#8217;t use it if any classes used by Ant is being changed and needs a refresh (e.g. whilst developing CommandLineTask which is part of the taskdef in the build.xml) - but that&#8217;s pretty rare.<br /><br />Update: Ok, looks like a decent sized compile eats over 100MB of RAM and that remains used, no matter how many times you recompile. So a best-of-both-world solution will be to exit ANT after every input commandline, but restart ANT to the command task&#8217;s prompt immediately so that the next compile / commandline can start immediately without waiting for ANT&#8217;s slow startup - parsing build.xml. At least that seems to improve my edit-compile-test cycle using Ant.<br /></p><br />
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=CommandLineTask: Running Ant repeatedly without the slow inits by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2004/12/commandlinetask.html" title="Share CommandLineTask: Running Ant repeatedly without the slow inits on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2004/12/commandlinetask.html" title="Share CommandLineTask: Running Ant repeatedly without the slow inits on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2004/12/commandlinetask.html" title="Share CommandLineTask: Running Ant repeatedly without the slow inits on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

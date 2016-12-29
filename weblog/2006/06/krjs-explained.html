@@ -1,0 +1,140 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>KRJS Explained  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="Regarding KRJS, I&#8217;ve been asked &quot;Hmm.. so you moved the javascript to the controller&#8230; what&#8217;s the benefit?&quot;. I&#8217;ll ..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">KRJS Explained</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-06-25T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>Regarding KRJS, I&#8217;ve been asked &quot;Hmm.. so you moved the javascript to the controller&#8230; what&#8217;s the benefit?&quot;. I&#8217;ll try to briefly illustrate the benefits here with some Rails/RJS code - <strong>the codes in this example are broken, bugs or simply wrong</strong> but that&#8217;s not the point - hopefully you&#8217;ll get the drift.<br /><br /><span style="font-weight: bold">The Problem:</span> Given a textfield and a blank div in Rails, let&#8217;s do a <a target="_blank" onclick="return top.js.OpenExtLink(window,event,this)" href="http://www.google.com/webhp?complete=1"><span style="font-style: italic">google suggest-ish</span> </a> feature<br /><span style="font-family: courier new,monospace">&lt;%= text_field_tag &#8217;<span style="font-weight: bold">query</span>&#8217; %&gt;</span><br /><span style="font-family: courier new,monospace"> &lt;div id=&quot;<span style="font-weight: bold">placeholder</span>&quot;&gt;&lt;/div&gt;</span><br /><br /><font size="3"><strong>Method #1</strong></font><br />1. observe your textfield with javascript:<br /><span style="font-family: courier new,monospace"> &lt;script&gt;</span><br /><span style="font-family: courier new,monospace">&nbsp; // every 3 seconds, check changes typed into textfield</span><br /> <span style="font-family: courier new,monospace">&nbsp; my_observer(&#8216;query&#8217;, 3, &#8216;my_call_to_server&#8217;);</span><br /><br /><span style="font-family: courier new,monospace"> &nbsp; // when called, sends server a request and updates HTML with</span><br /><span style="font-family: courier new,monospace">&nbsp; // response data</span><br /> <span style="font-family: courier new,monospace">&nbsp; function my_call_to_server(query) {</span><br /><span style="font-family: courier new,monospace">&nbsp;&nbsp;&nbsp; data = Ajax.get(&quot;http://host:port/my_script?query=&quot; + query);</span><br /><span style="font-family: courier new,monospace">&nbsp;&nbsp;&nbsp; getElementById(&#8216;placeholder&#8217;).innerHtml = data;</span><br /> <span style="font-family: courier new,monospace">&nbsp; }</span><br /><span style="font-family: courier new,monospace">&lt;/script&gt;</span><br /> <br />But let&#8217;s be fair, with Rails can cut it down and even get cross-browser compatibility:<br /><span style="font-family: courier new,monospace">&lt;%=</span><br /><span style="font-family: courier new,monospace"> observe_field(&#8217;<span style="font-weight: bold">query</span>&#8217;,</span><br /><span style="font-family: courier new,monospace">&nbsp; { :url =&gt; { :action =&gt; &#8217;<span style="font-weight: bold"> my_script</span>&#8217;}, </span><br /><span style="font-family: courier new,monospace">&nbsp; :frequency =&gt; <span style="font-weight: bold">3</span>,</span><br /> <span style="font-family: courier new,monospace">&nbsp; :with =&gt;&#8217;<span style="font-weight: bold">query</span>&#8217;,</span><br /><span style="font-family: courier new,monospace">&nbsp; :update =&gt; &#8217; <span style="font-weight: bold">placeholder</span>&#8217;)</span><br /><span style="font-family: courier new,monospace">%&gt;</span><br /><br />2. Next, handle the Ajax.get on server and spits out HTML. <br /><span style="font-family: courier new,monospace">def my_script</span><br /><span style="font-family: courier new,monospace">&nbsp; search_results&nbsp; = search_for(params[&#8216;query&#8217;])</span> <br /><span style="font-family: courier new,monospace">&nbsp; render text: =&gt; search_results.to_html</span><br /><span style="font-family: courier new,monospace"> end</span><br /><br />Notice the bold portions, these will come back to haunt you when you have many ajax pages - because you&#8217;re forced to tie up the whole logic (observe &#8217;<span style="font-weight: bold">query</span>&#8217; every  <span style="font-weight: bold">3</span> seconds, send to server &#8217;<span style="font-weight: bold">my_script</span>&#8217;, update &#8217;<span style="font-weight: bold">placeholder</span>&#8217;) all inside the HTML template. Dang! These will haunt you when you need to change or add logic (I&#8217;m sure you&#8217;ve experienced it before) <br /><br /><font size="3"><strong>Method #2</strong></font><br />1. Again, observe your textfield (notice the omitted <span style="font-family: courier new,monospace">:update</span> option)<br /><span style="font-family: courier new,monospace"> &lt;%=</span><br /><span style="font-family: courier new,monospace">observe_field(&#8217;</span><span style="font-weight: bold; font-family: courier new,monospace">query</span><span style="font-family: courier new,monospace"> &#8216;,</span><br /><span style="font-family: courier new,monospace">&nbsp; { :url =&gt; { :action =&gt; &#8217;</span><span style="font-weight: bold; font-family: courier new,monospace">my_script </span><span style="font-family: courier new,monospace">&#8217;}, </span><br /><span style="font-family: courier new,monospace">&nbsp; :frequency =&gt; </span><span style="font-weight: bold; font-family: courier new,monospace"> 3</span><span style="font-family: courier new,monospace">,</span><br /><span style="font-family: courier new,monospace">&nbsp; :with =&gt;&#8217;</span><span style="font-weight: bold; font-family: courier new,monospace"> query</span><span style="font-family: courier new,monospace">&#8217;)</span><br /><span style="font-family: courier new,monospace">%&gt;</span><br /><br />2. Handle the Ajax.get on server and use RJS to spit out JS (calling page will execute): <br /><span style="font-family: courier new,monospace">def my_script</span><br /><span style="font-family: courier new,monospace">&nbsp; search_results&nbsp; = search_for(params[&#8216;query&#8217;])</span> <br /><span style="font-family: courier new,monospace">&nbsp; render update do |page|</span><br /><span style="font-family: courier new,monospace"> &nbsp;&nbsp;&nbsp; page.replace_html :placeholder, search_results.to_html</span><br /><span style="font-family: courier new,monospace"><br /><span style="font-style: italic">&nbsp;&nbsp;&nbsp; # 2 new whiz-bang features! </span></span><br /><span style="font-family: courier new,monospace; font-style: italic">&nbsp;&nbsp;&nbsp; page.replace_html :title, &quot;Suggestions for #{params[&#8216;query&#8217;]}&quot; </span><br /><span style="font-family: courier new,monospace; font-style: italic">&nbsp;&nbsp;&nbsp; </span><span style="font-family: courier new,monospace; font-style: italic"> </span><span style="font-family: courier new,monospace; font-style: italic">page.hide :advertisement_div </span><span style="font-family: courier new,monospace; font-style: italic">if <br /><span style="font-style: italic"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>User.find(@session[:user_id]).name == &#8216;George&#8217;</span><span style="font-family: courier new,monospace; font-style: italic"><br /></span><span style="font-family: courier new,monospace"> &nbsp; end</span><br /><span style="font-family: courier new,monospace">end</span><br /><br />Notice lesser amount of bold portions in the template? No more hard coding to update &#8216;placeholder&#8217;, we&#8217;re saying it only at the server side. In fact, its so easy to add more / change JS events with RJS, that I had easily added 2 extra features without any the template changes! To introduce / change features in method #1, you would have to modify the html template. <br /><br />Now, notice that last extra feature&#8230; It roughly means &quot;<span style="font-style: italic">Find current user in database, if the name is George, send an extra javascript event to hide the advertisement div</span> &quot;. Imagine the code you have to juggle if we&#8217;re doing this on client side (method #1)!!<br /><br /><font size="3"><strong>Method #3</strong></font><br />NOW.. Let&#8217;s have fun with KRJS<br />1. <br />2. Handle the Ajax.get on server and use RJS to spit out JS (calling page will execute): <br /><span style="font-family: courier new,monospace">def <span style="font-weight: bold">on_query_change_3</span></span><br /><span style="font-family: courier new,monospace">&nbsp;  </span><span style="font-family: courier new,monospace"># same code as method #2&#8230;</span><br /><span style="font-family: courier new,monospace"> end</span><br /><br /><span style="font-style: italic">Hey! There&#8217;s no Step 1(tm)</span>. And step 2 is identical to method #2 (all benefits of RJS) except that our function has a specific naming convention. Absolutely no need to touch your template at all! The necessary javascripts in the HTML are inserted automatically when the template is rendered. <br /><br />Let&#8217;s say we decide to change the JS event to <span style="font-family: courier new,monospace">onblur</span> instead of observing every 3 seconds&#8230; come, think what has to be done if we&#8217;re using method #1 or #2? Ready? Change 1 file? 2 files? remove observe_field method, and replace with onblur event?&#8230; <br /><br />In KRJS, you simply rename your controller handler:<br /><span style="font-family: courier new,monospace">def <span style="font-weight: bold">on_query_blur</span></span><br /> <span style="font-family: courier new,monospace">&nbsp; </span><span style="font-family: courier new,monospace"># same code as method #2&#8230;</span><br /> <span style="font-family: courier new,monospace">end</span></p><p>Now, its not really performant right now&#8230; the time-savings is mostly conceptual as well as on the development time. The exact implementation could be evolved, no issue:</p><ul><li>detect external on_xxx.rjs files instead of clogging the controller with on_xxx methods&nbsp;</li><li>different behavior when in production mode</li><li>rake task to compile for production (faster to render)</li></ul><p>With KRJS, I can see lots of code-cutting with the many <a href="http://weblog.rubyonrails.org/2006/6/13/new-from-oreilly-rjs-templates-for-rails">RJS examples</a> out there. <a href="http://choonkeat.svnrepository.com/svn/rails-plugins/krjs/">Patches are welcome</a>.&nbsp;</p>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=KRJS Explained by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2006/06/krjs-explained.html" title="Share KRJS Explained on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2006/06/krjs-explained.html" title="Share KRJS Explained on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2006/06/krjs-explained.html" title="Share KRJS Explained on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

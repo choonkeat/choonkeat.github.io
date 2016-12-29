@@ -1,0 +1,140 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>&quot;CRUD! CRUD! CRUD!&quot;: DHH  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="Well, ok he didn&#8217;t exactly do a Steve-Balmer-jumping-around-the-stage thing. But what he was driving at this evening&#8217;s keynote is extre..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">&quot;CRUD! CRUD! CRUD!&quot;: DHH</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-06-25T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>Well, ok he didn&#8217;t exactly do a Steve-Balmer-jumping-around-the-stage thing. But what he was driving at this evening&#8217;s keynote is extremely liberating: </p> <p><em>What if every controller does only* CRUD  (create, read, update, destroy)?</em></p> <p>(Note: DHH understands that only CRUD is just an ideal and its perfectly necessary to drop out of that when needed. Much like how ActiveRecord optimises to support its ideal, yet allows find_by_sql) </p> <p>CRUD is simple and well understood. It is even the only 4 operations baked into the SQL to manipulating data - INSERT, SELECT, UPDATE, DELETE. So if 80% of the web apps are simply database-backed web applications, asking controllers to just revolve around CRUD isn&#8217;t that demanding is it? <a href="http://www.loudthinking.com/arc/000572.html">Using HTTP GET, POST, PUT and DELETE.</a> Instead of, </p> <pre>POST /people/destroy/1 </pre> <p>it now becomes, </p> <pre>DELETE /people/1&nbsp;</pre> <p>Note: Though <a href="http://www.intertwingly.net/blog/2006/03/12/HTTP-Best-Practices">technical concerns</a> are valid, it doesn&#8217;t sound like David is looking for protocol purity. Workarounds are acceptable if that&#8217;s what&#8217;s required to make this work.<br /> </p> <p>Having CRUD-only conventions means not needing to decide method names anymore - this is one of those stupid small things that nibbles at you like deciding the names of foreign keys. Say you have a &quot;Student&quot; controller, but you&#8217;re adding a &quot;Subject&quot; to him? Hmm&#8230; StudentController#take_subject() or SubjectController#add_student()? Is it so simple as associating the 2 models? Are there other operations that needs to be done when such association is created or destroyed? (eh? crud verbs sneaking in&#8230;) Before you know it&#8230; your StudentController would have 4 methods that arguably relates more to Subjects: drop_subject, show_subjects, update_subjects. <br /> </p> <p>In a CRUD-only world, since controllers are preferred to operate with CRUD-only constraint - and neither Student&#8217;s nor Subject&#8217;s CRUD should handle that - let&#8217;s create a StudyController instead. Now, operations on this student-subject relation will occur simply as CRUD operations in the StudyController.  Makes everything equally simple and awfully consistent.</p> <p>Then he builds on top of &quot;<em>if its a CRUD-only world anyways</em>&quot; and introduces the concept that had just hit him <a href="http://www.loudthinking.com/arc/000592.html">a few days ago</a>: Active Resources. Basically, resources which can be operated upon, behind the scenes, via RESTful CRUD URLs. And of cos, with Rails-style conventions, you <em>KNOW</em> it will be easy. </p><p>Note: The idea is just to model web resources, not to abstract away the underlying engine (sql or url?) for a single model object. To quote his reply (roughly), &quot;<em>I don&#8217;t believe in just flipping a switch and swapping the underlying technology&#8230; These things will leak.</em>&quot;. </p><p>When I saw the slides, I got a flashback to a 2005 Adam Bosworth speech: <a href="http://www.itconversations.com/shows/detail571.html">MySQL, don&#8217;t scale like Oracle! Think bigger!<br /></a></p>If truely scalable data store is what Adam Bosworth has described (and <a href="http://code.google.com/apis/gdata/">GData</a> is apparently Google&#8217;s implementation of such infrastructure) then Rails is well on its way. Taking big strides towards it (knowingly or not) while most other frameworks are still grappling over composite primary keys and plural table names controversies.&nbsp; <p>Rails 1.2 is going to be very, very interesting.&nbsp;</p> <p>Note: Shucks.. <a href="http://choonkeat.svnrepository.com/svn/rails-plugins/krjs/">KRJS</a> naming convention needs a new home then?<br /> </p>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=&quot;CRUD! CRUD! CRUD!&quot;: DHH by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2006/06/crud-crud-crud-.html" title="Share &quot;CRUD! CRUD! CRUD!&quot;: DHH on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2006/06/crud-crud-crud-.html" title="Share &quot;CRUD! CRUD! CRUD!&quot;: DHH on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2006/06/crud-crud-crud-.html" title="Share &quot;CRUD! CRUD! CRUD!&quot;: DHH on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

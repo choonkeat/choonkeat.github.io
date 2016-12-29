@@ -1,0 +1,147 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>Just another day in paradise  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="Sometimes it takes talking to somebody new to Rails to recall the little blessings that I&#8217;ve come to take for granted (which I use to be doin..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">Just another day in paradise</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-09-06T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>Sometimes it takes talking to somebody new to Rails to recall the little blessings that I&#8217;ve come to take for granted (which I use to be doing by myself over and over and over again&#8230;) For example, these HTML inputs</p><blockquote><pre>&lt;input name=&quot;person[0][name]&quot; /&gt;<br />&lt;input name=&quot;person[0][email]&quot; /&gt;<br />&lt;input name=&quot;person[1][name]&quot; /&gt;<br />&lt;input name=&quot;person[1][email]&quot; /&gt;<br />&lt;input name=&quot;person[2][name]&quot; /&gt;<br />&lt;input name=&quot;person[2][email]&quot; /&gt;</pre></blockquote>
+
+<p>when submitted, simply gives me regular, hierarchical hashes (not custom classes like PersonFormArray)</p><blockquote><pre>params[&quot;person&quot;][&quot;0&quot;] # { &quot;name&quot; =&gt; ..., &quot;email&quot; =&gt; ... }<br />params[&quot;person&quot;][&quot;1&quot;] # { &quot;name&quot; =&gt; ..., &quot;email&quot; =&gt; ... }<br />params[&quot;person&quot;][&quot;2&quot;] # { &quot;name&quot; =&gt; ..., &quot;email&quot; =&gt; ... }</pre></blockquote>
+
+<p>Some might disagree and say its simpler in <em>some</em> JEE framework where inputs and objects are paired for you automatically. What usually goes on, is that the binding is opaque and couples the implementation on two sides (view/controller or view/model). Stifling.</p>
+
+<p>In Rails (ActionPack), the &quot;binding&quot; is only a transparent naming convention. Hence, there is no coupling and more flexibility. </p><blockquote><pre>&lt;input name=&quot;person[2][silly_requirement]&quot; /&gt;</pre></blockquote><p>Will make the hash, without fuss, become</p><blockquote><pre>params[&quot;person&quot;][&quot;2&quot;] <br /># {&quot;name&quot; =&gt; ..., &quot;email&quot; =&gt; ..., &quot;silly_requirement&quot; =&gt; ...}</pre></blockquote>
+
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=Just another day in paradise by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2007/09/just-another-da.html" title="Share Just another day in paradise on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2007/09/just-another-da.html" title="Share Just another day in paradise on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2007/09/just-another-da.html" title="Share Just another day in paradise on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

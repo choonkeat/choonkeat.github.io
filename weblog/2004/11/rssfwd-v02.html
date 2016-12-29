@@ -1,0 +1,142 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>RssFwd v0.2  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="Puberty is never quite easy. RssFwd has taken a baby step to v0.2 today.. a complete rewrite. In Ruby. In Rails actually. Source code available her..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">RssFwd v0.2</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2004-11-14T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>Puberty is never quite easy. RssFwd has taken a baby step to v0.2 today.. a complete rewrite. <br /><br />In Ruby. In <a href="http://www.rubyonrails.org/">Rails</a> actually. Source code available <a href="http://www.yanime.org/rssfwd/rssfwd-0.2.zip"><span style="TEXT-DECORATION: line-through">here </span></a> [update: all downloads are <a href="http://rubyforge.org/frs/?group_id=457">here</a>]. Feel free to <a href="http://rails.yanime.org/rssfwd/">give it a try</a>. I won&#8217;t spam you, promise.<br /><br />The original TODO list included a web-interface to listing, subscribing and other end-user related activities which will be too boring to do with hand-coded file/database access, request, response, blah blah. So, decided to piggyback on rails&#8217; framework - which is a pretty pleasant experience.<br /><br />I&#8217;m not using any RSS/Atom APIs here, partly because Ruby support for RSS or Atom, etc is quite rudimentary and considering the <a href="http://diveintomark.org/archives/2004/02/04/incompatible-rss">many RSS versions</a> + Atom formats to support.. I think I&#8217;m better off with a standards-ignorant (lenient) feed reader. Any problems with anybody&#8217;s feed? Let me know. Fixing is not hard at all.<br /><br />Update:<br /><p style="FONT-WEIGHT: bold; MARGIN-LEFT: 40px">Take RssFwd with you</p><div style="MARGIN-LEFT: 40px">Subscribe to any feed, anywhere you go - with bookmarklets. </div><ol style="MARGIN-LEFT: 40px" type="1"><li>Right-click and bookmark this link: <a href="javascript:void(location.href%20=%20'http://rails.yanime.org/rssfwd/preview?url=' + escape(location.href))">RF Preview This!</a> <br />
+<li>Go to any RSS/Atom page (e.g. Experiment with <a href="http://rails.yanime.org/xml/rss/feed.xml"<br />
+ target=&#8221;_blank&#8221;>this feed </a>) </li><li>Click on your new bookmarks </li><li>That&#8217;s it! <br /><a href="javascript:void(location.href%20=%20'http://rails.yanime.org/rssfwd/preview?url=' + escape(location.href))">RF Preview This!</a> : You get a readable format immediately and the option to subscribe. <br /></li></ol><p>Now go, syndicate the planet.. <br /></p>Slight changes to my framework libraries though.. not entirely sure if they&#8217;re bugs, changing them works for me.. so.. here they are:<br /><br />Changed <span style="COLOR: rgb(102,102,102); FONT-FAMILY: courier new,courier,monospace">activerecord/lib/active_record/base.rb (sanitize)</span><br />old: <span style="COLOR: rgb(102,102,102); FONT-FAMILY: courier new,courier,monospace">object.to_s.gsub(/([;:])/, &quot;&quot;).gsub(&#8216;##&#8217;, &#8216;##&#8217;).gsub(/&#8217;/, &quot;&#8221;&quot;) # &#8217; (for ruby-mode)</span><br />new: <span style="COLOR: rgb(102,102,102); FONT-FAMILY: courier new,courier,monospace">object.to_s.gsub(/(;|:)/, &quot;&#92;&#92;&#92;&#92;&#92;&#92;&#92;&amp;&quot;).gsub(&#8216;##&#8217;, &#8216;##&#8217;).gsub(/&#8217;/, &quot;&#8221;&quot;) # &#8217; (for ruby-mode)</span><br /><br />strange why I need so many &#92; but the idea is to escape into &#92;; or &#92;: instead of blatantly removing the ; or : characters. Spent quite sometime tracking it down this one (cock eyed) when my <span style="COLOR: rgb(102,102,102); FONT-FAMILY: courier new,courier,monospace">WHERE url = &#8216;%s&#8217;</span> didn&#8217;t work as expected ;-)<br /><br />Also, changed <span style="COLOR: rgb(102,102,102); FONT-FAMILY: courier new,courier,monospace">http-access2/http.rb (set_header)</span><br /><br />old: <span style="COLOR: rgb(102,102,102); FONT-FAMILY: courier new,courier,monospace">set(&#8216;Host&#8217;, &quot;#{@request_uri.host}:#{@request_uri.port}&quot;) </span><br />new: <span style="COLOR: rgb(102,102,102); FONT-FAMILY: courier new,courier,monospace">set(&#8216;Host&#8217;, &quot;#{@request_uri.host}&quot;)<br />set(&#8216;Host&#8217;, &quot;#{@request_uri.host}:#{@request_uri.port}&quot;) unless @request_uri.port = 80 </span><br /><br />apparently rubyforge.org (sic) had problems with the host:port format and kept returning me HTTP 302, with the same Location: value. This naturally freaked out my HTTPAccess2::Client object. The new host-only header works.. so -shrugs- not sure who is the broken one.<br /><br />Hm. Did I mention, RssFwd is <a href="http://www.gnu.org/copyleft/gpl.html">GPL</a> ?<br /><br />TODO:<br /><ol><li>Integrate with <a href="http://rssscraper.rubyforge.org/">RSSScraper</a> or something easier, so that any webpage can be syndicated. </li><li>Allow server-mode at port 110, ala rss2email? Is it truely easier for non-techies? </li><li>Show latest few polled articles from all sources (copyright infringements?) </li><li>W3C-compliant style image links to easily indicate subscribe-able feeds. </li><li>Work on conserving bandwidth </li></ol></p>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=RssFwd v0.2 by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2004/11/rssfwd-v02.html" title="Share RssFwd v0.2 on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2004/11/rssfwd-v02.html" title="Share RssFwd v0.2 on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2004/11/rssfwd-v02.html" title="Share RssFwd v0.2 on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

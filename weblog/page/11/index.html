@@ -1,0 +1,437 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>choonkeat on programming & software  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="
+		 I&#8217;ve tried Firebug pretty early when it was first released and wasn&#8217;t too impressed. I was too obtuse to find my way around it, and..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner">
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2006/06/essential-webde.html">
+			
+				Essential Webdev Tools: Firebug</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-06-14T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p> <p>I&#8217;ve tried <a href="https://addons.mozilla.org/firefox/1843/">Firebug</a> pretty early when it was first released and wasn&#8217;t too impressed. I was too obtuse to find my way around it, and Gmail, <em>IIRC</em>, was givin way too many errors at the Firebug indicator, my machine was just grinding to a halt. Or maybe I just wasn&#8217;t doing too many web dev stuff back then (was doing Eclipse plugin) to be really in need of installing it. <br /></p><p>For the interested, I&#8217;m now a Firebug fan. Its been helping me greatly in debugging webpages. Yea.. <span style="font-style: italic">debugging web pages</span>, however <a href="http://www.triviaasylum.com/dilbert/diltriv.html#LetterB">pointy-haired</a> that may sound. </p> <p><a title="Photo Sharing" href="http://www.flickr.com/photos/choonkeat/166844180/"><img width="500" height="279" border="0" alt="firebug-3-inspect" src="http://static.flickr.com/50/166844180_e45970c607.jpg" /></a><br />E.g. this screenshot here showed how I could easily tell why the grey area (a &quot;pre&quot; tag) was blank - by just doing a mouse over. (<a href="http://www.flickr.com/photos/choonkeat/tags/firebug/">see more&#8230;</a>)<br />  <br />Awesome! Do lemme know if there&#8217;s an equivalent (hopefully free) IE tool for this. It&#8217;ll really handy to be able to inspect the current (js modified, not &#8216;view source&#8217;) DOM representation in IE.<br />  <br />Note: after installing Firebug, click on the green tick (or red cross) at the bottom right corner to bring up the Firebug panel.</p></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2006/06/krjs-rjs-withou.html">
+			
+				KRJS: RJS without messing the Views</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-06-12T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>   <p>RJS is great and awesome. I use it quite regularly now. With RJS, I don&#8217;t have to deal with <em>which parts of the page to update</em> in the rhtml files - I get to decide whilst in my controller using the nice and elegant <a href="http://codefluency.com/articles/2006/05/27/rails-views-render-update-not-rjs/">render :update</a>. Sweet. </p>             <p>But part of me wished I didn&#8217;t have to even decide <em>which page elements are to be ajaxified</em>. I&#8217;d wish I could more easily enable a link, form or button to make ajax calls without going back and touching my html&#8230; <br />       </p>             <p>Oh well. </p>             <p>Introducing the <a href="http://choonkeat.svnrepository.com/svn/rails-plugins/krjs/">KRJS plugin</a>, with less than 60 lines of patch to Rails&#8217; ActionPack itself (which probably means bugs are aplenty, would slow production sites to a crawl, and that its fresh from the oven too)</p>             <p>To see KRJS in action (<em>so what does it do?</em>), generate a blank controller and index action:<br />   </p>     <pre><font color="#990000">.</font>/script/generate controller Sample index</pre>   <p>Give it a decent layout (include javascripts) by creating the file app/views/layouts/sample.rhtml<br />   </p>     <pre><font color="#990000">&lt;</font><font color="#990000">!</font>DOCTYPE html PUBLIC <font color="#ff0000">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</font><br />     <font color="#ff0000">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</font><font color="#990000">&gt;</font><br />   <font color="#ff0000">&lt;html&gt;</font><br />   <font color="#ff0000">&lt;head&gt;</font><br />     <font color="#990000">&lt;</font><font color="#990000">%</font><font color="#990000">=</font> javascript_include_tag <font color="#990000">:</font>defaults <font color="#990000">%</font><font color="#990000">&gt;</font><br />   <font color="#ff0000">&lt;/head&gt;</font><br />   <font color="#ff0000">&lt;body&gt;</font><br />   <font color="#990000">&lt;</font><font color="#990000">%</font><font color="#990000">=</font> <font color="#009900">@content_for_layout</font> <font color="#990000">%</font><font color="#990000">&gt;</font><br />   <font color="#ff0000">&lt;/body&gt;</font><br />   <font color="#ff0000">&lt;/html&gt;</font> </pre>           <p>Create a sample form: <br />   </p>     <pre><font color="#990000">&lt;</font><font color="#990000">%</font><font color="#990000">=</font> <strong><font color="#000000">form_tag</font></strong><font color="#990000">(</font><font color="#ff0000">{</font><font color="#990000">:</font>action <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#ff0000">'submit'</font><font color="#ff0000">}</font><font color="#990000">,</font> <font color="#ff0000">{</font><font color="#990000">:</font>id <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#ff0000">'form'</font><font color="#ff0000">}</font><font color="#990000">)</font> <font color="#990000">%</font><font color="#990000">&gt;</font><br />     <font color="#990000">&lt;</font><font color="#990000">%</font><font color="#990000">=</font> text_field <font color="#ff0000">'account'</font><font color="#990000">,</font> <font color="#ff0000">'login'</font><font color="#990000">,</font> <font color="#990000">:</font>id <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#ff0000">'account-new-login'</font> <font color="#990000">%</font><font color="#990000">&gt;</font><font color="#990000">&lt;</font>br <font color="#990000">/</font><font color="#990000">&gt;</font><br />     <font color="#990000">&lt;</font><font color="#990000">%</font><font color="#990000">=</font> submit_tag <font color="#ff0000">'Login'</font> <font color="#990000">%</font><font color="#990000">&gt;</font><br />   <font color="#990000">&lt;</font><font color="#990000">%</font><font color="#990000">=</font> end_form_tag <font color="#990000">%</font><font color="#990000">&gt;</font> </pre>          <p>This will be the last time we&#8217;re touch the Views. If you visit the page now, you should see a simple form. This is the most basic Rails app. It will be our mickey mouse app for this session:<br />   </p>             <p><a title="Photo Sharing" href="http://www.flickr.com/photos/choonkeat/165073750/"><img width="240" height="93" border="0" alt="KRJS walkthru: Default form" src="http://static.flickr.com/49/165073750_19cba41a79_m.jpg" /></a></p>             <p>Clicking on Login leads you to an even simpler error page:</p>           <p><a title="Photo Sharing" href="http://www.flickr.com/photos/choonkeat/165073835/"><img width="240" height="94" border="0" alt="KRJS walkthru: Default page after submitting form" src="http://static.flickr.com/64/165073835_c5d9f5608a_m.jpg" /></a></p>             <p>This is because we didn&#8217;t have any code to handle the form submit. Don&#8217;t let that stop us web2.0-ers, let&#8217;s ajaxify it anyways! First, install the <a href="http://choonkeat.svnrepository.com/svn/rails-plugins/krjs/">KRJS plugin</a> </p><pre><font color="#990000">.</font>/script/plugin install http://choonkeat.svnrepository.com/svn/rails-plugins/krjs/</pre><p>and <strong>restart your server</strong>.</p>         <p>Now, try to view the page, and click on the Login button&#8230;. same error page. Good! That means KRJS didn&#8217;t mess up the original app. Now let&#8217;s add a new method into the controller, app/controllers/sample_controller.rb<br />     </p>         <pre>  <strong><font color="#0000ff">def</font></strong> on_form_submit<br />       render <font color="#990000">:</font>update <strong><font color="#0000ff">do</font></strong> <font color="#990000">|</font>page<font color="#990000">|</font><br />         page<font color="#990000">.</font>insert_html <font color="#990000">:</font>after<font color="#990000">,</font> <font color="#ff0000">'form'</font><font color="#990000">,</font> CGI<font color="#990000">.</font><strong><font color="#000000">escapeHTML</font></strong><font color="#990000">(</font>params<font color="#990000">.</font>inspect<font color="#990000">)</font><br />       <strong><font color="#0000ff">end</font></strong><br />     <strong><font color="#0000ff">end</font></strong></pre>   <p>&nbsp;</p>         <p>Refresh the page, and click on Login</p>         <p><a title="Photo Sharing" href="http://www.flickr.com/photos/choonkeat/165073881/"><img width="240" height="93" border="0" alt="KRJS walkthru: Result page after installing KRJS and clicking form" src="http://static.flickr.com/45/165073881_98a6576eac_m.jpg" /></a></p>         <p>As you can see, the form has become ajaxified - to update the page instead of sending the browser to a new location - by merely adding a new corresponding method in the controller! How about adding this to the controller:</p>       <p>&nbsp;</p>     <pre>  <strong><font color="#0000ff">def</font></strong> on_account_login_blur<br />       render <font color="#990000">:</font>update <strong><font color="#0000ff">do</font></strong> <font color="#990000">|</font>page<font color="#990000">|</font><br />         page<font color="#990000">.</font>insert_html <font color="#990000">:</font>after<font color="#990000">,</font> <font color="#ff0000">'form'</font><font color="#990000">,</font> CGI<font color="#990000">.</font><strong><font color="#000000">escapeHTML</font></strong><font color="#990000">(</font>params<font color="#990000">.</font>inspect<font color="#990000">)</font><br />       <strong><font color="#0000ff">end</font></strong><br />     <strong><font color="#0000ff">end</font></strong></pre>   <p>&nbsp;</p>       <p>Refresh the page, type something into the textfield and TAB away from the field:<br />   </p>       <p><a title="Photo Sharing" href="http://www.flickr.com/photos/choonkeat/165073907/"><img width="240" height="94" border="0" alt="KRJS walkthru: Result page after losing focus on text field" src="http://static.flickr.com/44/165073907_898d68f271_m.jpg" /></a></p>             <p>Yea, KRJS registers onBlur events as well. In fact, it&#8217;ll register onClick, onSubmit, onWatever, onYouwant because it doesn&#8217;t really care. All that matters is your HTML element&#8217;s ID attribute. <a href="http://choonkeat.svnrepository.com/svn/rails-plugins/krjs/">KRJS</a> currently identifies xhr actions by naming conventions, hence it will probably be most convenient to be used with <a href="http://choonkeat.svnrepository.com/svn/rails-plugins/dashed_dom_id/">dashed_</a><a href="http://choonkeat.svnrepository.com/svn/rails-plugins/dashed_dom_id/">dom_id plugin</a>.&nbsp;</p>     <p>Go ahead, give it a spin. I&#8217;m going to sleep.. hope I don&#8217;t wake into a world of horror&#8230; <br />   </p><p>[Updated plugin links]&nbsp;</p></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2006/05/not-managing-so.html">
+			
+				(Not) Managing Software Developers</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-05-31T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>&nbsp;</p>
+
+<p>My monthly dosage of Essential Programmer&#8217;s Read came in today: <a href="http://steve-yegge.blogspot.com/2006/05/not-managing-software-developers.html">(Not) Managing Software Developers</a>. (Life with <a href="http://www.joelonsoftware.com/">Joel</a> gone quiet can be pretty bitter&#8230; Luckily there&#8217;s Steve Vegge)</p> <p>I&#8217;m an awful manager myself (<em>lead what?</em> *inside joke*). Not sure if I&#8217;ll ever venture there again&#8230; but I just love these priceless anecdotes:</p> 
+<iframe src='http://steve-yegge.blogspot.com.sharedcopy.com/embeds/copy/choonkeat/32b9ad5420cb258e1d1c29c389658633/480.250/e3f0f6.fff.cc0500/shcp1.html' class='sharedcopy_embed' style='width: 480px; height: 250px; border: 0px; padding: 0px; margin 0px; background: #fff url(http://steve-yegge.blogspot.com.sharedcopy.com/images/loading.gif) no-repeat center center; ' frameborder='0' scrolling='no'></iframe><noframes>Your browser does not support frames, but you can still read the <a href='http://r1.sharedcopy.com/1in6ml'>sharedcopy content here</a>.</noframes>
+<p> I have indeed interviewed fresh CS graduates who proudly laid out their 5-year plan as &quot;First, I&#8217;ll <em>have to</em> do some programming&#8230; for 1 to 2 years. After that, then I can become a manager.&quot; Wow. Priceless. That&#8217;s a sure hire.<br /> <br /> My 2 cents addition to his &quot;Don&#8217;ts&quot; list: Don&#8217;t give frivolous timelines that you know will slip and does slip. The only thing it was good for is to ensure the next one will slip too. And the next next one. And etc, etc. Try to get a personal calendar for reminders instead.</p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2006/05/bye-bye-g-buy.html">
+			
+				Bye bye, G-Buy</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-05-29T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>If <a href="http://blogs.zdnet.com/Google/?p=208">this is true</a>, I&#8217;m just so glad Google dropped the name <a href="http://www.google.com/search?q=gbuy">GBuy</a>. For non-locals, here&#8217;s a <a href="http://www.urbandictionary.com/define.php?term=cheebye">hint</a> and some <a href="http://theory.isthereason.com/?p=732">colorful</a> <a href="http://crackmynuts.blogspot.com/2006/02/googles-new-payment-system.html">illustrations</a>.<br /></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2006/05/dirty-little-se.html">
+			
+				Dirty Little Secret</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-05-26T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>I&#8217;ve been doing more Rails development lately (yay!) but have something shameful to admit:</p>       <blockquote>    <p> I don&#8217;t care what <a href="http://blog.hasmanythrough.com/articles/2006/04/20/many-to-many-dance-off">variant of many-to-many relationship</a> the models have, I bulldoze with a same implementation everytime. </p>    </blockquote>        <p>The <a href="http://blog.hasmanythrough.com/articles/category/associations">nuances and gotchas</a> are too much for my liking. So rather than spending time groking them and risk <a href="http://dev.rubyonrails.org/changeset/4123">seeing them deprecated</a> (not complaining, just note things are moving fast), I&#8217;d prefer to rely on simpler concepts which are hence more stable and has <a href="http://www.artima.com/intv/ruby4.html">least-surprise</a> behaviors. Use the time saved to think about real important stuff: business requirements.<br />     </p>         <p>Simplifying the concept will mean a tiny bit more code - but lesser wrestling with the framework overall, IMHO. To represent any many-to-many relationship, opt for a rich-association database setup everytime (aka include an auto_increment id in the join table), regardless of whether there&#8217;ll ultimately be extra attributes. Defer decisions. Hence, <em>people.id == people_skills.person_id and&nbsp; people_skills.skill_id == skills.id</em> in the database will be represented in ActiveRecord as:<br />     </p>         <pre>  <strong><font color="#0000ff">class</font></strong> Person <font color="#990000">&lt;</font> ActiveRecord<font color="#990000">:</font><font color="#990000">:</font>Base<br />     has_and_belongs_to_many <font color="#990000">:</font>skills<br />     has_many <font color="#990000">:</font>people_skills<font color="#990000">,</font> <font color="#990000">:</font>dependent <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">:</font>destroy<br />   <strong><font color="#0000ff">end</font></strong><br />   <br />   <strong><font color="#0000ff">class</font></strong> Skill <font color="#990000">&lt;</font> ActiveRecord<font color="#990000">:</font><font color="#990000">:</font>Base<br />     has_and_belongs_to_many <font color="#990000">:</font>people<br />     has_many <font color="#990000">:</font>people_skills<font color="#990000">,</font> <font color="#990000">:</font>dependent <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">:</font>destroy<br />   <strong><font color="#0000ff">end</font></strong><br />   <br />   <strong><font color="#0000ff">class</font></strong> PeopleSkill <font color="#990000">&lt;</font> ActiveRecord<font color="#990000">:</font><font color="#990000">:</font>Base<br />     set_primary_key <font color="#990000">:</font>not_id <em><font color="#9a1900"># int auto_increment primary key, cannot be named 'id'</font></em><br />     belongs_to <font color="#990000">:</font>person<br />     belongs_to <font color="#990000">:</font>skill<br />   <strong><font color="#0000ff">end</font></strong></pre>         <p>There 2 lines more than <em>rightfully necessary</em>. But all the data will surely be accessible. If things turns out to be simple, your overhead is negligible. If requirements turns hairy, you&#8217;re still safe! No worrying over any potential <em>has_many :through</em> quirks, or lack of support with <em>has_and_belongs_to_many</em>. Just go with the above setup - get some code running! - and everything can be optimised later. Wrestling more and things will begin to feel like unnecessary situps to me&#8230;</p>     <p>[Update]<br />   Fixed the sample code above, apparently PeopleSkill&#8217;s primary key should not be named :id. So its 3 additional lines instead of 2. A tour via ./script/console will be<br />   </p>     <pre>  <font color="#990000">&gt;</font><font color="#990000">&gt;</font> Person<font color="#990000">.</font>delete_all<br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#993399">0</font><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> Skill<font color="#990000">.</font>delete_all<br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#993399">0</font><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> PeopleSkill<font color="#990000">.</font>delete_all<br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#993399">0</font><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> s <font color="#990000">=</font> Skill<font color="#990000">.</font>create <font color="#990000">:</font>name <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#ff0000">&quot;Swimming&quot;</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <em><font color="#9a1900">#&lt;Skill:0xb7855b3c @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Swimming&quot;, &quot;id&quot;=&gt;1}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb78533a0 @errors={}, @base=#&lt;Skill:0xb7855b3c ...&gt;&gt;&gt;</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jack <font color="#990000">=</font> Person<font color="#990000">.</font>create <font color="#990000">:</font>name <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#ff0000">&quot;Jack&quot;</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <em><font color="#9a1900">#&lt;Person:0xb784da04 @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Jack&quot;, &quot;id&quot;=&gt;1}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb784b268 @errors={}, @base=#&lt;Person:0xb784da04 ...&gt;&gt;&gt;</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jill <font color="#990000">=</font> Person<font color="#990000">.</font>create <font color="#990000">:</font>name <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#ff0000">&quot;Jill&quot;</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <em><font color="#9a1900">#&lt;Person:0xb784181c @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Jill&quot;, &quot;id&quot;=&gt;2}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb783eb30 @errors={}, @base=#&lt;Person:0xb784181c ...&gt;&gt;&gt;</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jack<font color="#990000">.</font>skills <font color="#990000">&lt;</font><font color="#990000">&lt;</font> s<br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">[</font><em><font color="#9a1900">#&lt;Skill:0xb7855b3c @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Swimming&quot;, &quot;id&quot;=&gt;1}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb78533a0 @errors={}, @base=#&lt;Skill:0xb7855b3c ...&gt;&gt;&gt;]</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jill<font color="#990000">.</font>skills <font color="#990000">&lt;</font><font color="#990000">&lt;</font> s<br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">[</font><em><font color="#9a1900">#&lt;Skill:0xb7855b3c @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Swimming&quot;, &quot;id&quot;=&gt;1}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb78533a0 @errors={}, @base=#&lt;Skill:0xb7855b3c ...&gt;&gt;&gt;]</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> PeopleSkill<font color="#990000">.</font><strong><font color="#000000">find</font></strong><font color="#990000">(</font><font color="#990000">:</font>all<font color="#990000">)</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">[</font><em><font color="#9a1900">#&lt;PeopleSkill:0xb781206c @attributes={&quot;not_id&quot;=&gt;&quot;1&quot;, &quot;skill_id&quot;=&gt;&quot;1&quot;, &quot;person_id&quot;=&gt;&quot;1&quot;}&gt;, #&lt;PeopleSkill:0xb7811ef0 @attributes={&quot;not_id&quot;=&gt;&quot;2&quot;, &quot;skill_id&quot;=&gt;&quot;1&quot;, &quot;person_id&quot;=&gt;&quot;2&quot;}&gt;]</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jack<font color="#990000">.</font>skills <font color="#990000">&lt;</font><font color="#990000">&lt;</font> Skill<font color="#990000">.</font><strong><font color="#000000">create</font></strong><font color="#990000">(</font><font color="#990000">:</font>name <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#ff0000">&quot;Dancing&quot;</font><font color="#990000">)</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">[</font><em><font color="#9a1900">#&lt;Skill:0xb7855b3c @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Swimming&quot;, &quot;id&quot;=&gt;1}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb78533a0 @errors={}, @base=#&lt;Skill:0xb7855b3c ...&gt;&gt;&gt;, #&lt;Skill:0xb7809994 @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Dancing&quot;, &quot;id&quot;=&gt;2}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb7807f04 @errors={}, @base=#&lt;Skill:0xb7809994 ...&gt;&gt;&gt;]</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jill<font color="#990000">.</font>skills <font color="#990000">&lt;</font><font color="#990000">&lt;</font> Skill<font color="#990000">.</font><strong><font color="#000000">create</font></strong><font color="#990000">(</font><font color="#990000">:</font>name <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#ff0000">&quot;Cooking&quot;</font><font color="#990000">)</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">[</font><em><font color="#9a1900">#&lt;Skill:0xb7855b3c @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Swimming&quot;, &quot;id&quot;=&gt;1}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb78533a0 @errors={}, @base=#&lt;Skill:0xb7855b3c ...&gt;&gt;&gt;, #&lt;Skill:0xb77f5930 @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Cooking&quot;, &quot;id&quot;=&gt;3}, @new_record=false, @errors=#&lt;ActiveRecord::Errors:0xb77f3b44 @errors={}, @base=#&lt;Skill:0xb77f5930 ...&gt;&gt;&gt;]</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jack<font color="#990000">.</font><strong><font color="#000000">skills</font></strong><font color="#990000">(</font><strong><font color="#0000ff">true</font></strong><font color="#990000">)</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">[</font><em><font color="#9a1900">#&lt;Skill:0xb77e2970 @attributes={&quot;name&quot;=&gt;&quot;Swimming&quot;, &quot;id&quot;=&gt;&quot;1&quot;, &quot;not_id&quot;=&gt;&quot;1&quot;, &quot;skill_id&quot;=&gt;&quot;1&quot;, &quot;person_id&quot;=&gt;&quot;1&quot;}, @readonly=true&gt;, #&lt;Skill:0xb77e2934 @attributes={&quot;name&quot;=&gt;&quot;Dancing&quot;, &quot;id&quot;=&gt;&quot;2&quot;, &quot;not_id&quot;=&gt;&quot;3&quot;, &quot;skill_id&quot;=&gt;&quot;2&quot;, &quot;person_id&quot;=&gt;&quot;1&quot;}, @readonly=true&gt;]</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> jack<font color="#990000">.</font>destroy<br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <em><font color="#9a1900">#&lt;Person:0xb784da04 @new_record_before_save=true, @attributes={&quot;name&quot;=&gt;&quot;Jack&quot;, &quot;id&quot;=&gt;1}, @skills=[], @new_record=false, @people_skills=[#&lt;PeopleSkill:0xb77dce94 @attributes={&quot;not_id&quot;=&gt;&quot;1&quot;, &quot;skill_id&quot;=&gt;&quot;1&quot;, &quot;person_id&quot;=&gt;&quot;1&quot;}&gt;, #&lt;PeopleSkill:0xb77dcd54 @attributes={&quot;not_id&quot;=&gt;&quot;3&quot;, &quot;skill_id&quot;=&gt;&quot;2&quot;, &quot;person_id&quot;=&gt;&quot;1&quot;}&gt;], @errors=#&lt;ActiveRecord::Errors:0xb784b268 @errors={}, @base=#&lt;Person:0xb784da04 ...&gt;&gt;&gt;</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> PeopleSkill<font color="#990000">.</font><strong><font color="#000000">find</font></strong><font color="#990000">(</font><font color="#990000">:</font>all<font color="#990000">)</font><br />   <font color="#990000">=</font><font color="#990000">&gt;</font> <font color="#990000">[</font><em><font color="#9a1900">#&lt;PeopleSkill:0xb77cef88 @attributes={&quot;not_id&quot;=&gt;&quot;2&quot;, &quot;skill_id&quot;=&gt;&quot;1&quot;, &quot;person_id&quot;=&gt;&quot;2&quot;}&gt;, #&lt;PeopleSkill:0xb77cef38 @attributes={&quot;not_id&quot;=&gt;&quot;4&quot;, &quot;skill_id&quot;=&gt;&quot;3&quot;, &quot;person_id&quot;=&gt;&quot;2&quot;}&gt;]</font></em><br />   <font color="#990000">&gt;</font><font color="#990000">&gt;</font> quit </pre>     <p>The reason the original sample code wasn&#8217;t working was <strong>not</strong> because of HABTM didn&#8217;t create the primary key (as mentioned by Josh in the comments), but rather its precisely because it did try to include the id column in the INSERT statement (with a wrong value) thus causing primary key clashes and blah blah blah. Strangely, by changing PeopleSkill&#8217;s primary key to be named something else, the INSERT statement would exclude it and insert only (`skill_id`, `person_id`), allowing MySQL to auto_generate the primary key.</p>   <p>As long as the primary keys of Person and Skill are not called &quot;id&quot;, PeopleSkill can happily use &quot;id&quot; as its auto increment primary key (as is with my original work). My force is not strong enough to attempt a patch / further investigation for this HABTM issue.&nbsp;</p><p>[Update 2]<br />Plugin available to make habtm behave: <a href="../../../files/ticket5216.zip">Download</a> and unzip into your vendor/plugins folder.<br /></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2006/05/google-toolbar-.html">
+			
+				Google Toolbar for RssFwd</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-05-25T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>  <p>Richard Hensman has just donated a custom button for RssFwd to plug into <a href="http://www.google.com/tools/firefox/toolbar/index.html">Google Toolbar</a>. Unfortunately, the Firefox version of the toolbar <a href="http://www.google.com/support/toolbar/bin/answer.py?answer=31240&amp;topic=935">doesn&#8217;t support adding a custom button</a> yet - which explains my delay in publishing this. Finally gotten to try it out today and it works pretty sweet :-) Thanks Richard!<br /></p><p>If you have Google Toolbar installed, click on the icon below and give <a href="http://www.rssfwd.com/">RssFwd</a> a spin!&nbsp;</p><p align="center"><a href="http://www.google.com/tools/toolbar/buttons/gallery?q=rssfwd"><img border="0" src="http://www.rssfwd.com/favicon.gif" />&nbsp; Add RssFwd!</a><br /></p><p>Note: it works exactly like the existing <a href="http://www.rssfwd.com/rssfwd/readers">bookmarket</a>, </p><p>Update: URL to toolbar button in google&nbsp;</p></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2006/05/version-control.html">
+			
+				Version Control: That missing module in CS101</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-05-24T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>Some of my friends would be groaning &quot;<em>Not again&#8230;</em>&quot; but please bear with me while I flush my system clear so as to avoid talking about it again.</p><p>What&#8217;s the big deal with a menial thing like version control? You join any software company and they&#8217;ll brief you on when to file your transport claims, how to apply leave, use their version control systems and access your voice mail. What&#8217;s so complex? CVS, Subversion, ClearCase, Visual Source Safe, blah blah blah&#8230; just grab any, all the same (get it over with and let&#8217;s settle the <em>real</em> critical stuff, like install WinXP or Win2k?). You check out, you make changes, you commit, it conflicts, you yell at it, you reboot like how you solved that Outlook crash last Friday and you look for MIS, you try clicking all possible buttons and god-knows-what-happened when finally (finally!), you get <em>your changes</em> into the server - hurray!, then someone screamed like their dog died, &quot;{<em>your name</em>} - what the {<em>expletive</em>} happened to my bug fix!?&quot; and you go, &quot;<em>Wha??? I didn&#8217;t do anything! This CVS isn&#8217;t stable - it clobbered your changes! Let&#8217;s not edit the same files at the same time again!&quot; </em>- and the rest of the day became a CVS101 walk-through cum hands-on session just to show how a CVS commit would not quietly overwrite another person&#8217;s change on the same file. Branching and merging were words never to be breathed, </p><p>Honest to goodness, that really did happen. So much for 5-years experience in developing enterprise Java application. (<em>Ok, that was a cheap shot!</em>)<br /></p><p>Version control should simply be taught in schools. Both the <a href="http://software.ericsink.com/scm/source_control.html">concept</a> (good reading!) and practice. If you think its not worth twenty minutes or that you can simply hide your head in the sand and don&#8217;t ever touch branching and merging - you&#8217;re not taught enough! I&#8217;d even venture to say that version control should be covered with higher priority than SQL - based on the simple fact that all software needs to be in version control (change control, revision control) but not all software will need SQL. e.g. J2ME games, Symbian apps, or an operating system.</p><p>Imagine a cooking school churning out chefs who don&#8217;t wash their hands? What shame! MIS who pulls the plug rather than shutting systems down properly? Yikes! So how can any honorable CS school churn out programmers who&#8217;d only know to backup (not even version!) their fabulous online banking website with folders named C:\project\current, C:\project\latest, C:\project\latest2, C:\project\final - Pfft!</p><p>&#8212;</p><p>I&#8217;ve recently come across, yet again, the opposite school of thought regarding branching in version control. It seems to me that ClearCase users coming to CVS (or alike) would generally get some culture shock. You see, they usually do draconian stuff like file locking and micro branches - create a branch, write code, commit, write more code, commit, then merge back to trunk when complete. Everyone works in their own branch and merge back later. </p><p>Over at the CVS camp, people usually work directly off the main trunk (aka HEAD) without file locking. Differences are <a href="http://software.ericsink.com/scm/scm_file_merge.html">resolved automagically by the tool and the occasional conflicts are resolved manually</a>. Branches are created only for releases, not your everyday affair.</p><p>My friend Harry is still adamant that the ClearCase methodology is more right and doing otherwise is cutting corners. Though I&#8217;m not totally convinced, I do see 2 plus points in doing micro branches: You can safely commit anytime (read: broken code) into the repository and scoot off to meet your girlfriend for dinner. When developing on the trunk, committing broken code would&#8217;ve affect other developers. But when not committing, you&#8217;d would risk losing unversioned changes in your working folder (Sorry honey, not tonight). However, with modern editors gaining capability to do local versioning, diff and merge (e.g. Eclipse) such risk is getting contained.</p><p>The other enterprisy advantage is that by having commits (read: progress) done centrally (unlike an editor&#8217;s local versioning), its more possible to have a project management systems extract information and build useful overviews and reports on the project&#8217;s progress - which ClearCase apparently does. The man.<br /></p><p>The only question is if its too cumbersome to practice - spending more time with the tool than on the code. And then, there&#8217;s the <a href="http://blog.ianbicking.org/distributed-vs-centralized-scm.html">distributed crowd</a>.</p><p>So perhaps its because schools already made the mistake once before - enough problems trying to cover waterfall, XP, UML methodologies - and curriculum would be simpler with <em>SELECT modules FROM last_year</em> instead.<br /></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2006/05/svn2svn.html">
+			
+				svn2svn</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-05-15T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p> <p>I don&#8217;t suppose many people will need this. But I found myself in a unique situation today, needing to transfer code from one <a href="Subversion">Subversion</a> repository to another. Preferably retaining the history of changesets and comments. Without access to the actual server repository.<br /> </p> <p>So wrote up this little ruby script: <a href="../../../files/svn2svn.rb.html">svn2svn.rb</a>.&nbsp;</p> <p>There&#8217;s nothing about it that needed it to be written in Ruby. Its just so. In fact I was too lazy to poke at <a href="http://www.swig.org/">SWIG</a> to get proper Ruby APIs for SVN like <a href="http://collaboa.org/">Collaboa</a> (aka Trac on Rails). I taken the easy way and used &quot;system&quot; and &quot;popen&quot; instead - <em>blasphemous</em>! The whole algorithm is hardly optimised as well, roughly:</p> <ol> <li>checkout each revision from source repository URL as r1, r2, r3, etc (the CVS equivalent will probably be &quot;each log event&quot;)</li> <li>(create and) checkout the destination repository URL to a working directory</li> <li>for each revision, patch the <strong>diff -Naur</strong> output into the working directory and commit (includes <strong>svn add</strong> and s<strong>vn remove</strong> where needed)<br /> </li> </ol> <p>Step #1 will take quite a very long time, depending on connectivity. So, if you ever have the same need, <a href="../../../files/svn2svn.rb.html">use it at your own risk</a>. </p> <p>If its any assurance, it worked for me.&nbsp;</p></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2006/05/firefox-view-so.html">
+			
+				Firefox View-Source</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-05-10T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p> <p>Perhaps the <em>whole-world-but-me</em> already knows this&#8230; but I&#8217;d really never known I could refresh (Ctrl-R) directly at Firefox&#8217;s View Source window! <br /> </p> <blockquote> <p>Write some code &gt; View with browser &gt; View source and see generated HTML<br /> Make code changes &gt; Refresh view-source window and see updated HTML<br /> </p> </blockquote> <p>Now that&#8217;s quite a dandy <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=230693#c14">feature</a>! Only found out just now when I&#8217;d accidentally refreshed the &quot;wrong window&quot; (so if you&#8217;d already known it, its only because you&#8217;re clumsier than me. Tsk!)</p></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2006/05/the-code-breake.html">
+			
+				The Code Breakers</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-05-08T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p> <p>Just got to know there&#8217;ll be a neat BBC documentary on Free/Open Source Software. Excluding the unearthly 3:30am and 5:30pm showtimes.. the more feasible showtime for Singapore will be: (for other timezones, pls check <a href="http://www.bbcworld.com/content/template_tvlistings.asp?pageid=668">at BBC directly</a>)</p> <blockquote><div class="vevent"> <a class="url" href="http://www.bbcworld.com/content/template_clickpage.asp?pageid=2783">  May 11, 2006 - 21:30  -  22:00  - <span class="summary"> The Code Breakers (r) 1 of 2 </span> - at <span class="location"> BBC Channel </span> </a> <div class="description"> For years Microsoft has dominated the world of computing, but its software is beyond the reach of many in the developing nations. This 2-part series investigates that the poorest countries are now changing tack and using Free/Open Source Software (FOSS). <br /> </div> </div>    <div class="vevent"> <a class="url" href="http://www.bbcworld.com/content/template_clickpage.asp?pageid=2783">  May 18, 2006 - 21:30  -  22:00  - <span class="summary"> The Code Breakers (r) 1 of 2 </span> - at <span class="location"> BBC Channel </span> </a> <div class="description"> For years Microsoft has dominated the world of computing, but its software is beyond the reach of many in the developing nations. This 2-part series investigates that the poorest countries are now changing tack and using Free/Open Source Software (FOSS). </div> </div>     </blockquote> <p>(This hcal output was made using <a href="http://microformats.org/code/hcalendar/creator">hCalendar creator</a>, neat! Editors should have hcal built in!)</p>        <p>So go home early on 11th, skip an episode of 至尊红颜 or something and go watch this. FOSS isn&#8217;t just about anti-microsoft&#8230;. so hopefully they won&#8217;t be just talking about Microsoft. </p></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <nav id="pagenavi">
+        
+            <a href="/weblog/page/10/" class="prev">Previous</a>
+        
+        
+            <a href="/weblog/page/12/" class="next">Next</a>
+        
+    </nav>
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>Now I&#39;ve finally gotten this out of the way...  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="   I&#8217;ve always wanted to produce semantically correct HTML forms. But sometimes, life gets in the way, styling incompetence, laziness, and I ..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">Now I&#39;ve finally gotten this out of the way...</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-04-02T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>   <p>I&#8217;ve always wanted to produce semantically correct HTML forms. But sometimes, life gets in the way, styling incompetence, laziness, and I end up having forms that look like:</p>     <pre>&lt;form ... &gt;<br />  &lt;b&gt;Name:&lt;/b&gt;&lt;input ... /&gt;&lt;br /&gt;<br />  &lt;b&gt;Email:&lt;/b&gt;&lt;input ... /&gt;&lt;br /&gt;<br />&lt;/form&gt;<br />   </pre>   <p>Yuck. </p>     <p>I recently got around to clarify what is the more &quot;<em>correct&quot; </em>markup to use at the <a href="http://websg.org/">WebSG</a> mailing list, and this is the one I settled with</p>     <pre>&lt;form ... &gt;<br />  &lt;fieldset&gt;<br /> &nbsp;&nbsp; &lt;legend&gt;Some Context&lt;/legend&gt;<br />  &nbsp; &lt;dl&gt;<br />   &nbsp;&nbsp; &lt;dt&gt;&lt;label for=&quot;someid&quot;&gt;Name&lt;/label&gt;&lt;/dt&gt;<br /> &nbsp;&nbsp;&nbsp;&nbsp; &lt;dd&gt;&lt;input id=&quot;someid&quot; ... /&gt;&lt;/dd&gt;<br />   &nbsp;&lt;dl&gt;<br />  &lt;/fieldset&gt;<br />&lt;/form&gt;<br />   </pre>   <p>Ok. But that&#8217;ll be a pain to write. Even if something generated the HTML files for me, there is still a lot of markup noise in there to be comfortable maintaining. So I&#8217;d set out to define what I&#8217;d like to write for Rails to render the above HTML<br />   </p>     <pre><span class="il"><span class="dl">&lt;%</span> form_for <span class="sy">:some</span> <span class="r">do</span> |f| <span class="dl">%&gt;</span></span><br />  <span class="il"><span class="dl">&lt;%</span> f.fieldset <span class="s"><span class="k">'Some Context</span><span class="dl">'</span></span> <span class="r">do</span> |f| <span class="dl">%&gt;</span></span><br />    <span class="il"><span class="dl">&lt;%=</span> f.text_field <span class="sy">:name</span> <span class="dl">%&gt;</span></span><br />  <span class="il"><span class="dl">&lt;%</span> <span class="r">end</span> <span class="dl">%&gt;<br />&lt;% end %&gt;<br />   </span></span></pre>   <p>Tighter code, less HTML noise in the file to distract me from the task at hand (the attributes, values, etc). Once I cook up a base style for this form, CSS will save me from all future look &amp; feel changes&#8230; *blissful expression* <br />   </p>     <pre> 1. cd $RAILS_ROOT # your current Rails app<br /> 2. svn export <a href="http://choonkeat.svnrepository.com/svn/rails-plugins/web_sg_form_builder">http://choonkeat.svnrepository.com/svn/rails-plugins/web_sg_form_builder</a> . --force<br /> 3. ./script/server<br /> 4. Go to <a href="http://localhost:3000/web_sg_form_builder">http://localhost:3000/web_sg_form_builder</a></pre>     <p>And you should get this page of instruction / demo:<br />   </p>     <p><a title="Photo Sharing" href="http://www.flickr.com/photos/choonkeat/443416920/"><img width="356" height="500" border="0" alt="WebSgFormBuilder" src="http://farm1.static.flickr.com/188/443416920_8b0c6bc015.jpg" /></a></p>     <p>&nbsp;</p></p>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=Now I&#39;ve finally gotten this out of the way... by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2007/04/now-ive-finally.html" title="Share Now I&#39;ve finally gotten this out of the way... on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2007/04/now-ive-finally.html" title="Share Now I&#39;ve finally gotten this out of the way... on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2007/04/now-ive-finally.html" title="Share Now I&#39;ve finally gotten this out of the way... on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

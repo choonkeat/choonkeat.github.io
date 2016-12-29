@@ -1,0 +1,140 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>Pet Peeves and Java  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content=" Had short chat with a colleague this afternoon. She was talking about some pet peeves of hers, regarding Java programming&#8230;  Wai: &quot;I hat..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">Pet Peeves and Java</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2004-11-22T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p> Had short chat with a colleague this afternoon. She was talking about some pet peeves of hers, regarding Java programming&#8230;<br /> <br /> Wai: &quot;<span style="color: rgb(102, 102, 102);">I hate it when people (write functions that) return object [] arrays. If you are returning [] arrays, most probably you&#8217;d used some kind of Collections to manipulate and finally, return using toArray right? If I need to check that something exists in that array, now I have to (write the code to) iterate or wrap it with another Collection class instance. And then, there&#8217;s [][]</span>&quot;<br /> <br /> Me: &quot;<span style="color: rgb(102, 102, 102);">Its actually Java&#8217;s fault. It doesn&#8217;t have native arrays, like Perl. If the language has native arrays, that&#8217;ll be the default array type everyone uses and you won&#8217;t have the problems you say. Default hash types, default string types, default numeric types.</span>&quot;<br /> <br /> Wai: &quot;<span style="color: rgb(102, 102, 102);">No. Its the fault of the schools. They don&#8217;t teach java.util properly. I mean, you use java.lang and you don&#8217;t realise it.</span>&quot;<br /> <br /> &quot;<span style="color: rgb(102, 102, 102);">Hmm</span>&quot;, I ate my fried chicken and let it sink in. <br /> <br /> Now.. i think i&#8217;ll answer, &quot;Not&quot;. Its not education, the language should make life easier; not education to teach us how to accept <span style="font-style: italic;">life&#8217;s like that</span>. If Java can let me write <span style="font-style: italic;">String s = &quot;Hello&quot;</span>  instead of enforcing <span style="font-style: italic;">String s = new String(&quot;Hello&quot;);</span> Why can&#8217;t it give me,<br /><br /><div style="margin-left: 40px;"><span style="color: rgb(102, 102, 102);"> // all examples not limited to Strings of cos, Objects!</span><br />Array list = [&quot;Happy&quot;, &quot;Go&quot;, Lucky.instance()];<br />  list[1]; <span style="color: rgb(102, 102, 102);">// gives me &quot;Go&quot;</span><br />  Map keyValue = [ &quot;first_name&quot; =&gt; &quot;Elvis&quot;, &quot;last_name&quot; =&gt; &quot;Presley&quot; ]; <br />  keyValue[&quot;last_name&quot;]     <span style="color: rgb(102, 102, 102);">// gives me &quot;Presley&quot;</span><br />  list.each (String s) {                     <span style="color: rgb(102, 102, 102);">// typecast for me (i&#8217;m infected with a bit of ruby here)</span><br />     System.out.print(s + &quot;,&quot;);          <span style="color: rgb(102, 102, 102);">// prints &quot;Happy,Go,Lucky,&quot;</span><br />  }<br /></div> <br />Obviously <span style="font-style: italic;">somebody</span>&#8217;s pet peeve was ironed out for Strings.. <br /><br /> Ten years and several versions later, <a href="http://java.sun.com/j2se/1.5.0/">Tiger</a> is a pat on the back. Its a letdown. If Java was open sourced, the language&#8217;s grammatical pet peeves would&#8217;ve been addressed by now. Darwin, Darwin.. but, if its so un-darwinian, why is Java still around at all?<br /><br />10 years, no syntax change, no pointers to explain. What could be easier? I don&#8217;t even have to zap new notes for the new batch of kids - Yippie! Unless there were deals struck by Sun with all education facilities, that I don&#8217;t know of, it would appear that the schools unorchestrated-ly robbed the industry by going Java-only&#8230;<br /><br /><span style="font-style: italic;">We&#8217;ve been duped - Tammy Lee, Apprentice<br /><br /></span>Update: <br /><a href="http://martinfowler.com/bliki/Closures.html">Closures</a><br /><div style="margin-left: 40px;"><a href="http://joe.truemesh.com/blog//000390.html">How C# does it</a><br /><a href="http://ivan.truemesh.com/archives/000392.html">How Python does it</a><br /><a href="http://article.gmane.org/gmane.comp.lang.lightweight/2274">How Java does(n&#8217;t) it</a><br /></div><br /><br /><span style="font-style: italic;"></span></p>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=Pet Peeves and Java by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2004/11/pet-peeves-and-.html" title="Share Pet Peeves and Java on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2004/11/pet-peeves-and-.html" title="Share Pet Peeves and Java on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2004/11/pet-peeves-and-.html" title="Share Pet Peeves and Java on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

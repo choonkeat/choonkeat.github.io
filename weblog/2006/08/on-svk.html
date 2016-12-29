@@ -1,0 +1,140 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>On SVK  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="Version control is the best thing since sliced bread (for those whom have just learnt of it). But once branching comes into the picture, it is beco..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">On SVK</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-08-30T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>Version control is the best thing since sliced bread (for those whom have <a href="http://www.apple.com/macosx/leopard/timemachine.html">just learnt of it</a>). But once <a href="http://www.ericsink.com/scm/scm_branches.html">branching</a> comes into the picture, it is becomes a <a href="../../articles/2006/05/24/version-control-that-missing-module-in-cs101">hairy</a> thing. </p><p>It might be because humans aren&#8217;t accustomed to think in terms of parallel universe (perhaps sci-fi authors). There appears to have no &quot;<em>one right way</em>&quot; to cater for all scenarios. I used to live and breath on the <em>trunk-is-stable-and-latest</em> camp (half sneering at enterprisey people who &#8217;<em>branch first</em><em>, then merge</em>&#8217;). But it just happens that my past situations only requires so much.<br /> </p><p>Furthermore, some people just prefer the branch-merge-often mentality, others thrive in simplicity of trunk-work-branch-maintain workflow. Like tea people and coffee people. Just different. No point converting anyone over to the other side. Hence I was dabbling to create a script (on-top-of <a href="http://www.dellroad.org/svnmerge/index">svnmerge</a>) to provide dead-simple branch/merge workflow - so trunk ppl can have it so, and branch ppl won&#8217;t be inconvenienced.<br /></p><p>That&#8217;s when I found <a href="http://svk.elixus.org/">SVK</a>. By saying its a &quot;<em>decentralized version control system built with the Subversion filesystem</em>&quot; is really really doing it a huge disservice. My layman version would be &quot;<em>SVK lets you be the branch-merge person you are inside, or the trunk-branch, or watever *%^#$ person you like to do your work in - whilst sharing a common repository with people of different taste! I mean, its like a cup that lets you sip coffee, sit around with everyone, whilst sharing the same pot of tea!</em>&quot;<br /></p><p>SVK has more commands to do magic, but the daily stuff closely resembles SVN: svk commit; svk update; svk diff. It also has another benefit - it doesn&#8217;t pollute your working directory with hidden <em>.svn</em> or <em>CVS</em> folders/files. <a href="http://thegrok.wordpress.com/">Some ppl</a> are irked by that. Those files are consolidated in your home directory. Actually that might be good / bad depending on you being a tea or coffee person.<br /></p><p>The only drawback is that IDE integration is lacking at the moment. And most importantly, the tickets / changesets information on <a href="http://trac.edgewall.org/">Trac</a> wouldn&#8217;t tally directly with my local mirror.<br /></p><p>Oh well, these might not be show stopper after all. Let&#8217;s see how it goes when I use it for real.<br /></p>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=On SVK by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2006/08/on-svk.html" title="Share On SVK on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2006/08/on-svk.html" title="Share On SVK on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2006/08/on-svk.html" title="Share On SVK on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

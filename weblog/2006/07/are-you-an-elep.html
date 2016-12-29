@@ -1,0 +1,140 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>Are you an elephant in a circus too?  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="Years ago I suffered from insomnia and quite often I&#8217;d watch TV Media (commercials) just to pass my time. Not all of them feature excited hou..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">Are you an elephant in a circus too?</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2006-07-01T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>Years ago I suffered from insomnia and quite often I&#8217;d watch TV Media (commercials) just to pass my time. Not all of them feature excited housewifes holding detergents as you&#8217;d think. There was this particular commercial (selling motivation tapes) that was quite memorable: </p><p>It narrates a story of a boy who saw that the big circus elephant tied to a pole by only a thin rope. &quot;Surely, the elephant could just break its bondage and run away free! Why didn&#8217;t she?&quot; the boy asks. The father replied, &quot;You see, when the elephant was little they&#8217;d tie her up in huge chains instead of this rope. The baby elephant would try with all her might to escape but in vain. Years of trying (and failing) has etched a strong message into her head: <em>I&#8217;m tied here. I can&#8217;t get away</em>. So now, the circus only has to use a thin rope. She won&#8217;t be trying to go anywhere.&quot;</p><p>I&#8217;m reminded of this story just last night, after realising that I&#8217;m like the elephant in the circus. <br /><br /><font color="#cc3333">Warning</font>: This is not a shining example of <em>best practices</em>! Do not meddle with production systems in situ! ?”?”æœ‰ç»ƒè¿‡çš„!<br /><br />Problem: I have a command line script doing some processing in a running system, but I wish to experiment a new little feature without impacting the existing system. What are my options?<br /><br />Normally I might prepare another copy of the same system (i.e. staging area), make code modifications and try running the new feature in the staging environment. Once things looks ok, I&#8217;ll patch the running system with the new code, and hence roll out the changes. In systems where the setup involves a few external systems, setting up a staging area can be a pain.<br /></p><p>I was too tired and lazy to prepare a staging area last night. Then, it occurred to me (ok, i&#8217;m slow) that with Ruby, I have <a href="http://onestepback.org/articles/10things/page024.html">open classes</a> - something I that do not have in my previous life! I&#8217;ve already been bathing in <a href="http://onestepback.org/articles/depinj/classesareopen.html">the goodness of open classes</a> while developing Rails apps - when I use the test and plugin framework, etc - but I was still dutifully going through the staging environments way.</p><p>So I made a copy of the script (the main logic is in the other parts of the system, this script is merely the entry point to kick off the whole process). And in this new script, I added code that redefines the behavior of a class in the system:</p><pre><em><font color="#9a1900"># import libraries above</font></em><br /><br /><strong><font color="#0000ff">class</font></strong> FeedTodo<br />  <strong><font color="#0000ff">def</font></strong> <strong><font color="#000000">deliver_emails</font></strong><font color="#990000">(</font>emails<font color="#990000">,</font> forced<font color="#990000">=</font><strong><font color="#0000ff">false</font></strong><font color="#990000">)</font><br />    <strong><font color="#000000">save_to_disk</font></strong><font color="#990000">(</font>emails<font color="#990000">)</font> <em><font color="#9a1900"># instead of sending the mails directly.</font></em><br />  <strong><font color="#0000ff">end</font></strong><br /><strong><font color="#0000ff">end</font></strong><br /><br /><em><font color="#9a1900"># actual execution below</font></em> </pre><p>When executing from this particular script, FeedTodo objects would no longer be delivering emails directly because I&#8217;ve redefined them to save onto the disk instead. The other parts of the system would happily continue to call FeedTodo#deliver_emails() as usual, invoking the new routine unsuspectingly. Also, the existing system which doesn&#8217;t use this new script would not have this modification in their runtime - hence, no impact to production system!<br /><br />In my past life, I would have to change the actual code for FeedTodo class and risk breaking the production system. Blasphemy! Occasionally, when I do, I&#8217;d even take pride that I can make such in situ changes backward compatible - feels like Indiana Jones swapping the weighted stone&#8230; </p><p>I&#8217;ve realised I&#8217;m not chained like I thought I was. I don&#8217;t think I&#8217;ll ever need to take such stone age risks anymore.<br /></p>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=Are you an elephant in a circus too? by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2006/07/are-you-an-elep.html" title="Share Are you an elephant in a circus too? on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2006/07/are-you-an-elep.html" title="Share Are you an elephant in a circus too? on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2006/07/are-you-an-elep.html" title="Share Are you an elephant in a circus too? on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

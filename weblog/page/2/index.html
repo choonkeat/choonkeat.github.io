@@ -1,0 +1,485 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>choonkeat on programming & software  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="
+		I had the need to show some folks example screens of webapps I&#8217;m working on recently. Using those screenshots, the other party could have ..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner">
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2010/09/loremipsumizer.html">
+			
+				Loremipsumizer</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-09-18T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>I had the need to show some folks example screens of webapps I&#8217;m working on recently. Using those screenshots, the other party could have a better feel of things, we could have a clearer discussion. But the irritation [for me] is always the setup</p>
+
+<p><ol>
+<li>The app I&#8217;m working on is still in flux, i.e. design &amp; data attributes will likely change, often</li>
+<li>The content I have is often imported from real data sources, and hence is somewhat private &amp; sensitive</li>
+<li>I&#8217;m too lazy to think up fake names, fake scenarios, fake photos to fill my database, just so I could have a fragile, demo screenshot (I&#8217;d need to redo / update later)</li>
+</ol>
+<p>What I&#8217;d <em>really</em> like is</p>
+
+<p><ol>
+<li>To be able to use my current webapp, as-is</li>
+<li>To be able to use my current data, as-is</li>
+<li>To protect private &amp; sensitive data</li>
+</ol>
+<p>Smells like a bookmarklet? So here it is&nbsp;<a href="http://gist.github.com/585708">Loremipsumizer.js</a>. After installing it, I can anonymize any webpage instantly (then take a screenshot, annotate or print &amp; discuss with somebody else, without worrying about the sensitivity of content)</p>
+
+<p><a href="javascript:(function(u){ c=document;b=c.body;s=c.createElement('script');s.src=u+'?r='+(new Date()).getTime();b.appendChild(s);})('https://raw.github.com/gist/585708/925d9d98ab459feacf3d17568d2d1499157f4970/loremipsumizer.js');void(0);">Click here</a> to try it on this webpage!</p>
+
+<p>The Loremipsumizer will anonymize all text, scramble all numbers, replace images, flash embeds (&amp; video tags?) with wireframe-ish cross-boxes (via data uri). Unfortunately I didn&#8217;t have an elegant solution to anonymize background images (css sprinting, image size, etc) so I&#8217;ll need suggestions there.</p>
+
+<p>In any case, here are a few screenshots of webpages I&#8217;ve anonymized. No prizes for guessing which websites:</p>
+
+<p><object width="400" height="300"> <param name="flashvars" value="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624856834061%2Fshow%2F&page_show_back_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624856834061%2F&set_id=72157624856834061&jump_to="></param> <param name="movie" value="http://www.flickr.com/apps/slideshow/show.swf?v=71649"></param> <param name="allowFullScreen" value="true"></param><embed type="application/x-shockwave-flash" src="http://www.flickr.com/apps/slideshow/show.swf?v=71649" allowFullScreen="true" flashvars="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624856834061%2Fshow%2F&page_show_back_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624856834061%2F&set_id=72157624856834061&jump_to=" width="400" height="300"></embed></object></p>
+
+<p>Note: Loremipsumizer does not require any JS library, and have not been tested on irritating browsers. Patches are welcome.</p>
+
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2010/08/foaf-rewards.html">
+			
+				FOAF Rewards</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-29T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p></p><p><a href="http://www.imdb.com/title/tt1285309/">The Joneses</a> is an interesting idea: if you push product placements all the way <a href="http://en.wikipedia.org/wiki/Up_to_eleven">to 11</a>, you&#39;d have it done in real life. But how do you attribute a [growth in] sale of product P, to the &quot;Joneses&quot; team member? Target market of product P + geography of the sale? And what if the network effects is far reaching and has no geographical boundary (i.e. internet)? So, no two &quot;Joneses&quot; teams should pimp the same product? No good.</p><p>What if we try something more pre-emptive, using something more direct - <a href="http://en.wikipedia.org/wiki/FOAF_(software)">FOAF</a>. So when customer Charlie buys Product P, your CRM picks up that amongst other customers who bought P, customer Betty is in Charlie&#39;s FOAF network&#0160;(Facebook, Twitter, email, blog, flickr, etc).</p><p>With this knowledge, you could directly credit Betty a referral reward and hope to gain an army of MLM team. But this risks displacing Betty&#39;s original reason of buying your product with a weaker, extrinsic motivation.</p><p>Alternatively, you could credit Betty with a discount on her next purchase. This approach is good and already exist informally. But it is also unsurprisingly inefficient in its current state: the connection happens if you manage to make the sales assistant remember you and they bother to inquire about referrals when serving a new customer.</p><p>Wouldn&#39;t it be great if a hypothetical &quot;<em>iCashRegister (now with FOAF)</em>&quot; exist to make this more efficient?</p><p>To cap the potential&#0160;hemorrhage&#0160;of &quot;discount credits&quot; on heavily connected customers, if there are several customers connected to this new customer, they&#39;d only each get a slice of the credits. Also,&#0160;for some business, it might make sense to attribute a referral based on the transaction of the same product. For other businesses, it might make sense to attribute a referral based on purchase recency.</p><p>So now any customer connected to a subsequent customer gets discount credits. And&#0160;all this can happen regardless of whether&#0160;(you)&#0160;the business owner is servicing the customer, or if it was just your part-time sales assistant in the shop.</p><p>To hell with wimpy loyalty cards.&#0160;Why isn&#39;t your business using &quot;<em>iCashRegister (now with FOAF)</em>&quot;?</p><p><em>Update: Do check out </em><a href="http://anafore.com/"><em>Anafore</em></a><em> if you&#39;re interested in this topic!</em></p><p></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2010/07/yet-another-5-ipad-stand-this-one-is-for-the-brits.html">
+			
+				Yet another $5 iPad stand - this one is for the Brits</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-07-18T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>Finally, our bulky <a href="http://en.wikipedia.org/wiki/BS_1363">British Standard power socket design</a> is useful for something.</p>
+
+<p><object height="300" width="400"> <param name="flashvars" value="offsite=true&amp;lang=en-us&amp;page_show_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624401037599%2Fshow%2F&amp;page_show_back_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624401037599%2F&amp;set_id=72157624401037599&amp;jump_to=" /> <param name="movie" value="http://www.flickr.com/apps/slideshow/show.swf?v=71649" /> <param name="allowFullScreen" value="true" /><embed allowfullscreen="true" flashvars="offsite=true&amp;lang=en-us&amp;page_show_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624401037599%2Fshow%2F&amp;page_show_back_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624401037599%2F&amp;set_id=72157624401037599&amp;jump_to=" height="300" src="http://www.flickr.com/apps/slideshow/show.swf?v=71649" type="application/x-shockwave-flash" width="400" /></object></p>
+
+<p>Only $5.50 - but you&#39;ll probably already have one in your house.&#0160;No warranty. <a href="http://rsspaperapp.com/">RssPaper</a> app sold separately.</p><p></p><p></p>
+
+<p></p>
+
+<p></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2010/06/youre-doing-it-wrong-acm-queue.html">
+			
+				You&#39;re Doing It Wrong - ACM Queue</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-06-17T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<div class='sharedcopy_widget' id='shcp_214b2ff5caae7b2b171d7d533c69c170' > <blockquote class='cited'  cite='http://r7.sharedcopy.com/119cnvb'  style='cursor: pointer; margin-left: 0; padding: 0 0 1em 1em; border: 1px #FFFFFF solid; border-left: 1em #EEEEEE solid; background: #ffffff; '>  <span class="content comments_count_2 withoutphoto" ><span class="text" ><blockquote style="text-align: justify; font-style: italic; border: 0px; background: transparent url(http://sharedcopy.com/images/icons/start_quote.gif) no-repeat scroll left top; padding-left: 20px; color: #555555;  font-style: italic; line-height: 1.2; margin-left: 0px;" class="comment_body comment_body1" >What good is an O(log2(n)) algorithm if those operations cause page faults and slow disk operations? For most relevant datasets an O(n) or even an O(n^2) algorithm, which avoids page faults, will run circles around it.<a href="http://r7.sharedcopy.com/119cnvb#shcp0" > </a ></blockquote> <blockquote style="text-align: justify; font-style: italic; border: 0px; background: transparent url(http://sharedcopy.com/images/icons/start_quote.gif) no-repeat scroll left top; padding-left: 20px; color: #555555;  font-style: italic; line-height: 1.2; margin-left: 0px;" class="comment_body comment_body2" >the results coming out of the CS department would be so much more interesting and useful if they applied to real computers and not just toys<a href="http://r7.sharedcopy.com/119cnvb#shcp1" > </a ></blockquote> </span ></span>  - <a href='http://sharedcopy.com'>Web annotation</a> on <a href='http://r7.sharedcopy.com/119cnvb'>You&#8217;re Doing It Wrong - ACM Queue</a><br /> </blockquote> </div> <script>   var json_214b2ff5caae7b2b171d7d533c69c170 = {    host: 'sharedcopy.com',    width: '480px',    height: '250px',    bgcolor: '#ffffff',    background: '#ffffff url(http://queue.acm.org.sharedcopy.com/images/loading.gif) no-repeat center center; ',    allow_click: true,    src: "http://queue.acm.org.sharedcopy.com/embeds/copy/choonkeat/214b2ff5caae7b2b171d7d533c69c170/480.250/ffffff.ffffff.cc0500/true/shcp0.html"  }; </script> <script src='http://sharedcopy.com/static/embed/script.js'></script> 
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2009/05/since-replies-can-come-from-anybody.html">
+			
+				Since @replies can come from anybody</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-05T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>Someone, let&#39;s say Yahoo, could roll out their own twitter-like service (let&#39;s call it yatter). And all yahoo mail users &quot;become&quot; yatter users automatically, like how they became Openid accounts.</p><ol>
+<li>when a yatter user &quot;<span style="color: #7f007f; font-family: Trebuchet MS;">joe</span>&quot; yatts, &quot;<span style="color: #7f007f; font-family: Trebuchet MS;">@twitter/charlie what are you doing?</span>&quot;</li>
+<li>yatter&#39;s twitter bot called &quot;<span style="background-color: #00ffff; font-family: Trebuchet MS;">yatter</span>&quot; relays the tweet, &quot;<span style="color: #111111; background-color: #00ffff; font-family: Trebuchet MS;">yatter/joe: @charlie what are you doing?</span>&quot;</li>
+<li>twitter user &quot;<span style="background-color: #00ffff; font-family: Trebuchet MS;">charlie</span>&quot; sees the message in his @replies stream, and can respond, &quot;<span style="background-color: #00ffff; font-family: Trebuchet MS;">@yatter/joe hitting my refresh button again and again</span>&quot;</li>
+<li>a yatter.com bot called &quot;<span style="color: #7f007f; font-family: Trebuchet MS;">twitter</span>&quot; relays the message, &quot;<span style="color: #7f007f; font-family: Trebuchet MS;">twitter/charlie: @joe hitting my refresh button again and again</span>&quot;</li>
+<li>yatter user &quot;<span style="color: #7f007f; font-family: Trebuchet MS;">joe</span>&quot; sees that in his @replies stream in yatter.com.. (repeat from the top)</li>
+</ol>
+<p>I&#39;d guess it makes sense for yatter apis to be fully compatible with twitter.com, in the ma.gnolia.com vs del.icio.us kind of way. So twitter clients just need to add a new config, &quot;hostname&quot;, and we&#39;re done.</p><p>I think yatter.com could technically allow @yatter/joe to follow
+@twitter/charlie. The question is, would twitter.com allow their @charlie user to
+follow @yatter/joe?</p><p>Yatter could use the age-old hotmail trick and append the latest status message of the mail sender to the email footer. That should pique interests of recipients. Besides, &quot;a signature&quot; is an existing, understood concept that users can easily see why they&#39;d would want to update their &quot;yatter status&quot;..</p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2009/04/an-iphone-optimized-web-page.html">
+			
+				An iPhone optimized web page</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-27T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p><em><strong>[UPDATE: Proof of concept no more, </strong></em><a href="http://rsspaperapp.com/?blog"><em><strong>RssPaper is now in the store</strong></em></a><em><strong>!]</strong></em></p><p>The defacto way of making a web page &quot;optimized for iPhone&quot; is to slap on <a href="http://code.google.com/p/iui/">iUI</a> (or variants) to simulate the look &amp; feel of a native app (i.e. the UITableView). You can click on an item in the list, and the page slides sideways to reveal another list, or more details&#8230; etc.</p><p>However, the starting point of trying to mimic meant we&#39;re aiming for the web site&#39;s experience is to be <em>worse-or-almost-as-good</em> compared to if it was a native app. e.g. <a href="http://m.cnn.com/">m.cnn.com</a> Can aim to be different instead?</p><p>In trying to mimic a native app, the iUI approach locks down the browser&#39;s width &amp; scaling capability. I actually liked that part of browsing on the iPhone &#8211; its automatic zoom! To zoom-in, you simply <a href="http://www.youtube.com/watch?v=3n0vt6TvEho#t=33s">double-tap on an area of the page</a>. To zoom out, double-tap again. (<em>There&#39;s pinching, but it is manual &amp; I don&#39;t like tedious things</em>)</p><p>Unfortunately, most layouts don&#39;t make it easy for iPhone to automatically zoom-in. The kicker is, a good &amp; fluid CSS layout actually hinders! e.g. the text is still small after double-tapping on <a href="http://jnd.org/">jnd.org</a></p><p>Turns out, the automatic zoom is controlled [only] by the width of the page segment.. meaning, the page&#39;s font size can be infinitesimally small &#8211; it doesn&#39;t matter. As long as the containing width is also small (e.g. contains 5 words across 1 row), the user can still comfortably zoom in and get big text with sharp font of 5 words across the entire screen width!</p><p>Taking this to an extreme, we could have all our site&#39;s content render in tiny little font inside narrow columns on 1 single page and the iPhone visitor can still effortlessly zoom in and read everything! No click, ajax, network lag, read content, back, click another, .. etc.. i.e. instead of content hierarchy behind deep navigation, we could have it based on font sizes.</p><p>Sounds like a newspaper huh?</p><p>To try this out, I&#39;d hacked up <a href="http://rsspaper.choonkeat.com/">this proof-of-concept</a> a few days ago, and have been using it to read my RSS feeds on my bus rides the past few days. While the app itself is <em>not there yet</em>, the zoom interface experiment has really been working out very well! </p>
+
+<p><a href="http://www.flickr.com/photos/choonkeat/3478796556/" title="screenshots by choonkeat, on Flickr"><img alt="screenshots" border="0" height="173" src="http://farm4.static.flickr.com/3574/3478796556_fa30dc29e9_m.jpg" width="240" /></a>
+
+</p><p>Have an iPhone/iPod touch? Try it and lemme know?</p><p>PS: A more extreme sell for a zoom-based UI is Microsoft&#39;s famous <a href="http://www.ted.com/index.php/talks/blaise_aguera_y_arcas_demos_photosynth.html">Seadragon</a> demo.<br />PS: this whole experiment was sparked off when I tried to read the beautiful <a href="http://hacker-newspaper.gilesb.com/">hacker-newspaper.gilesb.com</a> on my iPhone.</p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2009/03/999-reasons-to-love-ie6.html">
+			
+				9.99 Reasons to Love IE6</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-28T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>A friend showed me this website today: <a href="http://www.bringdownie6.com/">http://www.bringdownie6.com/</a> &quot;<em>Bring down!</em>&quot; Such angry words. There&#39;s so much negativity on the Internet <a href="http://www.google.com/search?q=say+no+ie6">regarding a browser</a>.</p><p>Instead of 1) getting good folks to put feeble badges on websites, or 2) resigning to fate &amp; cursing whenever you have to fire-up IE6 and <em>check</em>, or 3) <a href="http://litmusapp.com/alkaline/">getting bigger, better tools</a> to do stupid things faster&#8230; Maybe we can be more constructive.</p><p>Here&#39;s an idea:</p><p>Dear Developers &amp; Designers,</p><p>Save your sanity: At $0.00 cost to you, we make your website work in IE6!</p><div style="margin-left: 40px;"><strong>Step 1.</strong> Register your website with us<br /><strong>Step 2.</strong> Just copy-paste this into your website&#39;s &lt;head&gt; section: <span style="background-color: #b9b9b9; font-family: Trebuchet MS;">&lt;script src=&quot;http://weloveinternetexplorer.com/bff.js&quot;&gt;&lt;/script&gt;</span><br /><strong>Step 3.</strong> <em>*chuckle*</em> There&#39;s no Step 3!<br /></div><p></p><p>How this&#39;ll work is that, all your IE6 site visitors will be gently redirected to our payment page, explaining nicely:</p><div style="margin-left: 40px;">We&#39;re sorry but Website XYZ no longer works with your old, antique Internet Explorer browser. BUT for just US$9.99/month (<span style="font-style: italic;">1 movie ticket</span><em>!</em>) the hardworking engineers at weloveinternetexplorer.com will fixup the website for YOU, and make this problem go away for you! It&#39;ll just take 30 seconds! We accept all major credit cards &amp; Paypal (maybe even <span style="text-decoration: line-through;">淘宝!</span> <a href="https://www.alipay.com/">Alipay</a> (correction by @xtinegoh) )<br /><br />But you choose not to :-( you may install any of these free, modern browsers and use Website XYZ through them: [firefox logo] [safari logo] [google chrome logo]<br /><br />&#8211;<br />WeLoveInternetExplorer.com Team<br /></div><p></p><p>If the IE6 compatibility work has not been complete yet, the above pay-wall will not be shown. Instead, we&#39;d display a cool 1990s construction worker icon that these folks will be extremely familiar with!</p><p><a href="http://blog.choonkeat.com/.a/6a00e398212d6f883301156f761a73970b-pi" style="display: inline;"><img alt="Construct2_e0" border="0" class="at-xid-6a00e398212d6f883301156f761a73970b " src="/images/old/underconstruction.gif" title="Construct2_e0" /></a>
+ </p><p>All paid users can of course transparently continue to use the web site (and all other websites that uses this service).</p><p><em>PS: Designers &amp; developers that would like to do Internet Explorer compatibility work (yes, all 3 of you out there, 尤其是中国的同胞朋友, Hội lập trình viên Việt Nam, and сотрудник российских программистов !!!!) Please <a href="http://blog.choonkeat.com/weblog/chew-choon-keat.html">contact me</a></em></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2009/03/why-pick-a-different-domain-name-for-asset-host-and-not-just-subdomains.html">
+			
+				Why pick a different domain name for asset_host - and not just subdomains</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-23T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>Some sites, e.g. <a href="http://github.com">Github.com</a>, uses subdomain for images &amp; assets</p>
+<p><a href="http://www.flickr.com/photos/choonkeat/3378694378/" title="assets from subdomain by choonkeat, on Flickr"><img alt="assets from subdomain" height="184" src="http://farm4.static.flickr.com/3439/3378694378_c68d6d575d_m.jpg" width="240" /></a>
+</p>
+<p>Whereas others, e.g. Yahoo.com, uses a different domain name.</p>
+<p><a href="http://www.flickr.com/photos/choonkeat/3377876393/" title="assets from different domain by choonkeat, on Flickr"><img alt="assets from different domain" height="177" src="http://farm4.static.flickr.com/3460/3377876393_995f0549e8_m.jpg" width="240" /></a>
+</p><p>Because cookie bandwidth does add up.</p><p><em>PS: I spot George Oat&#39;s picture on Flickr frontpage still. I wonders if it is a form of respect or neglect.</em></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2009/03/keeping-google-ads-documentwrite-and-browsers-all-happy.html">
+			
+				How to really Post Load Google Ads (while keeping document.write happy &amp; page rendering snappy)</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-19T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>So you have a web page and it is getting some hits. One day, you decide you might as well earn some pennies off that traffic and began copy-pasting some Google Ads into it.</p><p>But you know, Google Ads suck. They use <span style="font-family: Courier;">document.write</span>. Yep, the things we were <a href="http://ejohn.org/blog/browser-page-load-performance/">warned against</a>. But that&#39;s not all. Their <span style="font-family: Courier;">document.write</span> actually pulls in more javascript, which in turn say &quot;<em>weeeeell, while we&#39;re at it!</em>&quot; and start to do even more <span style="font-family: Courier;">document.write</span>! (In this aspect, Microsoft ads seem more thoughtful, or it seems from Digg&#39;s homepage).</p><p>Anyways, this chokes the browser &amp; makes them stutter. Your web page now renders to your audience in stops and starts:</p><div style="margin-left: 40px;">some content appear &gt; ads appear (stall) &gt; more content appear &gt; ads appear (stall) &gt; rest of content appear<br /></div><p><br />A necessary evil? There are a few things that will fix to a certain extent: 1) use &quot;script defer&quot; or 2) <a href="http://www.webdeveloper.com/forum/showthread.php?t=195112">hacking document.write</a>. Not ideal in terms of fragility, and subsequent maintenance of ads embed codes.</p><p>Let&#39;s look at the problem again: 1) Google wants you to paste the script where the ad appears, 2) Wherever the script is pasted, the browser will stutter &amp; stall the content that comes after it.</p><p>For #2, maybe the &quot;solution&quot; is to paste the script AFTER all content? But wait &#8211; doesn&#39;t that mean #1 the ads get rendered there &amp; not where I want them? Yes, but only initially.</p><p>Why not reposition these ads to where they&#39;re supposed to be after they are constructed:</p><div style="margin-left: 40px;">all content appear &gt; ads appear (below the fold, stall) &gt; ads appear in position<br /></div><p>Let&#39;s say that works, unfortunately it sound convoluted &amp; a hassle, the site has too many existing ads to migrate &amp; our guy managing the ads doesn&#39;t code, he just copies whatever Google provides &amp; blah blah blah&#8230; </p><p>That&#39;s what the <a href="http://github.com/choonkeat/postload_google_ads">postload_google_ads</a> Rails plugin is for :-) site-wide benefit for minimum fuss (upfront &amp; subsequently)</p><p>To see it in action, see <a href="http://therssemail.com/ads/demo_without_postload_google_ads">this demo</a>. Click on &quot;Before&quot; and &quot;After&quot;. They 2 pages are essentially the same, but only one of them applies an &quot;after_filter&quot;:</p><div style="margin-left: 40px;">The postload_google_ads plugin is an &quot;after_filter&quot; in Rails. This means that after your webapp has done its thing &amp; generated the dynamic HTML, the after_filter transplant the ads&#39; script tag to the bottom of the DOM tree, leaving behind some placeholders. This modified html is then sent back &amp; rendered on the user&#39;s browser. After all your content renders, the ads will construct themselves (document.write all they want). After the ads are done, a little javascript repositions the rendered ads based on the absolute position of their corresponding placeholders.<br /></div><p>Until ads nework catch up to use unobtrusive javascript, I guess I&#39;ll have to settle for this.</p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2008/11/git-svn-rebase-could-not-detach-head.html">
+			
+				git svn rebase - could not detach HEAD (howto fix)</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-16T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>Sounds gross but that is the curt message:</p><div style="margin-left: 40px; font-family: Courier;">$ git svn rebase<br />&#8230;<br />First, rewinding head to replay your work on top of it&#8230;<br />could not detach HEAD<br />rebase refs/remotes/trunk: command returned error: 1<br /></div><p><br />Not very helpful, no clue, can&#39;t even buy a vowel. But if you try something else, the error message begin to make the problem more obvious:</p><div style="margin-left: 40px; font-family: Courier;">$ git co refs/remotes/trunk<br />error: Untracked working tree file &#39;public/images/plugout_button.gif&#39; <span style="background-color: #ffff00; font-family: Courier;">would be overwritten by merge</span>.<br /></div><p><br />Well&#8230; then git-svn should&#39;ve said so!</p><div style="margin-left: 40px; font-family: Courier;">$ <span style="background-color: #ffff00; font-family: Courier;">rm</span> public/images/plugout_button.gif <br />$ git svn rebase<br />First, rewinding head to replay your work on top of it&#8230;<br />Applying &#8230;.<br /></div><p><br />So there. This post is so that I commit it to my long term memory, aka Google.</p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <nav id="pagenavi">
+        
+            <a href="/" class="prev">Previous</a>
+        
+        
+            <a href="/weblog/page/3/" class="next">Next</a>
+        
+    </nav>
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

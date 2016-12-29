@@ -1,0 +1,165 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>No Template is the Best Template  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="Update 28 Sept 2008: checkout the working code at github repository, and a short video demo on vimeo.
+
+I&#8217;ve been swimming in jQuery-bliss f..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">No Template is the Best Template</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-26T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p style="font-style: italic">Update 28 Sept 2008: checkout the working code at <a href="http://github.com/choonkeat/hquery/tree/master">github repository</a>, and a short <a href="http://www.vimeo.com/1836815">video demo on vimeo</a>.</p>
+
+<p>I&#8217;ve been swimming in jQuery-bliss for a few months now - thanks <a href="http://nimbupani.com/">Divya</a> &amp; <a href="http://free-and-happy.blogspot.com/">Tien Dung</a> for introducing me to it! I&#8217;m yearning to <a href="http://ejohn.org/blog/bringing-the-browser-to-the-server/">do it on the server-side</a>.</p>
+
+<p>But to enjoy the jQuery-bliss (aka &#8221;<a href="http://blog.choonkeat.com/weblog/2007/11/the-unspecial-c.html">no special case pattern</a>&#8221;), I&#8217;d need to be in a problem where I have a document to sculpt. My recent toys (<a href="http://dev.choonkeat.com/js/cleartz/index#,Singapore,San_Francisco_CA,Berlin">cleartz</a> and <a href="http://dev.choonkeat.com/js/lang/index">tryanslator</a>.. and actually most Javascript apps?) for example, are built the via sculpting way: a very basic HTML structure, then Javascript comes in to flesh out its form and introduce function. A very pleasant development experience overall. </p>
+
+<p><em>Aside: Back in Java days, I remember I used to hate XML DOM parsing a
+lot. <code>NodeList</code>? <code>hasChildNodes</code>? But XPath came and suddenly pain became pleasure.</em><br>
+
+</p>
+
+<p>On the server-side, Model (of MVC) stuff seems to fit (maybe <code>sqlQuery( "people[gender='Male']" ).update({ salutation: "mister" })</code> ?) but ActiveRecord (&amp; <a href="http://errtheblog.com/posts/63-full-of-ambition">Ambition</a>?) is already nice to work with, and I have no major problems there. </p>
+
+<p>My gripe is with the View (and consequently the Controller). Views are generally powered by some templating system. These gnarly things are just a pile of bastardized HTML files good for neither designers nor developers. The best templating systems are only best because you&#8217;ll choke yourself slower by using them. Anyways, pretend you agree that templates == bad.</p>
+
+<p>Wouldn&#8217;t it be nice if your web framework 1) loads up pure HTML as a document object, 2) you modify them in the jQuery-bliss way in your Controller, then finally 3) the resulting HTML is spit back to the client browser? </p>
+
+<p>No nasty &lt;? %&gt; } or custom syntax for dynamic content, or loops, or if-else. Just pure HTML with dummy data baked in. </p><blockquote><pre># display_user.html<br>&lt;span class="tel"&gt;<br> &lt;span class="type"&gt;home&lt;/span&gt;:<br> &lt;span class="value"&gt;+1.415.555.1212&lt;/span&gt;<br>&lt;/span&gt;</pre></blockquote><p>Then modify them before serving:</p><blockquote><pre><pre><pre><pre><span style="color: #0000ff;"># inside controller</span><br><span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">def </span></span><span style="color: #008b8b;">display_user</span><span style="color: #6a5acd;">(</span><span style="color: #000000;">doc</span><span style="color: #6a5acd;">)</span><br>&nbsp; <span style="color: #000000;">user</span> <span style="color: #6a5acd;">=</span> <span style="color: #008b8b;">User</span><span style="color: #6a5acd;">.</span><span style="color: #000000;">find</span><span style="color: #6a5acd;">(</span> <span style="color: #000000;">params</span><span style="color: #6a5acd;">[</span><span style="color: #008b8b;">:user_id</span><span style="color: #6a5acd;">]</span> <span style="color: #6a5acd;">)</span><span style="color: #6a5acd;">&nbsp;</span><br>&nbsp; <span style="color: #6a5acd;">(</span><span style="color: #000000;">doc</span><span style="color: #6a5acd;">/"</span><span style="color: #dd00dd;">.tel .value</span><span style="color: #6a5acd;">").</span><span style="color: #000000;">inner_html</span> <span style="color: #6a5acd;">=</span> <span style="color: #000000;">user</span><span style="color: #6a5acd;">.</span><span style="color: #000000;">phone_number</span><br>&nbsp; <span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">return</span></span><span style="color: #000000;"> doc</span><span style="color: #6a5acd;">.</span><span style="color: #000000;">to_html</span><br><span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">end</span></span><span class="keyword">&nbsp;</span></pre></pre></pre></pre></blockquote><p>And because it is an in-memory tree instead of some opaque String, you can do everything programatically <em>around</em> the document: looping, if-else, removing nodes, replacing sub menus, partials? Furthermore, when you need to do dynamic behaviors on the client-side, the programming paradigm is exactly the same!</p>
+
+<p>Designers can be happy churning out the HTML/CSS in whatever tool they like (be it Dreamweaver or notepad.exe), and developers just poke their DOM. </p>
+
+<p>What say you?</p>
+
+<p><em>PS: Oh well, I guess what I&#8217;m trying to say is maybe we should not waste time finding better ways of constructing webpages (i.e. templating systems) when we could approach the problem as &#8220;modifying a document&#8221; - which is much cleaner and (with the <a href="http://blog.choonkeat.com/weblog/2007/11/the-unspecial-c.html">right API</a>) much easier.</em></p>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=No Template is the Best Template by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2008/03/no-template-is.html" title="Share No Template is the Best Template on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2008/03/no-template-is.html" title="Share No Template is the Best Template on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2008/03/no-template-is.html" title="Share No Template is the Best Template on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

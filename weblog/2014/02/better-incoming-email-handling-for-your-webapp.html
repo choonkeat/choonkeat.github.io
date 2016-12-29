@@ -1,0 +1,246 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>Better incoming email handling for your webapp  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="A standard feature in a webapp is to send emails to an end user. This can be done by
+
+
+using the locally installed mail transfer agent (MTA) like p..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">Better incoming email handling for your webapp</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-10T17:35:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>A standard feature in a webapp is to send emails to an end user. This can be done by</p>
+
+<ul>
+<li>using the locally installed <a href="http://www.postfix.org/">mail transfer agent (MTA) like postfix</a> (not available on heroku)</li>
+<li>paying a bit of money and using SendGrid</li>
+<li><a href="https://github.com/andris9/directmail">sending directly to the recipient smtp server</a> (doesn&#8217;t work well if you are on ec2)</li>
+</ul>
+
+
+<p>What happens when your user replies to that email, using email? You could stonewall with a non-existant <code>donotreply@example.com</code>&#8230; but how about when you <em>do</em> want to handle a reply? Add a link in the email saying <code>click here to reply using our web interface</code>? I find that UX onerous and usually terribly slow e.g. working through my inbox during commute.</p>
+
+<p>A better UX would be to allow an actual email reply.</p>
+
+<h3>Incoming email</h3>
+
+<p>Handling incoming emails might seem like dark waters for web developers. Many solutions offered on stackoverflow &amp; mailing lists usually involves gmail, imap and polling.</p>
+
+<p>Polling. Ugh.</p>
+
+<h3>Event driven incoming email</h3>
+
+<p>A better way is to pipe incoming email directly to your application for processing. And for web developers, &#8220;pipe&#8221; preferably means a <code>HTTP POST</code> into your favourite web framework. aka a Webhook.</p>
+
+<p>A quick overview of such setup is:</p>
+
+<ol>
+<li>Point <code>MX</code> dns entry for your domain to the server that can receive email (e.g. ubuntu with postfix installed); this server <em>can</em> be a different server from your webapp</li>
+<li>Configure <code>postfix</code> to handle that email with an <a href="https://gist.github.com/choonkeat/3225691">smtp-to-http shell script</a></li>
+<li>Now every incoming email is just a regular HTTP form post to your webapp. Throw the blob of email content into a parser like <a href="http://rubygems.org/gems/mail">mail</a> or <a href="https://npmjs.org/package/mailparser">mailparser</a> and you&#8217;d have a handy email object to manipulate.</li>
+</ol>
+
+
+<p>Configuring your own <code>Postfix</code> server and installing that script to work with <code>Postfix</code> might be difficult to some, walk in the park for others, but definitely a hairy piece of infrastructure to keep around. You can make things less hairy by paying a SaaS provider to take care of #1 and #2, but there are caveats.</p>
+
+<h3>Reply-To as Identifier</h3>
+
+<p>Most webapps I see uses a custom <code>Reply-To</code> email address (e.g. Basecamp &amp; Github) In this design, an email notification sent from Discussion <code>id=42</code> would use <code>Reply-To: discussion-42@webapp.com</code>; an email notification for Discussion <code>id=99</code> would use a different <code>Reply-To: discussion-99@webapp.com</code> address.</p>
+
+<p>When a user replies via email, the webhook handler parses <code>To: discussion-42@webapp.com</code> header, retrieves <code>Dicussion.find(42)</code> and create a new discussion comment on behalf of <code>User.where(email: email.from)</code>, using the email html/text body as <code>comment.body</code>.</p>
+
+<p>Unfortunately, unless you pay <a href="www.cloudmailin.com/plans">an arm and a leg</a>, you&#8217;ll only get 1x email address to use as your <code>Reply-To</code>. Also, any attachment in the email would be lost.</p>
+
+<p>So having unique-per-conversation <code>Reply-To</code> address is inefficient &amp; restrictive your infrastructure options.</p>
+
+<h3>Discussion Thread</h3>
+
+<p>One more thing.</p>
+
+<p>Unless you want your webapp&#8217;s email messages to reach your user&#8217;s inbox as individual, annoyingly unrelated messages, your job is actually not done yet.</p>
+
+<p>A conversation in your webapp should ideally be threaded in the same manner in your user&#8217;s inbox (e.g. see Basecamp discussions &amp; Github Issues). So when <code>userX</code> comments on <code>Discussion 42</code>, the outgoing email notification sent to other participants of the discussion should properly set <code>In-Reply-To: &lt;discussion42messageid&gt;</code> and <code>References: &lt;discussion42messageid&gt;</code> in order for them to thread properly in Gmail, Apple Mail and presumably anything else. Having a matching mail subject is essential too, but that&#8217;s the easy part.</p>
+
+<p>By now we&#8217;d have a module to manage mapping of <code>Discussion</code> records to-and-fro <code>Reply-To</code> values. And another module to manage a consistent value of <code>Message-Id</code>, <code>In-Reply-To</code> and <code>References</code> for <code>Discussion</code> records.</p>
+
+<p>Seems unnecessarily complicated.</p>
+
+<h3>Message-Id as Identifier (duh)</h3>
+
+<p>We can simplify the design by giving up unique-per-conversation <code>Reply-To</code>.</p>
+
+<p>Uh? Then how do you know if an email replied <code>To: standard@webapp.com</code> is for <code>Dicussion.find(42)</code>? We look inside the values array of <code>In-Reply-To</code> + <code>References</code> instead.</p>
+
+<p>For example, an outgoing email from your webapp just need to craft the correct, unique-per-conversation <code>Message-Id: &lt;discussion-42@webapp.com&gt;</code>. A email reply to that will automatically contain these headers</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>In-Reply-To: &lt;discussion-42@webapp.com&gt;
+</span><span class='line'>References: &lt;discussion-42@webapp.com&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And our webhook handler can still locate Discussion 42 based on values array of <code>In-Reply-To</code> + <code>References</code>. Thus, managing <code>Message-Id</code> alone will suffice.</p>
+
+<p>Warning: earlier we mentioned using <code>email.from</code> to identify the <code>User</code>, but that&#8217;s not reliable since email <code>From:</code> header can be easily faked. A better mechanism would be to embed the author identity in <code>References</code></p>
+
+<h3>Summary</h3>
+
+<p>A quick summary of this scheme is</p>
+
+<ol>
+<li>User#1 create new Discussion#42 with User#2 as participant</li>
+<li>App delivers &#8216;new discussion&#8217; email to User#2 with <code>Message-Id: &lt;D42&gt;</code> and <code>References: &lt;D42-U2SECRET&gt;</code></li>
+<li>User#2 replies to email, email automatically carries <code>In-Reply-To: &lt;D42&gt;</code> and <code>References: &lt;D42&gt; &lt;D42-U2SECRET&gt;</code></li>
+<li>Webhook handler picks up <code>D42</code> to retrieve Discussion#42, and picks up <code>U2SECRET</code> to locate User#2 and proceed to create a comment</li>
+<li>App delivers &#8216;new comment&#8217; email to User#1 with <code>References: &lt;D42&gt; &lt;D42-U1SECRET&gt;</code> (notice <code>Message-Id</code> doesn&#8217;t matter from here onwards)</li>
+</ol>
+
+
+<h3>Diymailin</h3>
+
+<p>That could be the end of the story for most people, but for <a href="https://github.com/develsadvocates/runtimeerror.js">various reasons</a> I couldn&#8217;t afford to have an unreasonably low cap on the number of incoming emails, and have attachments stripped.</p>
+
+<p>So for my own setup, I pay $5/month for a <a href="https://www.digitalocean.com/?refcode=8d52e959ad0f">Digital Ocean</a> box to run a <a href="https://github.com/choonkeat/diymailin">diymailin</a> instance. With that I can support the numerous apps that I have using diymailin&#8217;s built in web interface, without mucking around with arcane <code>postfix</code> config.</p>
+
+<h3>Mail2Webhook</h3>
+
+<p>But if you&#8217;re too lazy to setup your own diymailin instance, you can hop on to <a href="https://www.mail2webhook.com/">mail2webhook.com</a> and use my setup instead.</p>
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=Better incoming email handling for your webapp by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2014/02/better-incoming-email-handling-for-your-webapp.html" title="Share Better incoming email handling for your webapp on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2014/02/better-incoming-email-handling-for-your-webapp.html" title="Share Better incoming email handling for your webapp on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2014/02/better-incoming-email-handling-for-your-webapp.html" title="Share Better incoming email handling for your webapp on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://choonkeat.github.com/choonkeat/weblog/2014/02/better-incoming-email-handling-for-your-webapp.html';
+        var disqus_url = 'http://choonkeat.github.com/choonkeat/weblog/2014/02/better-incoming-email-handling-for-your-webapp.html';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

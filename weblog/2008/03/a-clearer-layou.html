@@ -1,0 +1,161 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>A Clearer Layout For Viewing Timezones  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="After putting up a job post for SharedCopy at the 37signals job board, I&#8217;ve gotten quite a fair bit of response and in turn, had to propose t..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">A Clearer Layout For Viewing Timezones</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-19T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>After putting up <a href="http://jobs.37signals.com/jobs/2749">a job post for SharedCopy</a> at the 37signals job board, I&#8217;ve gotten quite a fair bit of response and in turn, had to propose timings for Skype calls very often.</p>
+
+<p>I hate timezones.</p>
+
+<p>For my purpose (i.e. propose a time where all parties are at least awake!) I figure I&#8217;d just need a simple view of everybody&#8217;s clock over a period of 1 day - which can be done in Ruby:<br /> </p><blockquote><p>24.times do |hh|<br />&nbsp; puts [+8, -7, -5].collect {|tz| Time.now.utc + hh + (tz * 3600) }.inspect<br />end</p></blockquote><p>Functional, but a chore to run and the output is still a mess to pick out information from. Then I did a proper one in Javascript, in case I ever need to use it while on the move&#8230; ;-) </p>
+<blockquote><p><a href="http://dev.choonkeat.com/js/cleartz/index#,8,18,-6" title="Timezone Comparison Viewer by choonkeat, on Flickr"><img width="166" height="240" border="0" src="http://farm3.static.flickr.com/2299/2345726166_fd42e55ca8_m.jpg" alt="Timezone Comparison Viewer" /></a></p></blockquote>
+
+<p>[Update] A few notes:</p>
+
+<ul><li>The darker/<strong>shaded areas are ZZZ hours</strong> - so just look for horizontals where the &quot;whites&quot; align.</li>
+
+<li>Your own timezone should automatically show up - so <strong>most usage is only 1 click</strong>.</li>
+
+<li>URL changes as you add timezones - so you <strong>can even bookmark the page</strong> and remember a standard set of timezones.</li>
+
+<li>Day-of-week is subtly indicated just so <strong>you can tell if its the same day or otherwise</strong>.</li>
+
+<li><strong>Name of location</strong> is used instead of numeric offset (and <strong>auto resized to fit</strong>) for a more humane experience</li></ul>
+
+<p>&nbsp;</p>
+
+<p>Try it out at <a href="http://dev.choonkeat.com/js/cleartz/index">http://dev.choonkeat.com/js/cleartz/index</a></p>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=A Clearer Layout For Viewing Timezones by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2008/03/a-clearer-layou.html" title="Share A Clearer Layout For Viewing Timezones on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2008/03/a-clearer-layou.html" title="Share A Clearer Layout For Viewing Timezones on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2008/03/a-clearer-layou.html" title="Share A Clearer Layout For Viewing Timezones on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

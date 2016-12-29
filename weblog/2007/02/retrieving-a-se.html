@@ -1,0 +1,140 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>Retrieving a sensible file extension for a given MIME string in Rails  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="  Here&#8217;s a little snippet of code to retrieve a sensible file extension based on a MIME string, using the built-in MIME dictionary in Rails&n..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">Retrieving a sensible file extension for a given MIME string in Rails</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-02-28T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>  <p>Here&#8217;s a little snippet of code to retrieve a sensible file extension based on a MIME string, using the built-in MIME dictionary in Rails&nbsp;</p>   <pre><span class="keyword">  module </span><span class="module">Mime</span><br />      <span class="keyword">class </span><span class="class">Type</span><br />          <span class="keyword">class </span><span class="punct">&lt;&lt;</span> <span class="constant">self</span><br />              <span class="comment"># Lookup, guesstimate if fail, the file extension</span><br />              <span class="comment"># for a given mime string. For example:</span><br />              <span class="comment">#</span><br />              <span class="comment"># &gt;&gt; Mime::Type.file_extension_of 'text/rss+xml'</span><br />              <span class="comment"># =&gt; &quot;xml&quot;</span><br />              <span class="keyword">def </span><span class="method">file_extension_of</span><span class="punct">(</span><span class="ident">mime_string</span><span class="punct">)</span><br />                  <span class="ident">set</span> <span class="punct">=</span> <span class="constant">Mime</span><span class="punct">::</span><span class="constant">LOOKUP</span><span class="punct">[</span><span class="ident">mime_string</span><span class="punct">]</span><br />                  <span class="ident">sym</span> <span class="punct">=</span> <span class="ident">set</span><span class="punct">.</span><span class="ident">instance_variable_get</span><span class="punct">(&quot;</span><span class="string">@symbol</span><span class="punct">&quot;)</span> <span class="keyword">if</span> <span class="ident">set</span><br />                  <span class="keyword">return</span> <span class="ident">sym</span><span class="punct">.</span><span class="ident">to_s</span> <span class="keyword">if</span> <span class="ident">sym</span><br />                  <span class="keyword">return</span> <span class="global">$1</span> <span class="keyword">if</span> <span class="ident">mime_string</span> <span class="punct">=~</span> <span class="punct">/</span><span class="regex">(<span class="escape">\w</span>+)$</span><span class="punct">/</span><br />              <span class="keyword">end</span><br />          <span class="keyword">end</span><br />      <span class="keyword">end</span><br />  <span class="keyword">end</span> </pre>  <p>As mentioned in the comments in the code, you can now give it  <span class="code"><span class="constant">Mime</span><span class="punct">::</span><span class="constant">Type</span><span class="punct">.</span><span class="ident">file_extension_of</span> <span class="punct">&#8216;</span><span class="string">text/rss+xml</span><span class="punct">&#8217; </span></span>and it will return you <span class="code"><span class="punct">&quot;</span><span class="string">xml</span><span class="punct">&quot;</span></span>. Any extension missing, just apply the standard Rails MIME registration steps</p>   <pre><span class="constant">  Mime</span><span class="punct">::</span><span class="constant">Type</span><span class="punct">.</span><span class="ident">register</span> <span class="punct">&quot;</span><span class="string">text/vnd.sun.j2me.app-descriptor</span><span class="punct">&quot;,</span> <span class="symbol">:jad</span><br /><span class="constant">  Mime</span><span class="punct">::</span><span class="constant">Type</span><span class="punct">.</span><span class="ident">file_extension_of</span> <span class="punct">&quot;</span><span class="string">text/vnd.sun.j2me.app-descriptor</span><span class="punct">&quot;</span>  <span class="comment"># =&gt; &quot;jad&quot;</span> </pre>  <p>The bonus with using the standard Mime::Type.register is that both your MIME lookup and <a href="http://weblog.rubyonrails.org/2007/1/19/rails-1-2-rest-admiration-http-lovefest-and-utf-8-celebrations">respond_to</a> gets smarter together.&nbsp;</p></p>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=Retrieving a sensible file extension for a given MIME string in Rails by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2007/02/retrieving-a-se.html" title="Share Retrieving a sensible file extension for a given MIME string in Rails on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2007/02/retrieving-a-se.html" title="Share Retrieving a sensible file extension for a given MIME string in Rails on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2007/02/retrieving-a-se.html" title="Share Retrieving a sensible file extension for a given MIME string in Rails on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

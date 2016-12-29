@@ -1,0 +1,140 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>Implementing Feature Project add-on to an Eclipse Plugin Project  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="I may be ill-informed, but to me implementing a Feature means getting an icon at the Help &gt; About Eclipse Platform dialog. An icon beside the de..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">Implementing Feature Project add-on to an Eclipse Plugin Project</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2005-05-09T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>I may be ill-informed, but to me implementing a Feature means getting an icon at the Help &gt; About Eclipse Platform dialog. An icon beside the default, blue Eclipse icon. An icon for the developer to click on and bring up yet-another-dialog, listing the plugins my Feature contains.. together with some professional looking details about the whole thing.<br /><br />But, getting that icon to appear apparently isn&#8217;t easy. For a start, I couldn&#8217;t find much (any!) details on the bare minimum stuff I need to specify. Now, before I forget.. I&#8217;ll better write them all down. Prequisites:<br /><br /><ol><li>A plugin project in your workspace that is working fine. (Let&#8217;s call it plugin id org.yanime.plugin)</li><li>Create a Feature Project via File &gt; New &gt; Projects &gt; New Feature Project</li><li>Feature ID: Preferably the same ID as your plugin (org.yanime.plugin)</li><li>Feature Name: anything goes</li><li>Version: anything goes</li><li>Provider Name: I haven&#8217;t investigated, but I&#8217;d assume it should be the same as your intended plugin</li><li>Branding Plugin: Apparently, if your Feature ID != plugin id.. you&#8217;ll have to state your plugin id here. Else, just leave it blank.</li><li>Banner Image: any 32x32 gif image, put at the root folder of your Feature Project</li><li>Go to &quot;Build&quot; tab and make sure your image and feature.xml is included in the binary build.</li><li>Go to &quot;Content&quot; tab and include your plugin (org.yanime.plugin)</li></ol>You&#8217;ve completed your Feature Project. You can now Right Click &gt; Export &gt; Deployable features &gt; &#8230; and have a nifty .zip file to install. But, does it work? No! Who the hell knows you&#8217;ve to add more stuff into your plugin? So now, go back there to your workspace and open up your plugin project..<br /><br /><ol><li>Copy these set of files from other existing plugins (e.g. eclipse/plugins/org.eclipse.jdt_3.0.1)</li><ul><li>about.ini</li><li>about.mapping</li><li>about.properties</li><li>eclipse32.gif</li><li style="font-style: italic;">I forgot, but in case it doesn&#8217;t work, grab welcome.xml and about.html as well.</li></ul><li>Inside about.mapping, there is only 1 effective line, 0=xxxxx, don&#8217;t change the 0=. the xxxxx is what will appear in place of {0} inside about.properties (by default, used for Build id)</li><li>Now, edit your plugin.xml &gt; build (or edit build.properties directly) and make sure these files are all included in your plugin&#8217;s binary build.</li></ol>Only now, then you can truely export your Feature Project.. (it&#8217;ll produce 1 x zip file including your Feature and Plugin project files). The above only includes the bare minimum of getting your own little feature icon appearing on the About dialog of Eclipse. Play around with those files and values and images to customize to your liking.<br /><br />And also, I think as long as the Feature&#8217;s Provider Name is the same, they&#8217;ll share the same icon. Upon clicking that, the list you see is the list of Features under that Provider Name. So, if you have 10 plugins and 1 feature, you&#8217;ll only see 1 listed. If you want all of your plugins to show up with the descriptions and all, you&#8217;ll have to create a Feature for each plugin.<br /><br /><br /></p>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=Implementing Feature Project add-on to an Eclipse Plugin Project by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2005/05/implementing-fe.html" title="Share Implementing Feature Project add-on to an Eclipse Plugin Project on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2005/05/implementing-fe.html" title="Share Implementing Feature Project add-on to an Eclipse Plugin Project on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2005/05/implementing-fe.html" title="Share Implementing Feature Project add-on to an Eclipse Plugin Project on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

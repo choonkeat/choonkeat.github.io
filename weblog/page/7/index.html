@@ -1,0 +1,456 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>choonkeat on programming & software  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="
+		The designer finishes, or so he thought, his final touches and uploads the website to a staging server. He fires off an email to his client with..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner">
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2007/03/as-easy-as-pass.html">
+			
+				As easy as passing on a link</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-03-14T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>The designer finishes, or so he thought, his final touches and uploads the website to a staging server. He fires off an email to his client with the URL of his website and packs up for the night. In the morning, the client sees the email and clicks on the link&#8230;, &quot;<em>Hmm.. almost there, but just a bit more refinements needed..</em>&quot;</p>
+
+<p>At this point of time, the client would normally feedback by:</p>
+
+<ol><li>Capturing a screenshot, paste it into Microsoft Word, use the drawing tools there to indicate and comment on where changes are required, or</li>
+
+<li>Sitting the designer next to him and point to the monitor, or</li>
+
+<li>Launching a &quot;shared desktop&quot; environment (e.g. gotomeeting) with the designer, and point to the virtual monitor </li></ol>
+
+<p>All not very convenient. What if he could simply doodle on the webpage, like he would&#8217;ve doodled on his screenshot in Microsoft Word? Only now, he don&#8217;t need to take a screenshot, nor open Microsoft Word, nor save that file, nor email as an attachment back to the designer&#8230; he simply emails the designer a link - <a href="http://r0.sharedcopy.com/5tgda">like this link</a>.</p>
+
+<p>To start drawing on a page, you&#8217;d click on a bookmark on your browser - the toolbar will then appear and you are ready to go (Note: you must click &quot;Save&quot; before you can pass your URL to someone else). No login, no passwords for either parties. More comments can be piled upon the page - RSS is provided to help keep track. All pages goes away after 2 weeks. No mess.</p>
+
+<p>What do you think?</p>
+
+<p>Note: Clicking on a bookmark to bring up the Edit toolbar is most convenient - Works fine in Firefox, but I seem to have trouble getting the bookmark to load an external javascript in IE6? Hence, IE6 is tentatively limited to view/edit pages only, not create new pages.</p>
+
+<p>[Updated link to page] </p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2007/02/retrieving-a-se.html">
+			
+				Retrieving a sensible file extension for a given MIME string in Rails</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-02-28T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>  <p>Here&#8217;s a little snippet of code to retrieve a sensible file extension based on a MIME string, using the built-in MIME dictionary in Rails&nbsp;</p>   <pre><span class="keyword">  module </span><span class="module">Mime</span><br />      <span class="keyword">class </span><span class="class">Type</span><br />          <span class="keyword">class </span><span class="punct">&lt;&lt;</span> <span class="constant">self</span><br />              <span class="comment"># Lookup, guesstimate if fail, the file extension</span><br />              <span class="comment"># for a given mime string. For example:</span><br />              <span class="comment">#</span><br />              <span class="comment"># &gt;&gt; Mime::Type.file_extension_of 'text/rss+xml'</span><br />              <span class="comment"># =&gt; &quot;xml&quot;</span><br />              <span class="keyword">def </span><span class="method">file_extension_of</span><span class="punct">(</span><span class="ident">mime_string</span><span class="punct">)</span><br />                  <span class="ident">set</span> <span class="punct">=</span> <span class="constant">Mime</span><span class="punct">::</span><span class="constant">LOOKUP</span><span class="punct">[</span><span class="ident">mime_string</span><span class="punct">]</span><br />                  <span class="ident">sym</span> <span class="punct">=</span> <span class="ident">set</span><span class="punct">.</span><span class="ident">instance_variable_get</span><span class="punct">(&quot;</span><span class="string">@symbol</span><span class="punct">&quot;)</span> <span class="keyword">if</span> <span class="ident">set</span><br />                  <span class="keyword">return</span> <span class="ident">sym</span><span class="punct">.</span><span class="ident">to_s</span> <span class="keyword">if</span> <span class="ident">sym</span><br />                  <span class="keyword">return</span> <span class="global">$1</span> <span class="keyword">if</span> <span class="ident">mime_string</span> <span class="punct">=~</span> <span class="punct">/</span><span class="regex">(<span class="escape">\w</span>+)$</span><span class="punct">/</span><br />              <span class="keyword">end</span><br />          <span class="keyword">end</span><br />      <span class="keyword">end</span><br />  <span class="keyword">end</span> </pre>  <p>As mentioned in the comments in the code, you can now give it  <span class="code"><span class="constant">Mime</span><span class="punct">::</span><span class="constant">Type</span><span class="punct">.</span><span class="ident">file_extension_of</span> <span class="punct">&#8216;</span><span class="string">text/rss+xml</span><span class="punct">&#8217; </span></span>and it will return you <span class="code"><span class="punct">&quot;</span><span class="string">xml</span><span class="punct">&quot;</span></span>. Any extension missing, just apply the standard Rails MIME registration steps</p>   <pre><span class="constant">  Mime</span><span class="punct">::</span><span class="constant">Type</span><span class="punct">.</span><span class="ident">register</span> <span class="punct">&quot;</span><span class="string">text/vnd.sun.j2me.app-descriptor</span><span class="punct">&quot;,</span> <span class="symbol">:jad</span><br /><span class="constant">  Mime</span><span class="punct">::</span><span class="constant">Type</span><span class="punct">.</span><span class="ident">file_extension_of</span> <span class="punct">&quot;</span><span class="string">text/vnd.sun.j2me.app-descriptor</span><span class="punct">&quot;</span>  <span class="comment"># =&gt; &quot;jad&quot;</span> </pre>  <p>The bonus with using the standard Mime::Type.register is that both your MIME lookup and <a href="http://weblog.rubyonrails.org/2007/1/19/rails-1-2-rest-admiration-http-lovefest-and-utf-8-celebrations">respond_to</a> gets smarter together.&nbsp;</p></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2007/02/class-redefinit.html">
+			
+				Class (re)definition in method body</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-02-28T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p style="padding: 1em; font-style: italic;  background-color: rgb(221, 238, 238); -moz-border-radiu
+s: 1em; -webkit-border-radius: 1em; ">
+A <a href="http://www.sharphosts.com">cheap web hosting</a> is an excellent solution to expenses. However only <a href
+="http://www.sharphosts.com/rev/midphase.htm">midphase</a> is cheap enough, providing the standard of <a href="http://
+www.sharphosts.com/rev/powweb.htm">powweb</a>.</p>
+<p><em>UPDATE: modifed to use more idiomatic way of returning &#8220;***&#8221;. See comments</em> <br> </p> <p>Warning: This is really hacky and dirty. Writing the snippet here so I won&#8217;t forget<br> </p> <p>Redefining existing classes in Ruby is really handy, and a breeze to do</p> <pre><span class="ident">puts</span> <span class="number">5</span>     <span class="comment"># prints "5"</span><br> <span class="keyword">class </span><span class="class">Fixnum</span><br>  <span class="ident">alias_method</span> <span class="symbol">:old_to_s</span><span class="punct">,</span> <span class="symbol">:to_s</span><br>  <span class="keyword">def </span><span class="method">to_s</span><br>   <span class="punct">"</span><span class="string">*</span><span class="punct">"</span> <span class="punct">*</span> <span class="constant">self</span><br>  <span class="keyword">end</span><br> <span class="keyword">end</span><br> <span class="ident">puts</span> <span class="number">5</span>     <span class="comment"># prints "*****"</span></pre> <p>But, sometimes you&#8217;d just want to limit such monkey patching, like within a method where you really really need the hack in place - and you promise to undo the hack right after you&#8217;re done to return the world sanity (promise!)<br> </p> <pre><span class="keyword">class </span><span class="class">MyKlass</span><br>  <span class="keyword">def </span><span class="method">get_as_stars</span><span class="punct">(</span><span class="ident">value</span><span class="punct">)</span><br>   <span class="comment"># define funky behavior</span><br>   <span class="keyword">class </span><span class="class">::Fixnum</span><br>    <span class="ident">alias_method</span> <span class="symbol">:old_to_s</span><span class="punct">,</span> <span class="symbol">:to_s</span><br>    <span class="keyword">def </span><span class="method">to_s</span><br>     <span class="punct">"</span><span class="string">*</span><span class="punct">"</span> <span class="punct">*</span> <span class="constant">self</span><br>    <span class="keyword">end</span><br>   <span class="keyword">end</span><br> <br>   <span class="keyword">return</span> <span class="ident">value</span><span class="punct">.</span><span class="ident">to_s</span><br>  <span class="keyword">ensure</span><br>   <span class="comment"># revert back to original</span><br>   <span class="keyword">class </span><span class="class">::Fixnum</span><br>    <span class="ident">alias_method</span> <span class="symbol">:to_s</span><span class="punct">,</span> <span class="symbol">:old_to_s</span><br>   <span class="keyword">end</span><br>  <span class="keyword">end</span><br> <span class="keyword">end</span></pre> <p>Unfortunately, that&#8217;s invalid syntax </p> <pre><span class="constant">SyntaxError</span><span class="punct">:</span> <span class="ident">compile</span> <span class="ident">error</span><br> <span class="punct">:</span> <span class="keyword">class </span><span class="class">definition</span> <span class="keyword">in</span> <span class="ident">method</span> <span class="ident">body</span><br> <span class="punct">:</span> <span class="keyword">class </span><span class="class">definition</span> <span class="keyword">in</span> <span class="ident">method</span> <span class="ident">body</span></pre> <p>Well, what&#8217;s a man to do? module_eval to the rescue, just replace your &#8221;<span class="code"><span class="keyword">class </span><span class="class">X</span></span>&#8221; statement with &#8221;<span class="code"><span class="constant">X</span><span class="punct">.</span><span class="ident">module_eval</span> <span class="keyword">do</span></span>&#8221;</p> <pre><span class="keyword">class </span><span class="class">MyKlass</span><br>  <span class="keyword">def </span><span class="method">get_as_stars</span><span class="punct">(</span><span class="ident">value</span><span class="punct">)</span><br>   <span class="comment"># define funky behavior</span><br>   <span class="punct">::</span><span class="constant">Fixnum</span><span class="punct">.</span><span class="ident">module_eval</span> <span class="keyword">do</span><br>    <span class="ident">alias_method</span> <span class="symbol">:old_to_s</span><span class="punct">,</span> <span class="symbol">:to_s</span><br>    <span class="keyword">def </span><span class="method">to_s</span><br>     <span class="punct">"</span><span class="string">*</span><span class="punct">"</span> <span class="punct">*</span> <span class="constant">self</span><br>    <span class="keyword">end</span><br>   <span class="keyword">end</span><br> <br>   <span class="keyword">return</span> <span class="ident">value</span><span class="punct">.</span><span class="ident">to_s</span><br>  <span class="keyword">ensure</span><br>   <span class="comment"># revert back to original</span><br>   <span class="punct">::</span><span class="constant">Fixnum</span><span class="punct">.</span><span class="ident">module_eval</span> <span class="keyword">do</span><br>    <span class="ident">alias_method</span> <span class="symbol">:to_s</span><span class="punct">,</span> <span class="symbol">:old_to_s</span><br>   <span class="keyword">end</span><br>  <span class="keyword">end</span><br> <span class="keyword">end</span><br> <br> <span class="ident">k</span> <span class="punct">=</span> <span class="constant">MyKlass</span><span class="punct">.</span><span class="ident">new</span><br> <span class="ident">puts</span> <span class="number">3</span>         <span class="comment"># prints "3"</span><br> <span class="ident">puts</span> <span class="ident">k</span><span class="punct">.</span><span class="ident">get_as_stars</span><span class="punct">(</span><span class="number">4</span><span class="punct">)</span> <span class="comment"># prints "****"</span><br> <span class="ident">puts</span> <span class="number">5</span>         <span class="comment"># prints "5"</span></pre> <p>PS: Did this hack to get Time.now == Time.now working in a test. Grr<br>   </p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2007/02/activerecord-op.html">
+			
+				ActiveRecord: Optimistic Offline Lock</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-02-22T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>Find of the day for me: Rails&#8217; ActiveRecord <a href="http://www.ruby-forum.com/topic/61754#62324">supports Optimistic Offline Lock via lock_version column</a>. i.e. <a href="http://www.martinfowler.com/eaaCatalog/optimisticOfflineLock.html">this</a><br /></p><pre><span class="punct">&gt;&gt;</span> <span class="ident">duck1</span> <span class="punct">=</span> <span class="constant">Duck</span><span class="punct">.</span><span class="ident">find_by_name</span> <span class="punct">&quot;</span><span class="string">Daffy</span><span class="punct">&quot;</span><br /><span class="punct">=&gt;</span> <span class="comment">#&lt;Duck:0xb75d2f64 @attributes={&quot;name&quot;=&gt;&quot;Daffy&quot;, &quot;lock_version&quot;=&gt;&quot;0&quot;, &quot;id&quot;=&gt;&quot;1&quot;}&gt;</span><br /><span class="punct">&gt;&gt;</span> <span class="ident">duck2</span> <span class="punct">=</span> <span class="constant">Duck</span><span class="punct">.</span><span class="ident">find_by_name</span> <span class="punct">&quot;</span><span class="string">Daffy</span><span class="punct">&quot;</span><br /><span class="punct">=&gt;</span> <span class="comment">#&lt;Duck:0xb75cd08c @attributes={&quot;name&quot;=&gt;&quot;Daffy&quot;, &quot;lock_version&quot;=&gt;&quot;0&quot;, &quot;id&quot;=&gt;&quot;1&quot;}&gt;</span><br /><span class="punct">&gt;&gt;</span> <span class="ident">duck1</span><span class="punct">.</span><span class="ident">name</span> <span class="punct">=</span> <span class="punct">&quot;</span><span class="string">Daffy le duck</span><span class="punct">&quot;</span><br /><span class="punct">=&gt;</span> <span class="punct">&quot;</span><span class="string">Daffy le duck</span><span class="punct">&quot;</span><br /><span class="punct">&gt;&gt;</span> <span class="ident">duck2</span><span class="punct">.</span><span class="ident">name</span> <span class="punct">=</span> <span class="punct">&quot;</span><span class="string">Donald</span><span class="punct">&quot;</span><br /><span class="punct">=&gt;</span> <span class="punct">&quot;</span><span class="string">Donald</span><span class="punct">&quot;</span><br /><span class="punct">&gt;&gt;</span> <span class="ident">duck1</span><span class="punct">.</span><span class="ident">save</span><br /><span class="punct">=&gt;</span> <span class="constant">true</span><br /><span class="punct">&gt;&gt;</span> <span class="ident">duck2</span><span class="punct">.</span><span class="ident">save</span><br /><span class="constant">ActiveRecord</span><span class="punct">::</span><span class="constant">StaleObjectError</span><span class="punct">:</span> <span class="constant">Attempted</span> <span class="ident">to</span> <span class="ident">update</span> <span class="ident">a</span> <span class="ident">stale</span> <span class="ident">object</span> </pre>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2007/02/rmagick-renderi.html">
+			
+				RMagick: Rendering a chunk of lengthy text into a fixed size image, with a selected font color</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-02-21T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>Been using RMagick at work, and was required to do something that wasn&#8217;t supported directly: Rendering a chunk of lengthy text into a fixed size image, with a selected font color. Quite strange actually, because as far as rendering text goes, I would&#8217;ve thought that&#8217;s a common use case.<br />  </p>   <p>1. Selected font color</p>   <p>RMagick provides 2 ways of rendering text: Using the <a href="http://www.simplesystems.org/RMagick/doc/imusage.html#bi_format_list">caption builtin format</a> or <a href="http://www.simplesystems.org/RMagick/doc/draw.html#annotate">Draw#annotate</a>. Annotate loses since it doesn&#8217;t do word-wrap, but caption does. So&#8230; DIY word-wrapping with annotate? Ugh. The kick is, I could get &quot;annotate&quot; to set the font color, I couldn&#8217;t make &quot;caption&quot; do the same though the documentation says it can.<br />  </p>   <p>Tip #26 from the very valuable <a href="http://www.pragmaticprogrammer.com/ppbook/extracts/rule_list.html">Pragmatic Programmer</a> book is <br />   </p>      <blockquote>     <p>&quot;select&quot;&nbsp; Isn&#8217;t Broken<br />   It is rare to find a bug in the OS or the compiler, or even a third-party product or library. The bug is most likely in the application.</p>   </blockquote>      <p>This refers to programmers jumping to conclusion that some strange bug is caused by bugs in the lower-level library / operating system just because he cannot figure how his own code would be faulty. When you can&#8217;t find the bug in your code, operating under &quot;select is not broken&quot; mode means that you &quot;look again&quot; in your own code, turn it over, around and shake out the loose bits - you&#8217;ll usually find its actually your own fault.</p>     <p>Operating under this mode has a few benefits. First, your colleagues will stop avoiding you. Secondly, you&#8217;ll learn a hell lot about your own code, debugging and the underlying library you are using.&nbsp;However, when you&#8217;ve tried different ways, with the simplest possible piece of code (out of the context of your application) and it still doesn&#8217;t work, it wouldn&#8217;t hurt to question.<br />   <br />   Lucky me, the proverbial &quot;<a href="http://en.wikipedia.org/wiki/Asynchronous_I/O#Select.28.2Fpoll.29_loop">select</a>&quot; was indeed broken and Tim Hunter was blazing fast in his response. RMagick::Image::Info.fill= wasn&#8217;t working in &quot;caption&quot; mode, but now it does. My rendered, word-wrapped text now has colors.</p>   <p>2. Rendering into a fixed size</p>   <p>Word wrap allows me to constrain my text into a specific width, however it doesn&#8217;t trim my text properly height-wise. If the image height is shorter than the rendered result, text gets clipped mercilessly - sometimes halfway across the font, depending on your image height and font size. I didn&#8217;t find any option for such trimming, neither could I google an off the shelf solution. So I wrote my own. And since I felt that this &quot;rendering a chunk of lengthy text into a fixed size image, with a selected font color&quot; thingy is a rather common use case, I guess I might as well put the code out. Feel free to contribute any suggestion to speed up the trimming:</p><pre><span class="comment">#</span><br /><span class="comment"># Generate Magick::Image objects from text</span><br /><span class="comment">#  * wraps text around width_constraint (pixels)</span><br /><span class="comment">#  * cuts off text (and appends '...') if it goes beyond height_constraint (pixels)</span><br /><span class="comment">#</span><br /><span class="comment"># Example</span><br /><span class="comment"># &lt;code&gt;</span><br /><span class="comment">#    require 'rmagick_text_util.rb'</span><br /><span class="comment">#    include RMagickTextUtil</span><br /><span class="comment">#    some_text = &quot;Hello world. This is a rather lengthy line &quot;      +</span><br /><span class="comment">#                &quot;and I'm not very sure how much will be cropped, &quot; +</span><br /><span class="comment">#                &quot;and how much will be left over. So, here goes!&quot;</span><br /><span class="comment">#</span><br /><span class="comment">#    image = render_cropped_text(some_text, 100, 50)</span><br /><span class="comment">#    image.write &quot;example_without_block.jpg&quot;</span><br /><span class="comment">#</span><br /><span class="comment">#    image = render_cropped_text(some_text, 100, 50) do |img|</span><br /><span class="comment">#       img.fill = &quot;#ff0000&quot; # this won't work until RMagick v1.15.3</span><br /><span class="comment">#       img.pointsize = 15</span><br /><span class="comment">#    end</span><br /><span class="comment">#    image.write &quot;example_with_block.jpg&quot;</span><br /><span class="comment"># &lt;/code&gt;</span><br /><span class="comment">#</span><br /><span class="ident">require</span> <span class="punct">'</span><span class="string">RMagick</span><span class="punct">'</span><br /><br /><span class="keyword">module </span><span class="module">RMagickTextUtil</span><br />    <span class="keyword">def </span><span class="method">render_cropped_text</span><span class="punct">(</span><span class="ident">caption_text</span><span class="punct">,</span> <span class="ident">width_constraint</span><span class="punct">,</span> <span class="ident">height_constraint</span><span class="punct">,</span> <span class="punct">&amp;</span><span class="ident">block</span><span class="punct">)</span><br />        <span class="ident">image</span> <span class="punct">=</span> <span class="ident">render_text</span><span class="punct">(</span><span class="ident">caption_text</span><span class="punct">,</span> <span class="ident">width_constraint</span><span class="punct">,</span> <span class="punct">&amp;</span><span class="ident">block</span><span class="punct">)</span><br />        <span class="keyword">if</span> <span class="ident">height_constraint</span> <span class="punct">&lt;</span> <span class="ident">image</span><span class="punct">.</span><span class="ident">rows</span><br />            <span class="ident">percent</span> <span class="punct">=</span> <span class="ident">height_constraint</span><span class="punct">.</span><span class="ident">to_f</span> <span class="punct">/</span> <span class="ident">image</span><span class="punct">.</span><span class="ident">rows</span><span class="punct">.</span><span class="ident">to_f</span><br />            <span class="ident">end_index</span> <span class="punct">=</span> <span class="punct">(</span><span class="ident">caption_text</span><span class="punct">.</span><span class="ident">size</span> <span class="punct">*</span> <span class="ident">percent</span><span class="punct">).</span><span class="ident">to_i</span>  <span class="comment"># takes a leap into cropping</span><br />            <span class="ident">image</span> <span class="punct">=</span> <span class="ident">render_text</span><span class="punct">(</span><span class="ident">caption_text</span><span class="punct">[</span><span class="number">0</span><span class="punct">..</span><span class="ident">end_index</span><span class="punct">]</span> <span class="punct">+</span> <span class="punct">&quot;</span><span class="string">...</span><span class="punct">&quot;,</span> <span class="ident">width_constraint</span><span class="punct">,</span> <span class="punct">&amp;</span><span class="ident">block</span><span class="punct">)</span><br />            <span class="keyword">while</span> <span class="ident">height_constraint</span> <span class="punct">&lt;</span> <span class="ident">image</span><span class="punct">.</span><span class="ident">rows</span> <span class="punct">&amp;&amp;</span> <span class="ident">end_index</span> <span class="punct">&gt;</span> <span class="number">0</span> <span class="comment"># reduce in big chunks until within range</span><br />                <span class="ident">end_index</span> <span class="punct">-=</span> <span class="number">80</span><br />                <span class="ident">image</span> <span class="punct">=</span> <span class="ident">render_text</span><span class="punct">(</span><span class="ident">caption_text</span><span class="punct">[</span><span class="number">0</span><span class="punct">..</span><span class="ident">end_index</span><span class="punct">]</span> <span class="punct">+</span> <span class="punct">&quot;</span><span class="string">...</span><span class="punct">&quot;,</span> <span class="ident">width_constraint</span><span class="punct">,</span> <span class="punct">&amp;</span><span class="ident">block</span><span class="punct">)</span><br />            <span class="keyword">end</span><br />            <span class="keyword">while</span> <span class="ident">height_constraint</span> <span class="punct">&gt;</span> <span class="ident">image</span><span class="punct">.</span><span class="ident">rows</span>                  <span class="comment"># lengthen in smaller steps until exceed</span><br />                <span class="ident">end_index</span> <span class="punct">+=</span> <span class="number">10</span><br />                <span class="ident">image</span> <span class="punct">=</span> <span class="ident">render_text</span><span class="punct">(</span><span class="ident">caption_text</span><span class="punct">[</span><span class="number">0</span><span class="punct">..</span><span class="ident">end_index</span><span class="punct">]</span> <span class="punct">+</span> <span class="punct">&quot;</span><span class="string">...</span><span class="punct">&quot;,</span> <span class="ident">width_constraint</span><span class="punct">,</span> <span class="punct">&amp;</span><span class="ident">block</span><span class="punct">)</span><br />            <span class="keyword">end</span><br />            <span class="keyword">while</span> <span class="ident">height_constraint</span> <span class="punct">&lt;</span> <span class="ident">image</span><span class="punct">.</span><span class="ident">rows</span> <span class="punct">&amp;&amp;</span> <span class="ident">end_index</span> <span class="punct">&gt;</span> <span class="number">0</span> <span class="comment"># reduce in baby steps until fit</span><br />                <span class="ident">end_index</span> <span class="punct">-=</span> <span class="number">1</span><br />                <span class="ident">image</span> <span class="punct">=</span> <span class="ident">render_text</span><span class="punct">(</span><span class="ident">caption_text</span><span class="punct">[</span><span class="number">0</span><span class="punct">..</span><span class="ident">end_index</span><span class="punct">]</span> <span class="punct">+</span> <span class="punct">&quot;</span><span class="string">...</span><span class="punct">&quot;,</span> <span class="ident">width_constraint</span><span class="punct">,</span> <span class="punct">&amp;</span><span class="ident">block</span><span class="punct">)</span><br />            <span class="keyword">end</span><br />        <span class="keyword">end</span><br />        <span class="ident">image</span><br />    <span class="keyword">end</span><br /><br />    <span class="keyword">def </span><span class="method">render_text</span><span class="punct">(</span><span class="ident">caption_text</span><span class="punct">,</span> <span class="ident">width_constraint</span><span class="punct">,</span> <span class="punct">&amp;</span><span class="ident">block</span><span class="punct">)</span><br />        <span class="constant">Magick</span><span class="punct">::</span><span class="constant">Image</span><span class="punct">.</span><span class="ident">read</span><span class="punct">(&quot;</span><span class="string">caption:<span class="expr">#{caption_text.to_s}</span></span><span class="punct">&quot;)</span> <span class="punct">{</span><br />            <span class="comment"># this wraps the text to fixed width</span><br />            <span class="constant">self</span><span class="punct">.</span><span class="ident">size</span> <span class="punct">=</span> <span class="ident">width_constraint</span><br />            <span class="comment"># other optional settings</span><br />            <span class="ident">block</span><span class="punct">.</span><span class="ident">call</span><span class="punct">(</span><span class="constant">self</span><span class="punct">)</span> <span class="keyword">if</span> <span class="ident">block_given?</span><br />        <span class="punct">}.</span><span class="ident">first</span><br />    <span class="keyword">end</span><br /><span class="keyword">end</span></pre><p>Update: fixes infinite loop when empty string cannot satisfy height and width constraint</p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2007/02/repurposing-the.html">
+			
+				Repurposing The Web</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-02-09T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p> <p>I&#8217;ve been dabbling with content, syndication and stuff for a while now.. and this just blows my mind: <a href="http://pipes.yahoo.com/">Yahoo! Pipes</a> . Didn&#8217;t blog about it yesterday because the site was overwhelmed, and you would&#8217;ve only gotten &quot;Unable to reach website&quot;.. anyways..<br /></p> <p>What is it about? I wouldn&#8217;t be able <a href="http://radar.oreilly.com/archives/2007/02/pipes_and_filte.html">to describe it like Tim O&#8217;Reilly has</a>, but its basically Yahoo! Pipes lets you treat any feed as a source of data, add filters, conversions, sort, truncate, combine them into some output that pleases you.</p> <p><a title="Photo Sharing" href="http://www.flickr.com/photos/choonkeat/384332445/"><img width="240" height="108" border="0" alt="Screenshot" src="http://farm1.static.flickr.com/148/384332445_6b1e7c66a3_m.jpg" /></a></p> <p>Meaning, I can probably do things like ask for your name, put that into a Pipe that plucks your wishlist off Thinkgeek (or your blog), get a list of those items selling on ebay, filter them against the cheapest finds on Froogle and viola - a cheapest possible gift for a friend! Anyways, or use the Pipes to do some other sick thing you can think of.</p> <p>All drag and drop. Very spectacular, sleek, browser-based UI. +1 geek point to Yahoo!</p> <p><a title="Photo Sharing" href="http://www.flickr.com/photos/choonkeat/384333808/"><img width="240" height="174" border="0" alt="Screenshot-1" src="http://farm1.static.flickr.com/98/384333808_dad0287295_m.jpg" /></a></p><p>&nbsp;</p><p>Update: After playing for a little while, it makes you wish you could have more Operators, e.g. truncate a string, etc&#8230; and it&#8217;ll just be horrible to wait for Yahoo! to keep up with the requests.. hopefully there&#8217;ll be a plugin mechanism for that, like DabbleDB&#8217;s innovative approach of <a href="http://dabbledb.com/help/guides/pluginapi/">plug-outs</a>.<br /></p></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2007/02/yea-its-startup.html">
+			
+				Yea, its startups and demos time!</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-02-03T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>E27 in coming again @ <a href="http://www.smu.edu.sg/campus/pdf/smu_map.pdf">SMU Building 6 (PDF)</a>. One of the best places to see new ideas, grab talent when they&#8217;re young and (my favourite) give unsolicited comments on other people&#8217;s business model or technical implementation :-D</p><p><a href="http://www.entrepreneur27.org/sg/next-event/">Current lineup</a>:&nbsp;</p><ul><li>Virtual Worlds and MMORPGs</li><li>Complex Networks in a Simple World</li><li>ActiveDeals.com - interactive video content over the MSN instant messenger platform</li><li>Wisheus.com - social wishlist service</li><li>Tylerprojects.com - developer of mobile and web games</li></ul><p>You&#8217;re invited. RSVP <a href="http://entrepreneur27singapore.wikispaces.com/">here</a>. <br /></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2007/01/assumptions-abo.html">
+			
+				Assumptions about RSS-to-Email as archives</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-01-24T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>  <p>A nice little <a href="http://www.wired.com/news/technology/internet/0,72542-0.html?tw=rss.index">article in Wired</a> yesterday mentions <a href="http://www.rssfwd.com/">RssFwd</a></p>   <blockquote>The Feed Is in the Mail<br />  Even some the best RSS clients lack compelling archiving features &#8211; older headlines drop out of sight after a day or two. Thankfully, sites like RMail and RSSfwd provide simple archiving by delivering feeds to your e-mail account.<br />  </blockquote>   <p>&quot;Archiving&quot;? Hmm. I wonder if the writer has <a href="http://www.kbcafe.com/juice/?guid=20050424102714">read this</a> before, regarding <a href="http://www.r-mail.org/">RMail</a> [emphasis mine]</p>   <blockquote>&#8230;emails are sent every hour, on the hour, <strong>at most one email per hour</strong>. </blockquote>   <p>Absolutely nothing wrong with that policy. A conscious decision to protect the subscriber&#8217;s mailbox. However, it also means that if you&#8217;ve subscribed to <a href="http://slashdot.org/">high</a> <a href="http://digg.com/">traffic</a> feeds for archival purposes, you&#8217;d be in for a <em>little</em> surprise when you discover your archive isn&#8217;t anywhere complete. (Note below: <strong>Highlighted are emails from Rmail</strong>, the rest is from RssFwd. Both are subscriptions to the same Slashdot feed.)</p>   <p><a title="Photo Sharing" href="http://www.flickr.com/photos/choonkeat/367945639/"><img width="500" height="361" border="0" alt="RMail and RssFwd" src="http://farm1.static.flickr.com/138/367945639_6108aff171.jpg" /></a>&nbsp;</p>    <p>Something missing?&nbsp;</p><p>There are really many RSS-to-Email services out there. Some has accounts and passwords, some <a href="http://www.feedburner.com/fb/a/publishers/emailsub">can only be used for certain feeds only</a>, some <a href="http://www.feedblitz.com/features.asp">sends 1 email daily unless you pay</a>, many has complex features, and there are some which <a href="http://www.rssfwd.com/">simply sends an email for each update</a>. Each serve its own target audience. Do make sure you are the correct audience.<br /></p></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2007/01/its-2007-and-my.html">
+			
+				Its 2007 and my phone is still charging stupidly!</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-01-10T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p>Fact: There have been <a href="http://www.kk.org/cooltools/archives/000223.php">USB chargers</a> for phones for sometime now. And fact: most phones come bundled with cables to connect to the computer too. (You&#8217;ll have to <em>separately</em> install some terribly unfriendly, proprietary software to manage your phone or sync with something draconian like Outlook. But that&#8217;s kinda expected from handset makers.)<br /> </p><p>Also fact: Most users don&#8217;t connect their phones to a computer (Yes, you do. But I said most). Most important fact: But everyone charges their phone. My mom does. So it must be everyone. Why isn&#8217;t there <em>any</em> effort to piggyback data connection onto this compulsary user activity, aka ritual? To segway more users to connect their phones and computers&#8230; like PDAs?<br /></p><p>For years (years!), PDAs comes with something known as a <a href="http://en.wikipedia.org/wiki/Cradle">cradle</a>. PDAs sit in it to charge its battery - and with a usability sleight-of-hand, it&#8217;s also connected to a computer. So what you say? An <em>uncountable</em> number of PDA applications are out there (freeware, shareware, commercial software) totally relying on their users putting those handhelds into the cradle - the consistent, daily ritual! I remember, in my Palm wielding days, AvantGo is a really defacto application to install (offline news reading), and Showtimes! keeps my weekly movie schedules handy wherever I go&#8230; so many internet-related applications&#8230; and the handhelds themselves weren&#8217;t even network capable then! How crazy is that!!? </p><p>(Btw, I could have any PDA sit in its cradle for hours - charging is &quot;managed&quot;. No big deal. What&#8217;s with the <em>don&#8217;t over charge your phone</em> thing? Mobiles are lame? Or just urban legend?)<br /></p><p>Just gimmie 1 USB cable. </p><p>This USB cable (&quot;sync cable&quot;) connects to my PC on one end, and my phone on the other. This is the phone&#8217;s &quot;cradle&quot;. It charges the phone with USB power while and revealing the phone as a thumbdrive to the computer. Using the most fundamental, cross-platform, desktop interface: files and folders. SMS, contacts, MMS, images, videos? Everything. Only files and folders. (Note: Any required software is installed through the USB&#8217;s drive, no separate install CD please!)<br /></p><p>In the phone, let&#8217;s have a launcher application called &quot;Mothership&quot;. Now, &quot;Mothership&quot; will launch other (registered) applications whenever the phone is in such &quot;cradle&quot; (similar to &quot;<em>start this application when Windows start</em>&quot; in the Windows world). So we now have a &quot;cradle&quot; equivalent for a phone: When the phone is charging, some applications are launched to perform syncs and what not.<br /> </p><p>Wait, I&#8217;ve merely taped a USB charger cable (nothing new) and data sync cable (nothing new) together, provided a files &amp; folders interface on the PC (not new for some phones) and added a launcher event on the phone (Symbian developers can already detect &quot;charging&quot; event). What&#8217;s the big deal? </p><p>When &quot;Mothership&quot; launches an application, it automatically maps all network calls (3G, GPRS, whatever) of that application to use the computer&#8217;s internet connection! - i.e. effectively free internet connectivity. (<em>I&#8217;ve polled several Symbian programmers on technical possibility and the response is positive</em> ;-). So, with &quot;Mothership&quot;, the message to mobile developers is this: <em>No rewrite - if your program is launched by &quot;Mothership&quot;</em><em>, access to the Internet is automatically routed to use the PC&#8217;s connection</em>.<br /></p><p>Suddenly, a mobile podcast application looks more appealing - hey, just like an iPod synching. Sharing photos and videos becomes more seamless and free. A &quot;free&quot; network has been sorely missed in the mobile developers&#8217; world. This cradle thing should open up so many possibilities&#8230;<br /></p><p>Lots of usage edge cases? Maybe. But none that hasn&#8217;t been tackled by handhelds already, I suspect. And oh ya, &quot;sync cables&quot; should be sold cheaply, not for reaping huge profits. HOWTO build those cables, or tie up existing cables together, should be publicly available for DIY. <br /></p><p>Perhaps the impact of such connectivity can finally be brought home to the mobile world by somebody in the <a href="http://www.apple.com/">PDA / PC</a> world?<br /></p><p>Whoever it&#8217;ll be, please please make it happen soon&nbsp;</p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/weblog/2007/01/role-playing.html">
+			
+				Role Playing</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-01-08T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content">
+		<p> <p>I&#8217;ve not played the current breed of <a href="http://en.wikipedia.org/wiki/MMORPG">MMORPGs</a> myself and can only extrapolate their fun based on experience from my past life being a <a href="http://en.wikipedia.org/wiki/MUD">MUD</a> addict. (And <a href="http://secondlife.com/">Second Life</a> is just a <a href="http://en.wikipedia.org/wiki/MOO">MOO</a> right?)</p> <blockquote>Aside: Oooh, Second Life <a href="http://www.boingboing.net/2007/01/08/second_life_frees_so.html">has just been released</a> as GPL, aka free for everyone! Check out this quote, &quot;<em><em>it&#8217;s not very meaningful to amass in-game wealth if your ability to use it is contingent on your ongoing good relations with a single company</em>&quot;. Neato, they really grok <a href="http://headrush.typepad.com/creating_passionate_users/2006/12/become_the_thin.html">this</a></em>.&nbsp;</blockquote> <p>RPG is fun. MMORPG is even more fun: the world is <a href="http://en.wikipedia.org/wiki/Persistent_world">persistent</a> and the players are real people. These make your game achievements matter more than if otherwise. The game is growth: Leveling up your character, collecting those rare items and obtaining more powerful spells. In MMORPGs, such growth can only be achieved by killing monsters, exploring the lands, hunting or other equivalent &quot;farming&quot; activities. Do enough and you&#8217;ll reach the next level, learn new stuff&#8230; and then repeat&#8230; </p> <p>At times, these level-up activities can be a real chore - especially when that next level requires just so much more from you (7-digit experience points to level? Fwah!)&#8230; then a passing thought: killing these game monsters doesn&#8217;t DO anything. I know its a game, but what a waste isn&#8217;t it? Thousands of precious hours spent doing&#8230; nothing. </p> <p>What if level-up activities can have some <a href="http://www.mturk.com/mturk/welcome">impact in real world</a>, or your real online life? Can there be persistent worlds that better embrace real online activities? <br /></p> <p>For example, <a href="http://www.workingwithrails.com/">working with rails</a> community site links your online, rails-related activities with your profile. A site is not enough, and there&#8217;s still a gap between that and levelling up in a game. It would be ideal to be able to encompass a bigger range of &quot;classes&quot; of people: Level 45 music enthusiast, level 3 technical blogger? Pick one of our (many existing) online personas to &quot;play&quot; in? </p></p>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <nav id="pagenavi">
+        
+            <a href="/weblog/page/6/" class="prev">Previous</a>
+        
+        
+            <a href="/weblog/page/8/" class="next">Next</a>
+        
+    </nav>
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

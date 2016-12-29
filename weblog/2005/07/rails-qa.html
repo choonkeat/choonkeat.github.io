@@ -1,0 +1,174 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>Rails Q&amp;A  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="Below is an email Q&amp;A I had recently: 
+I know u are a proponent of Ruby on Rails. What is the main thing about the Rail f/w that is so producti..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">Rails Q&amp;A</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2005-07-15T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>Below is an email Q&amp;A I had recently: <blockquote><br />
+<p><strong>I know u are a proponent of Ruby on Rails. What is the main thing about the Rail f/w that is so productive?</strong><br/>
+</p><br />
+</blockquote>First thing, before the wrong foot etc.. <a href="http://blog.yanime.org/articles/2005/06/14/wrong-fight">this entry</a> will clarify what i think Rails positioning is. So, the keywords i guess is: quick &amp; agile.<br/>
+<blockquote><br />
+<p><strong>a) Ruby the scripting language?</strong><br/>
+</p><br />
+</blockquote>maybe its a the joy of learning a new language&#8230; but ruby is quite fun to code in, albeit the lack of code-completion editors (<a href="http://sourceforge.net/projects/rubyeclipse">maybe not for long</a>). but perhaps its b&#8217;cos i&#8217;d programmed without code-completion for the larger part so can still settle with that lack.<br/>
+<br/>
+update: I&#8217;d forgotten to mention that I missed the power and ease of arrays in a scripting language (compared to Java or C), and also the code block syntax in Ruby is insanely cool even <a href="http://lesscode.org/2005/07/12/ruby-colored-blocks-in-python/">when compared to</a> a beautiful language like Python.<br/>
+<blockquote><br />
+<p><strong>b) The framework (What part of it)</strong><br/>
+</p><br />
+</blockquote>I like that it comes with a pretty good ORM. Also, I only need to know very few conventions to get started. Yes these can be generalized into &quot;small learning curve&quot;.<br/>
+<blockquote><br />
+<p><strong>Why no Java/.Net/C++/VB etc has copied it point for point then ?</strong><br/>
+</p><br />
+</blockquote>Regarding clones, there is: <a href="http://www.loudthinking.com/arc/000276.html">.Net</a>, <a href="http://www.theserverside.com/news/thread.tss?thread_id=29716">Java</a>, <a href="http://subway.python-hosting.com/">Python</a>, even <a href="http://ripcord.co.nz/biscuit/forum/?controller=forum&amp;action=index">PHP</a>. But who&#8217;s interested? - and that&#8217;s actually quite important question: Can framework-X garner the same level of PR/momentum/growth? Clones are just pet projects out to prove X-can-also-do-Y. The original is currently used for bread-and-butter projects by DHH and <a href="http://www.37signals.com/svn/archives2/scoble_wonders_if_37signals_is_influencing_microsoft.php">co</a>. So they&#8217;re very actively on it, using it, etc. The original was <a href="http://www.loudthinking.com/arc/000416.html">extracted from a project, not written to a designed spec</a>. Why not somebody invest to use those clones as bread-and-butter? Well, wouldn&#8217;t that somebody rather use Rails instead? unless, of cos, they&#8217;ve an axe to grind against Rails.<br/>
+<blockquote><br />
+<p><strong>c) The domain chosen?</strong><br/>
+</p><br />
+</blockquote>hmm, don&#8217;t really understand. its for building general web apps.<br/>
+<blockquote><br />
+<p><strong>d) The philosophy ?</strong><br/>
+</p><br />
+</blockquote>Probably. convention over configuration is probably the first breath of fresh air. i&#8217;d originally cited this as a &quot;no xml config file nightmare&quot; thing, but actually it runs deeper, especially parameters passed to-and-fro forms/post, database column naming, before_* after_* hooks (benefits from very primitive AOP), where the files are placed (easy to learn another app) etc.<br/>
+<br/>
+When doing Rails, I feel as if somebody has felt the same pain as I and here are his consolidated solution for each and every problem, and I gratefully receive a solution for our lessons learnt.<br/>
+<br/>
+Very little things - <span style="font-style: italic;">may be detrimental to cite this example and make it seem like child&#8217;s play</span>.. but I found myself smiling when I learnt this - like e.g. having an &#8216;employee_counter&#8217; column in the &quot;companies&quot; table.. just having it and Rails will do the rest: e.g. +1 whenever a new &quot;employees&quot; record is inserted. very little things. update: also, a verbose error 500 page with stacktrace, session data, http parameters by default - but when in production mode, outside world sees &#8216;friendly error page&#8217;.. but localhost still gives you the verbose errors to help debugging, how thoughtful!<br/>
+<br/>
+And for the record, this is the blog entry that I stumbled upon Rails: <a href="http://www.oreillynet.com/pub/wlg/5424?page=last&amp;x-maxdepth=0">Award for beautiful coding: David Heinemeier Hansson</a><br/>
+<br/>
+update: I&#8217;d also forgotten to mention that I&#8217;d always preferred saving <i>development time</i> than saving <i>runtime</i>.</p>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=Rails Q&amp;A by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2005/07/rails-qa.html" title="Share Rails Q&amp;A on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2005/07/rails-qa.html" title="Share Rails Q&amp;A on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2005/07/rails-qa.html" title="Share Rails Q&amp;A on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

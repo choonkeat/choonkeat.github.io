@@ -1,0 +1,164 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>The &quot;No Special Case&quot; Pattern  | The Devel!</title>
+
+	<meta name="author" content="choonkeat">
+
+<meta name="description" content="Very often I&#8217;ll write (or use) APIs that look like this (translate accordingly for Ruby / Javascript code)Thing findOneThing(Key&nbsp; key);/..."> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="http://feeds.feedburner.com/choonkeat" rel="alternate" title="The Devel!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href="/stylesheets/application.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/javascripts/application.js"></script>
+
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Devel!</a></h1>
+<span class="tagline">choonkeat on programming & software</span>
+<nav id="main-nav"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/weblog/chew-choon-keat.html">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">The &quot;No Special Case&quot; Pattern</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-11-23T00:00:00+08:00" pubdate data-updated="true"></time></div>
+	</header>
+	<div class="entry-content"><p>Very often I&#8217;ll write (or use) APIs that look like this (translate accordingly for Ruby / Javascript code)</p><blockquote><pre><pre><strong><span class="storage storage_type storage_type_java">Thing</span></strong> findOneThing(<strong>Key<span class="storage storage_type storage_type_java">&nbsp;</span></strong> key);<span style="color: #999999;"><br /><span class="comment comment_line comment_line_double-slash comment_line_double-slash_java">// if nothing is found, throw an Exception or return null</span></span><br /><br /><strong><span class="support support_type support_type_built-ins support_type_built-ins_java">Collection</span></strong> findManyThings(<strong><span class="support support_type support_type_built-ins support_type_built-ins_java">Collection</span></strong> keyList);<br /><span style="color: #999999;"><span class="comment comment_line comment_line_double-slash comment_line_double-slash_java">// if nothing is found, return null</span></span>
+</pre></pre></blockquote><p>All well and good? I&#8217;d known the textbook-bullet-points for this, but for the longest time, I didn&#8217;t realize how much tax I&#8217;m paying subconsciously.. and just how many APIs are ignoring this wisdom:</p>
+
+
+
+
+
+<div id='shcp_37fafa3939147b8e0f4926089cac28b7'><blockquote style='margin-left: 0; padding-left: 1em; border-left: 1em #eee solid; '> <span class="content comments_count_3 withoutphoto" ><span class="text" > <blockquote class="comment_body comment_body1" >Nulls are awkward things in object-oriented programs because they defeat polymorphism.<a href="http://r9.sharedcopy.com/1nvbt#shcp1" > <sup>link &raquo;</sup></a ></blockquote> <blockquote class="comment_body comment_body2" >Instead of returning null, or some odd value, return a Special Case that has the same interface as what the caller expects.<a href="http://r9.sharedcopy.com/1nvbt#shcp2" > <sup>link &raquo;</sup></a ></blockquote> <p class="comment_body comment_body3" >Not all language can do this easily<a href="http://r9.sharedcopy.com/1nvbt#shcp3" > <sup>link &raquo;</sup></a ></p> </span ></span> - from <a href="http://r9.sharedcopy.com/1nvbt">P of EAA: Special Case</a> via <a href="http://sharedcopy.com">sharedcopy.com</a></blockquote></div><style>#shcp_37fafa3939147b8e0f4926089cac28b7 blockquote blockquote { margin-left: 1.5em;  font-style: italic; }; #shcp_37fafa3939147b8e0f4926089cac28b7 .html_gist { display: none; }</style><script>  var json_37fafa3939147b8e0f4926089cac28b7 = {   host: 'sharedcopy.com',   width: '480px',   height: '250px',   bgcolor: '#fff',   background: '#fff url(http://martinfowler.com.sharedcopy.com/images/loading.gif) no-repeat center center; ',   src: 'http://martinfowler.com.sharedcopy.com/embeds/copy/choonkeat/37fafa3939147b8e0f4926089cac28b7/480.250/e3f0f6.fff.cc0500/shcp1.html' };</script><script src='http://sharedcopy.com/static/embed/script.js'></script>
+
+
+
+
+<p>Finding yourself having to check for null return values? That&#8217;s not &quot;the way it is&quot;, that&#8217;s tax. </p>
+
+<p>Ruby helps <em>a bit</em> by making &quot;nil&quot; an object, paving way for the much loved duck-typing. Whereas some languages settle for dead bodies equivalent nulls. Especially in these languages, having to &quot;<em>return a empty object with the same interface</em>&quot; is a real chore. Person? EmptyPerson. Record? EmptyRecord.. ad infinitum</p>
+
+<p>Still, a language can really only help so much. And it is up to the library authors (i.e. you) to put this wisdom into practice. &quot;Practice?&quot;. Now comes the funny part.</p>
+
+<p>When talking about &quot;design patterns&quot;, usually images of &quot;Enterprise&quot;, &quot;UML&quot;, &quot;Configuration files&quot; start appearing in my mind. So I find it ironic that the best real example of this pattern comes from the lowly-regarded (by many &quot;real&quot; engineers) realm of Javascript. Its called <a href="http://jquery.com/blog/2006/08/20/why-jquerys-philosophy-is-better/">jQuery</a>.</p>
+
+<p>In fact, jQuery takes it even further&nbsp; by simplifying Martin Fowler&#8217;s pattern into a single practical use-case: Returning 1 object is equivalent to returning a List containing 1 object. By <strong>always</strong> returning a List (which can be empty, duh), it has even avoided the need to conjure special &quot;null object with equivalent interface&quot;! And most importantly, &quot;practical&quot; because all languages can do empty list.</p>
+
+<p>Its amazing how simple your train of thought (and code!) becomes when everything is a list (<em>tiny voice: uh.. Lispers knew that since before you were born&#8230; blah blah</em>). There&#8217;s nothing to decide, you always loop through the return value. 0 time? 1 time? N times? Imagine all those other idioms &amp; body of code, now becoming unnecessary&#8230; its applying liposuction for your source code! <br /><br />I don&#8217;t suppose its too far fetched to apply some jQuery-ism to ActiveRecord API is it?</p>
+
+<p>Update: Changed title from &quot;Unspecial Case&quot; to the &quot;No Special Case&quot;, which is more correct.</p>
+
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=The &quot;No Special Case&quot; Pattern by @choonkeat&url=http://choonkeat.github.com/choonkeat/weblog/2007/11/the-unspecial-c.html" title="Share The &quot;No Special Case&quot; Pattern on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://choonkeat.github.com/choonkeat/weblog/2007/11/the-unspecial-c.html" title="Share The &quot;No Special Case&quot; Pattern on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://choonkeat.github.com/choonkeat/weblog/2007/11/the-unspecial-c.html" title="Share The &quot;No Special Case&quot; Pattern on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2016
+
+    choonkeat
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<!-- <script src="/javascripts/hyphenator.js"></script> -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'choonkeat';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1438738-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+</body>
+</html>

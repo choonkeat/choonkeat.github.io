@@ -1,0 +1,16 @@
+.pulled-quote {
+  float: right;
+  width: 13em;
+  padding: 0 0.5em 0.5em 0.5em;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-align: right;
+}
+
+h3 {
+  text-transform: uppercase;
+}
+
+article .entry-content {
+  text-align: initial;
+}
