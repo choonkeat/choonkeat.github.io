@@ -1,0 +1,34 @@
+---
+layout: post
+title: Loremipsumizer
+published: true
+categories:
+- javascript
+- software
+- Web/Tech
+---
+<p>I had the need to show some folks example screens of webapps I'm working on recently. Using those screenshots, the other party could have a better feel of things, we could have a clearer discussion. But the irritation [for me] is always the setup</p>
+
+<p><ol>
+<li>The app I'm working on is still in flux, i.e. design &amp; data attributes will likely change, often</li>
+<li>The content I have is often imported from real data sources, and hence is somewhat private &amp; sensitive</li>
+<li>I'm too lazy to think up fake names, fake scenarios, fake photos to fill my database, just so I could have a fragile, demo screenshot (I'd need to redo / update later)</li>
+</ol>
+<p>What I'd <em>really</em> like is</p>
+
+<p><ol>
+<li>To be able to use my current webapp, as-is</li>
+<li>To be able to use my current data, as-is</li>
+<li>To protect private &amp; sensitive data</li>
+</ol>
+<p>Smells like a bookmarklet? So here it is&nbsp;<a href="http://gist.github.com/585708">Loremipsumizer.js</a>. After installing it, I can anonymize any webpage instantly (then take a screenshot, annotate or print &amp; discuss with somebody else, without worrying about the sensitivity of content)</p>
+
+<p><a href="javascript:(function(u){ c=document;b=c.body;s=c.createElement('script');s.src=u+'?r='+(new Date()).getTime();b.appendChild(s);})('https://raw.github.com/gist/585708/925d9d98ab459feacf3d17568d2d1499157f4970/loremipsumizer.js');void(0);">Click here</a> to try it on this webpage!</p>
+
+<p>The Loremipsumizer will anonymize all text, scramble all numbers, replace images, flash embeds (&amp; video tags?) with wireframe-ish cross-boxes (via data uri). Unfortunately I didn't have an elegant solution to anonymize background images (css sprinting, image size, etc) so I'll need suggestions there.</p>
+
+<p>In any case, here are a few screenshots of webpages I've anonymized. No prizes for guessing which websites:</p>
+
+<p><object width="400" height="300"> <param name="flashvars" value="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624856834061%2Fshow%2F&page_show_back_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624856834061%2F&set_id=72157624856834061&jump_to="></param> <param name="movie" value="http://www.flickr.com/apps/slideshow/show.swf?v=71649"></param> <param name="allowFullScreen" value="true"></param><embed type="application/x-shockwave-flash" src="http://www.flickr.com/apps/slideshow/show.swf?v=71649" allowFullScreen="true" flashvars="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624856834061%2Fshow%2F&page_show_back_url=%2Fphotos%2Fchoonkeat%2Fsets%2F72157624856834061%2F&set_id=72157624856834061&jump_to=" width="400" height="300"></embed></object></p>
+
+<p>Note: Loremipsumizer does not require any JS library, and have not been tested on irritating browsers. Patches are welcome.</p>

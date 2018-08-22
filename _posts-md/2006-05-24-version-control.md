@@ -1,0 +1,31 @@
+---
+layout: post
+title: 'Version Control: That missing module in CS101'
+published: true
+category:
+- software
+---
+Some of my friends would be groaning "_Not again..._" but please bear with me while I flush my system clear so as to avoid talking about it again.
+
+What's the big deal with a menial thing like version control? You join any software company and they'll brief you on when to file your transport claims, how to apply leave, use their version control systems and access your voice mail. What's so complex? CVS, Subversion, ClearCase, Visual Source Safe, blah blah blah... just grab any, all the same (get it over with and let's settle the _real_ critical stuff, like install WinXP or Win2k?). You check out, you make changes, you commit, it conflicts, you yell at it, you reboot like how you solved that Outlook crash last Friday and you look for MIS, you try clicking all possible buttons and god-knows-what-happened when finally (finally!), you get _your changes_ into the server - hurray!, then someone screamed like their dog died, "{_your name_} - what the {_expletive_} happened to my bug fix!?" and you go, "_Wha??? I didn't do anything! This CVS isn't stable - it clobbered your changes! Let's not edit the same files at the same time again!"_ - and the rest of the day became a CVS101 walk-through cum hands-on session just to show how a CVS commit would not quietly overwrite another person's change on the same file. Branching and merging were words never to be breathed,
+
+Honest to goodness, that really did happen. So much for 5-years experience in developing enterprise Java application. (_Ok, that was a cheap shot!_)
+
+Version control should simply be taught in schools. Both the [concept](http://software.ericsink.com/scm/source_control.html) (good reading!) and practice. If you think its not worth twenty minutes or that you can simply hide your head in the sand and don't ever touch branching and merging - you're not taught enough! I'd even venture to say that version control should be covered with higher priority than SQL - based on the simple fact that all software needs to be in version control (change control, revision control) but not all software will need SQL. e.g. J2ME games, Symbian apps, or an operating system.
+
+Imagine a cooking school churning out chefs who don't wash their hands? What shame! MIS who pulls the plug rather than shutting systems down properly? Yikes! So how can any honorable CS school churn out programmers who'd only know to backup (not even version!) their fabulous online banking website with folders named C:\project\current, C:\project\latest, C:\project\latest2, C:\project\final - Pfft!
+
+---
+
+I've recently come across, yet again, the opposite school of thought regarding branching in version control. It seems to me that ClearCase users coming to CVS (or alike) would generally get some culture shock. You see, they usually do draconian stuff like file locking and micro branches - create a branch, write code, commit, write more code, commit, then merge back to trunk when complete. Everyone works in their own branch and merge back later.
+
+Over at the CVS camp, people usually work directly off the main trunk (aka HEAD) without file locking. Differences are [resolved automagically by the tool and the occasional conflicts are resolved manually](http://software.ericsink.com/scm/scm_file_merge.html). Branches are created only for releases, not your everyday affair.
+
+My friend Harry is still adamant that the ClearCase methodology is more right and doing otherwise is cutting corners. Though I'm not totally convinced, I do see 2 plus points in doing micro branches: You can safely commit anytime (read: broken code) into the repository and scoot off to meet your girlfriend for dinner. When developing on the trunk, committing broken code would've affect other developers. But when not committing, you'd would risk losing unversioned changes in your working folder (Sorry honey, not tonight). However, with modern editors gaining capability to do local versioning, diff and merge (e.g. Eclipse) such risk is getting contained.
+
+The other enterprisy advantage is that by having commits (read: progress) done centrally (unlike an editor's local versioning), its more possible to have a project management systems extract information and build useful overviews and reports on the project's progress - which ClearCase apparently does. The man.
+
+The only question is if its too cumbersome to practice - spending more time with the tool than on the code. And then, there's the [distributed crowd](http://blog.ianbicking.org/distributed-vs-centralized-scm.html).
+
+So perhaps its because schools already made the mistake once before - enough problems trying to cover waterfall, XP, UML methodologies - and curriculum would be simpler with _SELECT modules FROM last\_year_ instead.
+

@@ -1,0 +1,32 @@
+---
+layout: post
+title: The "No Special Case" Pattern
+published: true
+category:
+- software
+---
+<p>Very often I'll write (or use) APIs that look like this (translate accordingly for Ruby / Javascript code)</p><blockquote><pre><pre><strong><span class="storage storage_type storage_type_java">Thing</span></strong> findOneThing(<strong>Key<span class="storage storage_type storage_type_java">&nbsp;</span></strong> key);<span style="color: #999999;"><br /><span class="comment comment_line comment_line_double-slash comment_line_double-slash_java">// if nothing is found, throw an Exception or return null</span></span><br /><br /><strong><span class="support support_type support_type_built-ins support_type_built-ins_java">Collection</span></strong> findManyThings(<strong><span class="support support_type support_type_built-ins support_type_built-ins_java">Collection</span></strong> keyList);<br /><span style="color: #999999;"><span class="comment comment_line comment_line_double-slash comment_line_double-slash_java">// if nothing is found, return null</span></span>
+</pre></pre></blockquote><p>All well and good? I'd known the textbook-bullet-points for this, but for the longest time, I didn't realize how much tax I'm paying subconsciously.. and just how many APIs are ignoring this wisdom:</p>
+
+
+
+
+
+<div id='shcp_37fafa3939147b8e0f4926089cac28b7'><blockquote style='margin-left: 0; padding-left: 1em; border-left: 1em #eee solid; '> <span class="content comments_count_3 withoutphoto" ><span class="text" > <blockquote class="comment_body comment_body1" >Nulls are awkward things in object-oriented programs because they defeat polymorphism.<a href="http://r9.sharedcopy.com/1nvbt#shcp1" > <sup>link &raquo;</sup></a ></blockquote> <blockquote class="comment_body comment_body2" >Instead of returning null, or some odd value, return a Special Case that has the same interface as what the caller expects.<a href="http://r9.sharedcopy.com/1nvbt#shcp2" > <sup>link &raquo;</sup></a ></blockquote> <p class="comment_body comment_body3" >Not all language can do this easily<a href="http://r9.sharedcopy.com/1nvbt#shcp3" > <sup>link &raquo;</sup></a ></p> </span ></span> - from <a href="http://r9.sharedcopy.com/1nvbt">P of EAA: Special Case</a> via <a href="http://sharedcopy.com">sharedcopy.com</a></blockquote></div><style>#shcp_37fafa3939147b8e0f4926089cac28b7 blockquote blockquote { margin-left: 1.5em;  font-style: italic; }; #shcp_37fafa3939147b8e0f4926089cac28b7 .html_gist { display: none; }</style><script>  var json_37fafa3939147b8e0f4926089cac28b7 = {   host: 'sharedcopy.com',   width: '480px',   height: '250px',   bgcolor: '#fff',   background: '#fff url(http://martinfowler.com.sharedcopy.com/images/loading.gif) no-repeat center center; ',   src: 'http://martinfowler.com.sharedcopy.com/embeds/copy/choonkeat/37fafa3939147b8e0f4926089cac28b7/480.250/e3f0f6.fff.cc0500/shcp1.html' };</script><script src='http://sharedcopy.com/static/embed/script.js'></script>
+
+
+
+
+<p>Finding yourself having to check for null return values? That's not &quot;the way it is&quot;, that's tax. </p>
+
+<p>Ruby helps <em>a bit</em> by making &quot;nil&quot; an object, paving way for the much loved duck-typing. Whereas some languages settle for dead bodies equivalent nulls. Especially in these languages, having to &quot;<em>return a empty object with the same interface</em>&quot; is a real chore. Person? EmptyPerson. Record? EmptyRecord.. ad infinitum</p>
+
+<p>Still, a language can really only help so much. And it is up to the library authors (i.e. you) to put this wisdom into practice. &quot;Practice?&quot;. Now comes the funny part.</p>
+
+<p>When talking about &quot;design patterns&quot;, usually images of &quot;Enterprise&quot;, &quot;UML&quot;, &quot;Configuration files&quot; start appearing in my mind. So I find it ironic that the best real example of this pattern comes from the lowly-regarded (by many &quot;real&quot; engineers) realm of Javascript. Its called <a href="http://jquery.com/blog/2006/08/20/why-jquerys-philosophy-is-better/">jQuery</a>.</p>
+
+<p>In fact, jQuery takes it even further&nbsp; by simplifying Martin Fowler's pattern into a single practical use-case: Returning 1 object is equivalent to returning a List containing 1 object. By <strong>always</strong> returning a List (which can be empty, duh), it has even avoided the need to conjure special &quot;null object with equivalent interface&quot;! And most importantly, &quot;practical&quot; because all languages can do empty list.</p>
+
+<p>Its amazing how simple your train of thought (and code!) becomes when everything is a list (<em>tiny voice: uh.. Lispers knew that since before you were born... blah blah</em>). There's nothing to decide, you always loop through the return value. 0 time? 1 time? N times? Imagine all those other idioms &amp; body of code, now becoming unnecessary... its applying liposuction for your source code! <br /><br />I don't suppose its too far fetched to apply some jQuery-ism to ActiveRecord API is it?</p>
+
+<p>Update: Changed title from &quot;Unspecial Case&quot; to the &quot;No Special Case&quot;, which is more correct.</p>

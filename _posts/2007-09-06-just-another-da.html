@@ -1,0 +1,14 @@
+---
+layout: post
+title: Just another day in paradise
+published: true
+category:
+- rails
+---
+<p>Sometimes it takes talking to somebody new to Rails to recall the little blessings that I've come to take for granted (which I use to be doing by myself over and over and over again...) For example, these HTML inputs</p><blockquote><pre>&lt;input name=&quot;person[0][name]&quot; /&gt;<br />&lt;input name=&quot;person[0][email]&quot; /&gt;<br />&lt;input name=&quot;person[1][name]&quot; /&gt;<br />&lt;input name=&quot;person[1][email]&quot; /&gt;<br />&lt;input name=&quot;person[2][name]&quot; /&gt;<br />&lt;input name=&quot;person[2][email]&quot; /&gt;</pre></blockquote>
+
+<p>when submitted, simply gives me regular, hierarchical hashes (not custom classes like PersonFormArray)</p><blockquote><pre>params[&quot;person&quot;][&quot;0&quot;] # { &quot;name&quot; =&gt; ..., &quot;email&quot; =&gt; ... }<br />params[&quot;person&quot;][&quot;1&quot;] # { &quot;name&quot; =&gt; ..., &quot;email&quot; =&gt; ... }<br />params[&quot;person&quot;][&quot;2&quot;] # { &quot;name&quot; =&gt; ..., &quot;email&quot; =&gt; ... }</pre></blockquote>
+
+<p>Some might disagree and say its simpler in <em>some</em> JEE framework where inputs and objects are paired for you automatically. What usually goes on, is that the binding is opaque and couples the implementation on two sides (view/controller or view/model). Stifling.</p>
+
+<p>In Rails (ActionPack), the &quot;binding&quot; is only a transparent naming convention. Hence, there is no coupling and more flexibility. </p><blockquote><pre>&lt;input name=&quot;person[2][silly_requirement]&quot; /&gt;</pre></blockquote><p>Will make the hash, without fuss, become</p><blockquote><pre>params[&quot;person&quot;][&quot;2&quot;] <br /># {&quot;name&quot; =&gt; ..., &quot;email&quot; =&gt; ..., &quot;silly_requirement&quot; =&gt; ...}</pre></blockquote>

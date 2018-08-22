@@ -1,0 +1,22 @@
+---
+layout: post
+title: 'Yanime: Now, Its Purely Code'
+published: true
+---
+<p>Got this link on Friday, forgot from which of my rss feeds: <a href="http://www.actionscript.com/index.php/fw/1/towards-open-source-flash-development/">Towards Open Source Flash Development</a><br/>
+<br/>
+The article brings together several technologies, that basically gives you: Flash (SWF) development without using Macromedia Flash! For the mavens, this may be old news, but since I'd last touched Yanime... its new to me and better late than never!<br/>
+<br/>
+Briefly, the article's method uses <a href="http://www.mtasc.org/">MTASC</a> (a fast, open source action script compiler that produces SWF files. KEWL!) as the main compiler, and Eclipse IDE (armed with 2 plugins: ASDT and <a href="http://www.potapenko.com/flashout/">Flashout</a>) I could also develop in pure text and produce SWF apps - without ever launching Flash MX2004 :-D<br/>
+<br/>
+And I did. The just re-written Yanime engine consists of only 1 x ActionScript file. To use a embedded yanime engine, create your own Flash file, and put the following action script:<br/>
+<br/>
+<blockquote> loadMovie(&quot;yanime.swf&quot;);<br/>
+var yanime = new Engine(_root);</blockquote><br/>
+<br/>
+And pump XML messages to yanime to render avatars or map:<br/>
+<blockquote><br />
+yanime.sendXML(xml_map);<br/>
+yanime.sendXML(xml_avatar);</blockquote><br/>
+<br/>
+I'll port over those missing features (e.g. speech bubble, networking with XMLSocket) real-soon-now! Source codes and project details... For now, please download here (Update: get from <a href="http://sourceforge.net/projects/yanime/">SourceForge</a> instead). <a href="http://www.rssfwd.com/rssfwd/preview?url=http%3A//blog.yanime.org/xml/rss/yanime/feed.xml">Subscribe for subsequent updates</a>!<br/></p>

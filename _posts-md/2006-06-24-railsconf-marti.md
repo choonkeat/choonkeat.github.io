@@ -1,0 +1,24 @@
+---
+layout: post
+title: 'RailsConf: Martin Fowler Keynote'
+published: true
+---
+There is so many design architecture. They're all different and incompatible. None of them solves all things, the point is to pick and choose the right design for your local problem.
+
+Rails (most prominently ActiveRecord) took that to heart, and pushed the Active Record Pattern further than the author had thought applicable in real life: Yea, when applications must yield to the DBA's database design ActiveRecord would break - but if the applications side has control over the database (the local problem that was picked) ActiveRecord's simplicity and directness would produce productivity gain that is simply enormous! So what if it doesn't solve all problems? It solved its problem exceedingly well.
+
+Quick and dirty:
+
+
+
+quick != dirty  
+  
+xp -- conversational programming.. (between programmer and business)  
+gist of xp is to turn into a more conversational process  
+  
+aim, fire? or fire, aim fire aim.. how cheap bulletrs are  
+  
+faster development cycle  
+  
+modern-ism : lisp, smalltalk.. uniform beauty. post-modernism: ruby.. hodge podge of solutions.. unix
+

@@ -1,0 +1,27 @@
+---
+layout: post
+title: Learning Web Development
+published: true
+category:
+- software
+---
+<p>Much in the spirit of &quot;Skinny Controllers and Fat Models&quot;, I'm coming round to the fact that Single-Table Inheritance for is <del>the evil</del> best avoided.</p>
+
+
+
+<p>All that code-reuse might look sexy and get all the OOP noddings. But in the longer run, the risk is that my code (esp. domain/business logic) end up as <a href="http://www.laputan.org/mud/">big balls of mud</a>. But this &quot;risk&quot; is taken in the bid to stave off something more imminent - code repetition. SQL everywhere? No, wrap in a function! No, wrap in a Class! No, inherit from that BaseClass! Fewest blocks to build the tallest cathedrals - architectural elegance.</p>
+
+
+
+<p>But buildings don't evolve. When requirements evolve, aka &quot;reveal their true selves&quot;, the models start to diverge bit by bit and my OOP-instinct intuitively hold them together. Then one day, often when its too late or a new team member joins, I realise the models are really not of the same family
+anymore. To my chagrin, the glue holding the inheritance were more about preventing them from stepping over each other. And the result is worse than the repetition I'd avoided.</p>
+
+<p>Another related issue is RESTful controllers - &quot;Oh, so 2006&quot; you say. Sorry I'd only drank half the CRUD kool-aid. Now I'm feeling the pain on those parts where I'd chosen to go the other way when there's a Model involved. Its the kind of pain you know only when you're straddling between 2 worlds. Bottom line: not worth over-thinking about controllers. I'm also certain those content-type negotiation can be abstracted out of sight. What's the fun in repeating this:</p>
+
+<blockquote><pre>responds_to do |format|<br />&nbsp; format.js { render :json =&gt; @object.to_json }<br />&nbsp; format.xml { render :xml =&gt; @object.to_xml }<br />&nbsp; format.html {&nbsp; }<br />end</pre></blockquote><p>And if I jump both feet into doing &quot;Presentation Layer&quot; in CSS/Javascript only, a lot of &quot;view&quot; can actually go away - leaving only layouts.<br /> </p>
+
+<p>So yes, bliss will be the day I only define schemas, write Models, sprinkle CSS and my app is done. Like my <a href="http://khigia.wordpress.com/">colleague</a> (and <a href="http://en.wikipedia.org/wiki/Prolog">Prolog</a> admirer) always say, &quot;<em>we only need defined data; everything else is easy</em>&quot;.&nbsp; </p>
+
+
+
+<p>PS: I used to roll my eyes at that, saying it is too academic. In the real world, we often don't have the luxury of data being fully &amp; correctly defined for us. Requirements change, stay agile, live with it! But I should've looked at it in another way: &quot;<em>we only need <del>defined [</del>to be defining] data; everything else <del>is easy </del>[can always write themselves]</em>&quot;</p>

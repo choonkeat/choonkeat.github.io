@@ -1,0 +1,45 @@
+---
+layout: post
+title: What's the Big Deal that Rake is expressed in Ruby, not XML?
+published: true
+---
+<p>This post will probably only make sense to my friend whom I'm responding to his queries &quot;<i>I need to see some examples to appreciate the impact</i>&quot;. <br/>
+<br/>
+When I read Martin Fowler's <a href="http://www.martinfowler.com/articles/rake.html">Rake intro</a>, I got a moment of <span style="font-style: italic;">Ohhhhhhh...</span>&nbsp; that I'd have never known , sitting in <a href="http://www.jroller.com/page/dgeary/20050714">Java-cafe</a>. Which also explained why Guido used the words <span style="font-style: italic;">your data</span> when he talks about Python. Different mindset. Different approach.<br/>
+<br/>
+I'm going through JSF and there's this XML definition.. Don't fight me, I'm not talking specifically about JSF, nor the <span style="font-family: courier new;">inputText </span>tag in particular, just using this specific tag as an example: <br/>
+<blockquote>&lt;h:inputText value=&quot;#{personBean.personName}&quot; required=&quot;true&quot; /&gt;</blockquote><br/>
+<br/>
+Focus on <span style="font-family: courier new;">required</span> attribute and value <span style="font-family: courier new;">true</span>. Yes, the designers of tag <span style="font-family: courier new;">h:inputText</span> has wisely forseen (can anyone forsee everything?) the need for validation and added a <span style="font-family: courier new;">required</span> attribute as a hook. However, since this is just a format (templating language), not the real programming language itself.. you can only say <span style="font-family: courier new;">true</span> or <span style="font-family: courier new;">false</span>.. in text. The tag would only understand the text <span style="font-family: courier new;">true</span> or <span style="font-family: courier new;">false</span>.<br/>
+<br/>
+This is the problem with yet-another-language layered on top of your development language - its never quite full blown. What do I mean? If this definition is in a real language, instead of a XML format.. it would've been possible to, and without any participation from wise designers:<br/>
+<blockquote>&lt;%= inputText( {&quot;value&quot; =&gt; personBean.personName, &quot;required&quot; =&gt; personBean.getRegisteredYear() &lt; 2000} ) %&gt;</blockquote><br/>
+<br/>
+Ignore the actual syntax, its my version of script-ish Java.., the main different here is I'm passing in a real boolean value. In fact, I'm passing in an <span style="font-weight: bold;">expression</span>. <br/>
+<br/>
+For expressions to happen in XML-based definitions need to,<br/>
+<blockquote>&lt;h:inputText value=&quot;#{personBean.personName}&quot; required=&quot;&lt;%= (booleanValue ? &quot;true&quot; : &quot;false&quot;) %&gt;&quot; /&gt;</blockquote><br/>
+or,<br/>
+<blockquote>String tf = (personBean.getRegisteredYear() &lt; 2000) ? &quot;true&quot; : &quot;false&quot;;<br/>
+...<br/>
+&lt;h:inputText value=&quot;#{personBean.personName}&quot; required=&quot;&lt;%= tf %&gt;&quot; /&gt;</blockquote><br/>
+etc etc.. <br/>
+<br/>
+For any workaround I can cook up... it must've been catered for by designers of the <span style="font-family: courier new;">h:inputText</span> or the XML format. Can I even do '<span style="font-family: courier new;">&lt;%= .. %&gt;</span>' within attribute values? The answer to the question is not important, the real problem is having to ask it in the first place! Does your templaing language / XML format allow me to do so? If its &quot;yes&quot;, you've just been blessed by the almighty designers whom've intently <span style="font-style: italic;">allowed you</span> to. And whatever flexibility they can <span style="font-style: italic;">allow</span>, will always be lesser subset of a full language. In using the invented-for-this-purpose XML-format (e.g. taglibs), you're limited to do whatever they can think of, not whatever you can or need.<br/>
+<br/>
+Being able to express in a real language is awfully empowering. In this aspect, Rake's approach (think Python-ist subscribes to this notion too) of defining data structures in actual code wins Ant in this aspect, as Ant will always be held back by the XML format that it needs to interpret. Empowerment and flexibility.<br/>
+<br/>
+Another thing, <span style="font-family: courier new;">h:inputText</span> tag may contain some wickedly cool algorithm inside and after all its fancy processing, it prints a <span style="font-family: courier new;">&lt;input type=&quot;text&quot;.. /&gt;</span> HTML string. That's it. Can I use that output for other purpsoe? Before it sees the light of day? Can I make it say.. add an <span style="font-family: courier new;">onClick</span> attribute to it? Again, the answer itself is non-important. The issue is, the designer of <span style="font-family: courier new;">h:inputText</span> must have thought of, and implemented for you some crutch you can use. e.g. creating an <span style="font-family: courier new;">extra</span> attribute where u can say <br/>
+<blockquote>&lt;h:inputText value=&quot;#{personBean.personName}&quot; required=&quot;true&quot; extra=&quot;onClick=\&quot;alert('hello');\&quot; &quot;/&gt;</blockquote><br/>
+<br/>
+But giving the <span style="font-family: courier new;">extra</span> attribute crutch only solves one scenario and definitely pales in comparison to being able to give me back the full string with which I can solve an infinitely more possible twisted scenarios. I can take the generated <span style="font-family: courier new;">&lt;input .../&gt;</span> string, print it to browser, log it (debugging?), add onClick attribute to it, change all to upper case (for draconian clients), output an encrypted string instead, or eat it and spit it back out. Anything! Power in my hands.<br/>
+<br/>
+Yes, designers of <span style="font-family: courier new;">h:inputText</span> can also give me crutches like <span style="font-family: courier new;">print=&quot;true&quot;, log=&quot;stdout&quot;, upperCase=&quot;true&quot;, encryption=&quot;blowFish&quot;</span>.. but if you seriously take that as equivalent, you're totally missing the point. <br/>
+<br/>
+Being able to express in a real language is awfully empowering. So. Helper methods rule, templating libs suck because they're inherently single purpose, single environment.<br/>
+<br/>
+Update: <a href="http://www.vanderburg.org/Blog/Software/Development/build_languages.rdoc">Similar thoughts on Ant and its XML</a>.<br/>
+<br/>
+Update: Found <a href="http://x180.net/Journal/2004/03/31.html">this old post from creator of Ant</a>.<br/>
+<br/>
+Update: Another good example of real-language describing template is <a href="http://builder.rubyforge.org/ ">Builder</a>. See <a href="http://www.clarkware.com/cgi/blosxom/2005/07/12">example</a><br /><br /></p>

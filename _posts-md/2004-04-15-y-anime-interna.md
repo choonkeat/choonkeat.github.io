@@ -1,0 +1,13 @@
+---
+layout: post
+title: Y-Anime internal version 1.10
+published: true
+---
+Disregarding the version number.. its actually more of a alpha product.. Still, I must say.. this iso-metric flash engine is starting to look more promising now.. [shall provide demo link soon]   
+  
+Though it doesn't look very different from the first release.. its definitely brushed up internally.. frameworks has also been done for the object's to be event-based.. e.g. "on\_WalkedOn" event is played by the above sample's walkable tiles.. whenever it is walked on.. it will drop.. and climb back up when nobody is on top..   
+  
+Until I'd created a SourceForge thingy for this.. pls email me for source codes (FLA).. don't worry, i'm not some email/info harvesting business shrewd... this thing is FREE (read: GPL)... I'm just too lazy to setup something convenient for anyone to download..   
+  
+Cheers! And feedback is always welcome.
+

@@ -1,0 +1,9 @@
+---
+layout: post
+title: Japanese phone (on the move) can download faster than your big fat broadband
+published: true
+category:
+- life
+---
+Stuff [this article](http://james.seng.cc/archives/2005/01/03/docomo_achieves_1gbps_in_4g_trials.html) into your ISP's face the next time they brag about their bandwidth.
+

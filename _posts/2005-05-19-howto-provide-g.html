@@ -1,0 +1,34 @@
+---
+layout: post
+title: HOWTO provide GUI feedback when a Job is completed
+published: true
+---
+<p>The Job framework is almost &quot;The Framework&quot; to use when executing any lengthy procedures inside Eclipse environment. <br />
+I've yet to encounter a scenario where <span style="font-family: courier new,courier,monospace;">IRunnableContext.run</span> <br />
+(my original solace) can't be replaced by a Job well done (ya, corny).<br /><br />So, back to the main question: How do you <br />
+respond &quot;Job done!&quot; to the user after your Job has finished execution? Simple, create an implementation of </p>
+
+<p>IJobChangeListener</span>. And, at the <span style="font-weight: bold; font-family: courier new,courier,monospace;">public void done(IJobChangeEvent event)</span> do:<br />
+<br /><br />
+<br /><br />
+<pre><br />
+  // note: you'll have to call addJobChangeListener() before<br />
+  // schedule() for this to take effect..<br />
+  if (event.getResult().isOK()) {<br />
+    Display.getDefault().asyncExec(new Runnable() {<br />
+      public void run() {<br />
+        IAction action = new Action(&quot;Job Done&quot;) {<br />
+          public void run() {<br />
+            <b>MessageDialog.openInformation(getShell(), <br />
+              &quot;Title&quot;, <br />
+              &quot;Job done!&quot;);</b><br />
+          }<br />
+        };<br />
+        action.run();<br />
+      }<br />
+    });<br />
+  }<br />
+</pre><br />
+<br /><br />
+<br /><br />
+Note that the <span style="font-weight: bold;">bold</span> section is the real meat of what you'd really wanted to do. But without doing all these Display...IAction..run thing, you'll definitely get the nasty  <span style="font-family: courier new,courier,monospace;">org.eclipse.swt.SWTException: Invalid thread access</span> <br /><br />Read more <a href="http://www.eclipse.org/articles/Article-Concurrency/jobs-api.html">here</a>.<br /><br /><br /></p>

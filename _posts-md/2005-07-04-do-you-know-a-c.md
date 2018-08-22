@@ -1,0 +1,16 @@
+---
+layout: post
+title: Do you know a consistent UI when you see one?
+published: true
+category:
+- life
+---
+Just the other night, I was with Love when she was clearing her gmail - \*click\* on the checkbox of the third (or so) email, scrolled hastily down (she's quite a speed reader), \*shift-clicked\* on the checkbox several rows down and the inbetween emails got their checkboxes selected as well.  
+  
+"Eh? Wait! What did you do?.. Did you just hold the shift key?"  
+"Ya.."  
+  
+In disbelief, I tried. It works. \*gasp\*. Shift-click. Like I've seen it the first time. I mean, I know it works on usual desktop stuff shift-click to select a range of stuff... but webpages / checkboxes isn't supposed to be capable of that.. I mean..   
+  
+"Duh", Love rolled her eyes and continued to slaughter her inbox. Now, I'm dumb.
+

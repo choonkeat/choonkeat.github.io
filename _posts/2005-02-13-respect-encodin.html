@@ -1,0 +1,8 @@
+---
+layout: post
+title: Respect Encoding
+published: true
+category:
+- rssfwd
+---
+<p>My colleague has returned me my <a href="http://www.amazon.com/exec/obidos/ASIN/1590593898/103-9679346-5086206">software bible</a> and I've been revisiting the chapters ever since - I felt I'd read the first pass too quickily... so I'm giving it a second pass in case I missed something.<br /> <br /> After re-reading the chapter on <a href="http://www.joelonsoftware.com/articles/Unicode.html">Unicode</a>, I grew remorseful and updated <a href="http://rails.yanime.org/rssfwd/">RssFwd</a> to not blatantly ignore the xml <span style="font-family: courier new,courier,monospace;">encoding </span>attribute. Now non-english sites like <a href="http://rails.yanime.org/rssfwd/preview?url=http%3A//joi.ito.com/jp/atom.xml">joi ito's</a> can be preview and subscribed to beautifully. Yippie!<br /> <br /> However, I'm still getting some ?? on the email subject even though the email body renders fine. A snippet of the raw email is as shown:<br /> <pre>From: <span style="font-style: italic;">[snipped]</span><br />To: <span style="font-style: italic;">[snipped]</span><br />Subject: &#65533;&#22825;&#65533;&#22816;&#65533;<br />Content-Type: text/html; charset=UTF-8<br /><span style="font-style: italic;">[rest of html content below..]</span><br /></pre> Any ideas? Is it because content-type is found below the subject? I can't seem to find a proper way to set content type in <a href="http://am.rubyonrails.org/">action mailer</a> and I'm manually setting <span style="font-family: courier new,courier,monospace;">mail['content-type'] = ...</span> before delivering the email :-(<br /><br /></p>

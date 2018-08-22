@@ -1,0 +1,14 @@
+---
+layout: post
+title: 'Rssfwd: Special treatment for laggards'
+published: true
+category:
+- rssfwd
+---
+<p>I didn't notice when but the number of feeds subscribed in Rssfwd seem to have jumped a couple of hundreds since I last counted (quite a number of Bittorrent sites.heh) Unfortunately, that also kind of brought Rssfwd to a crawl. So, in order to minimize the impact of us regular users, I've decided to separate the slower feeds (i.e. huge feeds takes a long time to parse in DOM) from the normal sized feeds. <br/>
+<br/>
+<div style="margin-left: 40px;"><span style="font-weight: bold;">Normal feeds</span>: 2 hours interval.<br/>
+<span style="font-weight: bold;">Slower feeds</span>: 6 hours interval.<br/>
+</div><br />
+<br/>
+Hope things return to normal hence. Anyone can suggest a faster XML library than <a href="http://www.germane-software.com/software/rexml/">REXML</a>? Or maybe I should just re-do in SAX.. *<span style="font-style: italic;">groan</span>*.<br/></p>

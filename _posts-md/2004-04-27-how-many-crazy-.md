@@ -1,0 +1,9 @@
+---
+layout: post
+title: How many crazy ah-bengs can you meet in a single drive home?
+published: true
+category:
+- life
+---
+Must've been the brief rain.. rustled the weeds.. and awaken the pesty flies. Extremely moist night tonight.. and I was sending Love home. And how many crazy speedster did I meet? Six! Three of them almost got me into some kind of mess... one stupid blue car even slowed down (middle lane onna highway) just to take me on.. KAOS.. Get on my nerves?! Stupid. Wish they'd all died crashing into a drain... I know that's a very evil thought.. but that's what's really on my mind then.. I beg for forgiveness to hold on to that thought.
+
