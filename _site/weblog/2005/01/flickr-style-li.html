@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Flickr-Style Listing | The Devel!</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="Flickr-Style Listing" />
+<meta name="author" content="choonkeat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="For a lack of better phrase, and I don&#39;t know who started this - just that I saw it on Flickr first - I&#39;ve shamelessly copied the presentation of my &quot;List Of Sites&quot; into Flickr-style, instead of the old, boring, usual, row-by-row listing.. *yawns*.. anyways, check it out! [Updated link on 26 Apr &#39;06]Think I may just put the &quot;You may also like.. &quot; feature soon.. Btw, I&#39;m currently using the following MySQL query to rank the feeds -SELECTFLOOR(SUM(my.num_of_subscribers &gt; your.num_of_subscribers OR (my.num_of_subscribers = your.num_of_subscribers AND my.id &gt; your.id)) / COUNT(*) * 25) + 6 AS rank, SUBSTRING(my.title, 1, 15) AS abbr_title, my.* FROM feeds my, feeds your WHERE my.id != your.id AND my.title != &#39;&#39; GROUP BY my.id ORDER BY my.title ASC;That&#39;s a mouthful!.. Roughly translate to: More subscribers always more popular; if not, newer is more popular. rank: The &quot;/ count(*) ... as rank&quot; is just to make sure that the range is 6 to 31 (font-ready numbers that I can plug directly in the rhtml file)abbr_title: not in use yet.. was going to control, because some ppl&#39;s blog titles are just too damn long! :-DI couldn&#39;t really decide what to do with the feeds that has the same number of subscribers (which happens to be &#39;1&#39; in many cases...) so I chose the lazy option: give the wildcard rankings to new feeds (order by id) so that the rankings will shuffle as new feeds are added - which is likely, since somebody out there is always reading something else.. If I&#39;d given the wildcard rankings to the more frequently updated, then the ranking would&#39;ve been rather stagnant - personal blogs will never outdo news sites, and news sites has naturally more chance of gaining subscriptions." />
+<meta property="og:description" content="For a lack of better phrase, and I don&#39;t know who started this - just that I saw it on Flickr first - I&#39;ve shamelessly copied the presentation of my &quot;List Of Sites&quot; into Flickr-style, instead of the old, boring, usual, row-by-row listing.. *yawns*.. anyways, check it out! [Updated link on 26 Apr &#39;06]Think I may just put the &quot;You may also like.. &quot; feature soon.. Btw, I&#39;m currently using the following MySQL query to rank the feeds -SELECTFLOOR(SUM(my.num_of_subscribers &gt; your.num_of_subscribers OR (my.num_of_subscribers = your.num_of_subscribers AND my.id &gt; your.id)) / COUNT(*) * 25) + 6 AS rank, SUBSTRING(my.title, 1, 15) AS abbr_title, my.* FROM feeds my, feeds your WHERE my.id != your.id AND my.title != &#39;&#39; GROUP BY my.id ORDER BY my.title ASC;That&#39;s a mouthful!.. Roughly translate to: More subscribers always more popular; if not, newer is more popular. rank: The &quot;/ count(*) ... as rank&quot; is just to make sure that the range is 6 to 31 (font-ready numbers that I can plug directly in the rhtml file)abbr_title: not in use yet.. was going to control, because some ppl&#39;s blog titles are just too damn long! :-DI couldn&#39;t really decide what to do with the feeds that has the same number of subscribers (which happens to be &#39;1&#39; in many cases...) so I chose the lazy option: give the wildcard rankings to new feeds (order by id) so that the rankings will shuffle as new feeds are added - which is likely, since somebody out there is always reading something else.. If I&#39;d given the wildcard rankings to the more frequently updated, then the ranking would&#39;ve been rather stagnant - personal blogs will never outdo news sites, and news sites has naturally more chance of gaining subscriptions." />
+<link rel="canonical" href="http://localhost:4000/weblog/2005/01/flickr-style-li.html" />
+<meta property="og:url" content="http://localhost:4000/weblog/2005/01/flickr-style-li.html" />
+<meta property="og:site_name" content="The Devel!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2005-01-29T00:00:00+08:00" />
+<script type="application/ld+json">
+{"headline":"Flickr-Style Listing","dateModified":"2005-01-29T00:00:00+08:00","datePublished":"2005-01-29T00:00:00+08:00","author":{"@type":"Person","name":"choonkeat"},"description":"For a lack of better phrase, and I don&#39;t know who started this - just that I saw it on Flickr first - I&#39;ve shamelessly copied the presentation of my &quot;List Of Sites&quot; into Flickr-style, instead of the old, boring, usual, row-by-row listing.. *yawns*.. anyways, check it out! [Updated link on 26 Apr &#39;06]Think I may just put the &quot;You may also like.. &quot; feature soon.. Btw, I&#39;m currently using the following MySQL query to rank the feeds -SELECTFLOOR(SUM(my.num_of_subscribers &gt; your.num_of_subscribers OR (my.num_of_subscribers = your.num_of_subscribers AND my.id &gt; your.id)) / COUNT(*) * 25) + 6 AS rank, SUBSTRING(my.title, 1, 15) AS abbr_title, my.* FROM feeds my, feeds your WHERE my.id != your.id AND my.title != &#39;&#39; GROUP BY my.id ORDER BY my.title ASC;That&#39;s a mouthful!.. Roughly translate to: More subscribers always more popular; if not, newer is more popular. rank: The &quot;/ count(*) ... as rank&quot; is just to make sure that the range is 6 to 31 (font-ready numbers that I can plug directly in the rhtml file)abbr_title: not in use yet.. was going to control, because some ppl&#39;s blog titles are just too damn long! :-DI couldn&#39;t really decide what to do with the feeds that has the same number of subscribers (which happens to be &#39;1&#39; in many cases...) so I chose the lazy option: give the wildcard rankings to new feeds (order by id) so that the rankings will shuffle as new feeds are added - which is likely, since somebody out there is always reading something else.. If I&#39;d given the wildcard rankings to the more frequently updated, then the ranking would&#39;ve been rather stagnant - personal blogs will never outdo news sites, and news sites has naturally more chance of gaining subscriptions.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/weblog/2005/01/flickr-style-li.html"},"url":"http://localhost:4000/weblog/2005/01/flickr-style-li.html","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Devel!" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">The Devel!</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Flickr-Style Listing</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2005-01-29T00:00:00+08:00" itemprop="datePublished">Jan 29, 2005
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>For a lack of better phrase, and I don't know who started this - just that I <a href="http://www.flickr.com/photos/tags">saw it on Flickr first</a> - I've shamelessly copied the presentation of my &quot;List Of Sites&quot; into Flickr-style, instead of the old, boring, usual, row-by-row listing..  *yawns*.. anyways, <a href="http://www.rssfwd.com/">check it out</a>! [Updated link on 26 Apr '06]<br /><br />Think I may just put the &quot;You may also like.. &quot; feature soon.. <br /><br />Btw, I'm currently using the following MySQL query to rank the feeds -<br /><br />SELECT<br /><div style="margin-left: 40px">FLOOR(<br /><div style="margin-left: 40px">SUM(<br /><div style="margin-left: 40px">my.num_of_subscribers &gt; your.num_of_subscribers OR <br />(my.num_of_subscribers = your.num_of_subscribers AND my.id &gt; your.id)</div>) / COUNT(*) * 25) + 6 AS rank, </div>SUBSTRING(my.title, 1, 15) AS abbr_title, <br />my.* </div>FROM <br /><div style="margin-left: 40px">feeds my, feeds your <br /></div>WHERE <br /><div style="margin-left: 40px">my.id != your.id AND my.title != '' </div>GROUP BY my.id <br />ORDER BY my.title ASC;<br /><br />That's a mouthful!.. Roughly translate to: <span style="font-style: italic">More subscribers always more popular; if not, newer is more popular</span>. <br /><ul><li>rank: The &quot;/ count(*) ... as rank&quot; is just to make sure that the range is 6 to 31 (font-ready numbers that I can plug directly in the rhtml file)</li><li>abbr_title: not in use yet.. was going to control, because some ppl's blog titles are just too damn long! :-D</li></ul>I couldn't really decide what to do with the feeds that has the same number of subscribers (which happens to be '1' in many cases...) so I chose the lazy option: give the wildcard rankings to new feeds (order by id) so that the rankings will shuffle as new feeds are added - which is likely, since somebody out there is always reading something else.. If I'd given the wildcard rankings to the more frequently updated, then the ranking would've been rather stagnant - personal blogs will never outdo news sites, and news sites has naturally more chance of gaining subscriptions.<br /></p>
+
+
+  </div><a class="u-url" href="/weblog/2005/01/flickr-style-li.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Devel!</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">choonkeat</li><li><a class="u-email" href="mailto:contactme@choonkeat.com">contactme@choonkeat.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">choonkeat</span></a></li><li><a href="https://www.twitter.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">choonkeat</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>choonkeat on programming &amp; software</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

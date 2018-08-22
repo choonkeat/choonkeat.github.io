@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Rails Q&amp;A | The Devel!</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="Rails Q&amp;A" />
+<meta name="author" content="choonkeat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Below is an email Q&amp;A I had recently: I know u are a proponent of Ruby on Rails. What is the main thing about the Rail f/w that is so productive? First thing, before the wrong foot etc.. this entry will clarify what i think Rails positioning is. So, the keywords i guess is: quick &amp; agile. a) Ruby the scripting language? maybe its a the joy of learning a new language... but ruby is quite fun to code in, albeit the lack of code-completion editors (maybe not for long). but perhaps its b&#39;cos i&#39;d programmed without code-completion for the larger part so can still settle with that lack. update: I&#39;d forgotten to mention that I missed the power and ease of arrays in a scripting language (compared to Java or C), and also the code block syntax in Ruby is insanely cool even when compared to a beautiful language like Python. b) The framework (What part of it) I like that it comes with a pretty good ORM. Also, I only need to know very few conventions to get started. Yes these can be generalized into &quot;small learning curve&quot;. Why no Java/.Net/C++/VB etc has copied it point for point then ? Regarding clones, there is: .Net, Java, Python, even PHP. But who&#39;s interested? - and that&#39;s actually quite important question: Can framework-X garner the same level of PR/momentum/growth? Clones are just pet projects out to prove X-can-also-do-Y. The original is currently used for bread-and-butter projects by DHH and co. So they&#39;re very actively on it, using it, etc. The original was extracted from a project, not written to a designed spec. Why not somebody invest to use those clones as bread-and-butter? Well, wouldn&#39;t that somebody rather use Rails instead? unless, of cos, they&#39;ve an axe to grind against Rails. c) The domain chosen? hmm, don&#39;t really understand. its for building general web apps. d) The philosophy ? Probably. convention over configuration is probably the first breath of fresh air. i&#39;d originally cited this as a &quot;no xml config file nightmare&quot; thing, but actually it runs deeper, especially parameters passed to-and-fro forms/post, database column naming, before_* after_* hooks (benefits from very primitive AOP), where the files are placed (easy to learn another app) etc. When doing Rails, I feel as if somebody has felt the same pain as I and here are his consolidated solution for each and every problem, and I gratefully receive a solution for our lessons learnt. Very little things - may be detrimental to cite this example and make it seem like child&#39;s play.. but I found myself smiling when I learnt this - like e.g. having an &#39;employee_counter&#39; column in the &quot;companies&quot; table.. just having it and Rails will do the rest: e.g. +1 whenever a new &quot;employees&quot; record is inserted. very little things. update: also, a verbose error 500 page with stacktrace, session data, http parameters by default - but when in production mode, outside world sees &#39;friendly error page&#39;.. but localhost still gives you the verbose errors to help debugging, how thoughtful! And for the record, this is the blog entry that I stumbled upon Rails: Award for beautiful coding: David Heinemeier Hansson update: I&#39;d also forgotten to mention that I&#39;d always preferred saving development time than saving runtime." />
+<meta property="og:description" content="Below is an email Q&amp;A I had recently: I know u are a proponent of Ruby on Rails. What is the main thing about the Rail f/w that is so productive? First thing, before the wrong foot etc.. this entry will clarify what i think Rails positioning is. So, the keywords i guess is: quick &amp; agile. a) Ruby the scripting language? maybe its a the joy of learning a new language... but ruby is quite fun to code in, albeit the lack of code-completion editors (maybe not for long). but perhaps its b&#39;cos i&#39;d programmed without code-completion for the larger part so can still settle with that lack. update: I&#39;d forgotten to mention that I missed the power and ease of arrays in a scripting language (compared to Java or C), and also the code block syntax in Ruby is insanely cool even when compared to a beautiful language like Python. b) The framework (What part of it) I like that it comes with a pretty good ORM. Also, I only need to know very few conventions to get started. Yes these can be generalized into &quot;small learning curve&quot;. Why no Java/.Net/C++/VB etc has copied it point for point then ? Regarding clones, there is: .Net, Java, Python, even PHP. But who&#39;s interested? - and that&#39;s actually quite important question: Can framework-X garner the same level of PR/momentum/growth? Clones are just pet projects out to prove X-can-also-do-Y. The original is currently used for bread-and-butter projects by DHH and co. So they&#39;re very actively on it, using it, etc. The original was extracted from a project, not written to a designed spec. Why not somebody invest to use those clones as bread-and-butter? Well, wouldn&#39;t that somebody rather use Rails instead? unless, of cos, they&#39;ve an axe to grind against Rails. c) The domain chosen? hmm, don&#39;t really understand. its for building general web apps. d) The philosophy ? Probably. convention over configuration is probably the first breath of fresh air. i&#39;d originally cited this as a &quot;no xml config file nightmare&quot; thing, but actually it runs deeper, especially parameters passed to-and-fro forms/post, database column naming, before_* after_* hooks (benefits from very primitive AOP), where the files are placed (easy to learn another app) etc. When doing Rails, I feel as if somebody has felt the same pain as I and here are his consolidated solution for each and every problem, and I gratefully receive a solution for our lessons learnt. Very little things - may be detrimental to cite this example and make it seem like child&#39;s play.. but I found myself smiling when I learnt this - like e.g. having an &#39;employee_counter&#39; column in the &quot;companies&quot; table.. just having it and Rails will do the rest: e.g. +1 whenever a new &quot;employees&quot; record is inserted. very little things. update: also, a verbose error 500 page with stacktrace, session data, http parameters by default - but when in production mode, outside world sees &#39;friendly error page&#39;.. but localhost still gives you the verbose errors to help debugging, how thoughtful! And for the record, this is the blog entry that I stumbled upon Rails: Award for beautiful coding: David Heinemeier Hansson update: I&#39;d also forgotten to mention that I&#39;d always preferred saving development time than saving runtime." />
+<link rel="canonical" href="http://localhost:4000/weblog/2005/07/rails-qa.html" />
+<meta property="og:url" content="http://localhost:4000/weblog/2005/07/rails-qa.html" />
+<meta property="og:site_name" content="The Devel!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2005-07-15T00:00:00+08:00" />
+<script type="application/ld+json">
+{"headline":"Rails Q&amp;A","dateModified":"2005-07-15T00:00:00+08:00","datePublished":"2005-07-15T00:00:00+08:00","author":{"@type":"Person","name":"choonkeat"},"description":"Below is an email Q&amp;A I had recently: I know u are a proponent of Ruby on Rails. What is the main thing about the Rail f/w that is so productive? First thing, before the wrong foot etc.. this entry will clarify what i think Rails positioning is. So, the keywords i guess is: quick &amp; agile. a) Ruby the scripting language? maybe its a the joy of learning a new language... but ruby is quite fun to code in, albeit the lack of code-completion editors (maybe not for long). but perhaps its b&#39;cos i&#39;d programmed without code-completion for the larger part so can still settle with that lack. update: I&#39;d forgotten to mention that I missed the power and ease of arrays in a scripting language (compared to Java or C), and also the code block syntax in Ruby is insanely cool even when compared to a beautiful language like Python. b) The framework (What part of it) I like that it comes with a pretty good ORM. Also, I only need to know very few conventions to get started. Yes these can be generalized into &quot;small learning curve&quot;. Why no Java/.Net/C++/VB etc has copied it point for point then ? Regarding clones, there is: .Net, Java, Python, even PHP. But who&#39;s interested? - and that&#39;s actually quite important question: Can framework-X garner the same level of PR/momentum/growth? Clones are just pet projects out to prove X-can-also-do-Y. The original is currently used for bread-and-butter projects by DHH and co. So they&#39;re very actively on it, using it, etc. The original was extracted from a project, not written to a designed spec. Why not somebody invest to use those clones as bread-and-butter? Well, wouldn&#39;t that somebody rather use Rails instead? unless, of cos, they&#39;ve an axe to grind against Rails. c) The domain chosen? hmm, don&#39;t really understand. its for building general web apps. d) The philosophy ? Probably. convention over configuration is probably the first breath of fresh air. i&#39;d originally cited this as a &quot;no xml config file nightmare&quot; thing, but actually it runs deeper, especially parameters passed to-and-fro forms/post, database column naming, before_* after_* hooks (benefits from very primitive AOP), where the files are placed (easy to learn another app) etc. When doing Rails, I feel as if somebody has felt the same pain as I and here are his consolidated solution for each and every problem, and I gratefully receive a solution for our lessons learnt. Very little things - may be detrimental to cite this example and make it seem like child&#39;s play.. but I found myself smiling when I learnt this - like e.g. having an &#39;employee_counter&#39; column in the &quot;companies&quot; table.. just having it and Rails will do the rest: e.g. +1 whenever a new &quot;employees&quot; record is inserted. very little things. update: also, a verbose error 500 page with stacktrace, session data, http parameters by default - but when in production mode, outside world sees &#39;friendly error page&#39;.. but localhost still gives you the verbose errors to help debugging, how thoughtful! And for the record, this is the blog entry that I stumbled upon Rails: Award for beautiful coding: David Heinemeier Hansson update: I&#39;d also forgotten to mention that I&#39;d always preferred saving development time than saving runtime.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/weblog/2005/07/rails-qa.html"},"url":"http://localhost:4000/weblog/2005/07/rails-qa.html","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Devel!" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">The Devel!</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Rails Q&amp;A</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2005-07-15T00:00:00+08:00" itemprop="datePublished">Jul 15, 2005
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Below is an email Q&amp;A I had recently: <blockquote><br />
+<p><strong>I know u are a proponent of Ruby on Rails. What is the main thing about the Rail f/w that is so productive?</strong><br/>
+</p><br />
+</blockquote>First thing, before the wrong foot etc.. <a href="http://blog.yanime.org/articles/2005/06/14/wrong-fight">this entry</a> will clarify what i think Rails positioning is. So, the keywords i guess is: quick &amp; agile.<br/>
+<blockquote><br />
+<p><strong>a) Ruby the scripting language?</strong><br/>
+</p><br />
+</blockquote>maybe its a the joy of learning a new language... but ruby is quite fun to code in, albeit the lack of code-completion editors (<a href="http://sourceforge.net/projects/rubyeclipse">maybe not for long</a>). but perhaps its b'cos i'd programmed without code-completion for the larger part so can still settle with that lack.<br/>
+<br/>
+update: I'd forgotten to mention that I missed the power and ease of arrays in a scripting language (compared to Java or C), and also the code block syntax in Ruby is insanely cool even <a href="http://lesscode.org/2005/07/12/ruby-colored-blocks-in-python/">when compared to</a> a beautiful language like Python.<br/>
+<blockquote><br />
+<p><strong>b) The framework (What part of it)</strong><br/>
+</p><br />
+</blockquote>I like that it comes with a pretty good ORM. Also, I only need to know very few conventions to get started. Yes these can be generalized into &quot;small learning curve&quot;.<br/>
+<blockquote><br />
+<p><strong>Why no Java/.Net/C++/VB etc has copied it point for point then ?</strong><br/>
+</p><br />
+</blockquote>Regarding clones, there is: <a href="http://www.loudthinking.com/arc/000276.html">.Net</a>, <a href="http://www.theserverside.com/news/thread.tss?thread_id=29716">Java</a>, <a href="http://subway.python-hosting.com/">Python</a>, even <a href="http://ripcord.co.nz/biscuit/forum/?controller=forum&amp;action=index">PHP</a>. But who's interested? - and that's actually quite important question: Can framework-X garner the same level of PR/momentum/growth? Clones are just pet projects out to prove X-can-also-do-Y. The original is currently used for bread-and-butter projects by DHH and <a href="http://www.37signals.com/svn/archives2/scoble_wonders_if_37signals_is_influencing_microsoft.php">co</a>. So they're very actively on it, using it, etc. The original was <a href="http://www.loudthinking.com/arc/000416.html">extracted from a project, not written to a designed spec</a>. Why not somebody invest to use those clones as bread-and-butter? Well, wouldn't that somebody rather use Rails instead? unless, of cos, they've an axe to grind against Rails.<br/>
+<blockquote><br />
+<p><strong>c) The domain chosen?</strong><br/>
+</p><br />
+</blockquote>hmm, don't really understand. its for building general web apps.<br/>
+<blockquote><br />
+<p><strong>d) The philosophy ?</strong><br/>
+</p><br />
+</blockquote>Probably. convention over configuration is probably the first breath of fresh air. i'd originally cited this as a &quot;no xml config file nightmare&quot; thing, but actually it runs deeper, especially parameters passed to-and-fro forms/post, database column naming, before_* after_* hooks (benefits from very primitive AOP), where the files are placed (easy to learn another app) etc.<br/>
+<br/>
+When doing Rails, I feel as if somebody has felt the same pain as I and here are his consolidated solution for each and every problem, and I gratefully receive a solution for our lessons learnt.<br/>
+<br/>
+Very little things - <span style="font-style: italic;">may be detrimental to cite this example and make it seem like child's play</span>.. but I found myself smiling when I learnt this - like e.g. having an 'employee_counter' column in the &quot;companies&quot; table.. just having it and Rails will do the rest: e.g. +1 whenever a new &quot;employees&quot; record is inserted. very little things. update: also, a verbose error 500 page with stacktrace, session data, http parameters by default - but when in production mode, outside world sees 'friendly error page'.. but localhost still gives you the verbose errors to help debugging, how thoughtful!<br/>
+<br/>
+And for the record, this is the blog entry that I stumbled upon Rails: <a href="http://www.oreillynet.com/pub/wlg/5424?page=last&amp;x-maxdepth=0">Award for beautiful coding: David Heinemeier Hansson</a><br/>
+<br/>
+update: I'd also forgotten to mention that I'd always preferred saving <i>development time</i> than saving <i>runtime</i>.</p>
+
+
+  </div><a class="u-url" href="/weblog/2005/07/rails-qa.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Devel!</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">choonkeat</li><li><a class="u-email" href="mailto:contactme@choonkeat.com">contactme@choonkeat.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">choonkeat</span></a></li><li><a href="https://www.twitter.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">choonkeat</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>choonkeat on programming &amp; software</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

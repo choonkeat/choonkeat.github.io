@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>The “No Special Case” Pattern | The Devel!</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="The “No Special Case” Pattern" />
+<meta name="author" content="choonkeat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Very often I&#39;ll write (or use) APIs that look like this (translate accordingly for Ruby / Javascript code) Thing findOneThing(Key&nbsp; key);// if nothing is found, throw an Exception or return nullCollection findManyThings(Collection keyList);// if nothing is found, return null All well and good? I&#39;d known the textbook-bullet-points for this, but for the longest time, I didn&#39;t realize how much tax I&#39;m paying subconsciously.. and just how many APIs are ignoring this wisdom:" />
+<meta property="og:description" content="Very often I&#39;ll write (or use) APIs that look like this (translate accordingly for Ruby / Javascript code) Thing findOneThing(Key&nbsp; key);// if nothing is found, throw an Exception or return nullCollection findManyThings(Collection keyList);// if nothing is found, return null All well and good? I&#39;d known the textbook-bullet-points for this, but for the longest time, I didn&#39;t realize how much tax I&#39;m paying subconsciously.. and just how many APIs are ignoring this wisdom:" />
+<link rel="canonical" href="http://localhost:4000/weblog/2007/11/the-unspecial-c.html" />
+<meta property="og:url" content="http://localhost:4000/weblog/2007/11/the-unspecial-c.html" />
+<meta property="og:site_name" content="The Devel!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2007-11-23T00:00:00+08:00" />
+<script type="application/ld+json">
+{"headline":"The “No Special Case” Pattern","dateModified":"2007-11-23T00:00:00+08:00","datePublished":"2007-11-23T00:00:00+08:00","author":{"@type":"Person","name":"choonkeat"},"description":"Very often I&#39;ll write (or use) APIs that look like this (translate accordingly for Ruby / Javascript code) Thing findOneThing(Key&nbsp; key);// if nothing is found, throw an Exception or return nullCollection findManyThings(Collection keyList);// if nothing is found, return null All well and good? I&#39;d known the textbook-bullet-points for this, but for the longest time, I didn&#39;t realize how much tax I&#39;m paying subconsciously.. and just how many APIs are ignoring this wisdom:","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/weblog/2007/11/the-unspecial-c.html"},"url":"http://localhost:4000/weblog/2007/11/the-unspecial-c.html","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Devel!" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">The Devel!</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">The &quot;No Special Case&quot; Pattern</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2007-11-23T00:00:00+08:00" itemprop="datePublished">Nov 23, 2007
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Very often I'll write (or use) APIs that look like this (translate accordingly for Ruby / Javascript code)</p><blockquote><pre><pre><strong><span class="storage storage_type storage_type_java">Thing</span></strong> findOneThing(<strong>Key<span class="storage storage_type storage_type_java">&nbsp;</span></strong> key);<span style="color: #999999;"><br /><span class="comment comment_line comment_line_double-slash comment_line_double-slash_java">// if nothing is found, throw an Exception or return null</span></span><br /><br /><strong><span class="support support_type support_type_built-ins support_type_built-ins_java">Collection</span></strong> findManyThings(<strong><span class="support support_type support_type_built-ins support_type_built-ins_java">Collection</span></strong> keyList);<br /><span style="color: #999999;"><span class="comment comment_line comment_line_double-slash comment_line_double-slash_java">// if nothing is found, return null</span></span>
+</pre></pre></blockquote><p>All well and good? I'd known the textbook-bullet-points for this, but for the longest time, I didn't realize how much tax I'm paying subconsciously.. and just how many APIs are ignoring this wisdom:</p>
+
+
+
+
+
+<div id='shcp_37fafa3939147b8e0f4926089cac28b7'><blockquote style='margin-left: 0; padding-left: 1em; border-left: 1em #eee solid; '> <span class="content comments_count_3 withoutphoto" ><span class="text" > <blockquote class="comment_body comment_body1" >Nulls are awkward things in object-oriented programs because they defeat polymorphism.<a href="http://r9.sharedcopy.com/1nvbt#shcp1" > <sup>link &raquo;</sup></a ></blockquote> <blockquote class="comment_body comment_body2" >Instead of returning null, or some odd value, return a Special Case that has the same interface as what the caller expects.<a href="http://r9.sharedcopy.com/1nvbt#shcp2" > <sup>link &raquo;</sup></a ></blockquote> <p class="comment_body comment_body3" >Not all language can do this easily<a href="http://r9.sharedcopy.com/1nvbt#shcp3" > <sup>link &raquo;</sup></a ></p> </span ></span> - from <a href="http://r9.sharedcopy.com/1nvbt">P of EAA: Special Case</a> via <a href="http://sharedcopy.com">sharedcopy.com</a></blockquote></div><style>#shcp_37fafa3939147b8e0f4926089cac28b7 blockquote blockquote { margin-left: 1.5em;  font-style: italic; }; #shcp_37fafa3939147b8e0f4926089cac28b7 .html_gist { display: none; }</style><script>  var json_37fafa3939147b8e0f4926089cac28b7 = {   host: 'sharedcopy.com',   width: '480px',   height: '250px',   bgcolor: '#fff',   background: '#fff url(http://martinfowler.com.sharedcopy.com/images/loading.gif) no-repeat center center; ',   src: 'http://martinfowler.com.sharedcopy.com/embeds/copy/choonkeat/37fafa3939147b8e0f4926089cac28b7/480.250/e3f0f6.fff.cc0500/shcp1.html' };</script><script src='http://sharedcopy.com/static/embed/script.js'></script>
+
+
+
+
+<p>Finding yourself having to check for null return values? That's not &quot;the way it is&quot;, that's tax. </p>
+
+<p>Ruby helps <em>a bit</em> by making &quot;nil&quot; an object, paving way for the much loved duck-typing. Whereas some languages settle for dead bodies equivalent nulls. Especially in these languages, having to &quot;<em>return a empty object with the same interface</em>&quot; is a real chore. Person? EmptyPerson. Record? EmptyRecord.. ad infinitum</p>
+
+<p>Still, a language can really only help so much. And it is up to the library authors (i.e. you) to put this wisdom into practice. &quot;Practice?&quot;. Now comes the funny part.</p>
+
+<p>When talking about &quot;design patterns&quot;, usually images of &quot;Enterprise&quot;, &quot;UML&quot;, &quot;Configuration files&quot; start appearing in my mind. So I find it ironic that the best real example of this pattern comes from the lowly-regarded (by many &quot;real&quot; engineers) realm of Javascript. Its called <a href="http://jquery.com/blog/2006/08/20/why-jquerys-philosophy-is-better/">jQuery</a>.</p>
+
+<p>In fact, jQuery takes it even further&nbsp; by simplifying Martin Fowler's pattern into a single practical use-case: Returning 1 object is equivalent to returning a List containing 1 object. By <strong>always</strong> returning a List (which can be empty, duh), it has even avoided the need to conjure special &quot;null object with equivalent interface&quot;! And most importantly, &quot;practical&quot; because all languages can do empty list.</p>
+
+<p>Its amazing how simple your train of thought (and code!) becomes when everything is a list (<em>tiny voice: uh.. Lispers knew that since before you were born... blah blah</em>). There's nothing to decide, you always loop through the return value. 0 time? 1 time? N times? Imagine all those other idioms &amp; body of code, now becoming unnecessary... its applying liposuction for your source code! <br /><br />I don't suppose its too far fetched to apply some jQuery-ism to ActiveRecord API is it?</p>
+
+<p>Update: Changed title from &quot;Unspecial Case&quot; to the &quot;No Special Case&quot;, which is more correct.</p>
+
+
+  </div><a class="u-url" href="/weblog/2007/11/the-unspecial-c.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Devel!</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">choonkeat</li><li><a class="u-email" href="mailto:contactme@choonkeat.com">contactme@choonkeat.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">choonkeat</span></a></li><li><a href="https://www.twitter.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">choonkeat</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>choonkeat on programming &amp; software</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

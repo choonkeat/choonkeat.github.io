@@ -1,0 +1,15 @@
+---
+layout: post
+title: Late nights
+published: true
+category:
+- life
+---
+I could've sworn I told myself I'll never work late, nor work weekends ever again.. Been quite a while since I'd tasted my own noodle delicacy.. though 2 packets at this hour would perhaps be a bit more than necessary..  
+  
+\*eat\* \*wash\*  
+  
+Its incredible how much money one can spend subconsciously.. its 1 Apr and I'm out of cash a week ago... even in the bank! I mean.. I don't even shop? Poor until even have to tolerate lousy no good money changer Singh @ Shaw Tower who wants to eat my 65 RMB for 7 SGD?!?! Heylo, Earth? No thanks, I'll rather keep my RMB.  
+  
+Perhaps will have to live on credit tomorrow again - if the GIRO fail to complete before hunger strikes.. Or maybe I should just bring maggie mee to work. Thank God for [instant noodles](http://jin.jcic.or.jp/nipponia/nipponia14/start.html)!
+

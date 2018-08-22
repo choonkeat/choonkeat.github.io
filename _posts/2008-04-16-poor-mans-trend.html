@@ -1,0 +1,44 @@
+---
+layout: post
+title: Poor Man's Trends
+published: true
+category:
+- rails
+---
+
+<p>I've just released my <a href="http://github.com/choonkeat/poormans-trends/tree/master">Poorman's Trends</a> Rails plugin as an excuse to do something with my GitHub account. Much like its distant cousin, <a href="http://blog.choonkeat.com/weblog/2004/12/poor-mans-crm.html">Poor Man's CRM</a>, this software aims to be plug-and-play, self-sufficient and useful enough to make sense of existing data. </p>
+
+<p>3 Steps to get it:</p>
+
+<ol><li>Install into vendor/plugins with <br /><code>./script/plugin install git://github.com/choonkeat/poormans-trends.git</code></li>
+
+<li>Add 1 line into your existing controller, e.g. <code>admin_controller.rb</code><br /><code>include Poormans::Trends</code></li>
+
+<li>Point your browser to <code>http://yourserver/<strong>admin/poormans_trends</strong></code> and Viola!</li></ol>
+
+<p>You should see a simple page greeting you, like in this screenshot:</p>
+
+<p>
+<a href="http://www.flickr.com/photos/choonkeat/2417672499/" title="Poorman's Trends Homepage by choonkeat, on Flickr"><img width="500" height="245" border="0" src="http://farm3.static.flickr.com/2342/2417672499_920e605a2e.jpg" alt="Poorman's Trends Homepage" /></a>
+
+</p>
+
+<p>Pick a Model class, and you should see some pretty graphs making their AJAXy entrance:</p> 
+<p>
+<a href="http://www.flickr.com/photos/choonkeat/2417672369/" title="Poorman's Trends Example3 by choonkeat, on Flickr"><img width="500" height="266" border="0" src="http://farm4.static.flickr.com/3162/2417672369_6e8bfc3f7b.jpg" alt="Poorman's Trends Example3" /></a><br />
+
+<a href="http://www.flickr.com/photos/choonkeat/2418488312/" title="Poorman's Trends Example1 by choonkeat, on Flickr"><img width="500" height="246" border="0" src="http://farm3.static.flickr.com/2057/2418488312_c5d2a27c42.jpg" alt="Poorman's Trends Example1" /></a></p>
+
+<p>What's happening is that a few interesting columns are picked up from
+the Model's table and a few popular values are picked up from those
+columns. A count is done for all of them, divided up by weeks and
+spitted out as HTML tables. These tables are then turned into pretty
+charts using the nice <em>HTML-table-to-canvas</em> javascript library <a href="http://www.filamentgroup.com/lab/creating_accessible_charts_using_canvas_and_jquery/">from Filament Group</a>.<br />
+</p>
+
+<p>Without configuration nor knowledge of what your application does, is there any hope that it can make sense? </p>
+
+<p>That's where the &quot;picking of interesting columns&quot; come in. Assuming zero domain knowledge of your application, I'd say the foreign keys are most interesting (in Rails convention, any column ending with &quot;_id&quot;), together with sub-classes (&quot;type&quot; and any columns ending with &quot;_type&quot;). The time aspect relies on the Rails convention of using &quot;created_at&quot;. </p>
+
+<p>The end result actually looks pretty good for something requiring no configuration! :-)<br /></p>
+

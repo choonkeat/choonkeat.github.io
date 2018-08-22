@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-08-22T15:38:33+08:00</updated><id>http://localhost:4000/</id><title type="html">The Devel!</title><subtitle>choonkeat on programming &amp; software</subtitle><author><name>choonkeat</name></author><entry><title type="html">File Uploads 2015</title><link href="http://localhost:4000/weblog/2015/10/file-uploads-2015.html" rel="alternate" type="text/html" title="File Uploads 2015" /><published>2015-10-29T00:00:00+08:00</published><updated>2015-10-29T00:00:00+08:00</updated><id>http://localhost:4000/weblog/2015/10/file-uploads-2015</id><content type="html" xml:base="http://localhost:4000/weblog/2015/10/file-uploads-2015.html">&lt;p&gt;Another day, another monolith Ruby gem to reach deep into the bowels of your app config, models, views, controllers and make you manage uploading of file, storage of files, processing of files together with the rest of your business logic, only with the promise of loads and loads of syntax-sugar and enough config option to hang yourself with.&lt;/p&gt;
+
+&lt;p&gt;paperclip, carrierwave, dragonfly, refile, shrine&amp;#8230;&lt;/p&gt;
+
+&lt;p&gt;The libraries may have high code quality, full coverage specs, flexible, comprehensive, easy, but it is bad architecture. I’ve covered most of them in &lt;a href=&quot;http://www.slideshare.net/choonkeat/file-upload-2015&quot;&gt;this presentation&lt;/a&gt; and won’t repeat them here.&lt;/p&gt;
+
+&lt;p&gt;While the Ruby community wasn&amp;#8217;t looking, the rest of the world has moved on to having standalone servers to manage &amp;amp; process their file uploads. Latest example: &lt;a href=&quot;https://medium.com/medium-eng/the-stack-that-helped-medium-drive-2-6-millennia-of-reading-time-e56801f7c492?source=tw-f29a01c49588-1446087364731#e425--share-0-487&quot;&gt;medium.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;When you adopt a server-client pattern (as oppose to syntax-sugar-into-my-monolith-rails-app pattern) you&amp;#8217;ll discover can optimize, manage, scale independently, extend and improve using standard protocols; a whole new world of possibilities.&lt;/p&gt;
+
+&lt;p&gt;What? This &lt;a href=&quot;https://github.com/choonkeat/attache&quot;&gt;rack+imagemagick server&lt;/a&gt; not working out for you? Swap in your own clustered-faster-attache.go server and your Rails app chugs along oblivious to the change.&lt;/p&gt;
+
+&lt;p&gt;What? Don’t like &lt;a href=&quot;https://github.com/choonkeat/attache_rails&quot;&gt;reactjs in the attache client gem&lt;/a&gt;? Introduce your own no-framework-js-attache gem and your attache server can remain oblivious to the upgrade.&lt;/p&gt;
+
+&lt;p&gt;What? Need to support that spanking new open protocol for resumable upload over unreliable network? Have option for Instagram-like processing? Well then &lt;a href=&quot;https://github.com/choonkeat/attache/pull/10&quot;&gt;add a middleware&lt;/a&gt; to your image server and both your server and Rails app can remain blissfully ignorant.&lt;/p&gt;
+
+&lt;p&gt;Architecture.&lt;/p&gt;
+
+&lt;p&gt;You already know it. That&amp;#8217;s why the common pattern is to use a database, redis, nginx alongside your Rails app. Instead of just having syntax-sugar inside your Rails app to wrangle with b-trees.&lt;/p&gt;
+
+&lt;p&gt;Or maybe this will work better: microservices!&lt;/p&gt;</content><author><name>choonkeat</name></author><summary type="html">Another day, another monolith Ruby gem to reach deep into the bowels of your app config, models, views, controllers and make you manage uploading of file, storage of files, processing of files together with the rest of your business logic, only with the promise of loads and loads of syntax-sugar and enough config option to hang yourself with.</summary></entry><entry><title type="html">A New Plan for Spam: Turing</title><link href="http://localhost:4000/weblog/2015/02/a-new-plan-for-spam.html" rel="alternate" type="text/html" title="A New Plan for Spam: Turing" /><published>2015-02-18T00:00:00+08:00</published><updated>2015-02-18T00:00:00+08:00</updated><id>http://localhost:4000/weblog/2015/02/a-new-plan-for-spam</id><content type="html" xml:base="http://localhost:4000/weblog/2015/02/a-new-plan-for-spam.html">&lt;p&gt;Background: Spammers don&amp;#8217;t really mind when you delete their spam mails or &amp;#8220;mark as spam&amp;#8221;. Same reason &lt;a href=&quot;http://research.microsoft.com/pubs/167713/WhyFromNigeria.pdf&quot;&gt;they want to be obviously spam&lt;/a&gt;: they only want to spend time communicating with the gullible. If they have to spend time communicating with people who wouldn&amp;#8217;t end up being tricked (aka false positive), it would greatly increase their cost of business.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.paulgraham.com/spam.html&quot;&gt;Thomas Bayes&lt;/a&gt; has served us well for a few years, now is &lt;a href=&quot;http://www.imdb.com/title/tt2084970/&quot;&gt;a great time&lt;/a&gt; to employ Alan Turing&amp;#8217;s help.&lt;/p&gt;
+
+&lt;p&gt;I propose to have an &amp;#8220;F1&amp;#8221; competition of sorts, for companies (or talented individuals) working on AI and NLP. Here&amp;#8217;s the competition challenge:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Hold a conversation with a spammer for as long as possible #TuringTest&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The entity that accumulates the longest durations over a period of time, e.g. 1 year, is champion for the year.&lt;/p&gt;
+
+&lt;p&gt;To do this, ironically, we need spam. We&amp;#8217;ll need mail clients (e.g. Mail.app, Gmail, Hotmail, Outlook) to rewire &amp;#8220;mark as spam&amp;#8221; to deliver, round robin, spams mails to everyone participating in the &lt;code&gt;#F1forAI&lt;/code&gt; competition.&lt;/p&gt;
+
+&lt;p&gt;From there, the end points will communicate with the spammer onbehalf of the end user, likely using the same SMTP server to hide scent.&lt;/p&gt;
+
+&lt;p&gt;And, that&amp;#8217;s about it really.&lt;/p&gt;
+
+&lt;p&gt;Oh, yes we need a global ranking table, like the one Dropbox created for their &lt;a href=&quot;https://www.dropbox.com/spacerace&quot;&gt;Great Space Race&lt;/a&gt;&lt;/p&gt;</content><author><name>choonkeat</name></author><summary type="html">Background: Spammers don&amp;#8217;t really mind when you delete their spam mails or &amp;#8220;mark as spam&amp;#8221;. Same reason they want to be obviously spam: they only want to spend time communicating with the gullible. If they have to spend time communicating with people who wouldn&amp;#8217;t end up being tricked (aka false positive), it would greatly increase their cost of business.</summary></entry><entry><title type="html">Robot Vacuum Cleaner</title><link href="http://localhost:4000/weblog/2014/09/robot-vacuum-cleaner.html" rel="alternate" type="text/html" title="Robot Vacuum Cleaner" /><published>2014-09-04T00:00:00+08:00</published><updated>2014-09-04T00:00:00+08:00</updated><id>http://localhost:4000/weblog/2014/09/robot-vacuum-cleaner</id><content type="html" xml:base="http://localhost:4000/weblog/2014/09/robot-vacuum-cleaner.html">&lt;p&gt;Well &lt;a href=&quot;https://www.dyson360eye.com&quot;&gt;this&lt;/a&gt; floated in my facebook feed today and my facebook-bubbled world goes crazy&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;Dyson finally announces a robot vacuum cleaner! - &lt;a href=&quot;http://www.theverge.com/2014/9/4/6104855/dyson-finally-announces-a-robot-vacuum-cleaner&quot;&gt;theverge&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;IMHO, as an ex-iRobot user, and certifiable lazy human being, &lt;em&gt;ahem&lt;/em&gt;, no.&lt;/p&gt;
+
+&lt;p&gt;The &amp;#8220;problem&amp;#8221; with robot vacuum cleaner (and the problem to solve if you&amp;#8217;re thinking of re-inventing one) is not if your robot can see better, can move faster, suck the floor cleaner, reach further into the corners, cover every inch better, map the house better, etc performance related aspects.&lt;/p&gt;
+
+&lt;p&gt;No.&lt;/p&gt;
+
+&lt;p&gt;What&amp;#8217;s the advantage of a robot vacuum cleaner vs any other methods of cleaning the floor?&lt;/p&gt;
+
+&lt;p&gt;It is cleaner? Nope. It is faster? Nope. Covers more floor area? Nope.&lt;/p&gt;
+
+&lt;p&gt;Answer: it doesn&amp;#8217;t require supervision. You schedule it once, it wakes up, it runs around on its own, cleans everywhere, returns to park and recharges itself, repeat. OMFG! It is a cron job! Write it once and I&amp;#8217;m set! For life! I don&amp;#8217;t even remember how many cron jobs I have, but that&amp;#8217;s the point right?&lt;/p&gt;
+
+&lt;p&gt;That&amp;#8217;s the robot vacuum cleaner advantage, in theory.&lt;/p&gt;
+
+&lt;p&gt;But it isn&amp;#8217;t a cron job, and you&amp;#8217;re not set for life. Instead, for the rest of your life, &lt;strong&gt;you&lt;/strong&gt; are set to pick up that robot, after every N times that it has done its rounds, to empty &lt;em&gt;its&lt;/em&gt; days-old dirty dust bag/container, clean &lt;em&gt;its&lt;/em&gt; now-days-old-dirty brushes and throw those dirty away. If &lt;em&gt;you&lt;/em&gt; fail to clean your robot punctually, your dirty robot will be going around the house, like you&amp;#8217;d scheduled it, and dirty your house everywhere, return to park and recharges itself, repeat. HAAA! Take that, yo! Who&amp;#8217;s scheduling who now?&lt;/p&gt;
+
+&lt;p&gt;So, no. Save the frenzy for when you see a robot vacuum cleaner that&amp;#8217;ll finally clean itself too.&lt;/p&gt;
+
+&lt;p&gt;For now, I&amp;#8217;m filing this under &lt;code&gt;#SolvingTheWrongProblem&lt;/code&gt; &lt;code&gt;#HeyOurVersionOfCronRunsYourJobFasterButYouNeedToSuperviseIt&lt;/code&gt;&lt;/p&gt;</content><author><name>choonkeat</name></author><summary type="html">Well this floated in my facebook feed today and my facebook-bubbled world goes crazy</summary></entry><entry><title type="html">Better incoming email handling for your webapp</title><link href="http://localhost:4000/weblog/2014/02/better-incoming-email-handling-for-your-webapp.html" rel="alternate" type="text/html" title="Better incoming email handling for your webapp" /><published>2014-02-10T00:00:00+08:00</published><updated>2014-02-10T00:00:00+08:00</updated><id>http://localhost:4000/weblog/2014/02/better-incoming-email-handling-for-your-webapp</id><content type="html" xml:base="http://localhost:4000/weblog/2014/02/better-incoming-email-handling-for-your-webapp.html">&lt;p&gt;A standard feature in a webapp is to send emails to an end user. This can be done by&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;using the locally installed &lt;a href=&quot;http://www.postfix.org/&quot;&gt;mail transfer agent (MTA) like postfix&lt;/a&gt; (not available on heroku)&lt;/li&gt;
+&lt;li&gt;paying a bit of money and using SendGrid&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/andris9/directmail&quot;&gt;sending directly to the recipient smtp server&lt;/a&gt; (doesn&amp;#8217;t work well if you are on ec2)&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;What happens when your user replies to that email, using email? You could stonewall with a non-existant &lt;code&gt;donotreply@example.com&lt;/code&gt;&amp;#8230; but how about when you &lt;em&gt;do&lt;/em&gt; want to handle a reply? Add a link in the email saying &lt;code&gt;click here to reply using our web interface&lt;/code&gt;? I find that UX onerous and usually terribly slow e.g. working through my inbox during commute.&lt;/p&gt;
+
+&lt;p&gt;A better UX would be to allow an actual email reply.&lt;/p&gt;
+
+&lt;h3&gt;Incoming email&lt;/h3&gt;
+
+&lt;p&gt;Handling incoming emails might seem like dark waters for web developers. Many solutions offered on stackoverflow &amp;amp; mailing lists usually involves gmail, imap and polling.&lt;/p&gt;
+
+&lt;p&gt;Polling. Ugh.&lt;/p&gt;
+
+&lt;h3&gt;Event driven incoming email&lt;/h3&gt;
+
+&lt;p&gt;A better way is to pipe incoming email directly to your application for processing. And for web developers, &amp;#8220;pipe&amp;#8221; preferably means a &lt;code&gt;HTTP POST&lt;/code&gt; into your favourite web framework. aka a Webhook.&lt;/p&gt;
+
+&lt;p&gt;A quick overview of such setup is:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Point &lt;code&gt;MX&lt;/code&gt; dns entry for your domain to the server that can receive email (e.g. ubuntu with postfix installed); this server &lt;em&gt;can&lt;/em&gt; be a different server from your webapp&lt;/li&gt;
+&lt;li&gt;Configure &lt;code&gt;postfix&lt;/code&gt; to handle that email with an &lt;a href=&quot;https://gist.github.com/choonkeat/3225691&quot;&gt;smtp-to-http shell script&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Now every incoming email is just a regular HTTP form post to your webapp. Throw the blob of email content into a parser like &lt;a href=&quot;http://rubygems.org/gems/mail&quot;&gt;mail&lt;/a&gt; or &lt;a href=&quot;https://npmjs.org/package/mailparser&quot;&gt;mailparser&lt;/a&gt; and you&amp;#8217;d have a handy email object to manipulate.&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;Configuring your own &lt;code&gt;Postfix&lt;/code&gt; server and installing that script to work with &lt;code&gt;Postfix&lt;/code&gt; might be difficult to some, walk in the park for others, but definitely a hairy piece of infrastructure to keep around. You can make things less hairy by paying a SaaS provider to take care of #1 and #2, but there are caveats.&lt;/p&gt;
+
+&lt;h3&gt;Reply-To as Identifier&lt;/h3&gt;
+
+&lt;p&gt;Most webapps I see uses a custom &lt;code&gt;Reply-To&lt;/code&gt; email address (e.g. Basecamp &amp;amp; Github) In this design, an email notification sent from Discussion &lt;code&gt;id=42&lt;/code&gt; would use &lt;code&gt;Reply-To: discussion-42@webapp.com&lt;/code&gt;; an email notification for Discussion &lt;code&gt;id=99&lt;/code&gt; would use a different &lt;code&gt;Reply-To: discussion-99@webapp.com&lt;/code&gt; address.&lt;/p&gt;
+
+&lt;p&gt;When a user replies via email, the webhook handler parses &lt;code&gt;To: discussion-42@webapp.com&lt;/code&gt; header, retrieves &lt;code&gt;Dicussion.find(42)&lt;/code&gt; and create a new discussion comment on behalf of &lt;code&gt;User.where(email: email.from)&lt;/code&gt;, using the email html/text body as &lt;code&gt;comment.body&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, unless you pay &lt;a href=&quot;www.cloudmailin.com/plans&quot;&gt;an arm and a leg&lt;/a&gt;, you&amp;#8217;ll only get 1x email address to use as your &lt;code&gt;Reply-To&lt;/code&gt;. Also, any attachment in the email would be lost.&lt;/p&gt;
+
+&lt;p&gt;So having unique-per-conversation &lt;code&gt;Reply-To&lt;/code&gt; address is inefficient &amp;amp; restrictive your infrastructure options.&lt;/p&gt;
+
+&lt;h3&gt;Discussion Thread&lt;/h3&gt;
+
+&lt;p&gt;One more thing.&lt;/p&gt;
+
+&lt;p&gt;Unless you want your webapp&amp;#8217;s email messages to reach your user&amp;#8217;s inbox as individual, annoyingly unrelated messages, your job is actually not done yet.&lt;/p&gt;
+
+&lt;p&gt;A conversation in your webapp should ideally be threaded in the same manner in your user&amp;#8217;s inbox (e.g. see Basecamp discussions &amp;amp; Github Issues). So when &lt;code&gt;userX&lt;/code&gt; comments on &lt;code&gt;Discussion 42&lt;/code&gt;, the outgoing email notification sent to other participants of the discussion should properly set &lt;code&gt;In-Reply-To: &amp;lt;discussion42messageid&amp;gt;&lt;/code&gt; and &lt;code&gt;References: &amp;lt;discussion42messageid&amp;gt;&lt;/code&gt; in order for them to thread properly in Gmail, Apple Mail and presumably anything else. Having a matching mail subject is essential too, but that&amp;#8217;s the easy part.&lt;/p&gt;
+
+&lt;p&gt;By now we&amp;#8217;d have a module to manage mapping of &lt;code&gt;Discussion&lt;/code&gt; records to-and-fro &lt;code&gt;Reply-To&lt;/code&gt; values. And another module to manage a consistent value of &lt;code&gt;Message-Id&lt;/code&gt;, &lt;code&gt;In-Reply-To&lt;/code&gt; and &lt;code&gt;References&lt;/code&gt; for &lt;code&gt;Discussion&lt;/code&gt; records.&lt;/p&gt;
+
+&lt;p&gt;Seems unnecessarily complicated.&lt;/p&gt;
+
+&lt;h3&gt;Message-Id as Identifier (duh)&lt;/h3&gt;
+
+&lt;p&gt;We can simplify the design by giving up unique-per-conversation &lt;code&gt;Reply-To&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Uh? Then how do you know if an email replied &lt;code&gt;To: standard@webapp.com&lt;/code&gt; is for &lt;code&gt;Dicussion.find(42)&lt;/code&gt;? We look inside the values array of &lt;code&gt;In-Reply-To&lt;/code&gt; + &lt;code&gt;References&lt;/code&gt; instead.&lt;/p&gt;
+
+&lt;p&gt;For example, an outgoing email from your webapp just need to craft the correct, unique-per-conversation &lt;code&gt;Message-Id: &amp;lt;discussion-42@webapp.com&amp;gt;&lt;/code&gt;. A email reply to that will automatically contain these headers&lt;/p&gt;
+
+&lt;figure class='code'&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class='line-number'&gt;1&lt;/span&gt;
+&lt;span class='line-number'&gt;2&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class='code'&gt;&lt;pre&gt;&lt;code class=''&gt;&lt;span class='line'&gt;In-Reply-To: &amp;lt;discussion-42@webapp.com&amp;gt;
+&lt;/span&gt;&lt;span class='line'&gt;References: &amp;lt;discussion-42@webapp.com&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+&lt;p&gt;And our webhook handler can still locate Discussion 42 based on values array of &lt;code&gt;In-Reply-To&lt;/code&gt; + &lt;code&gt;References&lt;/code&gt;. Thus, managing &lt;code&gt;Message-Id&lt;/code&gt; alone will suffice.&lt;/p&gt;
+
+&lt;p&gt;Warning: earlier we mentioned using &lt;code&gt;email.from&lt;/code&gt; to identify the &lt;code&gt;User&lt;/code&gt;, but that&amp;#8217;s not reliable since email &lt;code&gt;From:&lt;/code&gt; header can be easily faked. A better mechanism would be to embed the author identity in &lt;code&gt;References&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;A quick summary of this scheme is&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;User#1 create new Discussion#42 with User#2 as participant&lt;/li&gt;
+&lt;li&gt;App delivers &amp;#8216;new discussion&amp;#8217; email to User#2 with &lt;code&gt;Message-Id: &amp;lt;D42&amp;gt;&lt;/code&gt; and &lt;code&gt;References: &amp;lt;D42-U2SECRET&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;User#2 replies to email, email automatically carries &lt;code&gt;In-Reply-To: &amp;lt;D42&amp;gt;&lt;/code&gt; and &lt;code&gt;References: &amp;lt;D42&amp;gt; &amp;lt;D42-U2SECRET&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Webhook handler picks up &lt;code&gt;D42&lt;/code&gt; to retrieve Discussion#42, and picks up &lt;code&gt;U2SECRET&lt;/code&gt; to locate User#2 and proceed to create a comment&lt;/li&gt;
+&lt;li&gt;App delivers &amp;#8216;new comment&amp;#8217; email to User#1 with &lt;code&gt;References: &amp;lt;D42&amp;gt; &amp;lt;D42-U1SECRET&amp;gt;&lt;/code&gt; (notice &lt;code&gt;Message-Id&lt;/code&gt; doesn&amp;#8217;t matter from here onwards)&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;h3&gt;Diymailin&lt;/h3&gt;
+
+&lt;p&gt;That could be the end of the story for most people, but for &lt;a href=&quot;https://github.com/develsadvocates/runtimeerror.js&quot;&gt;various reasons&lt;/a&gt; I couldn&amp;#8217;t afford to have an unreasonably low cap on the number of incoming emails, and have attachments stripped.&lt;/p&gt;
+
+&lt;p&gt;So for my own setup, I pay $5/month for a &lt;a href=&quot;https://www.digitalocean.com/?refcode=8d52e959ad0f&quot;&gt;Digital Ocean&lt;/a&gt; box to run a &lt;a href=&quot;https://github.com/choonkeat/diymailin&quot;&gt;diymailin&lt;/a&gt; instance. With that I can support the numerous apps that I have using diymailin&amp;#8217;s built in web interface, without mucking around with arcane &lt;code&gt;postfix&lt;/code&gt; config.&lt;/p&gt;
+
+&lt;h3&gt;Mail2Webhook&lt;/h3&gt;
+
+&lt;p&gt;But if you&amp;#8217;re too lazy to setup your own diymailin instance, you can hop on to &lt;a href=&quot;https://www.mail2webhook.com/&quot;&gt;mail2webhook.com&lt;/a&gt; and use my setup instead.&lt;/p&gt;</content><author><name>choonkeat</name></author><summary type="html">A standard feature in a webapp is to send emails to an end user. This can be done by</summary></entry><entry><title type="html">Connecting Dots</title><link href="http://localhost:4000/weblog/2013/08/connecting-dots.html" rel="alternate" type="text/html" title="Connecting Dots" /><published>2013-08-14T00:00:00+08:00</published><updated>2013-08-14T00:00:00+08:00</updated><id>http://localhost:4000/weblog/2013/08/connecting-dots</id><content type="html" xml:base="http://localhost:4000/weblog/2013/08/connecting-dots.html">&lt;p&gt;I was &lt;a href=&quot;http://soundgecko.com&quot;&gt;listening&lt;/a&gt; to &lt;a href=&quot;http://highscalability.com/blog/2012/11/5/gone-fishin-building-super-scalable-systems-blade-runner-mee.html&quot;&gt;a post from High Scalability&lt;/a&gt; today, and it reminded me of this old talk&lt;/p&gt;
+
+&lt;blockquote&gt;
+  the spread of an epidemic can provide a model for the spread of information throughout a network and &amp;hellip; techniques based on that model can be used to create ultra-scalable software infrastructures that exhibit unparalleled robustness and scalability properties.
+  &lt;br/&gt;
+  &amp;mdash; &lt;a href=&quot;http://itc.conversationsnetwork.org/shows/detail459.html&quot;&gt;Werner Vogels, E-Commerce at Interplanetary Scale&lt;/a&gt;
+&lt;/blockquote&gt;
+
+
+&lt;p&gt;Taken to its logical conclusion, instead of our familiar client-server architectures, &amp;#8220;everybody&amp;#8221; will have to be hosting a piece of the system in order for us to reach where Werner Vogels describe: scale is no longer a problem to tackle but like a virus, the more nodes there are, the more robust the system.&lt;/p&gt;
+
+&lt;p&gt;Even if we solve the technical issues, the first big hurdle is actually: how do we convince everyone to run a piece of infrastructure 24x7?&lt;/p&gt;
+
+&lt;h3&gt;Go To Market&lt;/h3&gt;
+
+&lt;p&gt;At AllThingsD, when asked to comment on a TV product, Steve Jobs implied that the problem is not purely technical; he rightfully pointed out that there was no &lt;a href=&quot;http://tech.fortune.cnn.com/2011/12/23/video-steve-jobs-on-tvs-go-to-market-problem/&quot;&gt;good go-to-market-strategy&lt;/a&gt;. To appreciate how a go-to-market-strategy can make or break a product, let&amp;#8217;s consider the original iPhone: a beautiful jewel in your hands, but a rather lame cell phone (poor battery life, no 3g, no keyboard)&lt;/p&gt;
+
+&lt;p&gt;Who knows if the entire vision was already there, but the initial focus was solely on the beautiful device &amp;amp; beautiful interface. While flying lame and humble under the radar of incumbent players, get &lt;em&gt;this pretty device&lt;/em&gt; into enough affluent people&amp;#8217;s hands, and while they&amp;#8217;re smitten, require an unlimited data plan (imho, a critical but understated move in 2007).&lt;/p&gt;
+
+&lt;p&gt;Later, a reveal: hey Mac developers, a few million rich people is using our phone, running your familiar OS X, has 24x7 internet connection, plays video, mp3, has GPS, has Google Map, real web browser, multi-touch, accelerometer, camera, compass… Wanna sell them some apps? (you &lt;em&gt;have&lt;/em&gt; to time-travel back to 2007 to appreciate how impossibly desirable that was)&lt;/p&gt;
+
+&lt;p&gt;The proverbial chicken and egg hurdle was deftly leapt over with a feint.&lt;/p&gt;
+
+&lt;h3&gt;Interplanetary Scale&lt;/h3&gt;
+
+&lt;p&gt;Space Monkey says they are &lt;a href=&quot;http://www.kickstarter.com/projects/clintgc/space-monkey-taking-the-cloud-out-of-the-datacente&quot;&gt;taking the cloud out of the datacentre&lt;/a&gt;, then they talk about the &lt;a href=&quot;http://www.spacemonkey.com/&quot;&gt;1TB of storage… your photos, videos, documents, and music&lt;/a&gt;. You&amp;#8217;d think they&amp;#8217;re building a Dropbox, iCloud or Amazon S3. Perhaps they do really mean just that.&lt;/p&gt;
+
+&lt;p&gt;But let&amp;#8217;s assume they don&amp;#8217;t :-)&lt;/p&gt;
+
+&lt;h3&gt;Feint&lt;/h3&gt;
+
+&lt;p&gt;While Dropbox is a darling right now and &amp;#8220;Cloud&amp;#8221; is buzzword, Space Monkey is quite a desirable consumer device. So use that story and get the device into the hands of a big enough group of geeky people (Kickstarter hurray!)&lt;/p&gt;
+
+&lt;p&gt;Later, a reveal: hey developers, we have a big group of rich geeky people hosting our computer servers across the globe, powered up and connected to the internet 24x7, with a TB of storage each… Wanna sell them some apps?&lt;/p&gt;
+
+&lt;h3&gt;Botnet App Store&lt;/h3&gt;
+
+&lt;p&gt;What if an app running on this &amp;#8220;data center&amp;#8221; cost nothing extra to scale up? Instead of paying for computing resources in East Coast of USA to serve users in Australia, how about if every user &amp;#8220;pay for their fair share&amp;#8221; instead?&lt;/p&gt;
+
+&lt;p&gt;Let&amp;#8217;s say users install your app from Space Monkey &amp;#8220;app store&amp;#8221;, onto their own device. Your app runs off that device at home, stores their own content there too. Users can still access your app from Starbucks like a regular SaaS app (Space Monkey &amp;#8220;data centre&amp;#8221; platform takes care of that, no worries)&lt;/p&gt;
+
+&lt;p&gt;Nay sayers may immediately say &amp;#8220;that&amp;#8217;s a lame data centre! you can&amp;#8217;t possibly launch a search engine this way!&amp;#8221;. Some types of app won&amp;#8217;t work well (Google.com, Amazon.com), but others could potentially thrive (Shopify, Gmail, Dropbox).&lt;/p&gt;
+
+&lt;p&gt;And being lame to incumbent products is not always a bad thing.&lt;/p&gt;
+
+&lt;h3&gt;&amp;#8220;If you’re not paying for the product, you are the product&amp;#8221;&lt;/h3&gt;
+
+&lt;p&gt;Like an iPhone, the device belongs to the customer, and they&amp;#8217;d have to explicitly install apps from an app store. The result is, developers can easily charge money for the app in a way that agrees with how people pay for things. Thanks Apple AppStore, for training the mass consumers!&lt;/p&gt;
+
+&lt;p&gt;A side effect is, since you&amp;#8217;re now selling your app, you no longer need to sell your users: Hey, your product has no ads.&lt;/p&gt;
+
+&lt;h3&gt;Epilogue&lt;/h3&gt;
+
+&lt;p&gt;There once was a social network idea pitched to me: an anti-Facebook.&lt;/p&gt;
+
+&lt;p&gt;With superb privacy configs, access controls so anal that the infrastructure requires each user to store content in their own harddisk (Ha!). No big brother. No subpoena. I told my peers they&amp;#8217;re crazy.&lt;/p&gt;
+
+&lt;p&gt;Perhaps they&amp;#8217;d just needed a better go to market strategy.&lt;/p&gt;</content><author><name>choonkeat</name></author><summary type="html">I was listening to a post from High Scalability today, and it reminded me of this old talk</summary></entry><entry><title type="html">Learn hacking, not ABCs</title><link href="http://localhost:4000/weblog/2012/06/learn-hacking-not-abcs.html" rel="alternate" type="text/html" title="Learn hacking, not ABCs" /><published>2012-06-24T00:00:00+08:00</published><updated>2012-06-24T00:00:00+08:00</updated><id>http://localhost:4000/weblog/2012/06/learn-hacking-not-abcs</id><content type="html" xml:base="http://localhost:4000/weblog/2012/06/learn-hacking-not-abcs.html">&lt;p&gt;While looking for a place to start learning programming, my friend Phil brought this to my attention: &lt;a href=&quot;http://blogs.wsj.com/tech-europe/2012/06/19/codecademy-closes-10-million-round/&quot;&gt;Codecademy Closes $10 Million Round&lt;/a&gt;. He asked me what I think of it [as a place for him to start].&lt;/p&gt;
+
+&lt;p&gt;While I applaud their existence, and congratulate their funding, I doubt I would&amp;#8217;ve gotten into programming if I were introduced via something like &lt;a href=&quot;http://www.codecademy.com/&quot;&gt;Codecademy&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I&amp;#8217;m lazy, impatient and have lots of things I&amp;#8217;d rather be doing than whatever I&amp;#8217;m doing right now. And I definitely don&amp;#8217;t want to sit through grammar school, regardless of whether it was English language or the lovely Ruby programming language. I find programming interesting only because gets me results.&lt;/p&gt;
+
+&lt;p&gt;Story was, our home PC&amp;#8217;s 40mb hard disk crashed and we were left with whatever that was on floppies. My brother borrowed a book from the library with computer games inside. I would boot up the computer, ran &amp;#8220;gwbasic&amp;#8221;, choose a game from the book, and type all the gibberish code into the computer, character by character. Some games were a few lines long, some spanned a few pages. After everything was typed in, I&amp;#8217;d run and play my game.&lt;/p&gt;
+
+&lt;p&gt;I remember especially liking a cowboy fast draw turn-based game that had dice roll based on your character&amp;#8217;s stats (speed, accuracy), distance, dealt damages based on the gun you used and where you hit. It was fun.&lt;/p&gt;
+
+&lt;p&gt;Before long I realize I didn&amp;#8217;t have to transcribe every character in the book. If I changed some numbers, the computer wouldn&amp;#8217;t know it came from me, and the game would play out differently. I made the games better (or worse, depending on whether you think god-mode is a good thing or not).&lt;/p&gt;
+
+&lt;p&gt;Before long I realize I didn&amp;#8217;t have to transcribe &lt;em&gt;anything&lt;/em&gt; from the book. If I&amp;#8217;d just written anything I wanted, the computer wouldn&amp;#8217;t know &lt;em&gt;none&lt;/em&gt; of it came from the book. The computer would follow &lt;em&gt;my&lt;/em&gt; instructions and run &lt;em&gt;my&lt;/em&gt; game like it would run the games from the book.&lt;/p&gt;
+
+&lt;p&gt;Wow. I am as authoritative to the computer as The Book.&lt;/p&gt;
+
+&lt;p&gt;(The next big milestone would come several years later, when I produced my first &amp;#8220;.exe&amp;#8221; file. aka, shit just got real.)&lt;/p&gt;
+
+&lt;p&gt;That&amp;#8217;s why I&amp;#8217;m biased to think that programming should only ever be introduced as a means to get something real done or done faster. Hacking on something you already understand. Then there is a purpose and motivation to learn. Then programming is meaningful. It is sad [to me] to know that some people&amp;#8217;s first contact with programming would be a dry grammar class (or some patronizing guided tour to nowhere, &amp;#8221;&lt;em&gt;yippie, you can count!&lt;/em&gt;&amp;#8221;) that they just &lt;em&gt;have&lt;/em&gt; to sit through to learn, no biggie, like everything else they&amp;#8217;d done in school.&lt;/p&gt;
+
+&lt;p&gt;[Update 27 Sept 2012]&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;This essay was an immune response, triggered by hearing too many times that &lt;a href=&quot;https://vimeo.com/36579366&quot;&gt;Inventing on Principle&lt;/a&gt; was &amp;#8220;about live coding&amp;#8221;, and seeing too many attempts to &amp;#8220;teach programming&amp;#8221; by adorning a JavaScript editor with badges and mascots.&lt;/p&gt;
+
+&lt;p&gt;&amp;#8211; &amp;#8220;Learnable Programming&amp;#8221;, &lt;a href=&quot;http://worrydream.com/LearnableProgramming/&quot;&gt;Bret Victor&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;</content><author><name>choonkeat</name></author><summary type="html">While looking for a place to start learning programming, my friend Phil brought this to my attention: Codecademy Closes $10 Million Round. He asked me what I think of it [as a place for him to start].</summary></entry><entry><title type="html">TDD for Those Who Don’t Need It</title><link href="http://localhost:4000/weblog/2012/06/tdd-for-those-who-dont-need-it.html" rel="alternate" type="text/html" title="TDD for Those Who Don't Need It" /><published>2012-06-01T00:00:00+08:00</published><updated>2012-06-01T00:00:00+08:00</updated><id>http://localhost:4000/weblog/2012/06/tdd-for-those-who-dont-need-it</id><content type="html" xml:base="http://localhost:4000/weblog/2012/06/tdd-for-those-who-dont-need-it.html">&lt;p&gt;A public service announcement: There&amp;#8217;s still a lot of pretty good programmers who don&amp;#8217;t write tests&amp;#8230; and programmers who write tests are not necessarily any good.&lt;/p&gt;
+
+&lt;p&gt;It is easy to forget that. &lt;a href=&quot;http://en.wikipedia.org/wiki/Behavior_Driven_Development&quot;&gt;BDD&lt;/a&gt;/&lt;a href=&quot;http://en.wikipedia.org/wiki/Test-driven_development&quot;&gt;TDD&lt;/a&gt; propaganda can be a thick fog.&lt;/p&gt;
+
+&lt;p&gt;A year ago the only &amp;#8220;BDD&amp;#8221; I&amp;#8217;d done was &amp;#8220;Bug Driven&amp;#8221;, i.e. &amp;#8220;Bug in production? Add a test &amp;amp; fix it&amp;#8221;. There were no test culture from where I began writing code and we write code by simply writing the code. New, file, tap tap tap, run; That&amp;#8217;s how we do it, that&amp;#8217;s how we&amp;#8217;ve been doing it, work gets done, everyone is happy.&lt;/p&gt;
+
+&lt;p&gt;Nowadays, there&amp;#8217;ll be TDD folks sweeping in to shame you into writing tests. &amp;#8220;Oh, you DON&amp;#8217;T write tests? Then how can you possibly be sure your code is correct?!11 Fwahahahaha.&amp;#8221; &amp;#8220;I did test it myself. It&amp;#8217;s in production and it works.&amp;#8221; Still, you might eventually succumb to such peer pressure and decide to &amp;#8220;write some tests&amp;#8221; in your next project&amp;#8230; only to find it tedious, distracting, cumbersome &amp;amp; standing between you and your deadline. No more tests in the next project.&lt;/p&gt;
+
+&lt;p&gt;My issue is, every sell for TDD has to do with some future benefit: Tests give you confidence to refactor [next time]. Writing tests makes your design better [you&amp;#8217;ll be thankful next time]. Tests serves as documentation [for the next developer, or yourself next time]. Untested code is legacy code [when you have to touch it again, next time].&lt;/p&gt;
+
+&lt;p&gt;Well, &lt;a href=&quot;http://en.wikipedia.org/wiki/You_ain't_gonna_need_it&quot;&gt;YAGNI&lt;/a&gt; is a good principle too, and it can apply here.&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&quot;pullquote&quot;&gt;Perfectly capable programmers, who don&amp;#8217;t currently write tests, are not actually &lt;em&gt;against&lt;/em&gt; having confidence to refactor&lt;/span&gt;, &lt;em&gt;against&lt;/em&gt; better api design, &lt;em&gt;against&lt;/em&gt; having documentation, or &lt;em&gt;against&lt;/em&gt; maintainable code. It is pointless trying to convince them the benefits of that. In fact, chances are (believe it or not) they strive for that harder than you might imagine - they probably know their patterns of refactoring, may have solid habits of writing javadoc/rdoc/etc doc, and are likely to leave great commit messages too. They have different [arguably inferior] means at their disposal, that&amp;#8217;s all.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, something that&amp;#8217;s not YAGNI, and a very real issue of writing software, is the amount of information you have to hold in your head at the same time. Writing a feature of many moving parts is almost magic, this piece here, that piece there, fits perfectly somehow and everything works. On a good day, the programmer is in The Zone, pieces fit effortlessly. On a bad day, maybe nothing gets done. That&amp;#8217;s why the headphones. That&amp;#8217;s why the night shift, morning shift. &lt;span class=&quot;pullquote&quot;&gt;And if you&amp;#8217;re not a programmer, that&amp;#8217;s why your programmers bite when you approach their desks&lt;/span&gt; - you missed the sound of a thousand and one intricately placed detail crashing down like a house of cards, when you slap their back, &amp;#8220;Hey, how&amp;#8217;s it goin?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;What eventually got me into writing tests, was a point about TDD that is often buried, not clarified &amp;amp; maybe mentioned in passing. (On hindsight, I realise most TDD materials are meant to convert TDD folks of a different sect, and not really meant to get outsiders &lt;em&gt;into&lt;/em&gt; TDD) An example is in &lt;a href=&quot;http://railscasts.com/episodes/275-how-i-test&quot;&gt;this RailsCast, at the 4m37s mark&lt;/a&gt;, Ryan Bates made a throw away comment, &lt;em&gt;&amp;#8220;I really like this approach of testing, it just walks you through: what&amp;#8217;s the next step I have to do to get this working.&amp;#8221;&lt;/em&gt;. Though this may seriously not be the most important benefit for most TDD advocates, but as a reason to start adopting TDD&amp;#8230;&lt;/p&gt;
+
+&lt;p&gt;That. Was. It.&lt;/p&gt;
+
+&lt;p&gt;Writing your test first is like putting a golf flag at the hole.&lt;/p&gt;
+
+&lt;figure class='code'&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class='code'&gt;&lt;pre&gt;&lt;code class=''&gt;&lt;span class='line'&gt;it &quot;emails user when requesting password reset&quot; do
+&lt;/span&gt;&lt;span class='line'&gt;  user = Factory(:user)
+&lt;/span&gt;&lt;span class='line'&gt;  visit login_path
+&lt;/span&gt;&lt;span class='line'&gt;  click_link &quot;password&quot;
+&lt;/span&gt;&lt;span class='line'&gt;  fill_in &quot;Email&quot;, :with =&amp;gt; user.email
+&lt;/span&gt;&lt;span class='line'&gt;  click_button &quot;Reset Password&quot;
+&lt;/span&gt;&lt;span class='line'&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+&lt;p&gt;&lt;span class=&quot;pullquote&quot;&gt;Now that the flag is planted, the actual work of &amp;#8220;writing the code&amp;#8221; becomes an almost mindless stroll of hitting the ball towards the flag - fixing the next error thrown from the test&lt;/span&gt;: &lt;em&gt;&amp;#8220;error: no link with title, id or text &amp;#8216;password&amp;#8217; found&amp;#8221;&lt;/em&gt; ok, let&amp;#8217;s add that &amp;#8216;password&amp;#8217; field; &lt;em&gt;&amp;#8220;error: `new_password_reset_path&amp;#8217; undefined&amp;#8221;&lt;/em&gt; ok, let&amp;#8217;s add that &amp;#8216;new_password_reset_path&amp;#8217; route; etc until there&amp;#8217;s no more errors. Then you&amp;#8217;ve reached the flag. The feature is done. And chances are, you haven&amp;#8217;t even needed to launch that browser to &amp;#8220;check&amp;#8221;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;(If your test code can&amp;#8217;t produce &amp;#8220;reads like english&amp;#8221; code like the above sample, then just write your steps in prose first. You can add test code next to the [then commented out] prose later. The end result is the same, and fwiw I actually do prefer test code to read like code than english-y dsl)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;This approach addresses the &amp;#8220;house of cards&amp;#8221; issue by helping you persist details quickly, and often, into writing. Interruptions are still annoying of cos, but you can survive them better now: the next error is always clearly in sight, just solve it to move on to the next error. &lt;span class=&quot;pullquote&quot;&gt;Next boss to kill, in a mindless arcade.&lt;/span&gt; In fact, you can leave it &amp;#8220;half done&amp;#8221; and come back tomorrow without missing a beat, or requiring &amp;#8220;boot up time&amp;#8221; (recalling &amp;amp; loading details back into your brain) before you get started.&lt;/p&gt;
+
+&lt;p&gt;Certainly this isn&amp;#8217;t a silver bullet for all scenarios, but it&amp;#8217;s been effective enough for me. I&amp;#8217;d found myself ploughing through features steadily despite being drowsy from flu medication or being interrupted by loud wails across the room (I&amp;#8217;m also a stay-home dad to my 4-month old baby).&lt;/p&gt;
+
+&lt;p&gt;So, if you&amp;#8217;re a good programmer but not writing tests yet, hopefully this can strike a chord with you and get you started. A word of caution: there is just TOO MUCH testing libs out there, learning about most them is simply a waste of time. Just use the bare minimum &amp;amp; get going.&lt;/p&gt;
+
+&lt;p&gt;PS: This is known as the &amp;#8220;red/green/refactor&amp;#8221; mantra, which like a company mission statement, fail to appeal to me in &lt;em&gt;any&lt;/em&gt; way. &lt;a href=&quot;http://en.wikipedia.org/wiki/Test-driven_development&quot;&gt;Wikipedia&lt;/a&gt;, &amp;#8221;&lt;em&gt;TDD constantly repeats the steps of adding test cases that fail, passing them, and refactoring. Receiving the expected test results at each stage reinforces the programmer&amp;#8217;s mental model of the code, boosts confidence and increases productivity.&lt;/em&gt;&amp;#8221; zzzzz zones out&amp;#8230; um, watever.&lt;/p&gt;
+
+&lt;p&gt;[Update 27 Sept 2012]&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;Working in the head doesn&amp;#8217;t scale. The head is a hardware platform that hasn&amp;#8217;t been updated in millions of years. To enable the programmer to achieve increasingly complex feats of creativity, the environment must get the programmer out of her head, by providing an external imagination where the programmer can always be reacting to a work-in-progress.&lt;/p&gt;
+
+&lt;p&gt;&amp;#8211; &amp;#8220;Learnable Programming: Create by reacting&amp;#8221;, &lt;a href=&quot;http://worrydream.com/LearnableProgramming/&quot;&gt;Bret Victor&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;</content><author><name>choonkeat</name></author><summary type="html">A public service announcement: There&amp;#8217;s still a lot of pretty good programmers who don&amp;#8217;t write tests&amp;#8230; and programmers who write tests are not necessarily any good.</summary></entry><entry><title type="html">Nokia Lumia 800</title><link href="http://localhost:4000/weblog/2012/01/nokia-lumia-800.html" rel="alternate" type="text/html" title="Nokia Lumia 800" /><published>2012-01-31T00:00:00+08:00</published><updated>2012-01-31T00:00:00+08:00</updated><id>http://localhost:4000/weblog/2012/01/nokia-lumia-800</id><content type="html" xml:base="http://localhost:4000/weblog/2012/01/nokia-lumia-800.html">&lt;p&gt;Finally gotten my hands on the Nokia Lumia 800. It looks gorgeous.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/lumia800.jpg&quot; alt=&quot;Nokia Lumia 800 Black&quot; /&gt;&lt;/p&gt;
+
+&lt;h3&gt;Touch&lt;/h3&gt;
+
+&lt;p&gt;The Metro UI is sleek, and very responsive to touch. In fact, the touch could be described as too sensitive - it often mistaken my &amp;#8220;mousedown&amp;#8221; (if I may call it that) for a &amp;#8220;tap&amp;#8221; (as if I&amp;#8217;d let go). This isn&amp;#8217;t as big a problem in the normal menu navigation; &lt;span class=&quot;pullquote&quot;&gt;when in the browser I&amp;#8217;ll accidentally trigger zoom in/out surprisingly often.&lt;/span&gt; Perhaps it is a MSIE thing.&lt;/p&gt;
+
+&lt;p&gt;In any case, it is not laggy.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;[6 days in]&lt;/strong&gt; The gesture misreads is getting rather irritating. Reading and scrolling a webpage very often trigger the zooms or even unintended click on links YMMV, but I don&amp;#8217;t even think about the worrying about such accidents on iOS; Perhaps they err on the side of less destructive gesture or something smart. Regardless, my experience is that &lt;em&gt;even the original iPhone&lt;/em&gt; interprets gestures generations ahead of Lumia 800.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;[Update]&lt;/strong&gt; &lt;a href=&quot;http://www.theverge.com/2012/3/28/2909478/microsoft-building-windows-8-touchscreen-gestures&quot;&gt;This informative video of Microsoft explaining how touch hardware needs to &amp;#8220;meet specifications&amp;#8221;&lt;/a&gt; actually speaks volumes of the great amount of attention Apple has put in since the &lt;em&gt;first&lt;/em&gt; iPhone. The touch experience on the 2007 iPhone is still unsurpassed in 2012, think about that.&lt;/p&gt;
+
+&lt;p&gt;(Can&amp;#8217;t shake off the feeling that the video is an irresponsible (we did &lt;em&gt;our&lt;/em&gt; part) &amp;amp; pre-emptive disclaimer of &amp;#8220;their hardware is at fault, don&amp;#8217;t blame us&amp;#8221;)&lt;/p&gt;
+
+&lt;p&gt;There is also inconsistent treatment of &amp;#8220;mousedown&amp;#8221; style on links. e.g. In Google Mail tile, the links are helpfully highlighted when &amp;#8220;mousedown&amp;#8221; - like on iOS. Whereas in People tile, reading a tweet and clicking on a url is tricky - the whole tweet gets a &amp;#8220;3d mousedown&amp;#8221; treatment (like tapping a wooden plank floating on water) and only when you release then do you find out if you&amp;#8217;ve tapped the link or done nothing useful.&lt;/p&gt;
+
+&lt;h3&gt;Readability&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;[6 days in]&lt;/strong&gt; Metro, a typography-based design, renders itself (home, menu, native apps) very well. I&amp;#8217;ve initially commented to my wife that the fonts look sharp &amp;amp; I didn&amp;#8217;t even miss the &amp;#8220;retina display&amp;#8221; (unlike when I look at older iPhones).&lt;/p&gt;
+
+&lt;p&gt;Sadly, the same cannot be said for webpages in the browser - where fonts tend to be smaller. Text look ugly there.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;[1 month in]&lt;/strong&gt; The Metro layout allocates a lot of space on boasting its own sense of style (which looks gorgeous to demo, e.g. the big screenshot above content only shows after ~40% of the screen, and the right 10% is &amp;#8220;spent&amp;#8221; on revealing the next screen). This might be fine for a desktop or tablet, but starts getting pointless on the small screen after extended usage. A survey of some apps in their app store (e.g. Facebook app), seems like when following Metro look and feel, it is very easy to fall into the trap of only using half the screen for content.&lt;/p&gt;
+
+&lt;h3&gt;Web Browsing&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;[6 days in]&lt;/strong&gt; On Mobile Safari, if the web page doesn&amp;#8217;t render well I&amp;#8217;ll [double-tap] zoom &amp;amp; scroll as I read, or I&amp;#8217;ll tap &amp;#8220;Safari Reader&amp;#8221;, if that still doesn&amp;#8217;t work I&amp;#8217;ll tap my Instapaper bookmarklet &amp;amp; read it later on my Instapaper app. On the Lumia, due to touch gesture issues, the &amp;#8220;zoom &amp;amp; scroll&amp;#8221; route has 50% chance of taking me through an article. If that doesn&amp;#8217;t work, then there&amp;#8217;s no redress: No readability feature, no Instapaper app (unless I pay monthly subscription).&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&quot;pullquote&quot;&gt;The net effect is, I&amp;#8217;ve caught myself dreading to visit a link, go search for something on the web or generally using the browser. This is quite unlike the general sentiment of web browsing on the iOS.&lt;/span&gt;&lt;/p&gt;
+
+&lt;h3&gt;Transitions&lt;/h3&gt;
+
+&lt;p&gt;Stark changes to rectangular areas on the screen is often confusing. When tastefully used, subtle animation can help explain to a user &lt;em&gt;where&lt;/em&gt; something came from or went (e.g. [dis]appearance of dialog boxes).&lt;/p&gt;
+
+&lt;p&gt;In Metro, pages often peek at you from beyond the screen edge, elements at the top/bottom bounces around, and things in the middle often swirl &amp;amp; flip themselves silly, tapping on buttons sometimes give you that a slight vibrating buzz (a poor attempt at tactile feedback).&lt;/p&gt;
+
+&lt;p&gt;(Regarding the part where pages peek: unfortunately Metro chose to &lt;em&gt;wrap&lt;/em&gt; you around as you swipe toward the page on the right, instead of ending on the &amp;#8220;last page&amp;#8221;. Thus making it lose all the spatial benefit of having a &lt;a href=&quot;http://en.wikipedia.org/wiki/File:Wp7_musicvideo.jpg&quot;&gt;view port in a big space&lt;/a&gt; metaphor)&lt;/p&gt;
+
+&lt;p&gt;Though much better than Vista days, I continue to get the feeling that Microsoft interfaces enjoy telling the user, &amp;#8221;&lt;em&gt;Hey, look at ME!&lt;/em&gt;&amp;#8221; more than removing distractions from the task at hand or leaving limelight for the user&amp;#8217;s content.&lt;/p&gt;
+
+&lt;p&gt;A case in point is the hardware &amp;#8220;search&amp;#8221; button. When you want to search for something on the web, e.g. &amp;#8220;metro ui&amp;#8221;, tap and it will bring up Bing.&lt;/p&gt;
+
+&lt;p&gt;The beautiful background photo is sprinkled with tiny animated boxes - if you tap on them, will show you a trivia of some sort. This eye candy obviously speaks well of whoever had put it together, &lt;em&gt;&amp;#8220;Look at our new search page, mum!&amp;#8221;&lt;/em&gt;. &lt;span class=&quot;pullquote&quot;&gt;&lt;strong&gt;However, the task at hand is to search - not marvel at the search page&lt;/strong&gt;&lt;/span&gt;. A better flow would be to bring up the keyboard for the user to immediately type whatever he&amp;#8217;d want to search for before he&amp;#8217;d forgotten it (which is &amp;#8220;metro ui&amp;#8221; in the previous paragraph).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/bing-default.jpg&quot; alt=&quot;Bing&quot; /&gt;
+&lt;img src=&quot;/images/bing-after-tapping.jpg&quot; alt=&quot;Bing, after tapping on search bar&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To make it worse, the search button is located below the bottom of the screen, whereas the obvious next step is to tap something at the top of the screen.&lt;/p&gt;
+
+&lt;p&gt;What&amp;#8217;s nice though, is their sidestep of Apple&amp;#8217;s rubber band (bounce scrolling) patent. This might have changed, but I recall Android to have a lame, abrupt halt when a scrolling window reaches the end. Metro, however, implements an equally effective [to Apple&amp;#8217;s rubber band] effect by squeezing the height of elements into the edge of the scroll window, like passengers pressing onto each other  (and bouncing back) when the train screeches to a sudden stop.&lt;/p&gt;
+
+&lt;h3&gt;Sleep/Wake&lt;/h3&gt;
+
+&lt;p&gt;How do you pick up your phone from your desk? Go ahead and try it. Not something I&amp;#8217;m conscious of before this, but I pick it up by the sides. Unfortunately this means I&amp;#8217;ll often accidentally hit the sleep/wake button on the Lumia 800 - that button is smack in the middle on the right side. A reference for iPhone 4 users, the equivalent would be having that button just above your sim card slot. Yea, go figure. What&amp;#8217;s wrong with having the sleep wake button on the top edge? Was that patented as well?&lt;/p&gt;
+
+&lt;h3&gt;Hardware Back Button&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;[6 days in]&lt;/strong&gt; &lt;span class=&quot;pullquote&quot;&gt;The issue with a hardware back button is the lack of a hardware forward button (when combined with the fact that websites just love redirecting you to their mobile version).&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;For example,&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;Tap on People tile &gt; Read news feed &gt; Tap on tweet &gt; Tap on url in tweet &gt; Loading link &gt; Redirected to mobile version &gt; Page loads&lt;/p&gt;
+
+&lt;p&gt;After reading, you tap back to Tweet screen to reply that tweet, but you see Loading link &gt; Redirected to mobile version &gt; Damn, you tap twice but the redirect was faster than you, you&amp;#8217;re still at mobile tweet page, then you tap faster, tap.. You&amp;#8217;ve tapped too many times and you&amp;#8217;re back at news feed screen (or worse: home screen).&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;Without an equivalent forward button, it is onerous to get back to the correct place to reply that tweet (how far did you scroll?). Especially since re-entering some of these screens will refresh and thus change positions of items in lists. At this time, it begins to feel like a chore.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;[3 weeks in]&lt;/strong&gt; To make things worse, &lt;span class=&quot;pullquote&quot;&gt;the &amp;#8220;Home button&amp;#8221; on WP7 does not &lt;em&gt;bring you back&lt;/em&gt; to the Home screen. Instead, it &lt;em&gt;launches the Home screen&lt;/em&gt; app on top of your current app. This is a subtle, but important difference to where you thought the &amp;#8220;Back&amp;#8221; button will bring you.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;On more than one occasion, tapping the &amp;#8220;Back&amp;#8221; button had unexpectedly brought me &lt;em&gt;past&lt;/em&gt; the Home screen and [back] into a screen that I&amp;#8217;d forgotten about, lost for a moment, and not sure what I&amp;#8217;m supposed to do since the screen is totally irrelevant now.&lt;/p&gt;
+
+&lt;h3&gt;Flipboard&lt;/h3&gt;
+
+&lt;p&gt;I like the &amp;#8220;People&amp;#8221; tile. If you&amp;#8217;re willing to let Microsoft in to your world of Facebook, Twitter &amp;amp; Google, you&amp;#8217;ll basically get a &lt;a href=&quot;http://flipboard.com/&quot;&gt;Flipboard&lt;/a&gt; phone. Their [addressbook] integration extends into the &amp;#8220;Calendar&amp;#8221; and &amp;#8220;Pictures&amp;#8221; tile. Tweeted pictures, Facebook photos shared to you will all show up promptly neatly organized into albums.&lt;/p&gt;
+
+&lt;p&gt;I don&amp;#8217;t actually have the urge to download a Twitter or Facebook client for this phone. Yet.&lt;/p&gt;
+
+&lt;p&gt;It would&amp;#8217;ve been even better if the randomly chosen background photo (in Pictures app) could get some just-in-time blur / contrast treatment applied (like Path). Currently, the slim, white text can be a tad difficult to read.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;[6 days in]&lt;/strong&gt; I&amp;#8217;m finding the People tile integration / presentation of Facebook newsfeed (which impressed me earlier) to be shallow - messages spammed by friends playing games appears unfiltered, listing purely by recency isn&amp;#8217;t as interesting as how Facebook interleave activity, uselessly small thumbnails are also tiring to look through. As a result, I&amp;#8217;ve been looking at far less shared videos&amp;#8230; which could be a good thing.&lt;/p&gt;
+
+&lt;h3&gt;Camera&lt;/h3&gt;
+
+&lt;p&gt;Scenes: auto, backlight, beach, candlelight&amp;#8230; White Balance: auto, incandescent, cloudy&amp;#8230; Exposure Value: -0.5, 0, 0.5, 1.0&amp;#8230; ISO: auto, 100, 200&amp;#8230; Metering Mode: Centre Weighted, Frame Average, Centre Spot&amp;#8230; Effects: Normal, Black &amp;amp; White, Sepia&amp;#8230;&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&quot;pullquote&quot;&gt;Settings that reads like an actual point &amp;amp; shoot camera. I hate it.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Also, having &lt;code&gt;Press the screen to take pictures = On&lt;/code&gt; as default is sure to trip up migrants from iPhone. But maybe they are only trying to poach adopters from the market size leader.&lt;/p&gt;
+
+&lt;h3&gt;Computer&lt;/h3&gt;
+
+&lt;p&gt;The phone told me there was software update available, instructing me to &amp;#8220;connect to a computer&amp;#8221;. Obviously, that simplistic instruction wouldn&amp;#8217;t work on my mac. After a bit of googling, I concluded that I need to install &amp;#8220;zune&amp;#8221; on my mac - which brings me to &lt;a href=&quot;http://www.microsoft.com/download/en/details.aspx?id=20993&quot;&gt;this page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The download is a &lt;code&gt;.txt&lt;/code&gt; file. Inside the file, is the instruction to go to another URL (itunes.apple.com) to download the app. WTF? Instructions inside a text file? Did they steal that awesome user experience from some random bittorrent site? Where&amp;#8217;s my ascii art?&lt;/p&gt;
+
+&lt;p&gt;FWIW, Paypal is worse for doing such &lt;a href=&quot;http://twitter.com/choonkeat/status/129461166299811840&quot;&gt;302 Redirect with a PDF file&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Copy Paste&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;[3 weeks in]&lt;/strong&gt; You tap on a word and the copy-paste icon immediate jumps up. Tapping on the icon will prepend the icon into the list of auto-complete words. Now, whenever the keyboard shows up, the [paste] icon is there, ready for you to tap and paste into the text field. &lt;span class=&quot;pullquote&quot;&gt;I find this reuse of the existing auto-complete mechanism very elegant.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/wp7_copypaste1.jpg&quot; alt=&quot;Select&quot; /&gt;
+&lt;img src=&quot;/images/wp7_copypaste2.jpg&quot; alt=&quot;Copy&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After pasting once, the icon goes into partial hiding into the left of the screen. Tapping on it will reveal it in full, and tapping it again will paste the content into the text field (and the icon goes into partial hiding again). I find this dance slightly unnecessary, since it doesn&amp;#8217;t save a lot of pixels. Moreover, you can &amp;#8220;throw&amp;#8221; the icon left and it will completely disappear from the autocomplete list and save even more space (only to re-appear when focusing on a new text field)&lt;/p&gt;
+
+&lt;p&gt;Also unfortunate, is if you turn off the screen (easily by accident, as mentioned earlier), the clipboard is completely deleted. This is either due to security concerns, or (more likely) due to the need to have a way of free-ing up the autocomplete screen space.&lt;/p&gt;
+
+&lt;h3&gt;End&lt;/h3&gt;
+
+&lt;p&gt;The OS appeals to me and I attribute all hiccups encountered to the relative youth of the platform. I&amp;#8217;m hoping to use it, at least for the next few weeks, as my full-time phone.&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&quot;pullquote&quot;&gt;But I sure miss Instagram already.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;[6 days in]&lt;/strong&gt; Though I paid for my iOS Instapaper app, I&amp;#8217;m not a paid subscriber for Instapaper, thus no Instapaper app for me; I&amp;#8217;m very much missing the relatively new (and relatively minor) feature on iOS: Safari Reader.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;[1 month in]&lt;/strong&gt; I&amp;#8217;ve sold it.&lt;/p&gt;</content><author><name>choonkeat</name></author><summary type="html">Finally gotten my hands on the Nokia Lumia 800. It looks gorgeous.</summary></entry><entry><title type="html">Ruby for Rails Beginners</title><link href="http://localhost:4000/weblog/2011/09/ruby-for-rails-beginners.html" rel="alternate" type="text/html" title="Ruby for Rails Beginners" /><published>2011-09-24T00:00:00+08:00</published><updated>2011-09-24T00:00:00+08:00</updated><id>http://localhost:4000/weblog/2011/09/ruby-for-rails-beginners</id><content type="html" xml:base="http://localhost:4000/weblog/2011/09/ruby-for-rails-beginners.html">&lt;p&gt;I&amp;#39;ve been doing this exercise for a few Rails beginners (or non-rubyists who glanced at Rails a bit before) and the general feedback is that they learn Rails but not Ruby, and this is new to them. So I suppose I should just write it down to save future effort.&lt;/p&gt;
+&lt;p&gt;If you already know Ruby you&amp;#39;d want to stop reading here.&lt;/p&gt;
+&lt;h3 style=&quot;margin-top: 1.5em;&quot;&gt;&lt;strong&gt;&amp;quot;Computer, book me on the cheapest flight to Mexico for tomorrow!&amp;quot;&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;The unfortunate thing is, most folks&amp;#39; first contact with Rails will be some short code snippets like&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Comment &amp;lt; ActiveRecord::Base
+  belongs_to :user
+end
+
+class User &amp;lt; ActiveRecord::Base
+  has_many :comments
+  validates_uniqueness_of :username, :case_sensitive =&amp;gt; false
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Very succinct. Looks like english and could even appear friendly to non-programmers. It doesn&amp;#39;t look &amp;quot;&lt;em&gt;real&lt;/em&gt;&amp;quot; and has &amp;quot;&lt;em&gt;toy&lt;/em&gt;&amp;quot; written all over it. The jaded programmer will see &amp;quot;&lt;em&gt;config file&lt;/em&gt;&amp;quot;, &amp;quot;&lt;em&gt;no real syntax&lt;/em&gt;&amp;quot;, &amp;quot;&lt;em&gt;fragile&lt;/em&gt;&amp;quot;, &amp;quot;&lt;em&gt;abitrary subset&lt;/em&gt;&amp;quot;, &amp;quot;&lt;em&gt;haml&lt;/em&gt;&amp;quot; (&lt;em&gt;zing!&lt;/em&gt;) or &amp;quot;&lt;em&gt;not powerful&lt;/em&gt;&amp;quot; as if a guy in grey suit just demoed how he told his computer what to do verbally - &amp;quot;&lt;em&gt;How sustainable can such fake syntax be?&lt;/em&gt;&amp;quot;. And perhaps beginners might go, &amp;quot;&lt;em&gt;Rails lets me write english-ish code! Wow wee!&lt;/em&gt;&amp;quot;&lt;/p&gt;
+&lt;h3 style=&quot;margin-top: 1.5em;&quot;&gt;&lt;strong&gt;Let&amp;#39;s start somewhere else&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;In mainstream OO languages like Java, you can&amp;#39;t really write Java code anywhere you like. &amp;quot;&lt;em&gt;Huh?&lt;/em&gt;&amp;quot; Yes, you just don&amp;#39;t usually think about it this way. For example you can&amp;#39;t simply insert Java code anywhere, say&amp;#8230;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span style=&quot;color: #ff7f00;&quot;&gt;System.out.println(&amp;quot;here?&amp;quot;);&lt;/span&gt;
+public class Hello {
+  public static void main(String [] argv) {
+    System.out.println(&amp;quot;world!&amp;quot;);
+  }
+  &lt;span style=&quot;color: #ff7f00;&quot;&gt;System.out.println(&amp;quot;or here!&amp;quot;);&lt;/span&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It&amp;#39;s not allowed and you&amp;#39;d get errors&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ javac Hello.java
+Hello.java:1: class, interface, or enum expected
+System.out.println(&amp;quot;here?&amp;quot;);
+^
+Hello.java:6: &amp;lt;identifier&amp;gt; expected
+  System.out.println(&amp;quot;or here!&amp;quot;);
+                    ^
+Hello.java:6: illegal start of type
+  System.out.println(&amp;quot;or here!&amp;quot;);
+                     ^
+3 errors
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In Ruby, however,&amp;#0160;you&amp;#0160;&lt;em&gt;can&lt;/em&gt;&amp;#0160;write Ruby in weird places:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span style=&quot;color: #ff7f00;&quot;&gt;puts(&amp;quot;here?&amp;quot;)&lt;/span&gt;
+class Hello
+  def self.main(argv)
+    puts(&amp;quot;world!&amp;quot;)
+  end
+  &lt;span style=&quot;color: #ff7f00;&quot;&gt;puts(&amp;quot;or here!&amp;quot;)&lt;/span&gt;
+end
+Hello.main(ARGV)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which runs like this instead&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ruby hello.rb
+here?
+or here!
+world!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 style=&quot;margin-top: 1.5em;&quot;&gt;&lt;strong&gt;So? Big deal&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Taking another step back, let&amp;#39;s look at this Ruby class&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Hello
+  def an_instance_method()
+    puts(&amp;quot;This is inside an_instance_method&amp;quot;)
+  end
+  def self.a_class_method()
+    puts(&amp;quot;This is inside a_class_method&amp;quot;)
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you&amp;#39;re a programmer you&amp;#39;d have ascertained&amp;#0160;&lt;code&gt;def&lt;/code&gt;&amp;#0160;defines a method (or function). Now, the difference between&amp;#0160;&lt;code&gt;def an_instance_method()&lt;/code&gt;&amp;#0160;and&amp;#0160;&lt;code&gt;def self.a_class_method()&lt;/code&gt;&amp;#0160;is that&amp;#0160;&lt;code&gt;a_class_method&lt;/code&gt;&amp;#0160;is a class method (or Java programmers like to say &amp;quot;static method&amp;quot;) and is used like this&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Hello.a_class_method()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which prints&amp;#0160;&lt;code&gt;This is inside a_class_method&lt;/code&gt;&amp;#0160;whereas&amp;#0160;&lt;code&gt;an_instance_method&lt;/code&gt;&amp;#0160;is an instance method that you can call on instances of the&amp;#0160;&lt;code&gt;Hello&lt;/code&gt;&amp;#0160;class,&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;x = Hello.new()
+x.an_instance_method()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 style=&quot;margin-top: 1.5em;&quot;&gt;&lt;strong&gt;So? Big deal&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Say we define our Ruby class like this, with a&amp;#0160;&lt;code&gt;puts&lt;/code&gt;&amp;#0160;statement at the bottom&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Hello
+  def an_instance_method()
+    puts(&amp;quot;This is inside an_instance_method&amp;quot;)
+  end
+  def self.a_class_method()
+    puts(&amp;quot;This is inside a_class_method&amp;quot;)
+  end
+  &lt;span style=&quot;color: #ff7f00;&quot;&gt;puts(self)&lt;/span&gt;
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Running it would produce&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ruby hello.rb
+Hello
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Notice&amp;#0160;&lt;code&gt;puts(self)&lt;/code&gt;&amp;#0160;has printed the name of our class&amp;#0160;&lt;code&gt;Hello&lt;/code&gt;. &lt;strong&gt;This means we are referring to the Class which we&amp;#39;re still in process of defining!&lt;/strong&gt; And since we can refer to it, we can also use it (as much of it as we&amp;#39;ve defined so far)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Hello
+  &lt;span style=&quot;color: #ff7f00;&quot;&gt;x = self.new()
+  puts(x)&lt;/span&gt;
+
+  def an_instance_method()
+    puts(&amp;quot;This is inside an_instance_method&amp;quot;)
+  end
+  &lt;span style=&quot;color: #ff7f00;&quot;&gt;x.an_instance_method()&lt;/span&gt;
+
+  def self.a_class_method()
+    puts(&amp;quot;This is inside a_class_method&amp;quot;)
+  end
+  &lt;span style=&quot;color: #ff7f00;&quot;&gt;self.a_class_method()&lt;/span&gt;
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Running it would produce&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ruby hello.rb
+#&amp;lt;Hello:0x0000010084f778&amp;gt;
+This is inside an_instance_method
+This is inside a_class_method
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Notice how instance&amp;#0160;&lt;code&gt;x&lt;/code&gt;&amp;#0160;obtains an instance method after the fact! Let&amp;#39;s clean up our class: rename it as&amp;#0160;&lt;code&gt;User&lt;/code&gt;, and rename the class method to&amp;#0160;&lt;code&gt;validates_uniqueness_of&lt;/code&gt;, and add some arguments to the class method&amp;#8230;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class User
+  def self.validates_uniqueness_of(what, options)
+    puts(&amp;quot;This is inside validates_uniqueness_of #{what} and #{options}&amp;quot;)
+  end
+  &lt;span style=&quot;color: #ff7f00;&quot;&gt;self.validates_uniqueness_of(&amp;#39;username&amp;#39;, Hash[&amp;#39;case_sensitive&amp;#39;,false])&lt;/span&gt;
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The&amp;#0160;&lt;code&gt;#{blah}&lt;/code&gt;&amp;#0160;syntax is string interpolation, allowing Ruby code to run within a string, like&amp;#0160;&lt;code&gt;&amp;quot;Five plus One is equal to #{5 + 1}&amp;quot;&lt;/code&gt;. So, running this file would produce&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ruby hello.rb
+This is inside validates_uniqueness_of username and {&amp;quot;case_sensitive&amp;quot;=&amp;gt;false}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In Ruby, Hash objects (or associative arrays) can be defined literally as&amp;#0160;&lt;code&gt;{&amp;#39;case_sensitive&amp;#39;=&amp;gt;false}&lt;/code&gt;; (brackets) and {curly braces} are largely optional;&amp;#0160;&lt;code&gt;self&lt;/code&gt;&amp;#0160;is implied; You can also use&amp;#0160;&lt;code&gt;:symbols&lt;/code&gt;&amp;#0160;to denote things you&amp;#39;d usually use enums or constants for&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class User
+  &lt;span style=&quot;color: #ff7f00;&quot;&gt;def self.validates_uniqueness_of(what, options)&lt;/span&gt;
+    puts &amp;quot;This is inside validates_uniqueness_of #{what} and #{options}&amp;quot;
+  end
+  &lt;span style=&quot;color: #ff7f00;&quot;&gt;validates_uniqueness_of :username, :case_sensitive =&amp;gt; false&lt;/span&gt;
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can use the&amp;#0160;&lt;code&gt;&amp;lt;&lt;/code&gt;&amp;#0160;syntax to denote inheritance and define the class method elsewhere&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span style=&quot;color: #ff7f00;&quot;&gt;class Base&lt;/span&gt;
+  def self.validates_uniqueness_of(what, options)
+    puts &amp;quot;This is inside validates_uniqueness_of #{what} and #{options}&amp;quot;
+  end
+&lt;span style=&quot;color: #ff7f00;&quot;&gt;end
+
+class User &amp;lt; Base&lt;/span&gt;
+  validates_uniqueness_of :username, :case_sensitive =&amp;gt; false
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We could stash more methods into our&amp;#0160;&lt;code&gt;Base&lt;/code&gt;&amp;#0160;class&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Base
+  &lt;span style=&quot;color: #ff7f00;&quot;&gt;def self.has_many(what)
+    # some code
+  end&lt;/span&gt;
+  def self.validates_uniqueness_of(what, options)
+    # some code
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Or we could use&amp;#0160;&lt;code&gt;Mixins&lt;/code&gt;&amp;#0160;to organize them neatly into standalone modules and compose them together&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span style=&quot;color: #ff7f00;&quot;&gt;module Relation&lt;/span&gt;
+  def has_many(what)
+    # some code
+  end
+&lt;span style=&quot;color: #ff7f00;&quot;&gt;end
+
+module Validation&lt;/span&gt;
+  def validates_uniqueness_of(what, options)
+    # some code
+  end
+end
+
+class Base
+  &lt;span style=&quot;color: #ff7f00;&quot;&gt;extend Relation
+  extend Validation&lt;/span&gt;
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Either way, we can now have something that looks familiar&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class User &amp;lt; Base
+  has_many :comments
+  validates_uniqueness_of :username, :case_sensitive =&amp;gt; false
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So you see, the toy looking code is not Rails-specific, nor is it some limited-capacity syntax for PPT &amp;amp; luring beginners.&lt;/p&gt;
+&lt;h3 style=&quot;margin-top: 1.5em;&quot;&gt;&lt;strong&gt;Came for Rails? Stay for Ruby&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;And that&amp;#39;s it. If this has piqued your interest, you might want to investigate how Ruby lets Rails get away with the syntax of&amp;#0160;&lt;code&gt;config/routes.rb&lt;/code&gt;&amp;#0160;and how Ruby makes&amp;#0160;&lt;code&gt;has_many&lt;/code&gt;&amp;#0160;and&amp;#0160;&lt;code&gt;validates_uniqueness_of&lt;/code&gt;&amp;#0160;possible to implement.&lt;/p&gt;</content><author><name>choonkeat</name></author><summary type="html">I&amp;#39;ve been doing this exercise for a few Rails beginners (or non-rubyists who glanced at Rails a bit before) and the general feedback is that they learn Rails but not Ruby, and this is new to them. So I suppose I should just write it down to save future effort. If you already know Ruby you&amp;#39;d want to stop reading here. &amp;quot;Computer, book me on the cheapest flight to Mexico for tomorrow!&amp;quot; The unfortunate thing is, most folks&amp;#39; first contact with Rails will be some short code snippets like class Comment &amp;lt; ActiveRecord::Base belongs_to :user end</summary></entry><entry><title type="html">Giving Feedback On A Design You Are Paying For</title><link href="http://localhost:4000/weblog/2010/12/giving-feedback-on-a-design-you-are-paying-for.html" rel="alternate" type="text/html" title="Giving Feedback On A Design You Are Paying For" /><published>2010-12-17T00:00:00+08:00</published><updated>2010-12-17T00:00:00+08:00</updated><id>http://localhost:4000/weblog/2010/12/giving-feedback-on-a-design-you-are-paying-for</id><content type="html" xml:base="http://localhost:4000/weblog/2010/12/giving-feedback-on-a-design-you-are-paying-for.html">&lt;p&gt;&lt;em&gt;Disclaimer: I&amp;#8217;m not knowledgeable in this area, but am interested to know what&amp;#8217;s up. Please feel free to correct my misconceptions.&lt;/em&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+	&amp;#8220;Make this blue&amp;#8221;, &amp;#8220;Too big&amp;#8221;, &amp;#8220;Bigger&amp;#8221;, &amp;#8220;Darker&amp;#8221;, &amp;#8220;Too narrow&amp;#8221;, &amp;#8220;Put the logo here&amp;#8221;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I find it hard to comprehend why anyone paying good money for design, would review in this manner. Over and over, round after round. Sounds more like a person trying to work Photoshop with voice control. Shouldn&amp;#8217;t we let the skilled worry about their craft? If your designer doesn&amp;#8217;t know design better than you, why there is a business relationship?&lt;/p&gt;
+
+&lt;p&gt;On the back of such encounters (as an onlooker), I had concluded [mistakenly] that having multiple rounds of design reviews was just masturbatory and that a customer should only focus to communicate the whys clearly and leave designers to do their job.&lt;/p&gt;
+
+&lt;p&gt;Yesterday, 37signals posted &lt;a href=&quot;http://www.google.com/search?q=behind+the+scenes+site:37signals.com&quot;&gt;another&lt;/a&gt; &amp;#8220;Behind the scenes&amp;#8221; &lt;a href=&quot;http://37signals.com/svn/posts/2705-behind-the-scenes-37signalscom-redesign&quot;&gt;article on their blog&lt;/a&gt;. As I was reading their recap of multiple iterations and feedback, it occurred to me that my conclusion was misdirected. There&amp;#8217;s nothing wrong with the fact that there were multiple rounds of review. My issue was with the nature of the critiques.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;http://37signals.com/svn/posts/2705-behind-the-scenes-37signalscom-redesign&quot;&gt;feedback for each round&lt;/a&gt; were about story, intent, clarity. Not pixel pushing. Seems to me, &lt;em&gt;that&lt;/em&gt; is how a money paying customer should be reviewing to get his money&amp;#8217;s worth.&lt;br /&gt;
+&lt;/p&gt;</content><author><name>choonkeat</name></author><summary type="html">Disclaimer: I&amp;#8217;m not knowledgeable in this area, but am interested to know what&amp;#8217;s up. Please feel free to correct my misconceptions.</summary></entry></feed>

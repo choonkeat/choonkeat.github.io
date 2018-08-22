@@ -1,0 +1,77 @@
+---
+layout: post
+title: html2text function in Ruby
+published: true
+category:
+- software
+---
+
+<p>Whilst adding text-email feature in <a href="http://www.rssfwd.com/">RssFwd</a> (Ruby on Rails app), I had some problems looking for a html2text ruby library that'll do what I need - simple, clear text output, so I wrote my own.<br/>
+<br/>
+So, in case somebody else is looking for this little function (but irritating to be missing) here's my shot at getting a similar-to-<a href="http://lynx.browser.org/">lynx</a>-dump kind of output:<br/>
+<br/>
+The code:<br/>
+<br/>
+<blockquote style="text-align: left;"> require 'cgi'<br/>
+<br/>
+def html2text html<br/>
+&nbsp; text = html.<br/>
+&nbsp;&nbsp;&nbsp; gsub(/(&amp;nbsp;|\n|\s)+/im, ' ').squeeze(' ').strip.<br/>
+&nbsp;&nbsp;&nbsp; gsub(/&lt;([^\s]+)[^&gt;]*(src|href)=\s*(.?)([^&gt;\s]*)\3[^&gt;]*&gt;\4&lt;\/\1&gt;/i, '\4')<br/>
+<br/>
+&nbsp; links = []<br/>
+&nbsp; linkregex = /&lt;[^&gt;]*(src|href)=\s*(.?)([^&gt;\s]*)\2[^&gt;]*&gt;\s*/i<br/>
+&nbsp; while linkregex.match(text)<br/>
+&nbsp;&nbsp;&nbsp; links &lt;&lt; $~[3]<br/>
+&nbsp;&nbsp;&nbsp; text.sub!(linkregex, &quot;[#{links.size}]&quot;)<br/>
+&nbsp; end<br/>
+<br/>
+&nbsp; text = CGI.unescapeHTML(<br/>
+&nbsp;&nbsp;&nbsp; text.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gsub(/&lt;(script|style)[^&gt;]*&gt;.*&lt;\/\1&gt;/im, '').<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gsub(/&lt;!--.*--&gt;/m, '').<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gsub(/&lt;hr(| [^&gt;]*)&gt;/i, &quot;___\n&quot;).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gsub(/&lt;li(| [^&gt;]*)&gt;/i, &quot;\n* &quot;).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gsub(/&lt;blockquote(| [^&gt;]*)&gt;/i, '&gt; ').<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gsub(/&lt;(br)(| [^&gt;]*)&gt;/i, &quot;\n&quot;).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gsub(/&lt;(\/h[\d]+|p)(| [^&gt;]*)&gt;/i, &quot;\n\n&quot;).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gsub(/&lt;[^&gt;]*&gt;/, '')<br/>
+&nbsp; ).lstrip.gsub(/\n[ ]+/, &quot;\n&quot;) + &quot;\n&quot;<br/>
+<br/>
+&nbsp; for i in (0...links.size).to_a<br/>
+&nbsp;&nbsp;&nbsp; text = text + &quot;\n&nbsp; [#{i+1}] &lt;#{CGI.unescapeHTML(links[i])}&gt;&quot; unless links[i].nil?<br/>
+&nbsp; end<br/>
+&nbsp; links = nil<br/>
+&nbsp; text<br/>
+end</blockquote><br/>
+<br/>
+Sample html input string:<br/>
+<br/>
+<blockquote style="text-align: left;"> &lt;h1&gt;Title&lt;/h1&gt;<br/>
+This is the body. Testing &lt;a href=&quot;http://www.google.com/&quot;&gt;link to Google&lt;/a&gt;.&lt;p /&gt;<br/>
+Testing image &lt;img src=&quot;/noimage.png&quot;&gt;.&lt;br /&gt;<br/>
+The End. </blockquote><br/>
+<br/>
+The generated output string:<br/>
+<br/>
+<blockquote style="text-align: left;"> Title<br/>
+<br/>
+This is the body. Testing [1]link to Google.<br/>
+<br/>
+Testing image [2].<br/>
+The End.<br/>
+<br/>
+&nbsp; [1] &lt;http://www.google.com/&gt;<br/>
+&nbsp; [2] &lt;/noimage.png&gt;<br/>
+</blockquote><br/>
+<br/>
+Comments are welcome. <br/>
+<br/>
+Note: <br/>
+<ol><br />
+    <li>The &lt;&gt; around the list of links at the bottom? they supposedly helps more arcanic e-mail programs understand that they should not be broken up into multiple lines. <br/>
+    </li><br />
+    <li>The HTML entities aren't fully converted by CGI.unescapeHTML(e.g. &amp;mdash;) if there's a better method to use, lemme know</li><br />
+</ol><br />
+<br/></p>
+

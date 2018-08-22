@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Automating Tasks: Data Migrations | The Devel!</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="Automating Tasks: Data Migrations" />
+<meta name="author" content="choonkeat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Although hostgator has been here for quite a few years, the web hosting market is being rapidly taken over by startlogic. This will make gator third, with bluehost at the first position." />
+<meta property="og:description" content="Although hostgator has been here for quite a few years, the web hosting market is being rapidly taken over by startlogic. This will make gator third, with bluehost at the first position." />
+<link rel="canonical" href="http://localhost:4000/weblog/2006/07/automating-task.html" />
+<meta property="og:url" content="http://localhost:4000/weblog/2006/07/automating-task.html" />
+<meta property="og:site_name" content="The Devel!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2006-07-19T00:00:00+08:00" />
+<script type="application/ld+json">
+{"headline":"Automating Tasks: Data Migrations","dateModified":"2006-07-19T00:00:00+08:00","datePublished":"2006-07-19T00:00:00+08:00","author":{"@type":"Person","name":"choonkeat"},"description":"Although hostgator has been here for quite a few years, the web hosting market is being rapidly taken over by startlogic. This will make gator third, with bluehost at the first position.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/weblog/2006/07/automating-task.html"},"url":"http://localhost:4000/weblog/2006/07/automating-task.html","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Devel!" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">The Devel!</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Automating Tasks: Data Migrations</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2006-07-19T00:00:00+08:00" itemprop="datePublished">Jul 19, 2006
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p style="padding: 1em; font-style: italic;  background-color: #ddeeee; -moz-border-radius: 1em; -webkit-border-radius: 1em; ">
+Although <a href="http://www.sharphosts.com/rev/hostgator.htm">hostgator</a> has been here for quite a few years, the 
+<a href="http://www.sharphosts.com">web hosting</a> market is being rapidly taken over by <a href="http://www.sharphos
+ts.com/rev/startlogic.htm">startlogic</a>. This will make gator third, with <a href="http://www.sharphosts.com/rev/blu
+ehost.htm">bluehost</a> at the first position.</p>
+
+<p>If you've written a .bat file before, shell script, Microsoft Word Macro, or Excel Macro before.. you've exercised one of the fundamental purpose of software - to perform the same, repeatable task on your behalf - aka be your slave.<br> <br> Its funny then that we sometimes find ourselves being the slaves of the software we use. Uploading stuff one by one, two by two, anyone? <br> <br><blockquote> "<span style="font-style: italic">That's not a bug - its an intentional inconvenience! Aka a mechanism to uncover hidden but very real needs which would otherwise be buried by other needs, aka I-think-I need.</span>"<br></blockquote> <br> Taking that [software as slaves] into account, its strange to find 2 new tool to only surface rather recently from the land of application frameworks. Stuff that let's you tackle the problem once, but will be stupidly repeatable by the computer. I'm as guilty as everyone else for their late arrival. Looking back, I've asked myself how I have managed to get by without them? Especially when I've mostly worked in dotcoms that rolls out web apps almost by the week!<br> <br> <font size="4">1. Data Migrations Management</font><br> <br> Even if the code is flawless now, requirements will change <span style="font-style: italic">*sigh*</span>. Unfortunately, at the other end of the HTTP pipe is a real and unpredictable human being who is thinking about... not your application, but that Zara sale in town. That's why we have <a href="../../articles/2006/05/24/version-control-that-missing-module-in-cs101">version control</a> - undo code changes, look at who + when + why a certain function was modified. To manage the evolution of rules and logic.<br> <br> These rules and logic ultimately manages data. And data is put into buckets. These buckets were sculpted right at the start of the project: "<span style="font-style: italic">A student will have a name, age and gender</span>" roughly translates to <span style="font-family: courier new,monospace">CREATE TABLE students (id INT PRIMARY KEY AUTO_INCREMENT NOT NULL, name VARCHAR(255), age INT, gender SET('M', 'F', 'U'));</span> But these buckets need to evolve too. Hand-in-hand, together with the code. <span style="font-family: courier new,monospace">ALTER</span>, <span style="font-family: courier new,monospace">CREATE</span> and <span style="font-family: courier new,monospace">DROP</span>. Changes to these buckets if allowed to proceed without trace would be a great step back against the efforts of having the code being religiously version controlled ain't it?<br> <br> Why then, are the prevaling methods for managing data migrations 1) version control 1 x SQL CREATE script, and 2) collect a growing bunch of SQL scripts in a version controlled directory?<br> <br> Method #1 will collapse once the application is deployed <span style="font-style: italic">somewhere</span> with data - since CREATE scripts only deal with CREATING to buckets, not dealing with the scenario where the buckets are already there.. with data. Most often, once into maintenance mode, teams will intuitively adopt method #2, rendering the original, carefully bonsai'd CREATE script next to useless. <br> <br> Method #2 generally only handles schema changes in 1 direction - "<span style="font-style: italic">Attn all developers, send your SQL updates to me, I need to go down to the data centre this evening to deploy the latest... </span>". If all goes well, then great. But ever since Murphy created mishaps, life has never been that smooth. "<span style="font-style: italic">Hey mike, users are calling support - last evening's update broke something? We need to... </span>" Hmm, rolling back the code is easy... but rolling back the schema changes is another thing... which leads us to the next flaw. SQL can describe schema changes well, but has limited capability in communicating data migrations - which is ironically the more important thing in a production environment. "<span style="font-style: italic">Hi mike, I've split our name column into family_name and given_name... the gender field is changed from M,F,U to 0,1,2 referencing the new gender table.. also, we realise dates should be stored in GMT, I've added a column to store the timezone</span>" That's some hairy SQL to write for migrating... and rolling back.<br> <br> Rails comes with a neat tool called <a href="http://wiki.rubyonrails.com/rails/pages/UnderstandingMigrations">Rails Migrations</a>. What is does is very simple: Manage database migrations and in code, not SQL. And thanks to Rails' ActiveRecord, the code is actually very succint to read and write. Its role is so simple, there's even flaws. But whatever flaw you pick... they are definitely not a bigger problem than not managing migrations at all.<br> <br> Doing 2-way migrations of schema and data in Ruby code (ActiveRecord) is definitely much easier to express than anything out there. Hands down. Did I say its a 2-way migration? Rolling back a broken release now becomes within reach: <a href="http://rails.techno-weenie.net/tip/2006/1/7/rake_migrate_with_a_relative_version_number"><span style="font-family: courier new,monospace">rake migrate down</span></a>. Man, its really satisfying and addictive test out those migrations all day long, and migrate down, migrate down, migrate until the data literally rollsback into its womb!<br> <br> The beauty (and stress free moment) reveals itself when you have a few deployments to update the code with. It might be the demo laptop the sales team has been bringing out, 20 revisions ago.. you think... and that production system in some server somewhere updated last tuesday... no more "<span style="font-style: italic">let's reinstall everything!</span>" (the sales team are human you know? entering all those demo data... ) or "<span style="font-style: italic">I'll manually compare upgrade your data</span>".. just do <span style="font-family: courier new,monospace">rake migrate</span> and the schema and data will be brought up to date from whichever state they were in. Fuss free. And as mentioned, upgrading to the latest code is the easier part.<br> <br> So, don't collect the ALTER SQL scripts last minute and stress out your deployment guy at the data centre. Its pretty cold in there already. Tackle the problem early and in small steps. Get the developers to write (and test locally) the up and down migrations as-and-when changes are required. We all will suffer failures, just try to fail fast and early.<br> <br> Of course, Rails Migrations isn't a be-all-end-all thing. At my work place, Rails isn't everything and there are other languages and subsystems to live in harmony with. So requiring everyone to have a dependency on Rails just for schema management might be asking too much. I don't have to use Rails Migrations... but I am sold on the purpose it serves. So, we created our own standalone script to do approximately the same thing. I just have to live without the ActiveRecord API :-(<br> <br> Strange that most fullstack development frameworks doesn't come with schema management solution. Are there any standalone migrations tool that does like Rails Migrations? <br> <br> Oh did I say 2 new stuff? Its late, I'll stop at this one today.</p>
+
+
+  </div><a class="u-url" href="/weblog/2006/07/automating-task.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Devel!</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">choonkeat</li><li><a class="u-email" href="mailto:contactme@choonkeat.com">contactme@choonkeat.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">choonkeat</span></a></li><li><a href="https://www.twitter.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">choonkeat</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>choonkeat on programming &amp; software</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

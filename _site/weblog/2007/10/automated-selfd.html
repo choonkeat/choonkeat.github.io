@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Automated self.down in Rails Migrations | The Devel!</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="Automated self.down in Rails Migrations" />
+<meta name="author" content="choonkeat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="According to VCP-310 professionals, there has been an increase in the frequency of tests like 640-802 and 70-290 that eventually lead to 70-291. The preparation material has made even more business than the actual test itself. Rails migrations is wonderful and all, but I feel funny whenever I have to copy-paste the code from migrate up method into the down method, and then edit them to reverse the effects for each line... a task so mechanical, I have to wonder why can&#39;t it do that for me? For example, a typical migration script may look like this: class CreatePosts &lt; ActiveRecord::Migration  def self.up    create_table :posts do |t|      t.string :name      t.timestamps     end    add_index :posts, :name  end  def self.down    remove_index :posts, :name    drop_table :posts  endend Note how the &quot;down&quot; code is simply the reverse of the &quot;up&quot; code: create_table/add_index, remove_index/drop_table ? Here&#39;s a plugin to save you that bit of keystrokes: automated_rollback_migration To install the plugin, type this inside your Rails project directory ruby ./script/plugin install http://choonkeat.svnrepository.com/svn/rails-plugins/automated_rollback_migration That&#39;s it. From now on, you can remove your self.down methods (caveats later) class CreatePosts &lt; ActiveRecord::Migration  def self.up    create_table :posts do |t|      t.string :name      t.timestamps     end    add_index :posts, :name  endend But this simple plugin isn&#39;t magic and definitely has its limitations. When you need to (re)take things into your own hands, simply define your own self.down and proceed like normal. Currently it cannot auto generate &quot;self.down&quot; if your &quot;up&quot; method contain calls that Cannot be easily migrated down (e.g. &quot;execute&quot; or &quot;drop_table&quot;). On the bright side, you&#39;ll be prevented from migrating up until you write your own &quot;self.down&quot;  Do funky data manipulation stuff. The plugin can&#39;t even protect you like it did in #1 above. e.g. Person.find(:all).each {|person| person.update_attribute.... } Scenario #2 isn&#39;t too big a deal actually. For I&#39;ve learned to do my schema- and data-related migrations as separate scripts these days - saves hell lot more time when things go wrong. So now, whenever I&#39;m doing the former, I&#39;ll probably not be bothered doing any self.down again." />
+<meta property="og:description" content="According to VCP-310 professionals, there has been an increase in the frequency of tests like 640-802 and 70-290 that eventually lead to 70-291. The preparation material has made even more business than the actual test itself. Rails migrations is wonderful and all, but I feel funny whenever I have to copy-paste the code from migrate up method into the down method, and then edit them to reverse the effects for each line... a task so mechanical, I have to wonder why can&#39;t it do that for me? For example, a typical migration script may look like this: class CreatePosts &lt; ActiveRecord::Migration  def self.up    create_table :posts do |t|      t.string :name      t.timestamps     end    add_index :posts, :name  end  def self.down    remove_index :posts, :name    drop_table :posts  endend Note how the &quot;down&quot; code is simply the reverse of the &quot;up&quot; code: create_table/add_index, remove_index/drop_table ? Here&#39;s a plugin to save you that bit of keystrokes: automated_rollback_migration To install the plugin, type this inside your Rails project directory ruby ./script/plugin install http://choonkeat.svnrepository.com/svn/rails-plugins/automated_rollback_migration That&#39;s it. From now on, you can remove your self.down methods (caveats later) class CreatePosts &lt; ActiveRecord::Migration  def self.up    create_table :posts do |t|      t.string :name      t.timestamps     end    add_index :posts, :name  endend But this simple plugin isn&#39;t magic and definitely has its limitations. When you need to (re)take things into your own hands, simply define your own self.down and proceed like normal. Currently it cannot auto generate &quot;self.down&quot; if your &quot;up&quot; method contain calls that Cannot be easily migrated down (e.g. &quot;execute&quot; or &quot;drop_table&quot;). On the bright side, you&#39;ll be prevented from migrating up until you write your own &quot;self.down&quot;  Do funky data manipulation stuff. The plugin can&#39;t even protect you like it did in #1 above. e.g. Person.find(:all).each {|person| person.update_attribute.... } Scenario #2 isn&#39;t too big a deal actually. For I&#39;ve learned to do my schema- and data-related migrations as separate scripts these days - saves hell lot more time when things go wrong. So now, whenever I&#39;m doing the former, I&#39;ll probably not be bothered doing any self.down again." />
+<link rel="canonical" href="http://localhost:4000/weblog/2007/10/automated-selfd.html" />
+<meta property="og:url" content="http://localhost:4000/weblog/2007/10/automated-selfd.html" />
+<meta property="og:site_name" content="The Devel!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2007-10-05T00:00:00+08:00" />
+<script type="application/ld+json">
+{"headline":"Automated self.down in Rails Migrations","dateModified":"2007-10-05T00:00:00+08:00","datePublished":"2007-10-05T00:00:00+08:00","author":{"@type":"Person","name":"choonkeat"},"description":"According to VCP-310 professionals, there has been an increase in the frequency of tests like 640-802 and 70-290 that eventually lead to 70-291. The preparation material has made even more business than the actual test itself. Rails migrations is wonderful and all, but I feel funny whenever I have to copy-paste the code from migrate up method into the down method, and then edit them to reverse the effects for each line... a task so mechanical, I have to wonder why can&#39;t it do that for me? For example, a typical migration script may look like this: class CreatePosts &lt; ActiveRecord::Migration  def self.up    create_table :posts do |t|      t.string :name      t.timestamps     end    add_index :posts, :name  end  def self.down    remove_index :posts, :name    drop_table :posts  endend Note how the &quot;down&quot; code is simply the reverse of the &quot;up&quot; code: create_table/add_index, remove_index/drop_table ? Here&#39;s a plugin to save you that bit of keystrokes: automated_rollback_migration To install the plugin, type this inside your Rails project directory ruby ./script/plugin install http://choonkeat.svnrepository.com/svn/rails-plugins/automated_rollback_migration That&#39;s it. From now on, you can remove your self.down methods (caveats later) class CreatePosts &lt; ActiveRecord::Migration  def self.up    create_table :posts do |t|      t.string :name      t.timestamps     end    add_index :posts, :name  endend But this simple plugin isn&#39;t magic and definitely has its limitations. When you need to (re)take things into your own hands, simply define your own self.down and proceed like normal. Currently it cannot auto generate &quot;self.down&quot; if your &quot;up&quot; method contain calls that Cannot be easily migrated down (e.g. &quot;execute&quot; or &quot;drop_table&quot;). On the bright side, you&#39;ll be prevented from migrating up until you write your own &quot;self.down&quot;  Do funky data manipulation stuff. The plugin can&#39;t even protect you like it did in #1 above. e.g. Person.find(:all).each {|person| person.update_attribute.... } Scenario #2 isn&#39;t too big a deal actually. For I&#39;ve learned to do my schema- and data-related migrations as separate scripts these days - saves hell lot more time when things go wrong. So now, whenever I&#39;m doing the former, I&#39;ll probably not be bothered doing any self.down again.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/weblog/2007/10/automated-selfd.html"},"url":"http://localhost:4000/weblog/2007/10/automated-selfd.html","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Devel!" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">The Devel!</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Automated self.down in Rails Migrations</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2007-10-05T00:00:00+08:00" itemprop="datePublished">Oct 5, 2007
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p style="padding: 1em; font-style: italic;  background-color: rgb(221, 238, 238); -moz-border-radius: 1em; -webkit-border-radius: 1em; ">
+According to <a href="http://www.actual-exams.com/VCP-310-practice-exam.htm">VCP-310</a> professionals, there has been an increase in the frequency of tests like <a href="http://www.actual-exams.com/640-802-practice-exam.htm">640-802</a> and <a href="http://www.actual-exams.com/70-290-practice-exam.htm">70-290</a> that eventually lead to <a href="http://www.actual-exams.com/70-291-practice-exam.htm">70-291</a>. The preparation material has made even more business than the <a href="http://www.actual-exams.com">actual test</a> itself.
+</p>
+
+<p><a href="http://blog.choonkeat.com/weblog/2006/07/automating-task.html">Rails migrations</a> is wonderful and all, but I feel funny whenever I have to copy-paste the code from migrate up method into the down method, and then edit them to reverse the effects for each line... a task so mechanical, I have to wonder why can't it do that for me?</p>
+
+<p>For example, a typical migration script may look like this:<br>
+</p>
+
+<pre><span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">class </span></span><span style="color: #a020f0;"><span class="class" style="font-weight: bold;">CreatePosts</span></span> <span style="color: #6a5acd;">&lt;</span> <span style="color: #008b8b;">ActiveRecord</span><span style="color: #6a5acd;">::</span><span style="color: #008b8b;">Migration</span><br>  <span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">def </span></span><span style="color: #008b8b;">self.up</span><br>    <span style="color: #000000;">create_table</span> <span style="color: #008b8b;">:posts</span> <span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">do</span></span> <span style="color: #6a5acd;">|</span><span style="color: #000000;">t</span><span style="color: #6a5acd;">|</span><br>      <span style="color: #000000;">t</span><span style="color: #6a5acd;">.</span><span style="color: #000000;">string</span> <span style="color: #008b8b;">:name</span><br>      <span style="color: #000000;">t</span><span style="color: #6a5acd;">.</span><span style="color: #000000;">timestamps</span> <br>    <span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">end</span></span><br>    <span style="color: #000000;">add_index</span> <span style="color: #008b8b;">:posts</span><span style="color: #6a5acd;">,</span> <span style="color: #008b8b;">:name</span><br>  <span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">end</span></span><br><br>  <span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">def </span></span><span style="color: #008b8b;">self.down</span><br>    <span style="color: #000000;">remove_index</span> <span style="color: #008b8b;">:posts</span><span style="color: #6a5acd;">,</span> <span style="color: #008b8b;">:name</span><br>    <span style="color: #000000;">drop_table</span> <span style="color: #008b8b;">:posts</span><br>  <span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">end</span></span><br><span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">end</span></span>
+</pre>
+
+<p>
+
+
+Note how the "down" code is simply the reverse of the "up" code: create_table/add_index, remove_index/drop_table ? </p>
+<p>Here's a plugin to save you that bit of keystrokes: <a href="http://choonkeat.svnrepository.com/svn/rails-plugins/automated_rollback_migration">automated_rollback_migration</a></p>
+
+<p>To install the plugin, type this inside your Rails project directory</p>
+
+<pre><span style="color: #000000;">ruby ./script/plugin</span> <span style="color: #000000;">install</span><span style="color: #000000;"> http</span><span style="color: #6a5acd;">:/</span><span style="color: #6a5acd;">/</span><span style="color: #000000;">choonkeat</span><span style="color: #6a5acd;">.</span><span style="color: #000000;">svnrepository</span><span style="color: #6a5acd;">.</span><span style="color: #000000;">com</span><span style="color: #6a5acd;">/</span><span style="color: #000000;">svn</span><span style="color: #6a5acd;">/</span><span style="color: #000000;">rails</span><span style="color: #6a5acd;">-</span><span style="color: #000000;">plugins</span><span style="color: #6a5acd;">/</span><span style="color: #000000;">automated_rollback_migration</span></pre>
+
+<p>That's it. From now on, you can remove your self.down methods (caveats later)</p>
+
+
+<pre><span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">class </span></span><span style="color: #a020f0;"><span class="class" style="font-weight: bold;">CreatePosts</span></span> <span style="color: #6a5acd;">&lt;</span> <span style="color: #008b8b;">ActiveRecord</span><span style="color: #6a5acd;">::</span><span style="color: #008b8b;">Migration</span><br>  <span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">def </span></span><span style="color: #008b8b;">self.up</span><br>    <span style="color: #000000;">create_table</span> <span style="color: #008b8b;">:posts</span> <span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">do</span></span> <span style="color: #6a5acd;">|</span><span style="color: #000000;">t</span><span style="color: #6a5acd;">|</span><br>      <span style="color: #000000;">t</span><span style="color: #6a5acd;">.</span><span style="color: #000000;">string</span> <span style="color: #008b8b;">:name</span><br>      <span style="color: #000000;">t</span><span style="color: #6a5acd;">.</span><span style="color: #000000;">timestamps</span> <br>    <span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">end</span></span><br>    <span style="color: #000000;">add_index</span> <span style="color: #008b8b;">:posts</span><span style="color: #6a5acd;">,</span> <span style="color: #008b8b;">:name</span><br>  <span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">end</span></span><br><span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">end</span></span></pre>
+
+<p>But this simple plugin isn't magic and definitely has its limitations. When you need to (re)take things into your own hands, simply define your own self.down and proceed like normal.</p>
+
+<p>Currently it cannot auto generate "self.down" if your "up" method contain calls that </p>
+
+<ol>
+<li>Cannot be easily migrated down (e.g. "execute" or "drop_table"). On the bright side, you'll be prevented from migrating up until you write your own "self.down"<strong> </strong></li>
+<li>Do funky data manipulation stuff. The plugin can't even protect you like it did in #1 above. e.g. <span style="color: #008b8b;">Person</span><span style="color: #6a5acd;">.</span><span style="color: #000000;">find</span><span style="color: #6a5acd;">(</span><span style="color: #008b8b;">:all</span><span style="color: #6a5acd;">).</span><span style="color: #000000;">each</span> <span style="color: #6a5acd;">{|</span><span style="color: #000000;">person</span><span style="color: #6a5acd;">|</span> <span style="color: #000000;">person</span><span style="color: #6a5acd;">.</span><span style="color: #000000;">update_attribute</span><span style="color: #6a5acd;">....</span> <span style="color: #6a5acd;">}</span></li>
+</ol>
+
+<p>Scenario #2 isn't too big a deal actually. For I've learned to do my schema- and data-related migrations as separate scripts these days - saves hell lot more time when things go wrong. So now, whenever I'm doing the former, I'll probably not be bothered doing any self.down again.</p>
+
+
+  </div><a class="u-url" href="/weblog/2007/10/automated-selfd.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Devel!</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">choonkeat</li><li><a class="u-email" href="mailto:contactme@choonkeat.com">contactme@choonkeat.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">choonkeat</span></a></li><li><a href="https://www.twitter.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">choonkeat</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>choonkeat on programming &amp; software</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+---
+layout: post
+title: Why org.eclipse.jdt.launching.DEFAULT_CLASSPATH is always TRUE? And more on
+  launching Ant tasks programmatically...
+published: true
+---
+
+<p>DEFAULT_CLASSPATH will matter to you if you're trying to launch a task using <span style="font-family: courier new,courier,monospace;">ILaunchConfigurationWorkingCopy</span> using a separate JRE.<br /><br />To launch in a separate JVM, you'll have to first, get a JVM.. <br /><br />
+<pre></p>
+
+<p>  ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();<br />
+  ILaunchConfigurationType type = launchManager.getLaunchConfigurationType(IAntLaunchConfigurationConstants.ID_ANT_LAUNCH_CONFIGURATION_TYPE);<br />
+  ILaunchConfigurationWorkingCopy workingCopy = type.newInstance(null, &quot;Execute Ant Target&quot;);<br />
+  IProject project = ...;<br />
+  IVMInstall vm = JavaRuntime.getVMInstall((IJavaProject) project);<br />
+  workingCopy.setAttribute( IJavaLaunchConfigurationConstants.ATTR_VM_INSTALL_TYPE, vm.getVMInstallType().getId());<br />
+  workingCopy.setAttribute(IJavaLaunchConfigurationConstants.ATTR_VM_INSTALL_NAME, vm.getName());<br />
+  // ... more codes.. <br />
+  workingCopy.launch(ILaunchManager.RUN_MODE, new NullProgressMonitor()); <br />
+  // now this runs in separate JVM as ur Eclipse</p>
+
+</pre>
+Now, for my case I need to append quite a bit of classpath for my ant tasks to run, when NOT running as separate JVM, its relatively easy.. just modify the classpath set in the AntCorePlugin:<br />
+<pre>
+
+<p>  IAntClasspathEntry [] newUrls = ...;<br />
+  AntCorePlugin.getPlugin().getPreferences().setAdditionalClasspathEntries(newUrls);<br />
+  // and when u're done launching/launch has terminated.. just remember to reset it back<br />
+  // its impolite to make permanent change to user's preference without asking you know..</p>
+
+</pre>
+However, the above method of modifying classpath doesn't work when you're intending to run as a separate JRE, we'll have to do with something called <span style="font-family: courier new,courier,monospace;">IMemento</span>:<br />
+<pre>
+
+<p>  List mementoList = new ArrayList();<br />
+  mementoList.add((new AntHomeClasspathEntry()).getMemento());<br />
+  mementoList.add((new ContributedClasspathEntriesEntry()).getMemento());<br />
+  mementoList.add(JavaRuntime.newArchiveRuntimeClasspathEntry(new Path(workingDir.getAbsolutePath())).getMemento());<br />
+  // and more custom classpaths.. <br />
+  workingCopy.setAttribute(IJavaLaunchConfigurationConstants.ATTR_CLASSPATH, mementoList);</p>
+
+</pre>
+But what I find is, that there's this attribute <span style="font-family: courier new,courier,monospace;">ATTR_DEFAULT_CLASSPATH</span> that is always set to true. And when its true, the classpath that I've painstakingly assembled above doesn't apply, its value is always <span style="font-family: courier new,courier,monospace;">true</span> even if I explicitly set:<br />
+<pre>
+
+<p>  workingCopy.setAttribute(IJavaLaunchConfigurationConstants.ATTR_DEFAULT_CLASSPATH, false);<br />
+  workingCopy.launch(ILaunchManager.RUN_MODE, new NullProgressMonitor());</p>
+
+</pre>
+Frustrating. <br /><br />Its only after debugging into Eclipse's plugin's source code (yippie! open source!) that I realise that somewhere inside <span style="font-family: courier new,courier,monospace;">workingCopy.launch</span> itself, there's a call to <span style="font-family: courier new,courier,monospace;">AntUtil.migrateToNewClasspathFormat()</span> that effectively screws up that attribute. I haven't dwell into more details.. so my current fix is simple, I preempt:<br />
+
+<pre>
+
+<p>  AntUtil.migrateToNewClasspathFormat(workingCopy);<br />
+  workingCopy.setAttribute(IJavaLaunchConfigurationConstants.ATTR_DEFAULT_CLASSPATH, false);<br />
+  workingCopy.launch(ILaunchManager.RUN_MODE, new NullProgressMonitor());</p>
+
+</pre>
+Now, the value remains as <span style="font-family: courier new,courier,monospace;">false</span> and my custom classpath takes effect.<br /><br />
+

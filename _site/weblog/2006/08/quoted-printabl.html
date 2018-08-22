@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Quoted-Printable: Bitten for the N-th time! | The Devel!</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="Quoted-Printable: Bitten for the N-th time!" />
+<meta name="author" content="choonkeat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I knew I&#39;d handled this before, but still I&#39;d forgotten what was going on. Searching the web was fruitless - everyone seem happy to simply use str.unpack(&quot;M*&quot;) (aka TMail::Mail.unquoted_body when &quot;quoted-printable&quot;) for getting unquoted body from an email part that is &quot;quoted-printable&quot;. Perhaps I&#39;m just searching for the wrong terms... if so, then to ensure I&#39;ll hit my own result next time, I might as well be the one to put up a post using these terms that I might use:&nbsp; tmail unquote body quoted-printable decode truncated The problem is, I have a email.body (e.g. variable str) that looks like this: irb(main):002:0&gt; puts str This is a =20 multiline te= xt =20 string text =&gt; nil So far so good. Now I perform an unpack (aka email.unquoted_body) irb(main):003:0&gt; puts str.unpack(&quot;M*&quot;) # aka TMail::Mail.unquoted_body when &quot;quoted-printable&quot; This is a multiline te =&gt; nil WTF? What happened to the 3rd line of text? *shrugs* but if I do some dos2unix on the string... irb(main):004:0&gt; puts str.gsub(/\r\n/, &quot;\n&quot;).unpack(&quot;M*&quot;) This is a multiline text string text =&gt; nil Bah! The email did come from hotmail.com so I&#39;m biased to think they got it wrong instead of the stdlib. Update: Hmmmmmm.. Note that many implementations may elect to encode the localrepresentation of various content types directly, as described inAppendix G. In particular, this may apply to plain text materialon systems that use newline conventions other than CRLFdelimiters. Such an implementation is permissible, but thegeneration of line breaks must be generalized to account for thecase where alternate representations of newline sequences areused.quoted-printable := ([*(ptext / SPACE / TAB) ptext] [&quot;=&quot;] CRLF) ; Maximum line length of 76 characters excluding CRLFUpdate 2: Ruby stdlib is broken for unpack. &nbsp;" />
+<meta property="og:description" content="I knew I&#39;d handled this before, but still I&#39;d forgotten what was going on. Searching the web was fruitless - everyone seem happy to simply use str.unpack(&quot;M*&quot;) (aka TMail::Mail.unquoted_body when &quot;quoted-printable&quot;) for getting unquoted body from an email part that is &quot;quoted-printable&quot;. Perhaps I&#39;m just searching for the wrong terms... if so, then to ensure I&#39;ll hit my own result next time, I might as well be the one to put up a post using these terms that I might use:&nbsp; tmail unquote body quoted-printable decode truncated The problem is, I have a email.body (e.g. variable str) that looks like this: irb(main):002:0&gt; puts str This is a =20 multiline te= xt =20 string text =&gt; nil So far so good. Now I perform an unpack (aka email.unquoted_body) irb(main):003:0&gt; puts str.unpack(&quot;M*&quot;) # aka TMail::Mail.unquoted_body when &quot;quoted-printable&quot; This is a multiline te =&gt; nil WTF? What happened to the 3rd line of text? *shrugs* but if I do some dos2unix on the string... irb(main):004:0&gt; puts str.gsub(/\r\n/, &quot;\n&quot;).unpack(&quot;M*&quot;) This is a multiline text string text =&gt; nil Bah! The email did come from hotmail.com so I&#39;m biased to think they got it wrong instead of the stdlib. Update: Hmmmmmm.. Note that many implementations may elect to encode the localrepresentation of various content types directly, as described inAppendix G. In particular, this may apply to plain text materialon systems that use newline conventions other than CRLFdelimiters. Such an implementation is permissible, but thegeneration of line breaks must be generalized to account for thecase where alternate representations of newline sequences areused.quoted-printable := ([*(ptext / SPACE / TAB) ptext] [&quot;=&quot;] CRLF) ; Maximum line length of 76 characters excluding CRLFUpdate 2: Ruby stdlib is broken for unpack. &nbsp;" />
+<link rel="canonical" href="http://localhost:4000/weblog/2006/08/quoted-printabl.html" />
+<meta property="og:url" content="http://localhost:4000/weblog/2006/08/quoted-printabl.html" />
+<meta property="og:site_name" content="The Devel!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2006-08-14T00:00:00+08:00" />
+<script type="application/ld+json">
+{"headline":"Quoted-Printable: Bitten for the N-th time!","dateModified":"2006-08-14T00:00:00+08:00","datePublished":"2006-08-14T00:00:00+08:00","author":{"@type":"Person","name":"choonkeat"},"description":"I knew I&#39;d handled this before, but still I&#39;d forgotten what was going on. Searching the web was fruitless - everyone seem happy to simply use str.unpack(&quot;M*&quot;) (aka TMail::Mail.unquoted_body when &quot;quoted-printable&quot;) for getting unquoted body from an email part that is &quot;quoted-printable&quot;. Perhaps I&#39;m just searching for the wrong terms... if so, then to ensure I&#39;ll hit my own result next time, I might as well be the one to put up a post using these terms that I might use:&nbsp; tmail unquote body quoted-printable decode truncated The problem is, I have a email.body (e.g. variable str) that looks like this: irb(main):002:0&gt; puts str This is a =20 multiline te= xt =20 string text =&gt; nil So far so good. Now I perform an unpack (aka email.unquoted_body) irb(main):003:0&gt; puts str.unpack(&quot;M*&quot;) # aka TMail::Mail.unquoted_body when &quot;quoted-printable&quot; This is a multiline te =&gt; nil WTF? What happened to the 3rd line of text? *shrugs* but if I do some dos2unix on the string... irb(main):004:0&gt; puts str.gsub(/\\r\\n/, &quot;\\n&quot;).unpack(&quot;M*&quot;) This is a multiline text string text =&gt; nil Bah! The email did come from hotmail.com so I&#39;m biased to think they got it wrong instead of the stdlib. Update: Hmmmmmm.. Note that many implementations may elect to encode the localrepresentation of various content types directly, as described inAppendix G. In particular, this may apply to plain text materialon systems that use newline conventions other than CRLFdelimiters. Such an implementation is permissible, but thegeneration of line breaks must be generalized to account for thecase where alternate representations of newline sequences areused.quoted-printable := ([*(ptext / SPACE / TAB) ptext] [&quot;=&quot;] CRLF) ; Maximum line length of 76 characters excluding CRLFUpdate 2: Ruby stdlib is broken for unpack. &nbsp;","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/weblog/2006/08/quoted-printabl.html"},"url":"http://localhost:4000/weblog/2006/08/quoted-printabl.html","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Devel!" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">The Devel!</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Quoted-Printable: Bitten for the N-th time!</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2006-08-14T00:00:00+08:00" itemprop="datePublished">Aug 14, 2006
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p> <p>I knew I'd handled this before, but still I'd forgotten what was going on. Searching the web was <a href="http://www.google.com/search?q=tmail%20unquote%20body%20quoted-printable%20">fruitless</a> - everyone seem happy to simply use str.unpack(&quot;M*&quot;) (aka TMail::Mail.unquoted_body when &quot;quoted-printable&quot;) for getting unquoted body from an email part that is &quot;quoted-printable&quot;.</p> <p>Perhaps I'm just searching for the wrong terms... if so, then to ensure I'll hit my own result next time, I might as well be the one to put up a post using these terms that I might use:&nbsp; tmail unquote body quoted-printable decode truncated</p> <p>The problem is, I have a email.body (e.g. variable str) that looks like this: <br /> </p> <pre><span class="ident">irb</span><span class="punct">(</span><span class="ident">main</span><span class="punct">):</span><span class="number">002</span><span class="punct">:</span><span class="number">0</span><span class="punct">&gt;</span> <span class="ident">puts</span> <span class="ident">str</span><br /> <span class="constant">This</span> <span class="ident">is</span> <span class="ident">a</span><br /> <span class="punct">=</span><span class="number">20</span><br /> <span class="ident">multiline</span> <span class="ident">te</span><span class="punct">=</span><br /> <span class="ident">xt</span><br /> <span class="punct">=</span><span class="number">20</span><br /> <span class="ident">string</span> <span class="ident">text</span><br /> <span class="punct">=&gt;</span> <span class="constant">nil</span></pre> <p>So far so good. Now I perform an unpack (aka email.unquoted_body) <br /> </p> <pre><span class="ident">irb</span><span class="punct">(</span><span class="ident">main</span><span class="punct">):</span><span class="number">003</span><span class="punct">:</span><span class="number">0</span><span class="punct">&gt;</span> <span class="ident">puts</span> <span class="ident">str</span><span class="punct">.</span><span class="ident">unpack</span><span class="punct">(&quot;</span><span class="string">M*</span><span class="punct">&quot;)</span> <span class="comment"># aka TMail::Mail.unquoted_body when &quot;quoted-printable&quot;</span><br /> <span class="constant">This</span> <span class="ident">is</span> <span class="ident">a</span><br /> <br /> <span class="ident">multiline</span> <span class="ident">te</span><br /> <span class="punct">=&gt;</span> <span class="constant">nil</span></pre> <p>WTF? What happened to the 3rd line of text? *shrugs* but if I do some dos2unix on the string... <br /> </p> <pre><span class="ident">irb</span><span class="punct">(</span><span class="ident">main</span><span class="punct">):</span><span class="number">004</span><span class="punct">:</span><span class="number">0</span><span class="punct">&gt;</span> <span class="ident">puts</span> <span class="ident">str</span><span class="punct">.</span><span class="ident">gsub</span><span class="punct">(/</span><span class="regex"><span class="escape">\r\n</span></span><span class="punct">/,</span> <span class="punct">&quot;\n&quot;</span><span class="punct">).</span><span class="ident">unpack</span><span class="punct">(&quot;</span><span class="string">M*</span><span class="punct">&quot;)</span><br /> <span class="constant">This</span> <span class="ident">is</span> <span class="ident">a</span><br /> <br /> <span class="ident">multiline</span> <span class="ident">text</span><br /> <br /> <span class="ident">string</span> <span class="ident">text</span><br /> <span class="punct">=&gt;</span> <span class="constant">nil</span></pre> <p>Bah! The email did come from hotmail.com so I'm biased to think <em>they</em> got it wrong instead of the stdlib. </p> <p>Update: <a href="http://www.freesoft.org/CIE/RFC/1521/6.htm">Hmmmmmm..</a> </p> <pre>Note that many implementations may elect to encode the local<br />representation of various content types directly, as described in<br />Appendix G.  In particular, this may apply to plain text material<br />on systems that use newline conventions other than CRLF<br />delimiters. Such an implementation is permissible, but the<br />generation of line breaks must be generalized to account for the<br />case where alternate representations of newline sequences are<br />used.</pre><pre>quoted-printable := ([*(ptext / SPACE / TAB) ptext] [&quot;=&quot;] CRLF)<br />         ; Maximum line length of 76 characters excluding CRLF</pre><p>Update 2: Ruby stdlib is broken <a href="http://72.14.235.104/search?q=cache:dAM_bdbXon8J:blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/28601%3Fhelp+ruby+unpack+CRLF&amp;hl=en&amp;lr=&amp;strip=1">for unpack</a>. </p> <pre>&nbsp;</pre></p>
+
+
+  </div><a class="u-url" href="/weblog/2006/08/quoted-printabl.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Devel!</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">choonkeat</li><li><a class="u-email" href="mailto:contactme@choonkeat.com">contactme@choonkeat.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">choonkeat</span></a></li><li><a href="https://www.twitter.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">choonkeat</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>choonkeat on programming &amp; software</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

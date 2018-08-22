@@ -1,0 +1,10 @@
+---
+layout: post
+title: svn2svn
+published: true
+category:
+- software
+---
+
+<p> <p>I don't suppose many people will need this. But I found myself in a unique situation today, needing to transfer code from one <a href="Subversion">Subversion</a> repository to another. Preferably retaining the history of changesets and comments. Without access to the actual server repository.<br /> </p> <p>So wrote up this little ruby script: <a href="../../../files/svn2svn.rb.html">svn2svn.rb</a>.&nbsp;</p> <p>There's nothing about it that needed it to be written in Ruby. Its just so. In fact I was too lazy to poke at <a href="http://www.swig.org/">SWIG</a> to get proper Ruby APIs for SVN like <a href="http://collaboa.org/">Collaboa</a> (aka Trac on Rails). I taken the easy way and used &quot;system&quot; and &quot;popen&quot; instead - <em>blasphemous</em>! The whole algorithm is hardly optimised as well, roughly:</p> <ol> <li>checkout each revision from source repository URL as r1, r2, r3, etc (the CVS equivalent will probably be &quot;each log event&quot;)</li> <li>(create and) checkout the destination repository URL to a working directory</li> <li>for each revision, patch the <strong>diff -Naur</strong> output into the working directory and commit (includes <strong>svn add</strong> and s<strong>vn remove</strong> where needed)<br /> </li> </ol> <p>Step #1 will take quite a very long time, depending on connectivity. So, if you ever have the same need, <a href="../../../files/svn2svn.rb.html">use it at your own risk</a>. </p> <p>If its any assurance, it worked for me.&nbsp;</p></p>
+

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>No Template is the Best Template | The Devel!</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="No Template is the Best Template" />
+<meta name="author" content="choonkeat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Update 28 Sept 2008: checkout the working code at github repository, and a short video demo on vimeo. I&#39;ve been swimming in jQuery-bliss for a few months now - thanks Divya &amp; Tien Dung for introducing me to it! I&#39;m yearning to do it on the server-side. But to enjoy the jQuery-bliss (aka &quot;no special case pattern&quot;), I&#39;d need to be in a problem where I have a document to sculpt. My recent toys (cleartz and tryanslator.. and actually most Javascript apps?) for example, are built the via sculpting way: a very basic HTML structure, then Javascript comes in to flesh out its form and introduce function. A very pleasant development experience overall. Aside: Back in Java days, I remember I used to hate XML DOM parsing a lot. NodeList? hasChildNodes? But XPath came and suddenly pain became pleasure. On the server-side, Model (of MVC) stuff seems to fit (maybe sqlQuery( &quot;people[gender=&#39;Male&#39;]&quot; ).update({ salutation: &quot;mister&quot; }) ?) but ActiveRecord (&amp; Ambition?) is already nice to work with, and I have no major problems there. My gripe is with the View (and consequently the Controller). Views are generally powered by some templating system. These gnarly things are just a pile of bastardized HTML files good for neither designers nor developers. The best templating systems are only best because you&#39;ll choke yourself slower by using them. Anyways, pretend you agree that templates == bad. Wouldn&#39;t it be nice if your web framework 1) loads up pure HTML as a document object, 2) you modify them in the jQuery-bliss way in your Controller, then finally 3) the resulting HTML is spit back to the client browser? No nasty &lt;? %&gt; } or custom syntax for dynamic content, or loops, or if-else. Just pure HTML with dummy data baked in. # display_user.html&lt;span class=&quot;tel&quot;&gt; &lt;span class=&quot;type&quot;&gt;home&lt;/span&gt;: &lt;span class=&quot;value&quot;&gt;+1.415.555.1212&lt;/span&gt;&lt;/span&gt; Then modify them before serving: # inside controllerdef display_user(doc)&nbsp; user = User.find( params[:user_id] )&nbsp;&nbsp; (doc/&quot;.tel .value&quot;).inner_html = user.phone_number&nbsp; return doc.to_htmlend&nbsp; And because it is an in-memory tree instead of some opaque String, you can do everything programatically around the document: looping, if-else, removing nodes, replacing sub menus, partials? Furthermore, when you need to do dynamic behaviors on the client-side, the programming paradigm is exactly the same! Designers can be happy churning out the HTML/CSS in whatever tool they like (be it Dreamweaver or notepad.exe), and developers just poke their DOM. What say you? PS: Oh well, I guess what I&#39;m trying to say is maybe we should not waste time finding better ways of constructing webpages (i.e. templating systems) when we could approach the problem as &quot;modifying a document&quot; - which is much cleaner and (with the right API) much easier." />
+<meta property="og:description" content="Update 28 Sept 2008: checkout the working code at github repository, and a short video demo on vimeo. I&#39;ve been swimming in jQuery-bliss for a few months now - thanks Divya &amp; Tien Dung for introducing me to it! I&#39;m yearning to do it on the server-side. But to enjoy the jQuery-bliss (aka &quot;no special case pattern&quot;), I&#39;d need to be in a problem where I have a document to sculpt. My recent toys (cleartz and tryanslator.. and actually most Javascript apps?) for example, are built the via sculpting way: a very basic HTML structure, then Javascript comes in to flesh out its form and introduce function. A very pleasant development experience overall. Aside: Back in Java days, I remember I used to hate XML DOM parsing a lot. NodeList? hasChildNodes? But XPath came and suddenly pain became pleasure. On the server-side, Model (of MVC) stuff seems to fit (maybe sqlQuery( &quot;people[gender=&#39;Male&#39;]&quot; ).update({ salutation: &quot;mister&quot; }) ?) but ActiveRecord (&amp; Ambition?) is already nice to work with, and I have no major problems there. My gripe is with the View (and consequently the Controller). Views are generally powered by some templating system. These gnarly things are just a pile of bastardized HTML files good for neither designers nor developers. The best templating systems are only best because you&#39;ll choke yourself slower by using them. Anyways, pretend you agree that templates == bad. Wouldn&#39;t it be nice if your web framework 1) loads up pure HTML as a document object, 2) you modify them in the jQuery-bliss way in your Controller, then finally 3) the resulting HTML is spit back to the client browser? No nasty &lt;? %&gt; } or custom syntax for dynamic content, or loops, or if-else. Just pure HTML with dummy data baked in. # display_user.html&lt;span class=&quot;tel&quot;&gt; &lt;span class=&quot;type&quot;&gt;home&lt;/span&gt;: &lt;span class=&quot;value&quot;&gt;+1.415.555.1212&lt;/span&gt;&lt;/span&gt; Then modify them before serving: # inside controllerdef display_user(doc)&nbsp; user = User.find( params[:user_id] )&nbsp;&nbsp; (doc/&quot;.tel .value&quot;).inner_html = user.phone_number&nbsp; return doc.to_htmlend&nbsp; And because it is an in-memory tree instead of some opaque String, you can do everything programatically around the document: looping, if-else, removing nodes, replacing sub menus, partials? Furthermore, when you need to do dynamic behaviors on the client-side, the programming paradigm is exactly the same! Designers can be happy churning out the HTML/CSS in whatever tool they like (be it Dreamweaver or notepad.exe), and developers just poke their DOM. What say you? PS: Oh well, I guess what I&#39;m trying to say is maybe we should not waste time finding better ways of constructing webpages (i.e. templating systems) when we could approach the problem as &quot;modifying a document&quot; - which is much cleaner and (with the right API) much easier." />
+<link rel="canonical" href="http://localhost:4000/weblog/2008/03/no-template-is.html" />
+<meta property="og:url" content="http://localhost:4000/weblog/2008/03/no-template-is.html" />
+<meta property="og:site_name" content="The Devel!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2008-03-26T00:00:00+08:00" />
+<script type="application/ld+json">
+{"headline":"No Template is the Best Template","dateModified":"2008-03-26T00:00:00+08:00","datePublished":"2008-03-26T00:00:00+08:00","author":{"@type":"Person","name":"choonkeat"},"description":"Update 28 Sept 2008: checkout the working code at github repository, and a short video demo on vimeo. I&#39;ve been swimming in jQuery-bliss for a few months now - thanks Divya &amp; Tien Dung for introducing me to it! I&#39;m yearning to do it on the server-side. But to enjoy the jQuery-bliss (aka &quot;no special case pattern&quot;), I&#39;d need to be in a problem where I have a document to sculpt. My recent toys (cleartz and tryanslator.. and actually most Javascript apps?) for example, are built the via sculpting way: a very basic HTML structure, then Javascript comes in to flesh out its form and introduce function. A very pleasant development experience overall. Aside: Back in Java days, I remember I used to hate XML DOM parsing a lot. NodeList? hasChildNodes? But XPath came and suddenly pain became pleasure. On the server-side, Model (of MVC) stuff seems to fit (maybe sqlQuery( &quot;people[gender=&#39;Male&#39;]&quot; ).update({ salutation: &quot;mister&quot; }) ?) but ActiveRecord (&amp; Ambition?) is already nice to work with, and I have no major problems there. My gripe is with the View (and consequently the Controller). Views are generally powered by some templating system. These gnarly things are just a pile of bastardized HTML files good for neither designers nor developers. The best templating systems are only best because you&#39;ll choke yourself slower by using them. Anyways, pretend you agree that templates == bad. Wouldn&#39;t it be nice if your web framework 1) loads up pure HTML as a document object, 2) you modify them in the jQuery-bliss way in your Controller, then finally 3) the resulting HTML is spit back to the client browser? No nasty &lt;? %&gt; } or custom syntax for dynamic content, or loops, or if-else. Just pure HTML with dummy data baked in. # display_user.html&lt;span class=&quot;tel&quot;&gt; &lt;span class=&quot;type&quot;&gt;home&lt;/span&gt;: &lt;span class=&quot;value&quot;&gt;+1.415.555.1212&lt;/span&gt;&lt;/span&gt; Then modify them before serving: # inside controllerdef display_user(doc)&nbsp; user = User.find( params[:user_id] )&nbsp;&nbsp; (doc/&quot;.tel .value&quot;).inner_html = user.phone_number&nbsp; return doc.to_htmlend&nbsp; And because it is an in-memory tree instead of some opaque String, you can do everything programatically around the document: looping, if-else, removing nodes, replacing sub menus, partials? Furthermore, when you need to do dynamic behaviors on the client-side, the programming paradigm is exactly the same! Designers can be happy churning out the HTML/CSS in whatever tool they like (be it Dreamweaver or notepad.exe), and developers just poke their DOM. What say you? PS: Oh well, I guess what I&#39;m trying to say is maybe we should not waste time finding better ways of constructing webpages (i.e. templating systems) when we could approach the problem as &quot;modifying a document&quot; - which is much cleaner and (with the right API) much easier.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/weblog/2008/03/no-template-is.html"},"url":"http://localhost:4000/weblog/2008/03/no-template-is.html","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Devel!" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">The Devel!</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">No Template is the Best Template</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2008-03-26T00:00:00+08:00" itemprop="datePublished">Mar 26, 2008
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p style="font-style: italic">Update 28 Sept 2008: checkout the working code at <a href="http://github.com/choonkeat/hquery/tree/master">github repository</a>, and a short <a href="http://www.vimeo.com/1836815">video demo on vimeo</a>.</p>
+
+<p>I've been swimming in jQuery-bliss for a few months now - thanks <a href="http://nimbupani.com/">Divya</a> &amp; <a href="http://free-and-happy.blogspot.com/">Tien Dung</a> for introducing me to it! I'm yearning to <a href="http://ejohn.org/blog/bringing-the-browser-to-the-server/">do it on the server-side</a>.</p>
+
+<p>But to enjoy the jQuery-bliss (aka "<a href="http://blog.choonkeat.com/weblog/2007/11/the-unspecial-c.html">no special case pattern</a>"), I'd need to be in a problem where I have a document to sculpt. My recent toys (<a href="http://dev.choonkeat.com/js/cleartz/index#,Singapore,San_Francisco_CA,Berlin">cleartz</a> and <a href="http://dev.choonkeat.com/js/lang/index">tryanslator</a>.. and actually most Javascript apps?) for example, are built the via sculpting way: a very basic HTML structure, then Javascript comes in to flesh out its form and introduce function. A very pleasant development experience overall. </p>
+
+<p><em>Aside: Back in Java days, I remember I used to hate XML DOM parsing a
+lot. <code>NodeList</code>? <code>hasChildNodes</code>? But XPath came and suddenly pain became pleasure.</em><br>
+
+</p>
+
+<p>On the server-side, Model (of MVC) stuff seems to fit (maybe <code>sqlQuery( "people[gender='Male']" ).update({ salutation: "mister" })</code> ?) but ActiveRecord (&amp; <a href="http://errtheblog.com/posts/63-full-of-ambition">Ambition</a>?) is already nice to work with, and I have no major problems there. </p>
+
+<p>My gripe is with the View (and consequently the Controller). Views are generally powered by some templating system. These gnarly things are just a pile of bastardized HTML files good for neither designers nor developers. The best templating systems are only best because you'll choke yourself slower by using them. Anyways, pretend you agree that templates == bad.</p>
+
+<p>Wouldn't it be nice if your web framework 1) loads up pure HTML as a document object, 2) you modify them in the jQuery-bliss way in your Controller, then finally 3) the resulting HTML is spit back to the client browser? </p>
+
+<p>No nasty &lt;? %&gt; } or custom syntax for dynamic content, or loops, or if-else. Just pure HTML with dummy data baked in. </p><blockquote><pre># display_user.html<br>&lt;span class="tel"&gt;<br> &lt;span class="type"&gt;home&lt;/span&gt;:<br> &lt;span class="value"&gt;+1.415.555.1212&lt;/span&gt;<br>&lt;/span&gt;</pre></blockquote><p>Then modify them before serving:</p><blockquote><pre><pre><pre><pre><span style="color: #0000ff;"># inside controller</span><br><span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">def </span></span><span style="color: #008b8b;">display_user</span><span style="color: #6a5acd;">(</span><span style="color: #000000;">doc</span><span style="color: #6a5acd;">)</span><br>&nbsp; <span style="color: #000000;">user</span> <span style="color: #6a5acd;">=</span> <span style="color: #008b8b;">User</span><span style="color: #6a5acd;">.</span><span style="color: #000000;">find</span><span style="color: #6a5acd;">(</span> <span style="color: #000000;">params</span><span style="color: #6a5acd;">[</span><span style="color: #008b8b;">:user_id</span><span style="color: #6a5acd;">]</span> <span style="color: #6a5acd;">)</span><span style="color: #6a5acd;">&nbsp;</span><br>&nbsp; <span style="color: #6a5acd;">(</span><span style="color: #000000;">doc</span><span style="color: #6a5acd;">/"</span><span style="color: #dd00dd;">.tel .value</span><span style="color: #6a5acd;">").</span><span style="color: #000000;">inner_html</span> <span style="color: #6a5acd;">=</span> <span style="color: #000000;">user</span><span style="color: #6a5acd;">.</span><span style="color: #000000;">phone_number</span><br>&nbsp; <span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">return</span></span><span style="color: #000000;"> doc</span><span style="color: #6a5acd;">.</span><span style="color: #000000;">to_html</span><br><span style="color: #a52a2a;"><span class="keyword" style="font-weight: bold;">end</span></span><span class="keyword">&nbsp;</span></pre></pre></pre></pre></blockquote><p>And because it is an in-memory tree instead of some opaque String, you can do everything programatically <em>around</em> the document: looping, if-else, removing nodes, replacing sub menus, partials? Furthermore, when you need to do dynamic behaviors on the client-side, the programming paradigm is exactly the same!</p>
+
+<p>Designers can be happy churning out the HTML/CSS in whatever tool they like (be it Dreamweaver or notepad.exe), and developers just poke their DOM. </p>
+
+<p>What say you?</p>
+
+<p><em>PS: Oh well, I guess what I'm trying to say is maybe we should not waste time finding better ways of constructing webpages (i.e. templating systems) when we could approach the problem as "modifying a document" - which is much cleaner and (with the <a href="http://blog.choonkeat.com/weblog/2007/11/the-unspecial-c.html">right API</a>) much easier.</em></p>
+
+
+  </div><a class="u-url" href="/weblog/2008/03/no-template-is.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Devel!</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">choonkeat</li><li><a class="u-email" href="mailto:contactme@choonkeat.com">contactme@choonkeat.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">choonkeat</span></a></li><li><a href="https://www.twitter.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">choonkeat</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>choonkeat on programming &amp; software</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

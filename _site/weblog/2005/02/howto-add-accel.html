@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>HOWTO Add Accelerator Keys, aka Keyboard Shortcuts, aka Keybindings to Your Eclipse Plugin | The Devel!</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="HOWTO Add Accelerator Keys, aka Keyboard Shortcuts, aka Keybindings to Your Eclipse Plugin" />
+<meta name="author" content="choonkeat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="For starters, just add the following into the plugin.xml &lt;extension point=&quot;org.eclipse.ui.commands&quot;&gt; &lt;activeKeyConfiguration value=&quot;org.eclipse.ui.defaultAcceleratorConfiguration&quot;/&gt; &lt;!-- this one says that what I declare is active by default --&gt; &lt;category name=&quot;Do My Bidding Accelerator Keys&quot; id=&quot;myklass.activeKey.category1&quot;/&gt; &lt;command category=&quot;myklass.activeKey.category1&quot; name=&quot;Do My Bidding&quot; id=&quot;myklass.activeKey.MyCommand&quot;/&gt; &lt;!-- a unique id, to be used only much later --&gt; &lt;keyBinding command=&quot;myklass.activeKey.MyCommand&quot; string=&quot;Ctrl+1&quot; scope=&quot;org.eclipse.ui.globalScope&quot; &lt;!-- this is the scope where ur binding is active, lets try any global --&gt; configuration=&quot;org.eclipse.ui.defaultAcceleratorConfiguration&quot;/&gt; &lt;/extension&gt; &lt;/extension /&gt;&lt;/extension /&gt;Notice that we&#39;ve declared this binding to be default, to be called &quot;Do My Bidding&quot;, to be bound to keys &quot;Ctrl+1&quot;. But when I really do a Ctrl+1, what is executed? An Action happens. How to create an action? That&#39;s for another article (you should try the Hello World example from Eclipse itself) but right now, lets assume you have an Action that shows up a message box that says &quot;Do My Bidding&quot;... just add a definitionId to the &lt;action /&gt; &lt;extension point=&quot;org.eclipse.ui.actionSets&quot;&gt; &lt;actionSet ... /&gt; &lt;action definitionId=&quot;myklass.activeKey.MyCommand&quot; ... /&gt; &lt;!-- match definitionId with the id you gave to command earlier --&gt; &lt;action definitionid=&quot;myklass.activeKey.MyCommand&quot; .=&quot;&quot; /&gt;&lt;/action /&gt;&lt;extension&lt;extensionNow, when you press Ctrl+1, the above action will be invoked. What&#39;s kewl is, even the menu will be updated to show the key-binding, e.g. the Ctrl-H you see in the screen capture below:See here for more details." />
+<meta property="og:description" content="For starters, just add the following into the plugin.xml &lt;extension point=&quot;org.eclipse.ui.commands&quot;&gt; &lt;activeKeyConfiguration value=&quot;org.eclipse.ui.defaultAcceleratorConfiguration&quot;/&gt; &lt;!-- this one says that what I declare is active by default --&gt; &lt;category name=&quot;Do My Bidding Accelerator Keys&quot; id=&quot;myklass.activeKey.category1&quot;/&gt; &lt;command category=&quot;myklass.activeKey.category1&quot; name=&quot;Do My Bidding&quot; id=&quot;myklass.activeKey.MyCommand&quot;/&gt; &lt;!-- a unique id, to be used only much later --&gt; &lt;keyBinding command=&quot;myklass.activeKey.MyCommand&quot; string=&quot;Ctrl+1&quot; scope=&quot;org.eclipse.ui.globalScope&quot; &lt;!-- this is the scope where ur binding is active, lets try any global --&gt; configuration=&quot;org.eclipse.ui.defaultAcceleratorConfiguration&quot;/&gt; &lt;/extension&gt; &lt;/extension /&gt;&lt;/extension /&gt;Notice that we&#39;ve declared this binding to be default, to be called &quot;Do My Bidding&quot;, to be bound to keys &quot;Ctrl+1&quot;. But when I really do a Ctrl+1, what is executed? An Action happens. How to create an action? That&#39;s for another article (you should try the Hello World example from Eclipse itself) but right now, lets assume you have an Action that shows up a message box that says &quot;Do My Bidding&quot;... just add a definitionId to the &lt;action /&gt; &lt;extension point=&quot;org.eclipse.ui.actionSets&quot;&gt; &lt;actionSet ... /&gt; &lt;action definitionId=&quot;myklass.activeKey.MyCommand&quot; ... /&gt; &lt;!-- match definitionId with the id you gave to command earlier --&gt; &lt;action definitionid=&quot;myklass.activeKey.MyCommand&quot; .=&quot;&quot; /&gt;&lt;/action /&gt;&lt;extension&lt;extensionNow, when you press Ctrl+1, the above action will be invoked. What&#39;s kewl is, even the menu will be updated to show the key-binding, e.g. the Ctrl-H you see in the screen capture below:See here for more details." />
+<link rel="canonical" href="http://localhost:4000/weblog/2005/02/howto-add-accel.html" />
+<meta property="og:url" content="http://localhost:4000/weblog/2005/02/howto-add-accel.html" />
+<meta property="og:site_name" content="The Devel!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2005-02-23T00:00:00+08:00" />
+<script type="application/ld+json">
+{"headline":"HOWTO Add Accelerator Keys, aka Keyboard Shortcuts, aka Keybindings to Your Eclipse Plugin","dateModified":"2005-02-23T00:00:00+08:00","datePublished":"2005-02-23T00:00:00+08:00","author":{"@type":"Person","name":"choonkeat"},"description":"For starters, just add the following into the plugin.xml &lt;extension point=&quot;org.eclipse.ui.commands&quot;&gt; &lt;activeKeyConfiguration value=&quot;org.eclipse.ui.defaultAcceleratorConfiguration&quot;/&gt; &lt;!-- this one says that what I declare is active by default --&gt; &lt;category name=&quot;Do My Bidding Accelerator Keys&quot; id=&quot;myklass.activeKey.category1&quot;/&gt; &lt;command category=&quot;myklass.activeKey.category1&quot; name=&quot;Do My Bidding&quot; id=&quot;myklass.activeKey.MyCommand&quot;/&gt; &lt;!-- a unique id, to be used only much later --&gt; &lt;keyBinding command=&quot;myklass.activeKey.MyCommand&quot; string=&quot;Ctrl+1&quot; scope=&quot;org.eclipse.ui.globalScope&quot; &lt;!-- this is the scope where ur binding is active, lets try any global --&gt; configuration=&quot;org.eclipse.ui.defaultAcceleratorConfiguration&quot;/&gt; &lt;/extension&gt; &lt;/extension /&gt;&lt;/extension /&gt;Notice that we&#39;ve declared this binding to be default, to be called &quot;Do My Bidding&quot;, to be bound to keys &quot;Ctrl+1&quot;. But when I really do a Ctrl+1, what is executed? An Action happens. How to create an action? That&#39;s for another article (you should try the Hello World example from Eclipse itself) but right now, lets assume you have an Action that shows up a message box that says &quot;Do My Bidding&quot;... just add a definitionId to the &lt;action /&gt; &lt;extension point=&quot;org.eclipse.ui.actionSets&quot;&gt; &lt;actionSet ... /&gt; &lt;action definitionId=&quot;myklass.activeKey.MyCommand&quot; ... /&gt; &lt;!-- match definitionId with the id you gave to command earlier --&gt; &lt;action definitionid=&quot;myklass.activeKey.MyCommand&quot; .=&quot;&quot; /&gt;&lt;/action /&gt;&lt;extension&lt;extensionNow, when you press Ctrl+1, the above action will be invoked. What&#39;s kewl is, even the menu will be updated to show the key-binding, e.g. the Ctrl-H you see in the screen capture below:See here for more details.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/weblog/2005/02/howto-add-accel.html"},"url":"http://localhost:4000/weblog/2005/02/howto-add-accel.html","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Devel!" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">The Devel!</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">HOWTO Add Accelerator Keys, aka Keyboard Shortcuts, aka Keybindings to Your Eclipse Plugin</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2005-02-23T00:00:00+08:00" itemprop="datePublished">Feb 23, 2005
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>For starters, just add the following into the <font face="courier new,courier,monospace">plugin.xml<br /></font><br /><!--StartFragment --> <!--StartFragment -->  <strong>&lt;extension</strong><br />  <strong>point=&quot;</strong>org.eclipse.ui.commands<strong>&quot;&gt;</strong><br />  <strong>&lt;activeKeyConfiguration value=&quot;</strong>org.eclipse.ui.defaultAcceleratorConfiguration<strong>&quot;/&gt;</strong><br />  <em>&lt;!-- this one says that what I declare is active by default --&gt;</em><br />  <strong>&lt;category<br />  name=&quot;</strong>Do My Bidding Accelerator Keys<strong>&quot;</strong><br />  <strong>id=&quot;</strong>myklass.activeKey.category1<strong>&quot;/&gt;</strong><br />  <strong>&lt;command<br />  category=&quot;</strong>myklass.activeKey.category1<strong>&quot;<br />  name=&quot;</strong>Do My Bidding<strong>&quot;<br />  id=&quot;</strong>myklass.activeKey.MyCommand<strong>&quot;/&gt; <br /></strong>  <em>&lt;!-- a unique id, to be used only much later --&gt;</em><br />  <strong>&lt;keyBinding<br />  command=&quot;</strong>myklass.activeKey.MyCommand<strong>&quot;<br />  string=&quot;</strong>Ctrl+1<strong>&quot;<br />  scope=&quot;</strong>org.eclipse.ui.globalScope<strong>&quot; <br /></strong>  <em>&lt;!-- this is the scope where ur binding is active, lets try any global --&gt;</em><br />  <strong>configuration=&quot;</strong>org.eclipse.ui.defaultAcceleratorConfiguration<strong>&quot;/&gt;<br />  &lt;/extension&gt;</strong>  </extension /><br /></extension /><br />Notice that we've declared this binding to be default, to be called &quot;Do My Bidding&quot;, to be bound to keys &quot;Ctrl+1&quot;. But when I really do a Ctrl+1, what is executed? </p><p>An <span style="FONT-WEIGHT: bold">Action</span> happens. How to create an action? That's for another article (you should try the Hello World example from Eclipse itself) but right now, lets assume you have an Action that shows up a message box that says &quot;Do My Bidding&quot;... just add a <font face="courier new,courier,monospace">definitionId</font> to the <font face="courier new,courier,monospace">&lt;action /&gt;</font><br /><br /><!--StartFragment --> <strong>&lt;extension<br /></strong>  <strong>point=&quot;</strong>org.eclipse.ui.actionSets<strong>&quot;&gt;<br /></strong>  <strong>&lt;actionSet ... /&gt;<br /></strong>  <strong>&lt;action definitionId=&quot;</strong>myklass.activeKey.MyCommand<strong>&quot; ... /&gt;</strong> <br />  <em>&lt;!-- match definitionId with the id you gave to command earlier --&gt;</em> <br /><action definitionid="myklass.activeKey.MyCommand" .="" /><!-- match definitionId with the id you gave to command earlier --></action /><br /><extension<br /><!--StartFragment --><extension<br />Now, when you press Ctrl+1, the above action will be invoked. What's kewl is, even the menu will be updated to show the key-binding, e.g. the Ctrl-H you see in the screen capture below:<br /><img style="MARGIN: 5px" alt="" src="http://www.yanime.org/accelerator_keys_menu.jpg" /><br />See <a href="http://publib.boulder.ibm.com/infocenter/ad51help/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/wrkAdv_keyBindings_accelConfig.htm">here</a> for more details.</p><br />
+
+
+  </div><a class="u-url" href="/weblog/2005/02/howto-add-accel.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Devel!</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">choonkeat</li><li><a class="u-email" href="mailto:contactme@choonkeat.com">contactme@choonkeat.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">choonkeat</span></a></li><li><a href="https://www.twitter.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">choonkeat</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>choonkeat on programming &amp; software</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

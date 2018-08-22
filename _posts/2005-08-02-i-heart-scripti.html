@@ -1,0 +1,30 @@
+---
+layout: post
+title: I *Heart* Scripting Language
+published: true
+category:
+- software
+---
+
+<p>When I first found Perl, coming from C/Java world... I fell in love with it. Writing in perl was snappy. No beatin' them round those bushes when looking for money:<br/>
+<br/>
+<blockquote>open(FILE, &quot;bushes.txt&quot;);<br/>
+while (&lt;FILE&gt;) {<br/>
+&nbsp; printf if (/money/); # prints all lines that has 'money' in it.. <br/>
+}<br/>
+close FILE;<br/>
+</blockquote> <br/>
+Fresh from school of C/C++, I'd never <span style="font-style: italic;">knew</span> working with files was so easy and concise! Then came the real addictive @arrays.. <a href="http://www.pageresource.com/cgirec/ptut11.htm">push, pop, split, join, each, splice</a>,... life was good! (and I haven't even mentioned %hashes!) In fact, it was so good I started writing myself helper classes in Java just so I can <span style="font-style: italic;">think</span> naturally - and giving runtime performance the middle finger, &quot;<span style="font-style: italic;">Development time costs more than CPU cycles</span>&quot; I'd say and only did optimisation when there's production need - which turns out rarer than I'd expected. Not all of us work in million-hits-per-second mega online store. And as history goes, Java did eventually come cosy up with <span style="font-style: italic;">split</span> as well. Only split. <br/>
+<br/>
+And when I first saw Ruby it was the <span style="font-style: italic;">each</span> syntax that caught my eye. I could only say OMG! But Martin Fowler has articulated <a href="http://martinfowler.com/bliki/CollectionClosureMethod.html">the power combo of closures and collections [very good read]</a> very well. Even recently as I was showing <a href="http://weblog.rubyonrails.com/archives/2005/07/08/new-rails-movie-with-sound-and-sugar/">The Rails video</a> to some colleagues, I find myself repeating this disclaimer each time: <span style="font-style: italic;">Oh, this [benefit] is Ruby - not Rails per se - a scripting language's arrays is always more powerful</span>.<br/>
+<br/>
+Was at a Java event a few months back where the presenter was talking about Java 1.5 features. Most of the stuff were so-so to me, until he said something like (not quoting here): <span style="font-style: italic;">We did not introduce a 'foreach' keyword because we're very careful not to break existing codes,... </span>then goes on to introduce the new <span style="font-style: italic;">enum </span>keyword. Duh. How is <span style="font-style: italic;">foreach </span>more probable to break existing codes than <span style="font-style: italic;">enum</span>? I'd even bet its totally the other way round.<br/>
+<br/>
+Btw I haven't investigated <span style="font-style: italic;">enum</span>, but my gut feel tells me - its an unnecessarily complex beast that is only waiting to contribute to <a href="http://www.antipatterns.com/thebook.htm">anti-patterns</a>.<br/>
+<br/>
+enum. foreach. I can't understand <a href="http://blog.yanime.org/articles/2004/11/22/pet-peeves-and-java">why the priorities are such</a>. really.<br/>
+<br/>
+update: yea, I know the stuff mentioned above were wee bit outdated. but reading martin fowler did me in. i'm hoping <a href="http://developers.slashdot.org/article.pl?sid=05/07/22/145210&from=rss">an open source movement</a> will put enough pressure to steer the language's priorities.<br/>
+<br/>
+update: its my hypothesis that a language needs only to provide good grammer for list and strings (includes regex) to be useful. runtime performance should be dealt with aside of grammar.</p>
+

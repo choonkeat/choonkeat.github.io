@@ -1,0 +1,14 @@
+---
+layout: post
+title: Calling it a day
+published: true
+category:
+- life
+---
+My good friend Roger-Wabbit has decided to call it a day with the IT business. He's started out as enthusiastic, DIY Linux hobbist.. but slowly moulded into a [BOFH](http://members.iinet.net.au/~bofh/) (kidding!). Anyways.. he's moving up north to Terengganu to live out his diver dreams.. Hopefully the next time I travel up.. will be him teaching me to dive.   
+  
+One of my ex-boss has decided to call it a day with the IT business. Sounded tired over the phone. Perhaps much drained.. he's taken care of his baby for 4 years now.. its time to let go and one's gotta understand it must be hard. Hooking up my friend to take over the clients and contracts tomorrow.. hope it turns out well.  
+  
+My beloved Mr Goh has decided to call it a day. He looks happy though ;-) some has called him the in-between of two Lees... but I do like that guy. He gives you a snazzy warm feeling you're taken care of (perhaps of his height.. can't see his eyes thru the glasses clearly and assuring smile).. but I guess when someone leave in a good note, people tend to look at him in good light.
+
+  

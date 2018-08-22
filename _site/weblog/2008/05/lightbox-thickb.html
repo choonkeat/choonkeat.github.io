@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Lightbox, Thickbox, Greybox - Ugh | The Devel!</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="Lightbox, Thickbox, Greybox - Ugh" />
+<meta name="author" content="choonkeat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I dislike the increasing (still?) trend of websites deploying a lightbox (or thickbox) effect. Not so much for the strobing visuals, but more because it is nothing but an irrelevant technique dragged over from the desktop world to the web - just for the sake of familiarity. Modal dialog boxes are those which temporarily halt the program in the sense that the user cannot continue until the dialog has been closed link » Modal dialogs are generally regarded as bad design solutions by usability practitioners, since they are prone to produce mode errors . link » - from Dialog box - Wikipedia, the free encyclopedia via sharedcopy.com The web is free flowing and has no vertical constraint. And it&#39;s good that way! My personal preference as a developer is to use div-expansion/collapse everywhere possible, until I can&#39;t. By introducing new content in-place, and reflowing the rest of the document, a user is not required to take action just to back out. If he choose to proceed, he can interact with the new content (usually a form), or simply continue browsing, scrolling down or click elsewhere. Even if situation calls for a lightbox-ish design, it isn&#39;t too much to ask for [as much of the] surrounding content to be pushed aside whilst showing a thickbox at the centre of the screen. You get to reduce overlap &amp; maintain document flow at the same time. Try it, click on the Wikipedia quote above. Though the right columns of this blog is obscured by virtue of their floats, the content of this entry will remain in full view." />
+<meta property="og:description" content="I dislike the increasing (still?) trend of websites deploying a lightbox (or thickbox) effect. Not so much for the strobing visuals, but more because it is nothing but an irrelevant technique dragged over from the desktop world to the web - just for the sake of familiarity. Modal dialog boxes are those which temporarily halt the program in the sense that the user cannot continue until the dialog has been closed link » Modal dialogs are generally regarded as bad design solutions by usability practitioners, since they are prone to produce mode errors . link » - from Dialog box - Wikipedia, the free encyclopedia via sharedcopy.com The web is free flowing and has no vertical constraint. And it&#39;s good that way! My personal preference as a developer is to use div-expansion/collapse everywhere possible, until I can&#39;t. By introducing new content in-place, and reflowing the rest of the document, a user is not required to take action just to back out. If he choose to proceed, he can interact with the new content (usually a form), or simply continue browsing, scrolling down or click elsewhere. Even if situation calls for a lightbox-ish design, it isn&#39;t too much to ask for [as much of the] surrounding content to be pushed aside whilst showing a thickbox at the centre of the screen. You get to reduce overlap &amp; maintain document flow at the same time. Try it, click on the Wikipedia quote above. Though the right columns of this blog is obscured by virtue of their floats, the content of this entry will remain in full view." />
+<link rel="canonical" href="http://localhost:4000/weblog/2008/05/lightbox-thickb.html" />
+<meta property="og:url" content="http://localhost:4000/weblog/2008/05/lightbox-thickb.html" />
+<meta property="og:site_name" content="The Devel!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2008-05-07T00:00:00+08:00" />
+<script type="application/ld+json">
+{"headline":"Lightbox, Thickbox, Greybox - Ugh","dateModified":"2008-05-07T00:00:00+08:00","datePublished":"2008-05-07T00:00:00+08:00","author":{"@type":"Person","name":"choonkeat"},"description":"I dislike the increasing (still?) trend of websites deploying a lightbox (or thickbox) effect. Not so much for the strobing visuals, but more because it is nothing but an irrelevant technique dragged over from the desktop world to the web - just for the sake of familiarity. Modal dialog boxes are those which temporarily halt the program in the sense that the user cannot continue until the dialog has been closed link » Modal dialogs are generally regarded as bad design solutions by usability practitioners, since they are prone to produce mode errors . link » - from Dialog box - Wikipedia, the free encyclopedia via sharedcopy.com The web is free flowing and has no vertical constraint. And it&#39;s good that way! My personal preference as a developer is to use div-expansion/collapse everywhere possible, until I can&#39;t. By introducing new content in-place, and reflowing the rest of the document, a user is not required to take action just to back out. If he choose to proceed, he can interact with the new content (usually a form), or simply continue browsing, scrolling down or click elsewhere. Even if situation calls for a lightbox-ish design, it isn&#39;t too much to ask for [as much of the] surrounding content to be pushed aside whilst showing a thickbox at the centre of the screen. You get to reduce overlap &amp; maintain document flow at the same time. Try it, click on the Wikipedia quote above. Though the right columns of this blog is obscured by virtue of their floats, the content of this entry will remain in full view.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/weblog/2008/05/lightbox-thickb.html"},"url":"http://localhost:4000/weblog/2008/05/lightbox-thickb.html","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Devel!" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">The Devel!</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Lightbox, Thickbox, Greybox - Ugh</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2008-05-07T00:00:00+08:00" itemprop="datePublished">May 7, 2008
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>I dislike the increasing (still?) trend of websites deploying a <a href="http://www.front-end-developer.com/2008/04/11/top-17-css-lightbox-variations/">lightbox (or thickbox) effect</a>. Not so much for the <a href="http://www.37signals.com/svn/posts/592-been-lightboxed-lately">strobing visuals</a>, but more because it is nothing but an irrelevant technique dragged over from the desktop world to the web - just for the sake of familiarity.</p>
+
+<div id="shcp_10954" class="sharedcopy_widget"><blockquote cite="http://r2.sharedcopy.com/6e62cu1l" class="cited" style="border-style: solid; border-color: rgb(255, 255, 255) rgb(255, 255, 255) rgb(255, 255, 255) rgb(238, 238, 238); border-width: 1px 1px 1px 1em; padding: 0pt 0pt 1em 1em; background: rgb(255, 255, 255) none repeat scroll 0% 50%; cursor: pointer; margin-left: 0pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"> <p><span class="content comments_count_2 withoutphoto"><span class="text"><div class="html_gist none"><input type="hidden" value="body.mediawiki.ns-0.ltr.page-Dialog_box div#globalWrapper div#column-content div#content div#bodyContent div.thumb.tright div.thumbinner a.image img.thumbimage.shcp_dimension_300x122" class="csspath" /></div> <blockquote class="comment_body comment_body1" style="border: 0px none ; font-style: italic;"><p>Modal dialog boxes are those which temporarily halt the program in the sense that the user cannot continue until the dialog has been closed<a href="http://r2.sharedcopy.com/6e62cu1l#shcp0"> <sup>link »</sup></a></p></blockquote> <blockquote class="comment_body comment_body2" style="border: 0px none ; font-style: italic;"><p>Modal dialogs are generally regarded as bad design solutions by usability practitioners, since they are prone to produce mode errors .<a href="http://r2.sharedcopy.com/6e62cu1l#shcp1"> <sup>link »</sup></a></p></blockquote> </span></span> - from <a href="http://r2.sharedcopy.com/6e62cu1l">Dialog box - Wikipedia, the free encyclopedia</a> via <a href="http://sharedcopy.com">sharedcopy.com</a></p></blockquote></div>
+
+<p><script>  var json_10954 = {   host: 'sharedcopy.com',   width: '480px',   height: '250px',   bgcolor: '#ffffff',   background: '#ffffff url(http://en.wikipedia.org.sharedcopy.com/images/loading.gif) no-repeat center center; ',   allow_click: false,   src: 'http://en.wikipedia.org.sharedcopy.com/embeds/copy/choonkeat/ce3099e0d4c6f37ba4ba2f03c16c2f3b/480.250/ffffff.ffffff.cc0500/false/shcp0.html' };</script><script src="http://sharedcopy.com/static/embed/script.js"></script>
+
+</p>
+
+<p>The web is free flowing and has <a href="http://twitter.com/choonkeat/statuses/103816122">no vertical</a> <a href="http://blog.clicktale.com/2006/12/23/unfolding-the-fold/">constraint</a>. And it's good that way! <br /><br />My personal preference as a developer is to use div-expansion/collapse <strong>everywhere</strong> possible, until I can't. By introducing new content in-place, and reflowing the rest of the document, a user is not required to take action just to back out. If he choose to proceed, he can interact with the new content (usually a form), or simply continue browsing, scrolling down or click elsewhere.</p>
+
+<p>Even if situation calls for a lightbox-ish design, it isn't too much to ask for [as much of the] surrounding content to be pushed aside whilst showing a thickbox at the centre of the screen. You get to reduce overlap &amp; maintain document flow at the same time. <br /><br />Try it, click on the Wikipedia quote above. Though the right columns of this blog is obscured by virtue of their floats, the content of this entry will remain in full view. </p>
+
+
+  </div><a class="u-url" href="/weblog/2008/05/lightbox-thickb.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Devel!</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">choonkeat</li><li><a class="u-email" href="mailto:contactme@choonkeat.com">contactme@choonkeat.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">choonkeat</span></a></li><li><a href="https://www.twitter.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">choonkeat</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>choonkeat on programming &amp; software</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

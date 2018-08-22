@@ -1,0 +1,10 @@
+---
+layout: post
+title: Upload Applet - Part 2
+published: true
+category:
+- software
+---
+
+<p>After many weeks, I'd at last picked up my lazy ass to slap on a drag-and-drop interface to <a href="http://freshmeat.net/projects/jupload/">J'upload</a> and come up with a <a href="http://yanime.org/jupload/">working demo</a> [any uploaded file will go nowhere].<br /><br />Unfortunately, what was achievable fell short of my expectation. The naive goal was to create a firefox plugin that<br /><ol><li>Looks out for any &lt;input type=file&gt; tag (any file upload field) in any form rendered<br /></li><li>Re-render the field to use the applet (already installed with the plugin)</li><li>A drag-and-dropped filename will be prefilled into the browse field for the user<br /></li><li>The user can thus drag-and-drop files instead of clicking on the 'browse' button, whenever he encounters a upload button<br /></li></ol>However, step #3 (using javascript to set the value of a filename) is apparently a severe breach of security and is not allowed on any sane browser. So, unless there's another way around.. this plugin will not happen.<br /><br /><br /></p>
+

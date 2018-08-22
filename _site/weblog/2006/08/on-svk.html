@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>On SVK | The Devel!</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="On SVK" />
+<meta name="author" content="choonkeat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Version control is the best thing since sliced bread (for those whom have just learnt of it). But once branching comes into the picture, it is becomes a hairy thing. It might be because humans aren&#39;t accustomed to think in terms of parallel universe (perhaps sci-fi authors). There appears to have no &quot;one right way&quot; to cater for all scenarios. I used to live and breath on the trunk-is-stable-and-latest camp (half sneering at enterprisey people who &#39;branch first, then merge&#39;). But it just happens that my past situations only requires so much. Furthermore, some people just prefer the branch-merge-often mentality, others thrive in simplicity of trunk-work-branch-maintain workflow. Like tea people and coffee people. Just different. No point converting anyone over to the other side. Hence I was dabbling to create a script (on-top-of svnmerge) to provide dead-simple branch/merge workflow - so trunk ppl can have it so, and branch ppl won&#39;t be inconvenienced. That&#39;s when I found SVK. By saying its a &quot;decentralized version control system built with the Subversion filesystem&quot; is really really doing it a huge disservice. My layman version would be &quot;SVK lets you be the branch-merge person you are inside, or the trunk-branch, or watever *%^#$ person you like to do your work in - whilst sharing a common repository with people of different taste! I mean, its like a cup that lets you sip coffee, sit around with everyone, whilst sharing the same pot of tea!&quot; SVK has more commands to do magic, but the daily stuff closely resembles SVN: svk commit; svk update; svk diff. It also has another benefit - it doesn&#39;t pollute your working directory with hidden .svn or CVS folders/files. Some ppl are irked by that. Those files are consolidated in your home directory. Actually that might be good / bad depending on you being a tea or coffee person. The only drawback is that IDE integration is lacking at the moment. And most importantly, the tickets / changesets information on Trac wouldn&#39;t tally directly with my local mirror. Oh well, these might not be show stopper after all. Let&#39;s see how it goes when I use it for real." />
+<meta property="og:description" content="Version control is the best thing since sliced bread (for those whom have just learnt of it). But once branching comes into the picture, it is becomes a hairy thing. It might be because humans aren&#39;t accustomed to think in terms of parallel universe (perhaps sci-fi authors). There appears to have no &quot;one right way&quot; to cater for all scenarios. I used to live and breath on the trunk-is-stable-and-latest camp (half sneering at enterprisey people who &#39;branch first, then merge&#39;). But it just happens that my past situations only requires so much. Furthermore, some people just prefer the branch-merge-often mentality, others thrive in simplicity of trunk-work-branch-maintain workflow. Like tea people and coffee people. Just different. No point converting anyone over to the other side. Hence I was dabbling to create a script (on-top-of svnmerge) to provide dead-simple branch/merge workflow - so trunk ppl can have it so, and branch ppl won&#39;t be inconvenienced. That&#39;s when I found SVK. By saying its a &quot;decentralized version control system built with the Subversion filesystem&quot; is really really doing it a huge disservice. My layman version would be &quot;SVK lets you be the branch-merge person you are inside, or the trunk-branch, or watever *%^#$ person you like to do your work in - whilst sharing a common repository with people of different taste! I mean, its like a cup that lets you sip coffee, sit around with everyone, whilst sharing the same pot of tea!&quot; SVK has more commands to do magic, but the daily stuff closely resembles SVN: svk commit; svk update; svk diff. It also has another benefit - it doesn&#39;t pollute your working directory with hidden .svn or CVS folders/files. Some ppl are irked by that. Those files are consolidated in your home directory. Actually that might be good / bad depending on you being a tea or coffee person. The only drawback is that IDE integration is lacking at the moment. And most importantly, the tickets / changesets information on Trac wouldn&#39;t tally directly with my local mirror. Oh well, these might not be show stopper after all. Let&#39;s see how it goes when I use it for real." />
+<link rel="canonical" href="http://localhost:4000/weblog/2006/08/on-svk.html" />
+<meta property="og:url" content="http://localhost:4000/weblog/2006/08/on-svk.html" />
+<meta property="og:site_name" content="The Devel!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2006-08-30T00:00:00+08:00" />
+<script type="application/ld+json">
+{"headline":"On SVK","dateModified":"2006-08-30T00:00:00+08:00","datePublished":"2006-08-30T00:00:00+08:00","author":{"@type":"Person","name":"choonkeat"},"description":"Version control is the best thing since sliced bread (for those whom have just learnt of it). But once branching comes into the picture, it is becomes a hairy thing. It might be because humans aren&#39;t accustomed to think in terms of parallel universe (perhaps sci-fi authors). There appears to have no &quot;one right way&quot; to cater for all scenarios. I used to live and breath on the trunk-is-stable-and-latest camp (half sneering at enterprisey people who &#39;branch first, then merge&#39;). But it just happens that my past situations only requires so much. Furthermore, some people just prefer the branch-merge-often mentality, others thrive in simplicity of trunk-work-branch-maintain workflow. Like tea people and coffee people. Just different. No point converting anyone over to the other side. Hence I was dabbling to create a script (on-top-of svnmerge) to provide dead-simple branch/merge workflow - so trunk ppl can have it so, and branch ppl won&#39;t be inconvenienced. That&#39;s when I found SVK. By saying its a &quot;decentralized version control system built with the Subversion filesystem&quot; is really really doing it a huge disservice. My layman version would be &quot;SVK lets you be the branch-merge person you are inside, or the trunk-branch, or watever *%^#$ person you like to do your work in - whilst sharing a common repository with people of different taste! I mean, its like a cup that lets you sip coffee, sit around with everyone, whilst sharing the same pot of tea!&quot; SVK has more commands to do magic, but the daily stuff closely resembles SVN: svk commit; svk update; svk diff. It also has another benefit - it doesn&#39;t pollute your working directory with hidden .svn or CVS folders/files. Some ppl are irked by that. Those files are consolidated in your home directory. Actually that might be good / bad depending on you being a tea or coffee person. The only drawback is that IDE integration is lacking at the moment. And most importantly, the tickets / changesets information on Trac wouldn&#39;t tally directly with my local mirror. Oh well, these might not be show stopper after all. Let&#39;s see how it goes when I use it for real.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/weblog/2006/08/on-svk.html"},"url":"http://localhost:4000/weblog/2006/08/on-svk.html","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Devel!" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">The Devel!</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">On SVK</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2006-08-30T00:00:00+08:00" itemprop="datePublished">Aug 30, 2006
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Version control is the best thing since sliced bread (for those whom have <a href="http://www.apple.com/macosx/leopard/timemachine.html">just learnt of it</a>). But once <a href="http://www.ericsink.com/scm/scm_branches.html">branching</a> comes into the picture, it is becomes a <a href="../../articles/2006/05/24/version-control-that-missing-module-in-cs101">hairy</a> thing. </p><p>It might be because humans aren't accustomed to think in terms of parallel universe (perhaps sci-fi authors). There appears to have no &quot;<em>one right way</em>&quot; to cater for all scenarios. I used to live and breath on the <em>trunk-is-stable-and-latest</em> camp (half sneering at enterprisey people who '<em>branch first</em><em>, then merge</em>'). But it just happens that my past situations only requires so much.<br /> </p><p>Furthermore, some people just prefer the branch-merge-often mentality, others thrive in simplicity of trunk-work-branch-maintain workflow. Like tea people and coffee people. Just different. No point converting anyone over to the other side. Hence I was dabbling to create a script (on-top-of <a href="http://www.dellroad.org/svnmerge/index">svnmerge</a>) to provide dead-simple branch/merge workflow - so trunk ppl can have it so, and branch ppl won't be inconvenienced.<br /></p><p>That's when I found <a href="http://svk.elixus.org/">SVK</a>. By saying its a &quot;<em>decentralized version control system built with the Subversion filesystem</em>&quot; is really really doing it a huge disservice. My layman version would be &quot;<em>SVK lets you be the branch-merge person you are inside, or the trunk-branch, or watever *%^#$ person you like to do your work in - whilst sharing a common repository with people of different taste! I mean, its like a cup that lets you sip coffee, sit around with everyone, whilst sharing the same pot of tea!</em>&quot;<br /></p><p>SVK has more commands to do magic, but the daily stuff closely resembles SVN: svk commit; svk update; svk diff. It also has another benefit - it doesn't pollute your working directory with hidden <em>.svn</em> or <em>CVS</em> folders/files. <a href="http://thegrok.wordpress.com/">Some ppl</a> are irked by that. Those files are consolidated in your home directory. Actually that might be good / bad depending on you being a tea or coffee person.<br /></p><p>The only drawback is that IDE integration is lacking at the moment. And most importantly, the tickets / changesets information on <a href="http://trac.edgewall.org/">Trac</a> wouldn't tally directly with my local mirror.<br /></p><p>Oh well, these might not be show stopper after all. Let's see how it goes when I use it for real.<br /></p>
+
+
+  </div><a class="u-url" href="/weblog/2006/08/on-svk.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Devel!</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">choonkeat</li><li><a class="u-email" href="mailto:contactme@choonkeat.com">contactme@choonkeat.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">choonkeat</span></a></li><li><a href="https://www.twitter.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">choonkeat</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>choonkeat on programming &amp; software</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

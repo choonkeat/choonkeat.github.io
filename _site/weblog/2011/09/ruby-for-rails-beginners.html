@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Ruby for Rails Beginners | The Devel!</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="Ruby for Rails Beginners" />
+<meta name="author" content="choonkeat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I&#39;ve been doing this exercise for a few Rails beginners (or non-rubyists who glanced at Rails a bit before) and the general feedback is that they learn Rails but not Ruby, and this is new to them. So I suppose I should just write it down to save future effort. If you already know Ruby you&#39;d want to stop reading here. &quot;Computer, book me on the cheapest flight to Mexico for tomorrow!&quot; The unfortunate thing is, most folks&#39; first contact with Rails will be some short code snippets like class Comment &lt; ActiveRecord::Base belongs_to :user end" />
+<meta property="og:description" content="I&#39;ve been doing this exercise for a few Rails beginners (or non-rubyists who glanced at Rails a bit before) and the general feedback is that they learn Rails but not Ruby, and this is new to them. So I suppose I should just write it down to save future effort. If you already know Ruby you&#39;d want to stop reading here. &quot;Computer, book me on the cheapest flight to Mexico for tomorrow!&quot; The unfortunate thing is, most folks&#39; first contact with Rails will be some short code snippets like class Comment &lt; ActiveRecord::Base belongs_to :user end" />
+<link rel="canonical" href="http://localhost:4000/weblog/2011/09/ruby-for-rails-beginners.html" />
+<meta property="og:url" content="http://localhost:4000/weblog/2011/09/ruby-for-rails-beginners.html" />
+<meta property="og:site_name" content="The Devel!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-09-24T00:00:00+08:00" />
+<script type="application/ld+json">
+{"headline":"Ruby for Rails Beginners","dateModified":"2011-09-24T00:00:00+08:00","datePublished":"2011-09-24T00:00:00+08:00","author":{"@type":"Person","name":"choonkeat"},"description":"I&#39;ve been doing this exercise for a few Rails beginners (or non-rubyists who glanced at Rails a bit before) and the general feedback is that they learn Rails but not Ruby, and this is new to them. So I suppose I should just write it down to save future effort. If you already know Ruby you&#39;d want to stop reading here. &quot;Computer, book me on the cheapest flight to Mexico for tomorrow!&quot; The unfortunate thing is, most folks&#39; first contact with Rails will be some short code snippets like class Comment &lt; ActiveRecord::Base belongs_to :user end","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/weblog/2011/09/ruby-for-rails-beginners.html"},"url":"http://localhost:4000/weblog/2011/09/ruby-for-rails-beginners.html","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Devel!" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">The Devel!</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Ruby for Rails Beginners</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2011-09-24T00:00:00+08:00" itemprop="datePublished">Sep 24, 2011
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>I&#39;ve been doing this exercise for a few Rails beginners (or non-rubyists who glanced at Rails a bit before) and the general feedback is that they learn Rails but not Ruby, and this is new to them. So I suppose I should just write it down to save future effort.</p>
+<p>If you already know Ruby you&#39;d want to stop reading here.</p>
+<h3 style="margin-top: 1.5em;"><strong>&quot;Computer, book me on the cheapest flight to Mexico for tomorrow!&quot;</strong></h3>
+<p>The unfortunate thing is, most folks&#39; first contact with Rails will be some short code snippets like</p>
+<pre><code>class Comment &lt; ActiveRecord::Base
+  belongs_to :user
+end
+
+class User &lt; ActiveRecord::Base
+  has_many :comments
+  validates_uniqueness_of :username, :case_sensitive =&gt; false
+end
+</code></pre>
+<p>Very succinct. Looks like english and could even appear friendly to non-programmers. It doesn&#39;t look &quot;<em>real</em>&quot; and has &quot;<em>toy</em>&quot; written all over it. The jaded programmer will see &quot;<em>config file</em>&quot;, &quot;<em>no real syntax</em>&quot;, &quot;<em>fragile</em>&quot;, &quot;<em>abitrary subset</em>&quot;, &quot;<em>haml</em>&quot; (<em>zing!</em>) or &quot;<em>not powerful</em>&quot; as if a guy in grey suit just demoed how he told his computer what to do verbally - &quot;<em>How sustainable can such fake syntax be?</em>&quot;. And perhaps beginners might go, &quot;<em>Rails lets me write english-ish code! Wow wee!</em>&quot;</p>
+<h3 style="margin-top: 1.5em;"><strong>Let&#39;s start somewhere else</strong></h3>
+<p>In mainstream OO languages like Java, you can&#39;t really write Java code anywhere you like. &quot;<em>Huh?</em>&quot; Yes, you just don&#39;t usually think about it this way. For example you can&#39;t simply insert Java code anywhere, say&#8230;</p>
+<pre><code><span style="color: #ff7f00;">System.out.println(&quot;here?&quot;);</span>
+public class Hello {
+  public static void main(String [] argv) {
+    System.out.println(&quot;world!&quot;);
+  }
+  <span style="color: #ff7f00;">System.out.println(&quot;or here!&quot;);</span>
+}
+</code></pre>
+<p>It&#39;s not allowed and you&#39;d get errors</p>
+<pre><code>$ javac Hello.java
+Hello.java:1: class, interface, or enum expected
+System.out.println(&quot;here?&quot;);
+^
+Hello.java:6: &lt;identifier&gt; expected
+  System.out.println(&quot;or here!&quot;);
+                    ^
+Hello.java:6: illegal start of type
+  System.out.println(&quot;or here!&quot;);
+                     ^
+3 errors
+</code></pre>
+<p>In Ruby, however,&#0160;you&#0160;<em>can</em>&#0160;write Ruby in weird places:</p>
+<pre><code><span style="color: #ff7f00;">puts(&quot;here?&quot;)</span>
+class Hello
+  def self.main(argv)
+    puts(&quot;world!&quot;)
+  end
+  <span style="color: #ff7f00;">puts(&quot;or here!&quot;)</span>
+end
+Hello.main(ARGV)
+</code></pre>
+<p>Which runs like this instead</p>
+<pre><code>$ ruby hello.rb
+here?
+or here!
+world!
+</code></pre>
+<h3 style="margin-top: 1.5em;"><strong>So? Big deal</strong></h3>
+<p>Taking another step back, let&#39;s look at this Ruby class</p>
+<pre><code>class Hello
+  def an_instance_method()
+    puts(&quot;This is inside an_instance_method&quot;)
+  end
+  def self.a_class_method()
+    puts(&quot;This is inside a_class_method&quot;)
+  end
+end
+</code></pre>
+<p>If you&#39;re a programmer you&#39;d have ascertained&#0160;<code>def</code>&#0160;defines a method (or function). Now, the difference between&#0160;<code>def an_instance_method()</code>&#0160;and&#0160;<code>def self.a_class_method()</code>&#0160;is that&#0160;<code>a_class_method</code>&#0160;is a class method (or Java programmers like to say &quot;static method&quot;) and is used like this</p>
+<pre><code>Hello.a_class_method()
+</code></pre>
+<p>which prints&#0160;<code>This is inside a_class_method</code>&#0160;whereas&#0160;<code>an_instance_method</code>&#0160;is an instance method that you can call on instances of the&#0160;<code>Hello</code>&#0160;class,</p>
+<pre><code>x = Hello.new()
+x.an_instance_method()
+</code></pre>
+<h3 style="margin-top: 1.5em;"><strong>So? Big deal</strong></h3>
+<p>Say we define our Ruby class like this, with a&#0160;<code>puts</code>&#0160;statement at the bottom</p>
+<pre><code>class Hello
+  def an_instance_method()
+    puts(&quot;This is inside an_instance_method&quot;)
+  end
+  def self.a_class_method()
+    puts(&quot;This is inside a_class_method&quot;)
+  end
+  <span style="color: #ff7f00;">puts(self)</span>
+end
+</code></pre>
+<p>Running it would produce</p>
+<pre><code>$ ruby hello.rb
+Hello
+</code></pre>
+<p>Notice&#0160;<code>puts(self)</code>&#0160;has printed the name of our class&#0160;<code>Hello</code>. <strong>This means we are referring to the Class which we&#39;re still in process of defining!</strong> And since we can refer to it, we can also use it (as much of it as we&#39;ve defined so far)</p>
+<pre><code>class Hello
+  <span style="color: #ff7f00;">x = self.new()
+  puts(x)</span>
+
+  def an_instance_method()
+    puts(&quot;This is inside an_instance_method&quot;)
+  end
+  <span style="color: #ff7f00;">x.an_instance_method()</span>
+
+  def self.a_class_method()
+    puts(&quot;This is inside a_class_method&quot;)
+  end
+  <span style="color: #ff7f00;">self.a_class_method()</span>
+end
+</code></pre>
+<p>Running it would produce</p>
+<pre><code>$ ruby hello.rb
+#&lt;Hello:0x0000010084f778&gt;
+This is inside an_instance_method
+This is inside a_class_method
+</code></pre>
+<p>Notice how instance&#0160;<code>x</code>&#0160;obtains an instance method after the fact! Let&#39;s clean up our class: rename it as&#0160;<code>User</code>, and rename the class method to&#0160;<code>validates_uniqueness_of</code>, and add some arguments to the class method&#8230;</p>
+<pre><code>class User
+  def self.validates_uniqueness_of(what, options)
+    puts(&quot;This is inside validates_uniqueness_of #{what} and #{options}&quot;)
+  end
+  <span style="color: #ff7f00;">self.validates_uniqueness_of(&#39;username&#39;, Hash[&#39;case_sensitive&#39;,false])</span>
+end
+</code></pre>
+<p>The&#0160;<code>#{blah}</code>&#0160;syntax is string interpolation, allowing Ruby code to run within a string, like&#0160;<code>&quot;Five plus One is equal to #{5 + 1}&quot;</code>. So, running this file would produce</p>
+<pre><code>$ ruby hello.rb
+This is inside validates_uniqueness_of username and {&quot;case_sensitive&quot;=&gt;false}
+</code></pre>
+<p>In Ruby, Hash objects (or associative arrays) can be defined literally as&#0160;<code>{&#39;case_sensitive&#39;=&gt;false}</code>; (brackets) and {curly braces} are largely optional;&#0160;<code>self</code>&#0160;is implied; You can also use&#0160;<code>:symbols</code>&#0160;to denote things you&#39;d usually use enums or constants for</p>
+<pre><code>class User
+  <span style="color: #ff7f00;">def self.validates_uniqueness_of(what, options)</span>
+    puts &quot;This is inside validates_uniqueness_of #{what} and #{options}&quot;
+  end
+  <span style="color: #ff7f00;">validates_uniqueness_of :username, :case_sensitive =&gt; false</span>
+end
+</code></pre>
+<p>We can use the&#0160;<code>&lt;</code>&#0160;syntax to denote inheritance and define the class method elsewhere</p>
+<pre><code><span style="color: #ff7f00;">class Base</span>
+  def self.validates_uniqueness_of(what, options)
+    puts &quot;This is inside validates_uniqueness_of #{what} and #{options}&quot;
+  end
+<span style="color: #ff7f00;">end
+
+class User &lt; Base</span>
+  validates_uniqueness_of :username, :case_sensitive =&gt; false
+end
+</code></pre>
+<p>We could stash more methods into our&#0160;<code>Base</code>&#0160;class</p>
+<pre><code>class Base
+  <span style="color: #ff7f00;">def self.has_many(what)
+    # some code
+  end</span>
+  def self.validates_uniqueness_of(what, options)
+    # some code
+  end
+end
+</code></pre>
+<p>Or we could use&#0160;<code>Mixins</code>&#0160;to organize them neatly into standalone modules and compose them together</p>
+<pre><code><span style="color: #ff7f00;">module Relation</span>
+  def has_many(what)
+    # some code
+  end
+<span style="color: #ff7f00;">end
+
+module Validation</span>
+  def validates_uniqueness_of(what, options)
+    # some code
+  end
+end
+
+class Base
+  <span style="color: #ff7f00;">extend Relation
+  extend Validation</span>
+end
+</code></pre>
+<p>Either way, we can now have something that looks familiar</p>
+<pre><code>class User &lt; Base
+  has_many :comments
+  validates_uniqueness_of :username, :case_sensitive =&gt; false
+end
+</code></pre>
+<p>So you see, the toy looking code is not Rails-specific, nor is it some limited-capacity syntax for PPT &amp; luring beginners.</p>
+<h3 style="margin-top: 1.5em;"><strong>Came for Rails? Stay for Ruby</strong></h3>
+<p>And that&#39;s it. If this has piqued your interest, you might want to investigate how Ruby lets Rails get away with the syntax of&#0160;<code>config/routes.rb</code>&#0160;and how Ruby makes&#0160;<code>has_many</code>&#0160;and&#0160;<code>validates_uniqueness_of</code>&#0160;possible to implement.</p>
+
+  </div><a class="u-url" href="/weblog/2011/09/ruby-for-rails-beginners.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Devel!</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">choonkeat</li><li><a class="u-email" href="mailto:contactme@choonkeat.com">contactme@choonkeat.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">choonkeat</span></a></li><li><a href="https://www.twitter.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">choonkeat</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>choonkeat on programming &amp; software</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

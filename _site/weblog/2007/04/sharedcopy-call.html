@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>SharedCopy calls you back | The Devel!</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="SharedCopy calls you back" />
+<meta name="author" content="choonkeat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="SharedCopy launched recently, and today I&#39;ve released a callback API for it. (See here) What is SharedCopy? It is a free webpage annotation tool that just works. Sticky notes on any webpage and share it with anybody by giving the URL. No login required, but account holders get stuff like being able to &quot;lock&quot; and turn off comments, and now setup callbacks. Latest public comments (from everyone, or from a particular user) is available as a RSS feed. What is this callback thing? Imagine Sally, the project manager, is checking out out your website mockup. She clicks on a bookmarklet and a toolbox floats over the page on the top-left. She puts a sticky note beside your navigation menu and writes &quot;TODO: Make this green&quot;, then she clicks &quot;Save&quot;. Sally copies the SharedCopy URL, paste it into a new email and say &quot;See here. Do it by next week&quot; Now, wouldn&#39;t it be great if that &quot;TODO: Make this green&quot; message magically appears in your Basecamp project as a real TODO item? Or, colleagues can comment on webpages, which gets posted as a real Basecamp &quot;Message&quot; automatically for discussion? Or gets created as a New Bug Ticket? Or gets posted on your blog like a quoted link dump? Or gets bookmarked along with del.icio.us? Or... That&#39;s what a callback is for. When a copy is saved, the comments and etc, are sent (HTTP POST) to a web service for any further processing. As a demonstration, I&#39;ve actually written the callback integration with Basecamp (see here). But if you&#39;re using Basecamp integration for real, I&#39;d advise you host it yourself (for security / privacy reasons), instead of relying on my demo service. My reference implementation is available for download." />
+<meta property="og:description" content="SharedCopy launched recently, and today I&#39;ve released a callback API for it. (See here) What is SharedCopy? It is a free webpage annotation tool that just works. Sticky notes on any webpage and share it with anybody by giving the URL. No login required, but account holders get stuff like being able to &quot;lock&quot; and turn off comments, and now setup callbacks. Latest public comments (from everyone, or from a particular user) is available as a RSS feed. What is this callback thing? Imagine Sally, the project manager, is checking out out your website mockup. She clicks on a bookmarklet and a toolbox floats over the page on the top-left. She puts a sticky note beside your navigation menu and writes &quot;TODO: Make this green&quot;, then she clicks &quot;Save&quot;. Sally copies the SharedCopy URL, paste it into a new email and say &quot;See here. Do it by next week&quot; Now, wouldn&#39;t it be great if that &quot;TODO: Make this green&quot; message magically appears in your Basecamp project as a real TODO item? Or, colleagues can comment on webpages, which gets posted as a real Basecamp &quot;Message&quot; automatically for discussion? Or gets created as a New Bug Ticket? Or gets posted on your blog like a quoted link dump? Or gets bookmarked along with del.icio.us? Or... That&#39;s what a callback is for. When a copy is saved, the comments and etc, are sent (HTTP POST) to a web service for any further processing. As a demonstration, I&#39;ve actually written the callback integration with Basecamp (see here). But if you&#39;re using Basecamp integration for real, I&#39;d advise you host it yourself (for security / privacy reasons), instead of relying on my demo service. My reference implementation is available for download." />
+<link rel="canonical" href="http://localhost:4000/weblog/2007/04/sharedcopy-call.html" />
+<meta property="og:url" content="http://localhost:4000/weblog/2007/04/sharedcopy-call.html" />
+<meta property="og:site_name" content="The Devel!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2007-04-28T00:00:00+08:00" />
+<script type="application/ld+json">
+{"headline":"SharedCopy calls you back","dateModified":"2007-04-28T00:00:00+08:00","datePublished":"2007-04-28T00:00:00+08:00","author":{"@type":"Person","name":"choonkeat"},"description":"SharedCopy launched recently, and today I&#39;ve released a callback API for it. (See here) What is SharedCopy? It is a free webpage annotation tool that just works. Sticky notes on any webpage and share it with anybody by giving the URL. No login required, but account holders get stuff like being able to &quot;lock&quot; and turn off comments, and now setup callbacks. Latest public comments (from everyone, or from a particular user) is available as a RSS feed. What is this callback thing? Imagine Sally, the project manager, is checking out out your website mockup. She clicks on a bookmarklet and a toolbox floats over the page on the top-left. She puts a sticky note beside your navigation menu and writes &quot;TODO: Make this green&quot;, then she clicks &quot;Save&quot;. Sally copies the SharedCopy URL, paste it into a new email and say &quot;See here. Do it by next week&quot; Now, wouldn&#39;t it be great if that &quot;TODO: Make this green&quot; message magically appears in your Basecamp project as a real TODO item? Or, colleagues can comment on webpages, which gets posted as a real Basecamp &quot;Message&quot; automatically for discussion? Or gets created as a New Bug Ticket? Or gets posted on your blog like a quoted link dump? Or gets bookmarked along with del.icio.us? Or... That&#39;s what a callback is for. When a copy is saved, the comments and etc, are sent (HTTP POST) to a web service for any further processing. As a demonstration, I&#39;ve actually written the callback integration with Basecamp (see here). But if you&#39;re using Basecamp integration for real, I&#39;d advise you host it yourself (for security / privacy reasons), instead of relying on my demo service. My reference implementation is available for download.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/weblog/2007/04/sharedcopy-call.html"},"url":"http://localhost:4000/weblog/2007/04/sharedcopy-call.html","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Devel!" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">The Devel!</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">SharedCopy calls you back</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2007-04-28T00:00:00+08:00" itemprop="datePublished">Apr 28, 2007
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>SharedCopy launched recently, and today I've released a callback API for it. (See <a href="http://sharedcopy.com/public/api">here</a>)</p><p><strong>What is SharedCopy?</strong></p><p>It is a free webpage annotation tool that just works. Sticky notes on any webpage and share it with anybody by giving the URL. No login required, but account holders get stuff like being able to &quot;lock&quot; and turn off comments, and now setup callbacks. </p><p>Latest public comments (from everyone, or from a particular user) is available as a RSS feed.<br /></p><p><strong>What is this callback thing?</strong></p><p>Imagine Sally, the project manager, is checking out out your website mockup. She clicks on a bookmarklet and a toolbox floats over the page on the top-left. She puts a sticky note beside your navigation menu and writes &quot;<em>TODO: Make this green</em>&quot;, then she clicks &quot;Save&quot;. Sally copies the SharedCopy URL, paste it into a new email and say &quot;See here. Do it by next week&quot;<br /></p><p>Now, wouldn't it be great if that &quot;<em>TODO: Make this green</em>&quot; message magically appears in your Basecamp project as a real TODO item? Or, colleagues can comment on webpages, which gets posted as a real Basecamp &quot;Message&quot; automatically for discussion? Or gets created as a New Bug Ticket? Or gets posted on your blog like a quoted link dump? Or gets bookmarked along with del.icio.us? Or... <br /></p><p>That's what a callback is for. When a copy is saved, the comments and etc, are sent (HTTP POST) to a web service for any further processing. As a demonstration, I've actually written the callback integration with Basecamp (see <a href="http://sharedcopy.com/public/api">here</a>). </p><p>But if you're using Basecamp integration for real, I'd advise you host it yourself (for security / privacy reasons), instead of relying on my demo service. My reference implementation is available for download.<br /></p>
+
+
+  </div><a class="u-url" href="/weblog/2007/04/sharedcopy-call.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Devel!</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">choonkeat</li><li><a class="u-email" href="mailto:contactme@choonkeat.com">contactme@choonkeat.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">choonkeat</span></a></li><li><a href="https://www.twitter.com/choonkeat"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">choonkeat</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>choonkeat on programming &amp; software</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
