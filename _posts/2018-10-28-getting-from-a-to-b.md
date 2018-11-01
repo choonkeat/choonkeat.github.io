@@ -45,7 +45,7 @@ With the Elm/Haskell compiler, in their "if it compiles, it probably works" worl
 
 Pure functions are just inputs and return values (no side effects, no global references). Turns out, they are really really maintainable building blocks. When you're looking at a pure function, it doesn't matter if your project is 10, 1000 or 10,000,000 lines of code, your mind can focus on the pure function alone: nothing outside can affect it, it can affect nothing else. Who would've thunk that helps?
 
-In Go, it is already idiomatic to prefer a bit of verbosity in exchange for a more straightforward code that "do things right there", flowing simply from top to bottom. If we so desire, couldn't we just write pure functions in our favourite mainstream imperative language instead of abandoning ship and going into obscure ML land?
+In Go, it is already idiomatic to prefer a bit of verbosity in exchange for a more straightforward code that "do things right there", flowing simply from top to bottom. If we so desire, couldn't we just write pure functions in our favourite mainstream imperative language instead of abandoning ship and going into obscure [ML](https://en.wikipedia.org/wiki/ML_(programming_language)) land?
 
 We could. But I suspect building an entire app out of pure functions is a real struggle, made worse when the imperative language provide 101 ways to get from A to B. I get seduced by _"how to do functional programming in [your imperative language]"_ too, but the oft overlooked second part of that sad recurring theme song is: what we _cannot do_ is more important. If your language isn't going to stop you, all you've got are just soft agreements by linters, coding convention, and best practices.
 
