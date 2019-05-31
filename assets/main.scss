@@ -1,0 +1,8 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+article.post.h-entry .post-title { overflow-wrap: break-word; }
+ul.post-list .post-link          { overflow-wrap: break-word; }
+
