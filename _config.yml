@@ -14,7 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: The Devel!
-email: contactme@choonkeat.com
+email: choonkeat@gmail.com
 author: choonkeat
 description: >- # this means to ignore newlines until "baseurl:"
   choonkeat on programming & software

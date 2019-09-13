@@ -10,6 +10,6 @@ redirect_from: "/weblog/chew-choon-keat.html"
 
 ## Contact
 
-e-mail: [contactme@choonkeat.com](mailto:contactme@choonkeat.com)
+e-mail: [choonkeat@gmail.com](mailto:choonkeat@gmail.com)
 
 twitter: [@choonkeat](http://twitter.com/choonkeat)
