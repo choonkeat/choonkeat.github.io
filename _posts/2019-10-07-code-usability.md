@@ -49,7 +49,9 @@ On the other hand, what does an FP programmer do? Assuming I can figure out what
 
 The first step is admitting you have a problem.
 
-What's the next step? A function signature search perhaps? A bit out of the way, but more importantly, it needs precision to yield results [fail example](https://klaftertief.github.io/elm-search/?q=Json.Decode.Decoder%20a%20-%3E%20String%20-%3E%20a) vs [success example](https://klaftertief.github.io/elm-search/?q=Decoder%20a%20-%3E%20String%20-%3E%20Result%20Error%20a).
+What's the next step? A function signature search perhaps? A bit out of the way, but more importantly, it needs precision to yield results [fail example](https://klaftertief.github.io/elm-search/?q=Json.Decode.Decoder%20a%20-%3E%20String%20-%3E%20a) vs [success example](https://klaftertief.github.io/elm-search/?q=Json.Decode.Decoder%20a%20->%20String%20->%20Result%20Error%20a).
+
+_"Can any function from any module that can receive this Shape value, along with any other arguments, please stand forward? Curried functions in the current closure?"_
 
 Maybe something for the code editor community to think about.
 
