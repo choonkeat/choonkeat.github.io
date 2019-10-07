@@ -23,9 +23,13 @@ I suspect my head was parsing as
 - `Json.Decode.Decoder Float` knows how to decode a given json string into a `Float`.
 - If I create my own `Json.Decode.Decoder User`, it is something that knows how to decode a given json string into a `User`
 
-I wasn't aware how deeply OOP had shaped my thinking. Or maybe it's because of the "-er" suffix of `Decoder` and my [Go instincts](https://golang.org/doc/effective_go.html#interface-names).
+I wasn't aware how deeply OOP had shaped my thinking. Or maybe it's because of the "-er" suffix of `Decoder` and my [Go instincts](https://golang.org/doc/effective_go.html#interface-names). So, I kept wanting to give a string to my `Json.Decode.Decoder User`, _"here, decode it into `User`"_ -- but it can't
 
-To ease understanding, it is better we don't treat `Json.Decode.Decoder Float` nor `Json.Decode.Decoder User` as "objects". They don't "know how to do" anything. They hold values and are easier to grok if perceived as dumb values like `{ kind = "Float" }` or `{ kind = "User" }`.
+``` elm
+Json.Decode.float.decodeString(someString) -- oh no, not a thing
+```
+
+To ease into the right intuition, it is better I don't treat `Json.Decode.Decoder Float` nor `Json.Decode.Decoder User` as "objects". They don't "know how to do" anything. They hold values and are easier to grok if perceived as dumb values like `{ kind = "Float" }` or `{ kind = "User" }`.
 
 A `Json.Decode.Decoder a`
 - is not an "object"
