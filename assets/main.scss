@@ -6,3 +6,5 @@
 article.post.h-entry .post-title { overflow-wrap: break-word; }
 ul.post-list .post-link          { overflow-wrap: break-word; }
 
+blockquote       { letter-spacing: initial; font-size: 0.9em; }
+blockquote code  { font-style: normal; }
