@@ -39,6 +39,8 @@ circle.
 
 Contextual help. Perfect. Basically an equivalent in GUI would be the wizard dialog and its "next" "next" "finish" buttons.
 
+NOTE: That's in fact _exactly_ what the [Swift Playgrounds iPad](https://www.apple.com/sg/swift/playgrounds/) app does. You can code without even bringing up the keyboard.
+
 On the other hand, what does an FP programmer do? Assuming I can figure out what type the variable is, I'll open the documentation in my browser, press `CMD-F` and try my luck with "Find on page" with some guess words... say... `resize`? no?
 
 > When you design user interfaces, it's a good idea to keep two principles in mind:
