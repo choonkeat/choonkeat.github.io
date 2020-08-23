@@ -97,3 +97,28 @@ will render
 ```
 
 The `Html` module does not export the internal details of this type for us to look at (aka it's an opaque type). The module only exports a bunch of functions for us to call, to obtain various `Html` values. And really that's all we can know about it.
+
+
+### Part 2b And what's the relevance of `msg` part?
+
+That's the type parameter of `Html` type. We can't always have an effective mental model of what role they play. Sometimes we can deduce easily, e.g. `Maybe Int` or `List String`. But other times, it's not as obvious
+
+``` elm
+string : Parser (String -> a) a
+```
+
+What we can practically do with them is to make sure the type parameters / associated data types align, e.g.
+
+``` elm
+map : (a -> b) -> a -> b
+map func arg =
+    ...
+```
+
+To "line up" the type parameters.. i'll make sure the the `a` types are the same. And similarly:
+
+``` elm
+h1 : List (Attribute msg) -> List (Html msg) -> Html msg
+```
+
+When we call [`Html.h1`](https://package.elm-lang.org/packages/elm/html/latest/Html#h1) we can give any list of attributes and list of inner html elements -- as long as their `msg` are the same type
