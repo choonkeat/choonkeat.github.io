@@ -25,9 +25,11 @@ Unbeknownst to me, that's a common phrase used on Haskell (Elm's direct ancestor
 
 When faced with "will it work?", we might think it's mostly a question of correct logic (e.g. Fizz Buzz). But for every day code, whether something "works" is also as much about whether we had wired things correctly: _when user does A, did B trigger C to update D into E? How about unhappy paths?_ Turns out, frontend software is full of wires. Turns out, such uncertainties are avoidable.
 
-When I first learnt Custom Type (better known as Union Type, Algebraic Data Types, or ADTs), I was 😻. A friend told me to check TypeScript, "it has union types". I looked and found it half true: missing the important second half (which is also the sad recurring theme song of _"{mainstream imperative language X} adopted {functional language feature Y}"_)
+When I first learnt Custom Type (better known as [Tagged Unions, Sum Types](https://en.wikipedia.org/wiki/Tagged_union), [Algebraic Data Types aka ADTs](https://en.wikipedia.org/wiki/Algebraic_data_type)), I was in love. A friend told me to check TypeScript, "it has union types". I looked and found it half true: missing the important second half (which is also the sad recurring theme song of _"{mainstream imperative language X} adopted {functional language feature Y}"_)
 
 First half: yes, you can define a union type, `type Shape = Square | Rectangle`. But the more important second half: When we add `Circle` to the mix, what breaks in your codebase at compile time? In TypeScript or Flow, you have to go out of your way to have compile-time guarantees. In Elm, you have to go out of your way to escape it.
+
+[Update: that gap is actually the [differences between "union type" and "sum type" themselves](https://waleedkhan.name/blog/union-vs-sum-types/#differences)]
 
 > "Break everything"
 
@@ -49,7 +51,7 @@ In Go, it is already idiomatic to prefer a bit of verbosity in exchange for a mo
 
 We could. But I suspect building an entire app out of pure functions is a real struggle, made worse when the imperative language provide 101 ways to get from A to B. I get seduced by _"how to do functional programming in [your imperative language]"_ too, but the oft overlooked second part of that sad recurring theme song is: what we _cannot do_ is more important. If your language isn't going to stop you, all you've got are just soft agreements by linters, coding convention, and best practices.
 
-What I _do_ know is, I find refactoring code in Elm relatively more enjoyable. I suspect that being composed from pure functions has a lot to do with it. Also, there are little language level features that do make pure functions nicer to wield in ML and are cumbersome or missing in imperative languages <sup>[[3]](#footnote3)</sup>.
+What I _do_ know is, I find refactoring code in Elm relatively more enjoyable. I suspect that being composed from pure functions has a lot to do with it. Also, there are little language level features that do make pure functions nicer to wield in Elm and are cumbersome or missing in imperative languages <sup>[[3]](#footnote3)</sup>.
 
 > "Use the compiler"
 
