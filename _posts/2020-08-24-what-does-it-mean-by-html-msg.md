@@ -121,4 +121,23 @@ To "line up" the type parameters.. i'll make sure the the `a` types are the same
 h1 : List (Attribute msg) -> List (Html msg) -> Html msg
 ```
 
-When we call [`Html.h1`](https://package.elm-lang.org/packages/elm/html/latest/Html#h1) we can give any list of attributes and list of inner html elements -- as long as their `msg` are the same type
+When we call [`Html.h1`](https://package.elm-lang.org/packages/elm/html/latest/Html#h1) we can give any list of attributes and list of inner html elements -- as long as their `msg` are the same type.
+
+Now, if we go back up and look at a Browser program signature, e.g. [Browser.sandbox](https://package.elm-lang.org/packages/elm/browser/latest/Browser#sandbox)
+
+``` elm
+sandbox :
+    { init : model
+    , view : model -> Html msg
+    , update : msg -> model -> model
+    }
+```
+
+1. Remember, the type parameters must line up. So `msg` must refer to the same type everywhere regardless of whether it is `Int` or [a `Msg` custom type](https://guide.elm-lang.org/architecture/buttons.html)
+2. Recall that
+    > `update` — a way to update your state based on messages
+    > https://guide.elm-lang.org/architecture/
+
+This means the `msg` in `Html msg` refers to the type of value that will be handled in your `update` function. So we can conclude that `Html msg` means
+
+> Values representing DOM nodes for Elm to render. When events are triggered by handlers in the DOM, like [onClick](https://package.elm-lang.org/packages/elm/html/latest/Html-Events#onClick), we'll expect our `update` function to be called with values of `msg` type from our [DOM event handlers](https://package.elm-lang.org/packages/elm/html/latest/Html-Events).
