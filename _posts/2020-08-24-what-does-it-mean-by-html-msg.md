@@ -138,6 +138,7 @@ sandbox :
     > `update` — a way to update your state based on messages
     > https://guide.elm-lang.org/architecture/
 
-This means the `msg` in `Html msg` refers to the type of value that will be handled in your `update` function. So we can conclude that `Html msg` means
+This means the `msg` in `Html msg` refers to the type of value that will be handled in your `update` function. So we can conclude that
 
-> Values representing DOM nodes for Elm to render. When events are triggered by handlers in the DOM, like [onClick](https://package.elm-lang.org/packages/elm/html/latest/Html-Events#onClick), we'll expect our `update` function to be called with values of `msg` type from our [DOM event handlers](https://package.elm-lang.org/packages/elm/html/latest/Html-Events).
+- `Html` is the DOM node type
+- `msg` is the type for _"what event type does this DOM node trigger"_
