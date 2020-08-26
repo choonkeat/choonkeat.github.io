@@ -34,7 +34,7 @@ Did you notice a bug?
 
 A very common bug here is: we've forgotten to set the loading status before firing off `getThing`. And even after we fix _that_, we might realise days later that we've forgotten to unset the loading state upon getting an error. Whack-a-mole. As the number of APIs grow, and changes happen over time, preventing such bugs will only become harder and harder.
 
-Is constant vigilance our only protection?
+Is our constant vigilance the only protection?
 
 <img width="294" alt="Screenshot 2020-08-26 at 10 34 10 PM" src="https://user-images.githubusercontent.com/473/91317369-8cdfd980-e7ec-11ea-8668-96d959898f17.png">
 
@@ -45,8 +45,8 @@ As a code reviewer, I'd prefer the answer to be: no.
 Well, since we're trying to coordinate the state changes of request and response activities for each API, let's unify them into a sum type
 
 ``` elm
-type RequestResponse params response
-    = Request params
+type RequestResponse param response
+    = Request param
     | Response (Result Http.Error response)
 
 type ApiMsg
@@ -153,10 +153,10 @@ no matter which branch we take, the result is always a consistent shape. Read
 <https://elm-lang.org/0.19.1/custom-types> to learn how to “mix” types.
 ```
 
-Elm does not allow returning different types for different branches of a `case` or `if` expression
-- in our "request" branch, we are returning an empty record `{}`
-- in our "error" branch, we are returning a `{ alert : Maybe Alert }` record
-- in our "ok" branch, we are returning a `{ thing : RemoteData.RemoteData Http.Error a }` record
+Elm does not allow returning different types for different branches of a `case` or `if` expression, but currently
+- our "request" branch, returns an empty record `{}`
+- our "error" branch, returns a `{ alert : Maybe Alert }` record
+- our "ok" branch, returns a `{ thing : RemoteData.RemoteData Http.Error a }` record
 
 The only way to compile, is to return the same set of model attributes for all branches of our `case requestResponse of` -- which is exactly what we wanted!
 
@@ -169,7 +169,7 @@ updateWithApiMsg siteApi model =
                 ( updated, cmd ) =
                     case requestResponse of
                         Request num ->
-                            ( { alert = model.alert
+                            ( { alert = model.alert -- aka no change
                               , thing = RemoteData.Loading
                               }
                             , requestCmd ThingApi (getThing num)
@@ -194,4 +194,4 @@ updateWithApiMsg siteApi model =
         -- other APIs ...
 ```
 
-Now, each branch is required to return the same set of fields; each API can have is own set of fields. Elm compiler will be our constant vigilance instead. 🎉
+Now, each branch is required to return the same fields; each API can have their own field set. Elm compiler can be our constant vigilance instead. 🎉
