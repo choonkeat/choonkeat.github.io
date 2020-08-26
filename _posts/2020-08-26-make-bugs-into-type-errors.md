@@ -45,14 +45,14 @@ As a code reviewer, I'd prefer the answer to be: no.
 Well, since we're trying to coordinate the state changes of request and response activities for each API, let's unify them into a sum type
 
 ``` elm
-type WebRequestResponse a b
-    = WebRequest a
-    | WebResponse (Result Http.Error b)
+type RequestResponse params response
+    = Request params
+    | Response (Result Http.Error response)
 
 type ApiMsg
-    = ThingApi (WebRequestResponse Int Thing)
-    -- imagine there are many more APIs
-    -- each API defines a `WebRequestResponse` with their own `param` and `response` types
+    = ThingApi (RequestResponse Int Thing)
+    -- other APIs ...
+    -- each API defines a `RequestResponse` with their own `param` and `response` types
 ```
 
 then we can nest all API related Msg,
@@ -80,17 +80,17 @@ updateWithApiMsg siteApi model =
     case siteApi of
         ThingApi requestResponse ->
             case requestResponse of
-                WebRequest num ->
+                Request num ->
                     ( model
                     , requestCmd ThingApi (getThing num) )
 
-                WebResponse (Err err) ->
+                Response (Err err) ->
                     ( { model
                         | alert = Just (httpErrorString err)
                       }
                     , Cmd.none )
 
-                WebResponse (Ok thing) ->
+                Response (Ok thing) ->
                     ( { model
                         | thing = RemoteData.Success thing
                       }
@@ -99,9 +99,9 @@ updateWithApiMsg siteApi model =
         -- other APIs ...
 ```
 
-Everything compiles and we still have our bug. Perfect. _Now_, we're ready to make this bug a type error.
+We've done a bunch of busy work but everything still compiles; we still have our bug?? Perfect. _Now_, we're ready to make this bug a type error.
 
-What we're trying to do is make sure we don't forget to update the same set of model attributes for every stage of the API call (request, success, error)
+Recall that what we're trying to achieve is make sure we don't forget to update the same set of model attributes for every stage of the API call (request, success, error). And each API will have their own set of model attributes.
 
 > All branches in a `case` must produce the same type of values. This way, no matter which branch we take, the result is always a consistent shape.
 
@@ -115,18 +115,18 @@ updateWithApiMsg siteApi model =
             let
                 ( updated, cmd ) =
                     case requestResponse of
-                        WebRequest num ->
+                        Request num ->
                             ( {}
                             , requestCmd ThingApi (getThing num)
                             )
 
-                        WebResponse (Err err) ->
+                        Response (Err err) ->
                             ( { alert = Just (httpErrorString err) }
                             , Cmd.none
                             )
 
-                        WebResponse (Ok thing) ->
-                            ( { thing = RemoteData.succeed thing }
+                        Response (Ok thing) ->
+                            ( { thing = RemoteData.Success thing }
                             , Cmd.none
                             )
             in
@@ -168,23 +168,23 @@ updateWithApiMsg siteApi model =
             let
                 ( updated, cmd ) =
                     case requestResponse of
-                        WebRequest num ->
+                        Request num ->
                             ( { alert = model.alert
                               , thing = RemoteData.Loading
                               }
                             , requestCmd ThingApi (getThing num)
                             )
 
-                        WebResponse (Err err) ->
+                        Response (Err err) ->
                             ( { alert = Just (httpErrorString err)
                               , thing = RemoteData.Failure err
                               }
                             , Cmd.none
                             )
 
-                        WebResponse (Ok thing) ->
+                        Response (Ok thing) ->
                             ( { alert = Just "Thing loaded successfully"
-                              , thing = RemoteData.succeed thing
+                              , thing = RemoteData.Success thing
                               }
                             , Cmd.none
                             )
