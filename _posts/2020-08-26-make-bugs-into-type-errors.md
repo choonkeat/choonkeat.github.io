@@ -34,6 +34,8 @@ Did you notice a bug?
 
 A very common bug here is: we've forgotten to set the loading status before firing off `getThing`. And even after we fix _that_, we might realise days later that we've forgotten to unset the loading state upon getting an error. Whack-a-mole. As the number of APIs grow, and changes happen over time, preventing such bugs will only become harder and harder.
 
+Wait, there's a request to update the api, now we should update `model.category` from the response too, merge PR & deploy. Oops, we forgot to set `category = Loading` 😩
+
 Is our constant vigilance the only protection?
 
 <img width="294" alt="Screenshot 2020-08-26 at 10 34 10 PM" src="https://user-images.githubusercontent.com/473/91317369-8cdfd980-e7ec-11ea-8668-96d959898f17.png">
@@ -43,6 +45,8 @@ As a code reviewer, I'd prefer the answer to be: no.
 > [make bugs into type errors - @mattoflambda](https://twitter.com/mattoflambda/status/1008735243581288449)
 
 Well, since we're trying to coordinate the state changes of request and response activities for each API, let's unify them into a sum type
+
+### Part 1/2
 
 ``` elm
 type RequestResponse param response
@@ -101,6 +105,8 @@ updateWithApiMsg siteApi model =
 
 We've done a bunch of busy work but everything still compiles; we still have our bug?? Perfect. _Now_, we're ready to make this bug a type error.
 
+### Part 2/2
+
 Recall that what we're trying to achieve is make sure we don't forget to update the same set of model attributes for every stage of the API call (request, success, error). And each API will have their own set of model attributes.
 
 > All branches in a `case` must produce the same type of values. This way, no matter which branch we take, the result is always a consistent shape.
@@ -113,6 +119,8 @@ updateWithApiMsg siteApi model =
     case siteApi of
         ThingApi requestResponse ->
             let
+                -- NOTE: `updated` is only a subset of our `Model` record type
+                -- with only the fields that needs to be updated for `ThingApi`
                 ( updated, cmd ) =
                     case requestResponse of
                         Request num ->
@@ -133,6 +141,7 @@ updateWithApiMsg siteApi model =
             ( { model | alert = updated.alert, thing = updated.thing }, cmd )
 
         -- other APIs ...
+        -- each `updated` record will be different subsets of `Model` record type
 ```
 
 Now, we have a compiler error!
@@ -160,12 +169,16 @@ Elm does not allow returning different types for different branches of a `case` 
 
 The only way to compile, is to return the same set of model attributes for all branches of our `case requestResponse of` -- which is exactly what we wanted!
 
+### Result
+
 ``` elm
 updateWithApiMsg : ApiMsg -> Model -> ( Model, Cmd Msg )
 updateWithApiMsg siteApi model =
     case siteApi of
         ThingApi requestResponse ->
             let
+                -- NOTE: `updated` is only a subset of our `Model` record type
+                -- with only the fields that needs to be updated for `ThingApi`
                 ( updated, cmd ) =
                     case requestResponse of
                         Request num ->
@@ -192,6 +205,7 @@ updateWithApiMsg siteApi model =
             ( { model | alert = updated.alert, thing = updated.thing }, cmd )
 
         -- other APIs ...
+        -- each `updated` record will be different subsets of `Model` record type
 ```
 
 Now, each branch is required to return the same fields; each API can have their own field set. Elm compiler can be our constant vigilance instead. 🎉
