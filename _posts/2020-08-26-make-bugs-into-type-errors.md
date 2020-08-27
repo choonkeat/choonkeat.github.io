@@ -34,7 +34,7 @@ Did you notice a bug?
 
 A very common bug here is: we've forgotten to set the loading status before firing off `getThing`. And even after we fix _that_, we might realise days later that we've forgotten to unset the loading state upon getting an error. Whack-a-mole. As the number of APIs grow, and changes happen over time, preventing such bugs will only become harder and harder.
 
-Wait, there's a request to update the api, now we should update `model.category` from the response too, merge PR & deploy. Oops, we forgot to set `category = Loading` 😩
+Wait, there's a request to update the api, now we should update `model.category` from the api response too, merge PR & deploy. Oops, we forgot to set `category = Loading` 😩 Again 😖
 
 Is our constant vigilance the only protection?
 
