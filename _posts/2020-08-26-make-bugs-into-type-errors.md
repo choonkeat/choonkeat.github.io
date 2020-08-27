@@ -168,7 +168,7 @@ Elm does not allow returning different types for different branches of a `case` 
 - our "ok" branch, returns a `{ thing : RemoteData.RemoteData Http.Error a }` record
 - and if any branch forgets, and returns `( model, sendRequestCmd )` it won't work too!
 
-The only way to compile, is to return the same set of model attributes for all branches of our `case requestResponse of` -- which is exactly what we wanted!
+The only way to compile, is to return the _same subset_ of fields for _all branches_ of our `case requestResponse of` -- which is exactly what we wanted!
 
 ### Result
 
