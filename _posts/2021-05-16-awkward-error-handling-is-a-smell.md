@@ -3,7 +3,7 @@ layout: post
 title: Awkward error handling is a code smell
 published: true
 ---
-Say you have a need to pretty print an email address string inside one of your view component and you have the urge to say _hey, this pretty printer component shouldn't print if the email address isn't valid, like a blank username_. The options you can think of to deal with it all seem awkward or imperfect...
+Say you have a need to pretty print an email address string inside one of your view component and you have the urge to say _hey, this pretty printer component shouldn't print if the email address isn't valid, like a blank username_. The options to error out seem awkward and not great...
 
 Stop. That's not a good place to _start_ being concern if a value is valid. 
 
