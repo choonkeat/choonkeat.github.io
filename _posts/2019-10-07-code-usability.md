@@ -61,3 +61,5 @@ Maybe something for the code editor community to think about.
 
 
 _FWIW, the SQL syntax has the same problem too: you type `SELECT ` and wait there.. no code editor can help you very much since nobody knows what you are trying to select `FROM` yet. If that syntax had just switcheroo, `FROM ... SELECT ...` the more usable SQL syntax could've driven SQL adoption even higher ;-)_
+
+UPDATE: See also, [Data exploration through dot-driven development](https://2017.ecoop.org/details/ecoop-2017-papers/27/Data-exploration-through-dot-driven-development)
