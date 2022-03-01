@@ -5,7 +5,9 @@ published: true
 ---
 So Eric Normand had started a conversation to compare notes on dynamic types and static types. You can find it at [https://lispcast.com/user-wizard-scenario/](https://lispcast.com/user-wizard-scenario/).
 
-I liked the very concrete and real scenario he picked. I agree with the volatility observed but I also want to note early on that it isn't productive to respond to any particular solutions for each step: situation do arise, we developers handle it with the information and time we have at hand. The final solution in his scenario -- at the cost of a bit of type safety -- was to use a `Map`. Since that's what a dynamically typed language (e.g. Clojure) would've chosen from the start, it begs the question: why not start there in the first place [instead of opting for static types and hoping that volatility doesn't hit]? Which leads to the statement:
+I liked the very concrete and real scenario he picked. I agree with the volatility observed but I also want to note early on that it isn't productive to respond to any particular solutions for each step: situation do arise, we developers handle it with the information and time we have at hand.
+
+The final solution in his scenario -- at the cost of a bit of type safety -- was to use a `Map`. Since that's what a dynamically typed language (e.g. Clojure) would've chosen from the start, it begs the question: why not start there in the first place [instead of opting for static types and hoping that volatility doesn't hit]? Which leads to the statement:
 
 > sufficiently volatile data prefers a flexible model with optional runtime checks.
 
