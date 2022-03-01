@@ -5,7 +5,7 @@ published: true
 ---
 Related to [my previous post](/weblog/2022/03/regarding-the-user-wizard-scenario.html), I'd like to address another scenario cited as reasons to favor dynamic types:
 
-> Some APIs have a huge JSON format. But we might only need a few fields. Some fields could be `false`, or a list things. Some fields should even be parsed depending on some other fields in the JSON. To statically type this is very tedious and the type might not be understandable anymore.
+> Some APIs have a huge JSON format. But we might only need a few fields. Some fields could be `false` sometimes but a list of strings other times. Some fields should even be parsed depending on some other fields in the JSON. To statically type this is very tedious and the type might not be understandable anymore.
 
 When it comes to parsing JSON, there are reasons to favor dynamic types (who doesn't like `JSON.parse` when exploring data?), but I think the reasons above are actually reasons _to favor static types_.
 
@@ -60,14 +60,13 @@ function welcomeEmail( { email }) {
 
 No. Types are checked at compile time over the entire codebase, while assertions checks at runtime... and _only when_ that line is run. 5th page of a form wizard? Code gotta run until there, in the right condition, to find out about it.
 
-> We can add type signatures in some dynamically typed languages
+> We can _add_ type signatures in some dynamically typed languages
 
-Type inferred languages like Haskell had long allowed type signatures to be _removed_ and still keep the benefit!
+Ironically, type inferred languages like Haskell had long allowed type signatures to even be _removed_ and still keep the benefit!
 
-Basically one provides _"where do you want to check"_ vs the other provides _"everything is checked"_. I think it's safe to say while we might prefer some control over what we want to check in our code, we'd also prefer other people's code to be fully checked where possible 😆 ... as they say, _["Software engineering is what happens to programming when you add time and other programmers."](https://research.swtch.com/vgo-eng)_
+Basically one provides _"where do you want to type check"_ vs the other provides _"everything is type checked"_. I think it's safe to say while we might prefer some control over what we want to type check in our code, we'd also prefer other people's code to be fully type checked where possible 😆 ... as they say, _["Software engineering is what happens to programming when you add time and other programmers."](https://research.swtch.com/vgo-eng)_
 
-
-> **2. "Some fields could be `false`, or a list things. Some fields should even be parsed depending on some other fields in the JSON."**
+> **2. "Some fields could be `false` sometimes but a list of strings other times. Some fields should even be parsed depending on some other fields in the JSON."**
 
 Since the said JSON is beyond our control, we just have to deal with it. There is no escape.
 
@@ -149,6 +148,4 @@ store { email, preferences, deletedAt, lastLoginAt } =
 
 > **3. To statically type this is very tedious and the type might not be understandable anymore.**
 
-While there is obviously more lines of code, but note that the _type_ of `User` is as clean.
-
-The messy reality of the JSON rules are captured and compartmentalized inside individual decoder functions. The rest of the system can use this clean `User` type in abandon, with the compiler ensuring there are no stray threads.
+While there is obviously more lines of code, but note that the _type_ of `User` is as clean. The messy reality of the JSON rules are captured and compartmentalized inside individual decoder functions, very testable out of the box too. The rest of the system can use this clean `User` type in abandon, with the compiler ensuring there are no stray threads.

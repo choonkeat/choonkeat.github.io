@@ -23,13 +23,13 @@ Once we have a "bag of attributes" backing our form input values, add a function
 parse : Dict -> Result Errors UserInput
 ```
 
-If valid, we return the value, e.g. `Ok { email = "bob@example.com" }`. Otherwise, return errors, e.g. `Err [ ( Email, "cannot is invalid" ) ]`. With the return value, you can enable the submit button when `userInput` is present, disable when absent, extract and display input field errors alongside the input fields. Not only are these validation rules consolidated into a single place, we can even use this same pure function on the frontend and the backend too.
+If valid, we return the value, e.g. `Ok { email = "bob@example.com" }`. Otherwise, return errors, e.g. `Err [ ( Email, "is invalid" ) ]`. With the return value, you can enable the submit button when `userInput` is present, disable when absent, extract and display input field errors alongside the input fields. Not only are these validation rules consolidated into a single place, we can even use this same pure function on the frontend and the backend too.
 
 Our form can change as much as needed by requirements, we'll just update `parse` accordingly.
 
 ### Managing boundaries
 
-This isn't specific to managing HTML forms. The main idea here is to treat a form as a whole, and to consider it as external input, like a file. Drawing a line between that external world and the rest of our system.
+The main idea here is to treat a form as a whole, and to consider it as external input, like a file. Drawing a line between that external world and the rest of our system. This isn't specific to managing HTML forms.
 
 Just because one edge of the system is volatile, doesn’t mean the rest of the system have to be as volatile. Just because we are looser with types on the periphery doesn't mean we have to bear the cost in the rest of our system. We can continue to benefit from the cosy assurance of statically type checked code within these walls we draw.
 
