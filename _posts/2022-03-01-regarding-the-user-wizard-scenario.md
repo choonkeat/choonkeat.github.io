@@ -17,7 +17,7 @@ I'll disclaim upfront that I've in fact chosen to use a `Map` (aka `Dict`) most 
 
 That's true but **only if** we stop there!
 
-Once we have a "bag of attributes" backing our form input values, add a function to parse it into the desired type or error messages if any <sup>[[1]](#footnote1)</sup>.
+Once we have a "bag of attributes" backing our form input values, add a function to parse it into the desired type or error messages if any.
 
 ```elm
 parse : Dict -> Result Errors UserInput
@@ -39,9 +39,7 @@ This explicit management of boundaries, like managed effects, is what I apprecia
 
 **Q: I want to save each step of partial attributes into the db**
 
-I'd consider saving the key value data from those steps _as-is_ instead of having a `parse` for each step: it's pointless, the entire thing is incomplete anyways. But don't forget we can still use the same `parse` to obtain the list of errors _relevant to the current step_ and spruce up the UI accordingly.
-
-Only at the final step, would `parse` be required to succeed fully.
+I would save the key value `Dict` data in each step _as-is_, without a custom `parse` defined for each step: it's pointless, the entire thing is incomplete anyways. Don't forget however, we can still use the same `parse` to obtain the complete list of errors, but only surface the errors relevant to the current Step's UI. At the final step, I would require `parse` to succeed fully.
 
 **Q: What if some form inputs need the values from other form inputs?**
 
@@ -63,8 +61,4 @@ widget : Suggestions -> Html
 
 Extend the `parse` function to account for the new `ExternalData` input, e.g. `parse : ExternalData -> Dict -> Result Errors UserInput` and run the `parse` function inside the procedure that queries for those external data. e.g. Client-side code can call upon an HTTP API and then supply the response data to the `parse` function along with the form data.
 
-If it's not feasible in your scenario to supply such data to the Client-side, then we have to admit it can't be checked by the Client-side however you do it. Simply supply an empty value for `ExternalData` (that will allow you to consider the input as valid) and run it that way on the Client-side; we can still have validation for the other fields.
-
----
-
-<sub><a name="footnote1">[1]</a> In [my still evolving form data library](https://elm-formdata.netlify.app), I've chosen to go with ( Maybe a, List ( Maybe k, err ) ) instead of a Result so that I have the option to return some non-critical validation error messages along with a valid UserInput. We'll see how that works out.</sub><br/>
+If it's not feasible in our scenario to supply such data to the Client-side, then we have to admit it can't be checked by the Client-side however we do it. So, supply an empty value for `ExternalData` to skip that validation on the Client-side; we can still have Client-side validation for the other fields + the full validation can still happen with the same function on Server-side.
