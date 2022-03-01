@@ -45,16 +45,16 @@ store { email } =
 
 The added benefit is, if `email` field is anything but a `String`, we would've gotten a parsing error early and have code to deal with it upfront. Whereas, in the JS example, we might not know that our `email` is `null` or `42` until much later in the system (a background job 3 days later?).
 
-Troubleshooting the source of bad values that causes a crash is tedious, time consuming, and (given decoder pattern exists) an unnecessary trouble imo.
+Troubleshooting the source of bad values that causes a crash is tedious and (given decoder pattern exists) an unnecessary trouble imo.
 
-Even if we implemented decoders in JS, we still can't reap its benefits in the rest of our dynamically typed system. We need to manually add assertions everywhere that matters (that we remember to). `welcomeEmail( { email })` ? hmm, add a check just to be safe
+Even if we implemented decoders in JS, we still can't reap its benefits in the rest of our dynamically typed system. We need to manually add assertions everywhere that matters (that we remember to). `welcomeEmail( { email })` ? hmm, add an assertion just to be safe
 
 ```js
 function welcomeEmail( { email }) {
     if (typeof email !== 'string') {
 ```
 
-Btw, what can we effectively _do_ with an invalid value here? [Dealing with errors deep in the system is awkward](/weblog/2021/05/awkward-error-handling-is-a-smell.html)
+(Btw, what can we effectively _do_ with an invalid value here? [Dealing with errors deep in the system is awkward](/weblog/2021/05/awkward-error-handling-is-a-smell.html))
 
 > Isn't writing type signatures everywhere equivalent to scattering assertions everywhere?
 
@@ -64,7 +64,7 @@ No. Types are checked at compile time over the entire codebase, while assertions
 
 Type inferred languages like Haskell had long allowed type signatures to be _removed_ and still keep the benefit!
 
-Basically _"where do you want to check"_ vs _"everything is checked"_. I think it's safe to say while folks might prefer some control over what they want to check in their code, we'd prefer other people's code to be fully checked where possible 😆 as they say, _["Software engineering is what happens to programming when you add time and other programmers."](https://research.swtch.com/vgo-eng)_
+Basically one provides _"where do you want to check"_ vs the other provides _"everything is checked"_. I think it's safe to say while we might prefer some control over what we want to check in our code, we'd also prefer other people's code to be fully checked where possible 😆 ... as they say, _["Software engineering is what happens to programming when you add time and other programmers."](https://research.swtch.com/vgo-eng)_
 
 
 > **2. "Some fields could be `false`, or a list things. Some fields should even be parsed depending on some other fields in the JSON."**
@@ -116,11 +116,9 @@ datesFromState stateString date =
             { deletedAt = Nothing,   lastLoginAt = Just date }
         _ ->
             { deletedAt = Nothing,   lastLoginAt = Nothing   }
-```
 
-We compose our `userDecoder` with these decoders
+-- We compose our `userDecoder` with these decoders
 
-```elm
 userDecoder =
     Json.Decode.map3 buildUser
         -- decode the fields then assemble with `buildUser`
@@ -134,6 +132,8 @@ buildUser email preferences { deletedAt, lastLoginAt } =
     , deletedAt = deletedAt
     , lastLoginAt = lastLoginAt
     }
+
+-- Then we update the original snippet to mention the new fields
 
 handle jsonString =
     case decodeString userDecoder jsonString of
