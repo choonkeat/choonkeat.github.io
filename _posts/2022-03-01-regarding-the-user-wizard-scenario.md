@@ -62,3 +62,5 @@ widget : Suggestions -> Html
 Extend the `parse` function to account for the new `ExternalData` input, e.g. `parse : ExternalData -> Dict -> Result Errors UserInput` and run the `parse` function inside the procedure that queries for those external data. e.g. Client-side code can call upon an HTTP API and then supply the response data to the `parse` function along with the form data.
 
 If it's not feasible in our scenario to supply such data to the Client-side, then we have to admit it can't be checked by the Client-side however we do it. So, supply an empty value for `ExternalData` to skip that validation on the Client-side; we can still have Client-side validation for the other fields + the full validation can still happen with the same function on Server-side.
+
+_UPDATE: a related post [Re: Statically Typing Big Erratic JSON](/weblog/2022/03/regarding2-statically-typing-big-erratic-json.html)_

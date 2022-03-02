@@ -3,7 +3,7 @@ layout: post
 title: "Re: Statically Typing Big Erratic JSON"
 published: true
 ---
-Related to [my previous post](/weblog/2022/03/regarding-the-user-wizard-scenario.html), I'd like to address another scenario cited as reasons to favor dynamic types:
+Related to my previous post [Re: The User Wizard Scenario](/weblog/2022/03/regarding-the-user-wizard-scenario.html), I'd like to address another scenario cited as reasons to favor dynamic types:
 
 > Some APIs have a huge JSON format. But we might only need a few fields. Some fields could be `false` sometimes but a list of strings other times. Some fields should even be parsed depending on some other fields in the JSON. To statically type this is very tedious and the type might not be understandable anymore.
 
