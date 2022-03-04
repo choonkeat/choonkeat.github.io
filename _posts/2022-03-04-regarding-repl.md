@@ -36,7 +36,7 @@ For decoder dev, errors happen when decoder reaches unexpected character of the 
 
 For repl dev, if we jump immediately to thinking about fixing the parsing function, the difference there isn't huge either. While manually stepping through the _function body_ (or comparing old json with new json) to locate the problem is a little tedious but that's still the happy scenario.
 
-The real scenarios that decoder devs are fending off are all those runtime errors that pops up in places that doesn't make sense. Tracing why such values are in a bad state takes a lot of time & effort in a dynamically typed system: there are so many code paths across subsystems? Can take hours before even reaching the particular parsing function to begin fixing.
+The real scenarios that decoder devs are fending off are all those runtime errors that pops up in places that doesn't make sense. Tracing why such values are in a bad state takes a lot of time & effort in a dynamically typed system: there are so many code paths? across subsystems? It can take hours before we discover the particular parsing function to fix.
 
 #### **Boundary**
 
@@ -54,4 +54,4 @@ Then again "giving up" sounds harsh since I _can_ improve and reach _reasonably 
 
 <sub><a name="footnote1">[1]</a> I was developing a Slack bot in a place with no wifi, and I just wrote decoders based on JSON samples I'd downloaded earlier from their docs site, then I write code that worked with those types, fixing bugs along the way until it compiles. When I'm finally back online, I tried my bot... and it worked the first run! I'm not such a meticulous person so credits totally goes to the Elm compiler and its type system.</sub><br/>
 
-<sub><a name="footnote2">[2]</a> This should possibly be the understatement akin to SVN users downplaying the speed of Git, while Git rightfully claims [it's so freaking fast that you actually use it differently](https://youtu.be/4XpnKHJAok8). I should want to experience such repl someday.</sub><br/>
+<sub><a name="footnote2">[2]</a> This should possibly be the understatement akin to SVN users downplaying the speed of Git, while Git rightfully claims [it's so freaking fast that you actually use it differently](https://youtu.be/4XpnKHJAok8). Must be giddying! I should want to experience such repl workflow someday.</sub><br/>
