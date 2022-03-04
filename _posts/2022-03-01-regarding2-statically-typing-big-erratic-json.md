@@ -149,3 +149,5 @@ store { email, preferences, deletedAt, lastLoginAt } =
 > **3. To statically type this is very tedious and the type might not be understandable anymore.**
 
 While there is obviously more lines of code, but note that the _type_ of `User` is as clean. The messy reality of the JSON rules are captured and compartmentalized inside individual decoder functions, very testable out of the box too. The rest of the system can use this clean `User` type in abandon, with the compiler ensuring there are no stray threads.
+
+_UPDATE: a followup post [Re: REPL](/weblog/2022/03/regarding-repl.html)_
