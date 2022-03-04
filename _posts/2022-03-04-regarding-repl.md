@@ -30,7 +30,7 @@ I suspect the main difference could be this:
 
 However I feel the speed difference of this activity is in _minutes_<sup>[[2]](#footnote2)</sup>, but the speed difference later on can easily be _hours_...
 
-**Q: How do we deal with changes after that?** e.g. some fields turns out to be optional, etc.
+**Q: How do we deal with changes after that? e.g. some fields turns out to be optional, etc.**
 
 For decoder dev, errors happen when decoder reaches unexpected character of the input. So errors can state how their expectation failed: expect "email" field to be string (but it wasn't). This allows us to zoom in to the "email" field decoder and start TDDing with the new input variant. Fixed.
 
@@ -44,7 +44,7 @@ The real scenarios that decoder devs are fending off are all those runtime error
 
 This is more significant to me than an idea to apply for a particular scenario: It's the fact that entire system is enforced: every tiny part is always locked in and enforced with other tiny parts regardless whether I remember to do it or not. I'd mentioned "sure-footed" in an earlier paragraph, but [here's my longer description of what that meant](https://discourse.elm-lang.org/t/what-are-your-favorite-things-about-elm/6947/71):
 
-> With Elm, I could take a sure-footed approach to problems that I might have previously felt is too hard for me. **My Elm solution to each small part cumulates to the final solution without requiring me to keep revisiting at every step (because it’s “proven”)**. And the best part is, after I’ve crossed the finishing line & gotten everything working, tidying up my entire solution is a safe and mechanical process. Confidence++
+> With Elm, I could take a sure-footed approach to problems that I might have previously felt is too hard for me. My Elm solution to each small part cumulates to the final solution without requiring me to keep revisiting at every step (because it’s “proven”). And the best part is, after I’ve crossed the finishing line & gotten everything working, tidying up my entire solution is a safe and mechanical process. Confidence++
 
 This applies to both getting things to work _in the first place_ but especially to _managing changes later_; no unnecessary revisits. That's what I'm giving up the discovery speed for.
 
