@@ -38,11 +38,17 @@ For repl dev, if we jump immediately to thinking about fixing the parsing functi
 
 The real scenarios that decoder devs are fending off are all those runtime errors that pops up in places that doesn't make sense. Tracing why such values are in a bad state takes a lot of time & effort in a dynamically typed system: there are so many code paths? across subsystems? It can take hours before we discover the particular parsing function to fix.
 
-#### **Boundary**
+#### **Boundary & Enforcement**
 
 > I like idea of using a Dict until we're ready to enforce
 
-This is more significant to me than an idea to apply for a particular scenario: It's the fact that entire system is enforced: every tiny part is always locked in and enforced with other tiny parts regardless whether I remember to do it or not. I'd mentioned "sure-footed" in an earlier paragraph, but [here's my longer description of what that meant](https://discourse.elm-lang.org/t/what-are-your-favorite-things-about-elm/6947/71):
+This is more significant to me than an idea to apply for a particular scenario: It's the fact that entire system is enforced: every tiny part is always locked in and enforced with other tiny parts regardless whether I remember to do it or not. This brings benefits I'd not experienced before non-pure type fp languages:
+
+- I am sure all affected areas of code are included in every PR (from myself or anyone else in the team), see [thread](https://twitter.com/choonkeat/status/1494480136036810755)
+- Big bold refactors are safe and feedback is as fast as the Elm compiler. This is unlike when I didn't have such a type system and compiler, invariants were upheld by a lot of tests. Big refactors means probably only integration tests survive and test code is a real burden to bring along during such refactors (so maybe don't write them? don't port them?)
+- This all means I don't have to get my designs "correct" off the bat. Especially in a startup, where we are always discovering something new about our domain, what are our odds? So I can code dirty first because cleaning up later is easier here?
+
+I'd mentioned "sure-footed" in an earlier paragraph, but [here's my longer description of what that meant](https://discourse.elm-lang.org/t/what-are-your-favorite-things-about-elm/6947/71):
 
 > With Elm, I could take a sure-footed approach to problems that I might have previously felt is too hard for me. My Elm solution to each small part cumulates to the final solution without requiring me to keep revisiting at every step (because it’s “proven”). And the best part is, after I’ve crossed the finishing line & gotten everything working, tidying up my entire solution is a safe and mechanical process. Confidence++
 
