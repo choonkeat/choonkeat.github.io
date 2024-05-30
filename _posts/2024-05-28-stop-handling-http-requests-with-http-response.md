@@ -101,7 +101,7 @@ app.get('/goodbye', handleAppResponse(handleGoodbye));
 // ...
 ```
 
-What we get after all this, is that our "http handlers" have _all_ become simpler functions! We don't have to fiddle with mutating `http.Response`; we can't! Just return the appropriate response!
+What we get after all this, is that our "http handlers" have _all_ become simpler functions! We don't have to fiddle with mutating `http.Response`; we can't because we don't have access to it! Just return the appropriate response variant!
 
 ```ts
 function handleHello(req: Request): AppResponse {
@@ -123,8 +123,8 @@ func handleHello(r *http.Request) AppResponse {
         return JsonError(err, http.StatusInternalServerError)
     }
     return RenderPage(
-        dom.H1(
-            dom.Attrs("id", "greeting"), // choonkeat/dom-go
+        dom.H1( // github.com/choonkeat/dom-go
+            dom.Attrs("id", "greeting"),
             dom.InnerText("Hello, "),
             dom.InnerText(uname),
         ),
