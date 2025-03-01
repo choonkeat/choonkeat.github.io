@@ -114,7 +114,7 @@ function handleHello(req: Request): AppResponse {
 }
 ```
 
-and in Go [with sum types](https://github.com/choonkeat/sumtype-go)
+and in Go [with sum types](https://github.com/choonkeat/sumtype-go) <sup>[[1]](#footnote1)</sup>
 
 ```go
 func handleHello(r *http.Request) AppResponse {
@@ -135,3 +135,7 @@ func handleHello(r *http.Request) AppResponse {
 We've constrained our http handlers to return `AppResponse`. We can't mutate `http.Response` directly. How our web app respond is all managed in a single place. There's no whack-a-mole problem anymore.
 
 _Food for thought: if we take 1 more step to replace `http.Request` with our own `AppRequest`, then our handlers are just functions `handleHello(AppRequest): AppResponse` -- we don't even need to fiddle with http to unit test our http handlers?_
+
+<sub><a name="footnote1">[1]</a>
+You can also embrace returning-a-value as solution in Go without defining your own sum type [using this library](https://github.com/alvinchoong/go-httphandler)
+</sub><br/>
